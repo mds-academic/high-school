@@ -1,0 +1,2685 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UOB My Digital Space — High School Sesi 2</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐍</text></svg>">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --blue: #0056b3;
+      --light-blue: #4a9eff;
+      --uob-red: #e60012;
+      --uob-red-soft: #ff5a6b;
+      --uob-blue-deep: #0056b3;
+      --uob-blue-soft: #5aa7ff;
+      --teal: #11a9b7;
+      --bg: #f5f6f8;
+      --panel: #fff;
+      --text: #2c3e50;
+      --muted: #6c757d;
+      --line: #e3e8ef;
+      --green: #2e9d57;
+      --orange: #f39c12;
+      --red: #e74c3c;
+      --purple: #8e44ad;
+      --blue-soft: #eef7ff;
+      --green-soft: #effaf2
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      height: 100vh;
+      overflow: hidden;
+      color: var(--text)
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #f5d7da, #d9e9ff);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, .08)
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--uob-red) 0%, var(--uob-red-soft) 28%, var(--uob-blue-deep) 72%, var(--uob-blue-soft) 100%);
+      transition: width .3s ease;
+      box-shadow: 0 0 8px rgba(0, 86, 179, .18)
+    }
+
+    .main-container {
+      display: flex;
+      height: 100vh
+    }
+
+    .slides-panel {
+      width: 50%;
+      background: #f8f9fa;
+      border-right: 2px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      position: relative
+    }
+
+    .explanation-panel {
+      width: 50%;
+      background: #fff;
+      overflow-y: auto;
+      padding: 32px
+    }
+
+    .slide-header {
+      background: #fff;
+      padding: 17px 20px 15px;
+      border-bottom: 2px solid var(--line);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+      position: relative
+    }
+
+    .slide-header::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(var(--uob-red), var(--light-blue))
+    }
+
+    .slide-header h1 {
+      font-size: 1.28rem;
+      color: var(--text);
+      margin-bottom: 3px
+    }
+
+    .slide-header p {
+      font-size: .9rem;
+      color: var(--muted)
+    }
+
+    .header-badge {
+      position: absolute;
+      right: 18px;
+      top: 17px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      border: 1px solid #cce7ff;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-weight: 700;
+      font-size: .76rem
+    }
+
+    .slide-content {
+      flex: 1;
+      padding: 24px 28px 94px;
+      overflow-y: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 0
+    }
+
+    .slide,
+    .explanation {
+      display: none;
+      opacity: 0;
+      transition: opacity .25s ease
+    }
+
+    .slide.active,
+    .explanation.active {
+      display: block;
+      opacity: 1
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 820px
+    }
+
+    .explanation {
+      max-width: 760px;
+      margin: 0 auto
+    }
+
+    .slide h2 {
+      font-size: 2.25rem;
+      color: var(--blue);
+      margin-bottom: 10px;
+      line-height: 1.15
+    }
+
+    .slide h3 {
+      font-size: 1.78rem;
+      color: var(--blue);
+      margin-bottom: 16px;
+      line-height: 1.2
+    }
+
+    .slide h4,
+    .explanation h4 {
+      font-size: 1.05rem;
+      margin-bottom: 9px;
+      color: var(--text)
+    }
+
+    .slide p,
+    .explanation p {
+      font-size: 1rem;
+      line-height: 1.58;
+      color: #495057;
+      margin-bottom: 14px
+    }
+
+    .explanation h3 {
+      font-size: 1.65rem;
+      margin-bottom: 16px;
+      color: var(--text);
+      line-height: 1.25
+    }
+
+    .slide ul,
+    .slide ol,
+    .explanation ul,
+    .explanation ol {
+      margin-left: 22px;
+      margin-bottom: 10px
+    }
+
+    .slide li,
+    .explanation li {
+      margin-bottom: 7px;
+      line-height: 1.5
+    }
+
+    code {
+      background: #eef3f8;
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #334155
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--uob-red);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 8px
+    }
+
+    .lead {
+      font-size: 1.08rem !important
+    }
+
+    .mini-note {
+      font-size: .9rem !important;
+      color: var(--muted) !important;
+      margin-top: 10px
+    }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      gap: 13px;
+      margin: 16px 0
+    }
+
+    .visual-card,
+    .metric-box,
+    .info-box,
+    .example-box,
+    .warning-box,
+    .interactive-box,
+    .code-card,
+    .quiz-card {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05)
+    }
+
+    .visual-card {
+      padding: 15px
+    }
+
+    .visual-card p {
+      margin-bottom: 0;
+      font-size: .92rem;
+      line-height: 1.42
+    }
+
+    .visual-icon {
+      font-size: 1.9rem;
+      margin-bottom: 8px
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 16px
+    }
+
+    .metric-box {
+      padding: 16px 12px;
+      text-align: center
+    }
+
+    .metric-box strong {
+      display: block;
+      font-size: 1.55rem;
+      color: var(--blue);
+      margin-bottom: 7px
+    }
+
+    .metric-box span {
+      font-size: .9rem;
+      line-height: 1.35;
+      color: #495057;
+      display: block
+    }
+
+    .info-box,
+    .example-box,
+    .warning-box,
+    .interactive-box {
+      padding: 17px;
+      margin: 16px 0
+    }
+
+    .info-box {
+      border-left: 5px solid var(--light-blue)
+    }
+
+    .example-box {
+      border-left: 5px solid var(--green);
+      background: #f8fff8
+    }
+
+    .warning-box {
+      border-left: 5px solid var(--orange);
+      background: #fffaf0
+    }
+
+    .interactive-box {
+      border-left: 5px solid var(--purple);
+      background: #fcf8ff
+    }
+
+    .navigation {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 2px solid var(--line);
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, .04)
+    }
+
+    .nav-btn {
+      background: var(--light-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: .94rem;
+      font-weight: 700;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      transition: .2s ease
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      background: #357abd
+    }
+
+    .nav-btn:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none
+    }
+
+    .slide-indicator {
+      font-size: .9rem;
+      color: var(--muted);
+      font-weight: 700
+    }
+
+    .floating-element {
+      position: absolute;
+      opacity: .07;
+      pointer-events: none;
+      font-size: 2rem;
+      animation: float 6s ease-in-out infinite
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0)
+      }
+
+      33% {
+        transform: translateY(-12px) rotate(4deg)
+      }
+
+      66% {
+        transform: translateY(7px) rotate(-3deg)
+      }
+    }
+
+    .access-popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .8);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center
+    }
+
+    .access-popup {
+      background: white;
+      border: 3px solid var(--light-blue);
+      border-radius: 15px;
+      padding: 38px;
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .3);
+      transform: scale(.8);
+      opacity: 0;
+      transition: all .3s ease
+    }
+
+    .access-popup.show {
+      transform: scale(1);
+      opacity: 1
+    }
+
+    .access-popup h2 {
+      color: var(--text);
+      margin-bottom: 13px;
+      font-size: 1.8rem
+    }
+
+    .access-popup p {
+      color: #666;
+      margin-bottom: 22px;
+      line-height: 1.55
+    }
+
+    .access-input {
+      width: 100%;
+      padding: 14px;
+      font-size: 1.15rem;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      text-align: center;
+      letter-spacing: 2px;
+      font-weight: bold;
+      text-transform: uppercase
+    }
+
+    .access-input:focus {
+      outline: none;
+      border-color: var(--light-blue);
+      box-shadow: 0 0 0 3px rgba(74, 158, 255, .12)
+    }
+
+    .access-submit,
+    .primary-btn,
+    .secondary-btn {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .access-submit,
+    .primary-btn {
+      background: var(--blue);
+      color: white
+    }
+
+    .secondary-btn {
+      background: #e9ecef;
+      color: var(--text)
+    }
+
+    .access-submit {
+      padding: 13px 28px;
+      font-size: 1.05rem
+    }
+
+    .access-error {
+      color: var(--red);
+      margin-top: 13px;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity .2s
+    }
+
+    .access-error.show {
+      opacity: 1
+    }
+
+    .access-hint {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 5px;
+      padding: 9px;
+      margin-top: 18px;
+      font-size: .88rem;
+      color: #856404
+    }
+
+    .scratch-map-wrap {
+      position: relative;
+      width: 100%;
+      margin: 12px auto;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .08)
+    }
+
+    .scratch-map-wrap img {
+      width: 100%;
+      display: block
+    }
+
+    .hotspot {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      background: var(--uob-red);
+      color: white;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35);
+      display: grid;
+      place-items: center;
+      transform: translate(-50%, -50%);
+      transition: transform .16s, background .16s;
+      z-index: 3
+    }
+
+    .hotspot:hover,
+    .hotspot.active {
+      transform: translate(-50%, -50%) scale(1.16);
+      background: var(--blue)
+    }
+
+    .scratch-caption {
+      text-align: center;
+      font-size: .85rem;
+      color: var(--muted);
+      margin-top: 8px
+    }
+
+    .area-live-card {
+      min-height: 110px;
+      border: 2px solid #cfe7fb;
+      background: var(--blue-soft);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 14px
+    }
+
+    .area-number {
+      display: inline-grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: white;
+      font-weight: 900;
+      margin-right: 7px
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .choice-btn {
+      border: 2px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 11px 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: .18s;
+      text-align: left
+    }
+
+    .choice-btn:hover {
+      border-color: var(--light-blue);
+      transform: translateY(-1px)
+    }
+
+    .choice-btn.correct,
+    .choice-btn.selected {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: #176b35
+    }
+
+    .choice-btn.wrong {
+      border-color: var(--red);
+      background: #fff1f0;
+      color: #a42820
+    }
+
+    .feedback-line {
+      min-height: 28px;
+      font-weight: 700;
+      margin-top: 8px
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .form-grid label {
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--text)
+    }
+
+    .form-grid input,
+    .form-grid textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      margin-top: 5px
+    }
+
+    .form-grid input:focus,
+    .form-grid textarea:focus {
+      outline: none;
+      border-color: var(--light-blue)
+    }
+
+    .lms-map-wrap,
+    .test-map-wrap {
+      position: relative
+    }
+
+    .session-card-hotspot {
+      position: absolute;
+      left: 19.1%;
+      top: 43%;
+      width: 25.5%;
+      height: 51%;
+      padding: 0;
+      border: 3px dashed transparent;
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+      transition: .2s ease
+    }
+
+    .session-card-hotspot span {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: #fff;
+      font-size: .9rem;
+      font-weight: 900;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35)
+    }
+
+    .session-card-hotspot:hover,
+    .session-card-hotspot.active {
+      border-color: var(--uob-red);
+      background: rgba(230, 0, 18, .08)
+    }
+
+    .session-card-hotspot:hover span,
+    .session-card-hotspot.active span {
+      background: var(--blue);
+      transform: scale(1.1)
+    }
+
+    .test-card-hotspot {
+      position: absolute;
+      left: 18%;
+      right: 3%;
+      bottom: 5%;
+      height: 20%;
+      padding: 0;
+      border: 3px dashed transparent;
+      border-radius: 14px;
+      background: transparent;
+      cursor: pointer;
+      transition: .2s ease
+    }
+
+    .test-number {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35)
+    }
+
+    .test-instruction {
+      position: absolute;
+      left: 50%;
+      bottom: 12px;
+      transform: translateX(-50%);
+      width: 88%;
+      padding: 7px 9px;
+      border-radius: 8px;
+      background: rgba(0, 86, 179, .94);
+      color: #fff;
+      font-size: .76rem;
+      line-height: 1.3;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, .25)
+    }
+
+    .test-card-hotspot:hover,
+    .test-card-hotspot.active {
+      border-color: var(--uob-red);
+      background: rgba(230, 0, 18, .08)
+    }
+
+    .test-card-hotspot:hover .test-instruction,
+    .test-card-hotspot.active .test-instruction {
+      background: var(--uob-red)
+    }
+
+    .flow-line {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 20px 0
+    }
+
+    .flow-box {
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--blue);
+      color: #fff;
+      text-align: center;
+      font-weight: 900;
+      cursor: pointer
+    }
+
+    .flow-arrow {
+      color: var(--uob-red);
+      font-size: 1.6rem;
+      font-weight: 900
+    }
+
+    .comparison-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    .compare-card {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      background: #fff
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 2px
+    }
+
+    .pill.blue {
+      background: var(--blue)
+    }
+
+    .pill.green {
+      background: var(--green)
+    }
+
+    .pill.purple {
+      background: var(--purple)
+    }
+
+    .colab-mock,
+    .colab-hotmap {
+      border: 2px solid #dce6ef;
+      border-radius: 14px;
+      background: #1e1e1e;
+      color: #e5e7eb;
+      overflow: hidden;
+      margin: 16px 0;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .12);
+      position: relative
+    }
+
+    .colab-title {
+      background: #111827;
+      padding: 10px 14px;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      font-size: .9rem
+    }
+
+    .colab-title span {
+      font-size: .8rem;
+      color: #9ca3af
+    }
+
+    .colab-cell {
+      margin: 12px;
+      border: 1px solid #374151;
+      border-radius: 10px;
+      background: #0f172a;
+      min-height: 72px;
+      position: relative;
+      padding: 14px 14px 14px 48px
+    }
+
+    .run-dot {
+      position: absolute;
+      left: 12px;
+      top: 15px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 0;
+      background: #16a34a;
+      color: white;
+      display: grid;
+      place-items: center
+    }
+
+    .colab-cell pre,
+    .code-card pre,
+    .receipt-preview pre {
+      white-space: pre-wrap;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .9rem;
+      line-height: 1.45
+    }
+
+    .colab-output {
+      margin: 0 12px 12px;
+      padding: 12px;
+      background: #fff;
+      color: #111827;
+      border-radius: 10px;
+      min-height: 48px;
+      position: relative
+    }
+
+    .python-editor {
+      border-radius: 18px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #152744 0%, #132742 100%);
+      box-shadow: 0 10px 24px rgba(8, 22, 46, .18);
+      margin: 16px 0;
+      border: 1px solid #274468
+    }
+
+    .editor-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #182c49;
+      color: #fff;
+      padding: 13px 18px 11px;
+      font-weight: 900
+    }
+
+    .editor-label {
+      font-size: 1.05rem;
+      letter-spacing: .05em;
+      color: #dbeafe
+    }
+
+    .editor-live {
+      font-size: .95rem;
+      letter-spacing: .04em;
+      color: #69e3a7
+    }
+
+    .python-editor textarea {
+      width: 100%;
+      min-height: 250px;
+      resize: vertical;
+      background: #0f2240;
+      color: #fff;
+      border: 0;
+      padding: 18px 18px 16px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 1rem;
+      line-height: 1.65;
+      outline: none
+    }
+
+    .python-editor textarea:focus {
+      box-shadow: inset 0 0 0 2px rgba(147, 197, 253, .22)
+    }
+
+    .editor-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      background: #182c49;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      border-bottom: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .run-code-btn {
+      background: #22b573;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-weight: 900;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, .12);
+      transition: .18s ease
+    }
+
+    .run-code-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03)
+    }
+
+    .editor-toolbar-note {
+      color: #dbeafe;
+      font-size: .98rem;
+      line-height: 1.4
+    }
+
+    .editor-output-panel {
+      padding: 0 16px 16px;
+      background: #182c49
+    }
+
+    .editor-output-label {
+      color: #93c5fd;
+      font-size: 1rem;
+      letter-spacing: .08em;
+      font-weight: 900;
+      padding: 14px 12px 8px
+    }
+
+    .output-box {
+      background: #041126;
+      color: #fff;
+      min-height: 110px;
+      white-space: pre-wrap;
+      font-family: Consolas, Monaco, monospace;
+      padding: 16px;
+      border: 1px solid #2b4f7b;
+      border-radius: 12px;
+      line-height: 1.6
+    }
+
+    .code-card {
+      padding: 14px;
+      background: #111827;
+      color: #e5e7eb;
+      overflow: auto
+    }
+
+    .receipt-preview {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 14px 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05)
+    }
+
+    .receipt-preview pre {
+      color: #111827
+    }
+
+    .component-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0
+    }
+
+    .component-pill {
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      padding: 8px 11px;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .component-pill.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    .checklist {
+      list-style: none;
+      margin-left: 0 !important;
+      display: grid;
+      gap: 8px
+    }
+
+    .check-item {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      cursor: pointer
+    }
+
+    .check-item input {
+      margin-top: 3px;
+      transform: scale(1.2)
+    }
+
+    .check-item.done {
+      background: var(--green-soft);
+      border-color: #9cd9af;
+      text-decoration: line-through;
+      color: #3e6b4c
+    }
+
+    .debug-scenario {
+      display: none
+    }
+
+    .debug-scenario.active {
+      display: block
+    }
+
+    .debug-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px
+    }
+
+    .debug-tab {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 7px 11px;
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    .debug-tab.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    @media(max-width:960px) {
+      body {
+        overflow: auto;
+        height: auto
+      }
+
+      .main-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh
+      }
+
+      .slides-panel,
+      .explanation-panel {
+        width: 100%;
+        height: auto;
+        min-height: 50vh
+      }
+
+      .slides-panel {
+        min-height: 100vh
+      }
+
+      .slide-content {
+        padding: 20px 20px 92px
+      }
+
+      .explanation-panel {
+        padding: 24px
+      }
+
+      .header-badge {
+        display: none
+      }
+
+      .flow-line,
+      .comparison-table {
+        grid-template-columns: 1fr
+      }
+
+      .flow-arrow {
+        display: none
+      }
+    }
+
+    .stdin-panel {
+      padding: 0 16px 14px;
+      background: #182c49;
+      border-top: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .stdin-label {
+      color: #93c5fd;
+      font-size: .86rem;
+      letter-spacing: .08em;
+      font-weight: 900;
+      padding: 10px 2px 6px;
+      text-transform: uppercase
+    }
+
+    .stdin-area {
+      width: 100%;
+      min-height: 74px;
+      resize: vertical;
+      border: 1px solid #2b4f7b;
+      border-radius: 10px;
+      background: #0b1a33;
+      color: #e5f0ff;
+      padding: 10px 12px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .92rem;
+      line-height: 1.45;
+      outline: none
+    }
+
+    .stdin-area:focus {
+      box-shadow: inset 0 0 0 2px rgba(147, 197, 253, .22)
+    }
+
+    .stdin-area.preset-loaded {
+      border-color: #69e3a7;
+      box-shadow: 0 0 0 3px rgba(105, 227, 167, .22), inset 0 0 0 1px rgba(105, 227, 167, .35)
+    }
+
+    .type-bank {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .type-card {
+      border: 2px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: 800
+    }
+
+    .type-card.active {
+      background: var(--blue-soft);
+      border-color: var(--blue)
+    }
+
+    .mini-terminal {
+      background: #041126;
+      color: #fff;
+      border-radius: 12px;
+      border: 1px solid #2b4f7b;
+      padding: 16px;
+      margin: 14px 0;
+      font-family: Consolas, Monaco, monospace;
+      white-space: pre-wrap;
+      line-height: 1.55;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .08)
+    }
+
+    .safe-card {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 13px;
+      cursor: pointer;
+      font-weight: 800
+    }
+
+    .safe-card.safe {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: #176b35
+    }
+
+    .safe-card.risky {
+      border-color: var(--red);
+      background: #fff1f0;
+      color: #a42820
+    }
+
+    .memory-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    .memory-slot {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      cursor: pointer
+    }
+
+    .memory-slot.active {
+      border-color: var(--blue);
+      background: var(--blue-soft)
+    }
+
+    .memory-slot code {
+      display: block;
+      margin-top: 6px;
+      color: var(--blue);
+      font-weight: 900
+    }
+
+    .thin-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 14px 0
+    }
+
+    .thin-table th {
+      background: var(--blue);
+      color: #fff;
+      text-align: left;
+      padding: 10px
+    }
+
+    .thin-table td {
+      border-top: 1px solid var(--line);
+      padding: 10px;
+      vertical-align: top
+    }
+
+    .thin-table code {
+      background: #eef3f8;
+      padding: 2px 6px;
+      border-radius: 5px
+    }
+  </style>
+</head>
+
+<body>
+  <div class="access-popup-overlay" id="accessPopup">
+    <div class="access-popup">
+      <h2>🔐 Kode Akses</h2>
+      <p>Masukkan kode akses High School untuk membuka materi Sesi 2.</p><input type="text" class="access-input"
+        id="accessInput" placeholder="MASUKKAN KODE" maxlength="20" autocomplete="off" /><button class="access-submit"
+        onclick="checkAccessCode()">Masuk</button>
+      <div class="access-error" id="accessError">Kode akses belum tepat. Coba lagi.</div>
+      <div class="access-hint">Kode akses diberikan oleh guru.</div>
+    </div>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+  <div class="main-container" id="mainContent" style="display:none;">
+    <div class="slides-panel">
+      <div class="slide-header">
+        <h1>UOB My Digital Space — High School</h1>
+        <p>Sesi 2 · Profil Nasabah</p><span class="header-badge">Python · High School</span>
+      </div>
+      <div class="slide-content">
+        <div class="floating-element" style="top:12%;left:7%;">🐍</div>
+        <div class="floating-element" style="top:18%;right:10%;">⌨️</div>
+        <div class="floating-element" style="bottom:25%;left:14%;">🧾</div>
+        <div class="floating-element" style="bottom:15%;right:16%;">💰</div>
+        <!-- SLIDE 1 -->
+        <section class="slide active" id="slide-1">
+          <span class="eyebrow">Sesi 2</span>
+          <h2>Profil Nasabah</h2>
+          <p class="lead">Hari ini kamu akan membuat program CLI sederhana yang menerima data pengguna, menyimpannya ke
+            variabel, lalu menampilkan ringkasan profil keuangan.</p>
+          <div class="metrics">
+            <div class="metric-box"><strong>⌨️</strong><span>Menerima input dari pengguna</span></div>
+            <div class="metric-box"><strong>🗂️</strong><span>Menyimpan data ke variabel</span></div>
+            <div class="metric-box"><strong>🔢</strong><span>Membedakan str, int, dan float</span></div>
+            <div class="metric-box"><strong>🧾</strong><span>Menampilkan profil nasabah</span></div>
+          </div>
+          <div class="example-box">
+            <h4>Target akhir</h4>
+            <p>Program meminta nama, usia, rencana keuangan, dan target nominal. Setelah itu, program menampilkan
+              ringkasan profil yang rapi.</p>
+          </div>
+        </section>
+
+        <!-- SLIDE 2 -->
+        <section class="slide" id="slide-2">
+          <h3>Misi Belajar Hari Ini</h3>
+          <div class="visual-grid">
+            <div class="visual-card">
+              <div class="visual-icon">🧭</div>
+              <h4>Buka LMS</h4>
+              <p>Buka materi Sesi 2 dan cek arahan kelas.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">⌨️</div>
+              <h4>Input</h4>
+              <p>Menerima ketikan pengguna dengan <code>input()</code>.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🗂️</div>
+              <h4>Variabel</h4>
+              <p>Menyimpan data dengan nama yang jelas.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🔁</div>
+              <h4>Type Casting</h4>
+              <p>Mengubah teks angka menjadi angka yang bisa dihitung.</p>
+            </div>
+          </div>
+          <div class="interactive-box">
+            <h4>Cek awal</h4>
+            <p>Bagian mana yang menurutmu paling perlu dipahami hari ini?</p>
+            <div class="choice-grid"><button class="choice-btn" onclick="selectAny(this)">Cara kerja
+                input()</button><button class="choice-btn" onclick="selectAny(this)">Tipe data Python</button><button
+                class="choice-btn" onclick="selectAny(this)">Menghindari error</button><button class="choice-btn"
+                onclick="selectAny(this)">Merapikan output terminal</button></div>
+          </div>
+        </section>
+
+        <!-- SLIDE 3 -->
+        <section class="slide" id="slide-3">
+          <h3>Siapkan Workspace</h3>
+          <p class="lead">Pastikan perangkat dan akun siap sebelum membuka Google Colab.</p>
+          <div class="choice-grid">
+            <button class="choice-btn" onclick="deviceCheck(this,true)">Laptop/komputer siap digunakan</button>
+            <button class="choice-btn" onclick="deviceCheck(this,true)">Internet stabil</button>
+            <button class="choice-btn" onclick="deviceCheck(this,true)">Browser sudah dibuka</button>
+            <button class="choice-btn" onclick="deviceCheck(this,true)">Akun Google/Colab siap</button>
+            <button class="choice-btn" onclick="deviceCheck(this,true)">Akun LMS siap</button>
+            <button class="choice-btn" onclick="deviceCheck(this,true)">Tidak memakai data pribadi asli</button>
+          </div>
+          <div class="info-box"><strong>Alamat LMS:</strong><br><a href="https://app.uobmydigitalspace.com/"
+              target="_blank" rel="noopener noreferrer">https://app.uobmydigitalspace.com/</a></div>
+        </section>
+
+        <!-- SLIDE 4 -->
+        <section class="slide" id="slide-4">
+          <h3>Buka Materi Sesi 2</h3>
+          <p class="lead">Materi sesi dan tes berada di menu yang berbeda. Mulai dari halaman sesi terlebih dahulu.</p>
+          <div class="scratch-map-wrap lms-map-wrap"><img
+              src="https://uob-1328237036.cos.ap-singapore.myqcloud.com//file-uploader/images/6a973bfb-a09a-42af-a4ea-a4db56b12f56.png"
+              alt="Tampilan LMS UOB My Digital Space"><button class="hotspot" style="left:10.5%;top:39%;"
+              onclick="showLmsStep(1,this)">1</button><button class="session-card-hotspot"
+              onclick="showLmsStep(2,this)"><span>2</span></button></div>
+          <p class="scratch-caption">Klik angka 1 untuk membuka Sesi Kelas, lalu pilih kartu sesi bernomor 2.</p>
+          <div class="area-live-card" id="lmsStepInfo">
+            <h4>👆 Mulai dari Langkah 1</h4>
+            <p>Klik menu <strong>Sesi Kelas</strong> di sebelah kiri.</p>
+          </div>
+        </section>
+        <!-- SLIDE 5 -->
+        <section class="slide" id="slide-5">
+          <h3>Review Singkat Sesi 1</h3>
+          <p class="lead">Kita akan memakai lagi tiga konsep dari sesi sebelumnya.</p>
+          <div class="visual-grid">
+            <div class="visual-card">
+              <div class="visual-icon">🖨️</div>
+              <h4>print()</h4>
+              <p>Menampilkan teks atau nilai ke output.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🏷️</div>
+              <h4>Variabel</h4>
+              <p>Menyimpan data dengan nama tertentu.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🔤</div>
+              <h4>f-string</h4>
+              <p>Menyisipkan isi variabel ke dalam teks.</p>
+            </div>
+          </div>
+          <div class="interactive-box">
+            <h4>Quick check</h4>
+            <p>Manakah yang menampilkan isi variabel <code>nama</code>?</p>
+            <div class="choice-grid"><button class="choice-btn"
+                onclick="quiz(this,false,'q6')">print("nama")</button><button class="choice-btn"
+                onclick="quiz(this,true,'q6')">print(nama)</button><button class="choice-btn"
+                onclick="quiz(this,false,'q6')">print = nama</button></div>
+            <div class="feedback-line" id="q6"></div>
+          </div>
+        </section>
+
+        <!-- SLIDE 6 -->
+        <section class="slide" id="slide-6">
+          <h3>Dari Form Digital ke Program Python</h3>
+          <p class="lead">Aplikasi e-wallet atau bank digital perlu membaca data pengguna dengan rapi.</p>
+          <div class="visual-grid">
+            <div class="visual-card">
+              <div class="visual-icon">🧑</div>
+              <h4>Nama</h4>
+              <p>Data teks, biasanya bertipe <code>str</code>.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🎂</div>
+              <h4>Usia</h4>
+              <p>Data angka bulat, cocok menjadi <code>int</code>.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🎯</div>
+              <h4>Rencana</h4>
+              <p>Data teks tentang tujuan finansial.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">💰</div>
+              <h4>Target</h4>
+              <p>Data angka yang bisa dihitung.</p>
+            </div>
+          </div>
+          <div class="warning-box">
+            <h4>Gunakan data contoh</h4>
+            <p>Latihan ini tidak membutuhkan data asli. Cukup gunakan data dummy.</p>
+          </div>
+        </section>
+
+        <!-- SLIDE 7 -->
+        <section class="slide" id="slide-7">
+          <h3>Alur IPO: Input → Process → Output</h3>
+          <div class="flow-line">
+            <div class="flow-box" onclick="showIPO('input')">Input</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-box" onclick="showIPO('process')">Process</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-box" onclick="showIPO('output')">Output</div>
+          </div>
+          <div class="area-live-card" id="ipoInfo">
+            <h4>Input</h4>
+            <p>Program menerima data dari pengguna, misalnya nama dan usia.</p>
+          </div>
+          <div class="interactive-box">
+            <h4>Contoh cepat</h4>
+            <p>Jika pengguna mengetik <strong>16</strong> untuk usia, proses apa yang perlu terjadi?</p>
+            <div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'q8')">Ubah teks "16" menjadi
+                angka 16</button><button class="choice-btn" onclick="quiz(this,false,'q8')">Biarkan sebagai teks untuk
+                semua kebutuhan</button><button class="choice-btn" onclick="quiz(this,false,'q8')">Hapus
+                datanya</button></div>
+            <div class="feedback-line" id="q8"></div>
+          </div>
+        </section>
+
+        <!-- SLIDE 8 -->
+        <section class="slide" id="slide-8">
+          <h3>input(): Menerima Ketikan Pengguna</h3>
+          <p class="lead"><code>input()</code> membuat program menunggu pengguna mengetik sesuatu.</p>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div>
+            <textarea id="py1" spellcheck="false">nama = input(&quot;Masukkan nama nasabah: &quot;)
+print(f&quot;Halo, {nama}!&quot;)</textarea>
+            <div class="stdin-panel">
+              <div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py1_input"
+                spellcheck="false">Alya Nabila</textarea>
+            </div>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py1')">Run code</button><span
+                class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py1_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+          <p class="mini-note">Ganti input simulator, lalu lihat output berubah.</p>
+        </section>
+
+        <!-- SLIDE 9 -->
+        <section class="slide" id="slide-9">
+          <h3>input() Selalu Menghasilkan String</h3>
+          <p class="lead">Walaupun pengguna mengetik angka, hasil dari <code>input()</code> tetap bertipe
+            <code>str</code>.</p>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div>
+            <textarea id="py2" spellcheck="false">usia_input = input(&quot;Masukkan usia: &quot;)
+print(usia_input)
+print(type(usia_input))</textarea>
+            <div class="stdin-panel">
+              <div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py2_input"
+                spellcheck="false">16</textarea>
+            </div>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py2')">Run code</button><span
+                class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py2_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+          <p class="mini-note">Coba isi input dengan 16. Perhatikan tipe datanya tetap str.</p>
+        </section>
+
+        <!-- SLIDE 10 -->
+        <section class="slide" id="slide-10">
+          <h3>Aturan Nama Variabel</h3>
+          <p>Nama variabel harus mudah dibaca dan konsisten.</p>
+          <div class="memory-box">
+            <div class="memory-slot" onclick="showNaming('snake',this)">
+              <strong>snake_case</strong><code>target_nominal</code></div>
+            <div class="memory-slot" onclick="showNaming('space',this)"><strong>Tanpa
+                spasi</strong><code>target nominal ❌</code></div>
+            <div class="memory-slot" onclick="showNaming('number',this)"><strong>Tidak diawali
+                angka</strong><code>2target ❌</code></div>
+            <div class="memory-slot" onclick="showNaming('case',this)">
+              <strong>Case-sensitive</strong><code>Nama ≠ nama</code></div>
+          </div>
+          <div class="area-live-card" id="namingInfo">
+            <h4>Pilih aturan</h4>
+            <p>Klik salah satu kotak untuk melihat penjelasan.</p>
+          </div>
+        </section>
+
+        <!-- SLIDE 11 -->
+        <section class="slide" id="slide-11">
+          <h3>Tipe Data Dasar</h3>
+          <p class="lead">Python perlu tahu jenis data agar operasi yang dilakukan tepat.</p>
+          <div class="type-bank"><button class="type-card"
+              onclick="showDataType('str',this)"><code>str</code><br>Teks</button><button class="type-card"
+              onclick="showDataType('int',this)"><code>int</code><br>Angka bulat</button><button class="type-card"
+              onclick="showDataType('float',this)"><code>float</code><br>Angka desimal</button></div>
+          <div class="area-live-card" id="typeInfo">
+            <h4>Pilih tipe data</h4>
+            <p>Klik salah satu tipe data untuk melihat contoh penggunaannya.</p>
+          </div>
+          <table class="thin-table">
+            <tr>
+              <th>Data</th>
+              <th>Tipe yang cocok</th>
+            </tr>
+            <tr>
+              <td>"Alya Nabila"</td>
+              <td><code>str</code></td>
+            </tr>
+            <tr>
+              <td>16</td>
+              <td><code>int</code></td>
+            </tr>
+            <tr>
+              <td>4.5</td>
+              <td><code>float</code></td>
+            </tr>
+          </table>
+        </section>
+
+        <!-- SLIDE 12 -->
+        <section class="slide" id="slide-12">
+          <h3>Type Casting: Mengubah Tipe Data</h3>
+          <p class="lead"><code>int()</code> dan <code>float()</code> digunakan untuk mengubah teks angka menjadi angka.
+          </p>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div>
+            <textarea id="py3" spellcheck="false">usia = int(input(&quot;Masukkan usia: &quot;))
+target_nominal = int(input(&quot;Target tabungan: &quot;))
+print(type(usia))
+print(type(target_nominal))
+print(f&quot;Usia: {usia} tahun&quot;)
+print(f&quot;Target: Rp {target_nominal:,}&quot;)</textarea>
+            <div class="stdin-panel">
+              <div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py3_input"
+                spellcheck="false">16
+7500000</textarea>
+            </div>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py3')">Run code</button><span
+                class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py3_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+          <p class="mini-note">Ubah input menjadi angka lain. Jangan masukkan huruf dulu di slide ini.</p>
+        </section>
+
+        <!-- SLIDE 13 -->
+        <section class="slide" id="slide-13">
+          <h3>Mini Debug: ValueError</h3>
+          <p>Program bisa error jika input angka diisi dengan teks huruf.</p>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div>
+            <textarea id="py4" spellcheck="false">usia = int(input(&quot;Masukkan usia: &quot;))
+print(f&quot;Usia kamu {usia} tahun&quot;)</textarea>
+            <div class="stdin-panel">
+              <div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py4_input"
+                spellcheck="false">enam belas</textarea>
+            </div>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py4')">Run code</button><span
+                class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py4_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+          <p class="mini-note">Coba ganti input menjadi: enam belas. Lihat pesan error yang muncul.</p>
+        </section>
+
+        <!-- SLIDE 14 -->
+        <section class="slide" id="slide-14">
+          <h3>Literasi Digital: Data Aman untuk Latihan</h3>
+          <p class="lead">Sebagai developer, kamu perlu tahu data mana yang aman dipakai saat latihan.</p>
+          <div class="choice-grid">
+            <button class="safe-card" onclick="markSafety(this,true)">Nama dummy: Alya Nabila</button>
+            <button class="safe-card" onclick="markSafety(this,false)">Nomor rekening asli</button>
+            <button class="safe-card" onclick="markSafety(this,true)">Target tabungan contoh: 7500000</button>
+            <button class="safe-card" onclick="markSafety(this,false)">PIN atau password</button>
+            <button class="safe-card" onclick="markSafety(this,false)">NIK pribadi</button>
+            <button class="safe-card" onclick="markSafety(this,true)">Rencana contoh: Membeli laptop</button>
+          </div>
+          <p class="mini-note">Klik setiap kartu. Hijau berarti aman untuk latihan, merah berarti jangan digunakan.</p>
+        </section>
+
+        <!-- SLIDE 15 -->
+        <section class="slide" id="slide-15">
+          <h3>Reading Code: Prediksi Output</h3>
+          <p>Baca kode dulu sebelum menjalankannya.</p>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div>
+            <textarea id="py5" spellcheck="false"># Program Pengisian Profil
+nama = input(&quot;Nama nasabah: &quot;)
+usia = int(input(&quot;Usia: &quot;))
+print(f&quot;{nama} berusia {usia} tahun.&quot;)</textarea>
+            <div class="stdin-panel">
+              <div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py5_input"
+                spellcheck="false">Alya
+16</textarea>
+            </div>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py5')">Run code</button><span
+                class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py5_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+          <p class="mini-note">Input simulator berisi dua baris: nama dan usia.</p>
+          <div class="interactive-box">
+            <h4>Pertanyaan</h4>
+            <p>Variabel mana yang bertipe int?</p>
+            <div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'q16')">nama</button><button
+                class="choice-btn" onclick="quiz(this,true,'q16')">usia</button><button class="choice-btn"
+                onclick="quiz(this,false,'q16')">Keduanya string</button></div>
+            <div class="feedback-line" id="q16"></div>
+          </div>
+        </section>
+
+        <!-- SLIDE 16 -->
+        <section class="slide" id="slide-16">
+          <h3>Klasifikasi Tipe Data</h3>
+          <p>Pilih tipe data yang paling cocok untuk setiap nilai.</p>
+          <div class="interactive-box">
+            <h4>Nilai: <code>"Menabung untuk kuliah"</code></h4>
+            <div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'q17a')">str</button><button
+                class="choice-btn" onclick="quiz(this,false,'q17a')">int</button><button class="choice-btn"
+                onclick="quiz(this,false,'q17a')">float</button></div>
+            <div class="feedback-line" id="q17a"></div>
+          </div>
+          <div class="interactive-box">
+            <h4>Nilai: <code>4.5</code></h4>
+            <div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'q17b')">str</button><button
+                class="choice-btn" onclick="quiz(this,false,'q17b')">int</button><button class="choice-btn"
+                onclick="quiz(this,true,'q17b')">float</button></div>
+            <div class="feedback-line" id="q17b"></div>
+          </div>
+        </section>
+
+        <!-- SLIDE 17 -->
+        <section class="slide" id="slide-17">
+          <h3>Rancang Variabel Project</h3>
+          <p class="lead">Sebelum coding, tentukan data apa saja yang akan disimpan.</p>
+          <table class="thin-table">
+            <tr>
+              <th>Variabel</th>
+              <th>Isi Data</th>
+              <th>Tipe</th>
+            </tr>
+            <tr>
+              <td><code>nama_lengkap</code></td>
+              <td>Nama dummy nasabah</td>
+              <td><code>str</code></td>
+            </tr>
+            <tr>
+              <td><code>usia</code></td>
+              <td>Usia nasabah</td>
+              <td><code>int</code></td>
+            </tr>
+            <tr>
+              <td><code>rencana_keuangan</code></td>
+              <td>Tujuan finansial</td>
+              <td><code>str</code></td>
+            </tr>
+            <tr>
+              <td><code>target_nominal</code></td>
+              <td>Target tabungan</td>
+              <td><code>int</code></td>
+            </tr>
+          </table>
+          <div class="interactive-box">
+            <h4>Cek naming</h4>
+            <p>Nama variabel mana yang paling rapi?</p>
+            <div class="choice-grid"><button class="choice-btn"
+                onclick="quiz(this,false,'q18')">namalengkap</button><button class="choice-btn"
+                onclick="quiz(this,true,'q18')">nama_lengkap</button><button class="choice-btn"
+                onclick="quiz(this,false,'q18')">Nama Lengkap</button></div>
+            <div class="feedback-line" id="q18"></div>
+          </div>
+        </section>
+
+        <!-- SLIDE 18 -->
+        <section class="slide" id="slide-18">
+          <h3>Langkah 1: Input Nama dan Usia</h3>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div>
+            <textarea id="py6" spellcheck="false">nama_lengkap = input(&quot;Masukkan nama lengkap Anda: &quot;)
+usia = int(input(&quot;Masukkan usia Anda: &quot;))
+
+print(f&quot;Nama: {nama_lengkap}&quot;)
+print(f&quot;Usia: {usia} tahun&quot;)</textarea>
+            <div class="stdin-panel">
+              <div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py6_input"
+                spellcheck="false">Alya Nabila
+16</textarea>
+            </div>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py6')">Run code</button><span
+                class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py6_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+          <p class="mini-note">Coba ubah nama dan usia pada input simulator.</p>
+        </section>
+
+        <!-- SLIDE 19 -->
+        <section class="slide" id="slide-19">
+          <h3>Langkah 2: Tambahkan Header Program</h3>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div>
+            <textarea id="py7" spellcheck="false">print(&quot;=== SISTEM REKAPITULASI DATA BANK MUDA ===&quot;)
+print(&quot;------------------------------------------&quot;)
+
+nama_lengkap = input(&quot;Masukkan nama lengkap Anda: &quot;)
+print(f&quot;Halo, {nama_lengkap}!&quot;)</textarea>
+            <div class="stdin-panel">
+              <div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py7_input"
+                spellcheck="false">Alya Nabila</textarea>
+            </div>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py7')">Run code</button><span
+                class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py7_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+          <p class="mini-note">Header membantu pengguna memahami program yang sedang dijalankan.</p>
+        </section>
+
+        <!-- SLIDE 20 -->
+        <section class="slide" id="slide-20">
+          <h3>Langkah 3: Input Lengkap Profil</h3>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div>
+            <textarea id="py8" spellcheck="false">nama_lengkap = input(&quot;Masukkan nama lengkap Anda: &quot;)
+usia = int(input(&quot;Masukkan usia Anda saat ini: &quot;))
+rencana_keuangan = input(&quot;Apa rencana/tujuan keuangan Anda?: &quot;)
+target_nominal = int(input(&quot;Berapa target nominal yang ingin dicapai? (Rp): &quot;))
+
+print(&quot;Data berhasil diterima.&quot;)</textarea>
+            <div class="stdin-panel">
+              <div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py8_input"
+                spellcheck="false">Alya Nabila
+16
+Membeli Laptop Gaming
+7500000</textarea>
+            </div>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py8')">Run code</button><span
+                class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py8_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+          <p class="mini-note">Data teks disimpan sebagai str. Data angka dikonversi dengan int().</p>
+        </section>
+
+        <!-- SLIDE 21 -->
+        <section class="slide" id="slide-21">
+          <h3>Langkah 4: Tampilkan Ringkasan Profil</h3>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div>
+            <textarea id="py9" spellcheck="false" style="min-height:310px">nama_lengkap = &quot;Alya Nabila&quot;
+usia = 16
+rencana_keuangan = &quot;Membeli Laptop Gaming&quot;
+target_nominal = 7500000
+
+print(&quot;📊 RINGKASAN PROFIL NASABAH&quot;)
+print(&quot;------------------------------------------&quot;)
+print(f&quot;Nama Nasabah     : {nama_lengkap}&quot;)
+print(f&quot;Usia Saat Ini    : {usia} tahun&quot;)
+print(f&quot;Rencana Keuangan : {rencana_keuangan}&quot;)
+print(f&quot;Target Tabungan  : Rp {target_nominal:,}&quot;)</textarea>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py9')">Run code</button><span
+                class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py9_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+          <p class="mini-note">Coba ubah isi variabel dan lihat ringkasan ikut berubah.</p>
+        </section>
+
+        <!-- SLIDE 22 -->
+        <section class="slide" id="slide-22">
+          <h3>Starter Code: Profil Nasabah</h3>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div>
+            <textarea id="py10" spellcheck="false" style="min-height:360px"># 1. Menampilkan Header Aplikasi Finansial
+print(&quot;=== SISTEM REKAPITULASI DATA BANK MUDA ===&quot;)
+
+# 2. Proses Input &amp; Type Casting
+nama_lengkap = input(&quot;Masukkan nama lengkap Anda: &quot;)
+usia = int(input(&quot;Masukkan usia Anda saat ini: &quot;))
+rencana_keuangan = input(&quot;Apa rencana/tujuan keuangan Anda?: &quot;)
+target_nominal = int(input(&quot;Berapa target nominal yang ingin dicapai? (Rp): &quot;))
+
+# 3. Proses Menampilkan Ringkasan Profil
+print(&quot;\n------------------------------------------&quot;)
+print(&quot;📊 RINGKASAN PROFIL NASABAH&quot;)
+print(&quot;------------------------------------------&quot;)
+print(f&quot;Nama Nasabah     : {nama_lengkap}&quot;)
+print(f&quot;Usia Saat Ini    : {usia} tahun&quot;)
+print(f&quot;Rencana Keuangan : {rencana_keuangan}&quot;)
+print(f&quot;Target Tabungan  : Rp {target_nominal:,}&quot;)
+print(&quot;------------------------------------------&quot;)</textarea>
+            <div class="stdin-panel">
+              <div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py10_input"
+                spellcheck="false">Alya Nabila
+16
+Membeli Laptop Gaming
+7500000</textarea>
+            </div>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py10')">Run
+                code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat
+                hasilnya.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py10_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+          <p class="mini-note">Ini adalah versi utama program. Ubah input simulator untuk melakukan pengujian.</p>
+        </section>
+
+        <!-- SLIDE 23 -->
+        <section class="slide" id="slide-23">
+          <h3>Test Case: Pastikan Program Dinamis</h3>
+          <p class="lead">Program harus berubah sesuai input, bukan hanya cocok untuk satu data.</p>
+          <div class="choice-grid"><button class="choice-btn" onclick="loadTestCase(this,1)">Test Case 1</button><button
+              class="choice-btn" onclick="loadTestCase(this,2)">Test Case 2</button></div>
+          <div class="mini-terminal">Test Case 1
+            Alya Nabila / 16 / Membeli Laptop Gaming / 7500000
+
+            Test Case 2
+            Budi Hartono / 17 / Investasi Reksadana / 12000000</div>
+          <p class="mini-note">Klik salah satu test case. Kamu akan langsung diarahkan ke slide Starter Code. Setelah
+            itu, klik <strong>Run code</strong>.</p>
+          <div class="feedback-line" id="testCaseFeedback"></div>
+        </section>
+
+        <!-- SLIDE 24 -->
+        <section class="slide" id="slide-24">
+          <h3>Edge Case: Input Tidak Sesuai</h3>
+          <p>Program bisa berhenti jika pengguna memasukkan data angka dalam bentuk teks huruf.</p>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div>
+            <textarea id="py11" spellcheck="false">usia = int(input(&quot;Masukkan usia: &quot;))
+print(f&quot;Usia: {usia} tahun&quot;)</textarea>
+            <div class="stdin-panel">
+              <div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py11_input"
+                spellcheck="false">enam belas</textarea>
+            </div>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py11')">Run
+                code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat
+                hasilnya.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py11_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+          <p class="mini-note">Input ini sengaja salah untuk melihat contoh ValueError.</p>
+          <div class="interactive-box">
+            <h4>Apa penyebab error?</h4>
+            <div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'q25')">int() menerima teks
+                huruf, bukan angka</button><button class="choice-btn" onclick="quiz(this,false,'q25')">print() tidak
+                boleh dipakai</button><button class="choice-btn" onclick="quiz(this,false,'q25')">Nama variabel terlalu
+                panjang</button></div>
+            <div class="feedback-line" id="q25"></div>
+          </div>
+        </section>
+
+        <!-- SLIDE 25 -->
+        <section class="slide" id="slide-25">
+          <h3>Target Tampilan Terminal</h3>
+          <div class="mini-terminal">=== SISTEM REKAPITULASI DATA BANK MUDA ===
+            Masukkan nama lengkap Anda: Alya Nabila
+            Masukkan usia Anda saat ini: 16
+            Apa rencana/tujuan keuangan Anda?: Membeli Laptop Gaming
+            Berapa target nominal yang ingin dicapai? (Rp): 7500000
+            ------------------------------------------
+            📊 RINGKASAN PROFIL NASABAH
+            ------------------------------------------
+            Nama Nasabah : Alya Nabila
+            Usia Saat Ini : 16 tahun
+            Rencana Keuangan : Membeli Laptop Gaming
+            Target Tabungan : Rp 7,500,000
+            ------------------------------------------</div>
+          <p class="mini-note">Output tidak harus sama persis, tetapi informasinya harus lengkap, rapi, dan mudah
+            dibaca.</p>
+        </section>
+
+        <!-- SLIDE 26 -->
+        <section class="slide" id="slide-26">
+          <h3>Detektif Kode: Debugging</h3>
+          <div class="debug-tabs"><button class="debug-tab active"
+              onclick="showDebug('debug-value',this)">ValueError</button><button class="debug-tab"
+              onclick="showDebug('debug-name',this)">NameError</button><button class="debug-tab"
+              onclick="showDebug('debug-fstring',this)">f-string lupa</button><button class="debug-tab"
+              onclick="showDebug('debug-zero',this)">ZeroDivision</button></div>
+          <div class="debug-scenario active" id="debug-value">
+            <div class="warning-box">
+              <h4>Gejala</h4>
+              <p><code>ValueError: invalid literal for int()</code></p>
+            </div>
+            <div class="info-box">
+              <h4>Cek</h4>
+              <p>Pastikan input untuk <code>int()</code> berisi angka murni, bukan huruf atau simbol.</p>
+            </div>
+          </div>
+          <div class="debug-scenario" id="debug-name">
+            <div class="warning-box">
+              <h4>Gejala</h4>
+              <p><code>NameError: name 'nama_lengkap' is not defined</code></p>
+            </div>
+            <div class="info-box">
+              <h4>Cek</h4>
+              <p>Samakan ejaan variabel. Python membedakan huruf besar, huruf kecil, dan garis bawah.</p>
+            </div>
+          </div>
+          <div class="debug-scenario" id="debug-fstring">
+            <div class="warning-box">
+              <h4>Gejala</h4>
+              <p><code>{nama_lengkap}</code> tercetak mentah di layar.</p>
+            </div>
+            <div class="info-box">
+              <h4>Cek</h4>
+              <p>Tambahkan huruf <code>f</code> sebelum tanda kutip: <code>print(f"Nama: {nama_lengkap}")</code>.</p>
+            </div>
+          </div>
+          <div class="debug-scenario" id="debug-zero">
+            <div class="warning-box">
+              <h4>Gejala</h4>
+              <p><code>ZeroDivisionError</code> saat challenge tabungan bulanan.</p>
+            </div>
+            <div class="info-box">
+              <h4>Cek</h4>
+              <p>Durasi bulan tidak boleh 0 karena angka tidak bisa dibagi dengan nol.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SLIDE 27 -->
+        <section class="slide" id="slide-27">
+          <h3>Output Minimum</h3>
+          <p>Project dianggap selesai jika syarat berikut terpenuhi.</p>
+          <ul class="checklist">
+            <li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"> Program berjalan tanpa
+              SyntaxError.</li>
+            <li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"> Program meminta 4 data input.
+            </li>
+            <li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"> Usia dan target nominal
+              dikonversi dengan int().</li>
+            <li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"> Output ringkasan menampilkan
+              semua data.</li>
+            <li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"> Tidak memakai data pribadi asli.
+            </li>
+          </ul>
+        </section>
+
+        <!-- SLIDE 28 -->
+        <section class="slide" id="slide-28">
+          <h3>Challenge: Estimasi Tabungan Bulanan</h3>
+          <p class="lead">Tambahkan durasi bulan, lalu hitung target tabungan per bulan.</p>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div>
+            <textarea id="py12" spellcheck="false">target_nominal = int(input(&quot;Target nominal: &quot;))
+durasi_bulan = int(input(&quot;Ingin dicapai dalam berapa bulan?: &quot;))
+
+tabungan_per_bulan = target_nominal / durasi_bulan
+
+print(f&quot;Estimasi tabungan per bulan: Rp {tabungan_per_bulan:,}&quot;)</textarea>
+            <div class="stdin-panel">
+              <div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py12_input"
+                spellcheck="false">7500000
+10</textarea>
+            </div>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py12')">Run
+                code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat
+                hasilnya.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py12_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+          <p class="mini-note">Coba ubah durasi menjadi 0 untuk melihat alasan ZeroDivisionError.</p>
+        </section>
+
+        <!-- SLIDE 29 -->
+        <section class="slide" id="slide-29">
+          <span class="eyebrow">Penutup</span>
+          <h2>Ringkasan Sesi 2</h2>
+          <div class="visual-grid">
+            <div class="visual-card">
+              <div class="visual-icon">⌨️</div>
+              <h4>Input</h4>
+              <p><code>input()</code> menerima ketikan pengguna.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🗂️</div>
+              <h4>Variabel</h4>
+              <p>Data disimpan dengan nama yang jelas.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🔁</div>
+              <h4>Casting</h4>
+              <p><code>int()</code> dan <code>float()</code> mengubah tipe data.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🧾</div>
+              <h4>Output</h4>
+              <p>Ringkasan profil ditampilkan dengan rapi.</p>
+            </div>
+          </div>
+          <div class="example-box">
+            <h4>Kalimat penting</h4>
+            <p><strong>Data yang masuk harus disimpan, diproses, dan ditampilkan sesuai tipe datanya.</strong></p>
+          </div>
+        </section>
+      </div>
+      <div class="navigation"><button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)"><span>←</span>
+          Previous</button>
+        <div class="slide-indicator"><span id="currentSlide">1</span> / <span id="totalSlides">30</span></div><button
+          class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next <span>→</span></button>
+      </div>
+    </div>
+    <div class="explanation-panel">
+      <section class="explanation active" id="explanation-1">
+        <h3>Project yang Akan Dibuat</h3>
+        <p>Di sesi sebelumnya, kamu sudah membuat output kwitansi digital dengan <code>print()</code>, variabel, dan
+          <code>f-string</code>. Di sesi ini, program tidak hanya memakai data yang sudah ditulis di dalam kode. Program
+          akan mulai menerima data dari pengguna melalui terminal.</p>
+        <p>Project yang dibuat adalah <strong>Profil Nasabah</strong>. Bentuknya masih sederhana, yaitu program berbasis
+          terminal atau CLI. Namun pola kerjanya sudah mirip form digital pada aplikasi finansial: pengguna mengisi
+          data, sistem menyimpan data tersebut, lalu sistem menampilkan ringkasan yang bisa dibaca kembali.</p>
+        <div class="info-box">
+          <h4>Fokus utama</h4>
+          <p>Fokus sesi ini adalah <strong>input → process → output</strong>. Kamu akan belajar cara menerima input,
+            menyimpan input ke variabel, mengubah tipe data angka, dan menampilkan hasil dengan format yang rapi.</p>
+        </div>
+        <div class="warning-box">
+          <h4>Catatan keamanan</h4>
+          <p>Data yang digunakan di kelas adalah data contoh. Jangan memasukkan data pribadi asli seperti nomor
+            rekening, NIK, PIN, password, alamat lengkap, atau nomor telepon pribadi.</p>
+        </div>
+      </section>
+
+      <section class="explanation" id="explanation-2">
+        <h3>Alur Belajar Sesi Ini</h3>
+        <p>Sesi ini memperluas materi Sesi 1. Kalau sebelumnya data ditulis langsung di kode, sekarang data akan datang
+          dari pengguna. Ini membuat program lebih interaktif, tetapi juga membuat program perlu lebih hati-hati dalam
+          mengolah data.</p>
+        <div class="info-box">
+          <h4>Urutan besar sesi</h4>
+          <ol>
+            <li>Membuka materi dan mengikuti arahan awal.</li>
+            <li>Mengingat kembali <code>print()</code>, variabel, dan <code>f-string</code>.</li>
+            <li>Mempelajari <code>input()</code> dan alur IPO.</li>
+            <li>Membedakan tipe data <code>str</code>, <code>int</code>, dan <code>float</code>.</li>
+            <li>Melakukan <em>type casting</em> agar angka bisa dihitung.</li>
+            <li>Membangun program Profil Nasabah dan mengetesnya.</li>
+          </ol>
+        </div>
+        <p>Bahasa yang dipakai tetap Python dasar. Yang berubah adalah cara program berinteraksi dengan pengguna. Ini
+          penting karena banyak aplikasi nyata dimulai dari form input.</p>
+      </section>
+
+      <section class="explanation" id="explanation-3">
+        <h3>Persiapan Sebelum Coding</h3>
+        <p>Karena sesi ini memakai input dari pengguna, kamu akan sering menjalankan ulang program. Pastikan browser,
+          koneksi internet, dan workspace Google Colab siap agar waktu tidak habis untuk kendala teknis.</p>
+        <div class="warning-box">
+          <h4>Keamanan data</h4>
+          <p>Gunakan data dummy. Contohnya: <strong>Alya Nabila</strong>, <strong>16</strong>, <strong>Membeli Laptop
+              Gaming</strong>, dan <strong>7500000</strong>. Jangan memakai data finansial asli.</p>
+        </div>
+        <p>Kalau program meminta nama, usia, atau target tabungan, data tersebut hanya untuk latihan. Prinsip ini
+          penting karena developer bertanggung jawab menjaga privasi pengguna, bahkan ketika masih belajar.</p>
+      </section>
+
+      <section class="explanation" id="explanation-4">
+        <h3>Cara Membuka Materi</h3>
+        <p>Urutan membuka materi sama seperti sesi sebelumnya. Buka menu <strong>Sesi Kelas</strong>, lalu cari kartu
+          sesi yang sesuai dengan rombel dan arahan guru.</p>
+        <div class="info-box">
+          <h4>Yang perlu dicek</h4>
+          <ul>
+            <li>Judul sesi sesuai: <strong>Profil Nasabah</strong>.</li>
+            <li>Akun yang digunakan benar.</li>
+            <li>Rombel dan jenjang sesuai.</li>
+            <li>Materi bisa dibuka sebelum masuk ke aktivitas coding.</li>
+          </ul>
+        </div>
+        <p>Jika tampilan LMS berbeda dari contoh, jangan panik. Ikuti nama menu dan instruksi guru, karena data sekolah
+          atau rombel di akunmu bisa berbeda.</p>
+      </section>
+      <section class="explanation" id="explanation-5">
+        <h3>Konsep Lama yang Dipakai Lagi</h3>
+        <p>Sesi 2 tidak dimulai dari nol. Kamu tetap memakai <code>print()</code> untuk menampilkan output, variabel
+          untuk menyimpan data, dan <code>f-string</code> untuk membuat kalimat yang bisa berubah sesuai isi variabel.
+        </p>
+        <div class="example-box">
+          <h4>Contoh singkat</h4>
+          <p>Jika <code>nama = "Alya"</code>, maka <code>print(nama)</code> akan menampilkan <strong>Alya</strong>.
+            Berbeda dengan <code>print("nama")</code> yang hanya menampilkan teks <strong>nama</strong>.</p>
+        </div>
+        <p>Perbedaan kecil seperti tanda kutip sangat penting di Python. Teks di dalam tanda kutip dianggap string
+          biasa, sedangkan nama tanpa tanda kutip dianggap sebagai variabel yang perlu dicari nilainya.</p>
+      </section>
+
+      <section class="explanation" id="explanation-6">
+        <h3>Kenapa Data Perlu Dikelola?</h3>
+        <p>Ketika pengguna mengisi form, sistem tidak boleh menyimpan data secara asal. Nama, usia, rencana keuangan,
+          dan target nominal punya bentuk data yang berbeda. Jika semuanya dianggap teks biasa, program akan kesulitan
+          melakukan perhitungan.</p>
+        <p>Misalnya, target tabungan <strong>7500000</strong> bisa ditampilkan sebagai teks. Namun jika nanti ingin
+          dihitung, misalnya dibagi menjadi target bulanan, data tersebut perlu menjadi angka.</p>
+        <div class="info-box">
+          <h4>Tujuan sesi ini</h4>
+          <p>Kamu akan belajar membuat program yang menangkap data, memberi label melalui variabel, mengubah tipe data
+            jika perlu, lalu menampilkan ringkasan profil secara terstruktur.</p>
+        </div>
+      </section>
+
+      <section class="explanation" id="explanation-7">
+        <h3>Memahami IPO</h3>
+        <p>IPO adalah singkatan dari <strong>Input, Process, Output</strong>. Ini adalah pola dasar banyak produk
+          digital. Program menerima data, mengolahnya, lalu menampilkan hasil.</p>
+        <div class="info-box">
+          <h4>Dalam project Profil Nasabah</h4>
+          <ul>
+            <li><strong>Input:</strong> pengguna mengetik nama, usia, rencana, dan target nominal.</li>
+            <li><strong>Process:</strong> Python menyimpan data ke variabel dan melakukan casting untuk data angka.</li>
+            <li><strong>Output:</strong> terminal menampilkan ringkasan profil nasabah.</li>
+          </ul>
+        </div>
+        <p>Pola ini membantu kamu menulis program secara terstruktur. Kalau output salah, kamu bisa mengecek apakah
+          masalahnya ada di input, proses, atau output.</p>
+      </section>
+
+      <section class="explanation" id="explanation-8">
+        <h3>Cara Kerja input()</h3>
+        <p><code>input()</code> digunakan untuk menerima ketikan pengguna dari terminal. Teks di dalam tanda kurung akan
+          menjadi pertanyaan atau prompt yang muncul sebelum pengguna mengetik jawaban.</p>
+        <p>Contohnya, <code>input("Masukkan nama nasabah: ")</code> akan menampilkan prompt tersebut, lalu menunggu
+          pengguna mengetik nama. Jawaban pengguna kemudian bisa disimpan ke variabel.</p>
+        <div class="example-box">
+          <h4>Membaca baris kode</h4>
+          <p><code>nama = input(...)</code> artinya: ambil data dari pengguna, lalu simpan hasilnya ke variabel
+            <strong>nama</strong>.</p>
+        </div>
+        <p>Di slide ini, bagian <strong>Input simulator</strong> menggantikan ketikan pengguna di terminal. Saat praktik
+          asli di Google Colab, kamu akan mengetik langsung ketika program meminta input.</p>
+      </section>
+
+      <section class="explanation" id="explanation-9">
+        <h3>Konsekuensi input()</h3>
+        <p>Python menangkap hasil <code>input()</code> sebagai string. Ini berlaku untuk semua ketikan, termasuk angka.
+          Jadi ketika pengguna mengetik <strong>16</strong>, Python menyimpannya sebagai teks <strong>"16"</strong>,
+          bukan angka 16.</p>
+        <div class="warning-box">
+          <h4>Kenapa ini penting?</h4>
+          <p>Data bertipe string tidak bisa langsung dipakai untuk operasi matematika. Jika ingin menghitung usia,
+            target nominal, atau estimasi tabungan, data angka dari input perlu dikonversi dulu.</p>
+        </div>
+        <p>Fungsi <code>type()</code> membantu mengecek tipe data yang sedang aktif. Ini sering dipakai saat debugging
+          untuk memastikan data sudah berbentuk sesuai kebutuhan.</p>
+      </section>
+
+      <section class="explanation" id="explanation-10">
+        <h3>Naming Convention</h3>
+        <p>Nama variabel yang baik membantu program mudah dibaca. Di Python, gaya yang umum dipakai adalah
+          <strong>snake_case</strong>, yaitu huruf kecil dengan garis bawah sebagai pemisah kata.</p>
+        <div class="info-box">
+          <h4>Contoh yang baik</h4>
+          <p><code>nama_lengkap</code>, <code>rencana_keuangan</code>, <code>target_nominal</code>, dan
+            <code>durasi_bulan</code>.</p>
+        </div>
+        <p>Hindari nama yang terlalu pendek atau tidak jelas seperti <code>x</code>, <code>y</code>, atau <code>a</code>
+          untuk data penting. Nama seperti itu mungkin berjalan, tetapi menyulitkan saat program makin panjang.</p>
+        <div class="warning-box">
+          <h4>Python case-sensitive</h4>
+          <p><code>Nama</code> dan <code>nama</code> dianggap dua variabel berbeda. Salah kapital bisa menyebabkan
+            <strong>NameError</strong>.</p>
+        </div>
+      </section>
+
+      <section class="explanation" id="explanation-11">
+        <h3>str, int, dan float</h3>
+        <p>Dalam project finansial sederhana, tiga tipe data ini paling sering muncul. <code>str</code> dipakai untuk
+          teks, <code>int</code> untuk angka bulat, dan <code>float</code> untuk angka desimal.</p>
+        <div class="info-box">
+          <h4>Contoh penggunaan</h4>
+          <ul>
+            <li><code>nama_lengkap</code> cocok menjadi <code>str</code>.</li>
+            <li><code>usia</code> cocok menjadi <code>int</code>.</li>
+            <li><code>persentase_bunga</code> atau nilai desimal cocok menjadi <code>float</code>.</li>
+          </ul>
+        </div>
+        <p>Tipe data menentukan operasi yang boleh dilakukan. Teks tidak bisa langsung dibagi, sedangkan angka bisa.
+          Karena itu, data dari input perlu diubah jika akan dipakai untuk perhitungan.</p>
+      </section>
+
+      <section class="explanation" id="explanation-12">
+        <h3>Kenapa Perlu Casting?</h3>
+        <p>Karena hasil <code>input()</code> selalu string, data angka perlu dikonversi. Untuk angka bulat, gunakan
+          <code>int()</code>. Untuk angka desimal, gunakan <code>float()</code>.</p>
+        <div class="example-box">
+          <h4>Contoh</h4>
+          <p><code>usia = int(input("Masukkan usia: "))</code> berarti: ambil input dari pengguna, lalu ubah hasilnya
+            menjadi integer sebelum disimpan ke variabel <strong>usia</strong>.</p>
+        </div>
+        <p>Jika pengguna mengetik angka yang benar, program berjalan. Jika pengguna mengetik huruf untuk data yang
+          diminta sebagai angka, Python akan memunculkan error. Ini akan kita bahas di bagian debugging.</p>
+      </section>
+
+      <section class="explanation" id="explanation-13">
+        <h3>Membaca ValueError</h3>
+        <p><strong>ValueError</strong> muncul ketika Python menerima nilai yang bentuknya tidak sesuai untuk operasi
+          yang diminta. Dalam contoh ini, <code>int()</code> membutuhkan angka, tetapi input berisi teks huruf.</p>
+        <div class="warning-box">
+          <h4>Contoh penyebab</h4>
+          <p>Program meminta usia, lalu pengguna mengetik <strong>enam belas</strong>. Karena itu bukan karakter angka
+            murni, <code>int()</code> tidak bisa mengubahnya menjadi integer.</p>
+        </div>
+        <p>Untuk sesi ini, cara mengatasinya adalah memasukkan angka dalam format yang tepat. Di level lanjutan, kamu
+          bisa menambahkan validasi input agar program tidak langsung berhenti saat pengguna salah mengetik.</p>
+      </section>
+
+      <section class="explanation" id="explanation-14">
+        <h3>Keamanan Data dan Privasi</h3>
+        <p>Ketika menulis kode di platform cloud seperti Google Colab, notebook bisa saja dibagikan atau terlihat oleh
+          pihak lain jika pengaturannya tidak dijaga. Karena itu, jangan pernah memasukkan data sensitif ke dalam
+          program latihan.</p>
+        <div class="info-box">
+          <h4>Gunakan data dummy</h4>
+          <p>Data dummy adalah data contoh yang tidak mewakili identitas asli seseorang. Data ini cukup untuk menguji
+            program tanpa membahayakan privasi.</p>
+        </div>
+        <div class="warning-box">
+          <h4>Data yang tidak boleh dipakai</h4>
+          <p>Nomor rekening, NIK, PIN, password, OTP, alamat rumah lengkap, nomor kartu, dan informasi pribadi lain
+            tidak perlu dimasukkan ke program latihan.</p>
+        </div>
+        <p>Prinsip ini penting dalam aplikasi finansial karena kesalahan kecil dalam pengelolaan data bisa berdampak
+          besar bagi pengguna.</p>
+      </section>
+
+      <section class="explanation" id="explanation-15">
+        <h3>Membaca Struktur Kode</h3>
+        <p>Sebelum menjalankan program, biasakan membaca alurnya. Kode pada slide ini meminta dua input: nama dan usia.
+          Nama disimpan sebagai string, sedangkan usia dikonversi menjadi integer.</p>
+        <div class="example-box">
+          <h4>Urutan alur</h4>
+          <ol>
+            <li>Program meminta nama.</li>
+            <li>Program meminta usia.</li>
+            <li>Usia diubah menjadi <code>int</code>.</li>
+            <li>Program menampilkan kalimat menggunakan <code>f-string</code>.</li>
+          </ol>
+        </div>
+        <p>Kemampuan membaca kode sangat membantu saat debugging. Kamu tidak selalu perlu langsung menjalankan program
+          untuk menebak bagian mana yang menyimpan data dan bagian mana yang menampilkan output.</p>
+      </section>
+
+      <section class="explanation" id="explanation-16">
+        <h3>Latihan Klasifikasi Data</h3>
+        <p>Nilai yang diberi tanda kutip adalah string, meskipun di dalamnya ada angka atau spasi. Contohnya,
+          <code>"Menabung untuk kuliah"</code> adalah string karena merupakan teks.</p>
+        <p>Nilai <code>4.5</code> cocok menjadi <code>float</code> karena memiliki bagian desimal. Float sering dipakai
+          untuk nilai seperti persentase, rasio, bunga, atau hasil pembagian.</p>
+        <div class="info-box">
+          <h4>Patokan cepat</h4>
+          <ul>
+            <li>Ada tanda kutip → biasanya <code>str</code>.</li>
+            <li>Angka bulat tanpa desimal → biasanya <code>int</code>.</li>
+            <li>Angka dengan titik desimal → biasanya <code>float</code>.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="explanation" id="explanation-17">
+        <h3>Menentukan Variabel Sebelum Menulis Kode</h3>
+        <p>Program yang rapi biasanya dirancang dulu. Untuk project ini, ada empat data utama: nama lengkap, usia,
+          rencana keuangan, dan target nominal. Setiap data diberi nama variabel yang jelas.</p>
+        <p>Nama variabel tidak hanya soal gaya. Nama yang jelas membuat program lebih mudah dibaca, lebih mudah
+          diperbaiki, dan lebih mudah dikembangkan. Ketika nanti ada error, kamu bisa cepat mencari bagian yang
+          berhubungan dengan data tertentu.</p>
+        <div class="info-box">
+          <h4>Prinsip yang dipakai</h4>
+          <p>Gunakan <strong>snake_case</strong>, hindari spasi, gunakan huruf kecil, dan pilih nama yang menggambarkan
+            isi datanya.</p>
+        </div>
+      </section>
+
+      <section class="explanation" id="explanation-18">
+        <h3>Menerima Data Awal</h3>
+        <p>Langkah pertama project adalah menerima data dasar dari pengguna. Nama disimpan sebagai string karena berupa
+          teks. Usia dikonversi dengan <code>int()</code> karena usia adalah angka bulat.</p>
+        <div class="warning-box">
+          <h4>Perhatikan format input</h4>
+          <p>Untuk usia, masukkan angka saja. Jangan menulis <strong>16 tahun</strong> atau <strong>enam belas</strong>,
+            karena <code>int()</code> tidak bisa mengubah teks tersebut menjadi integer.</p>
+        </div>
+        <p>Setelah input diterima, program menampilkan kembali data untuk memastikan variabel sudah berisi nilai yang
+          benar.</p>
+      </section>
+
+      <section class="explanation" id="explanation-19">
+        <h3>Kenapa Header Penting?</h3>
+        <p>Header membuat output terminal lebih mudah dipahami. Tanpa header, pengguna mungkin tidak tahu program apa
+          yang sedang berjalan atau data apa yang perlu dimasukkan.</p>
+        <p>Garis seperti <code>===</code> atau <code>---</code> bukan perintah khusus. Itu hanya teks yang dicetak agar
+          tampilan terminal terlihat lebih terstruktur.</p>
+        <div class="info-box">
+          <h4>Tips tampilan terminal</h4>
+          <ul>
+            <li>Gunakan judul yang jelas.</li>
+            <li>Gunakan garis pemisah secukupnya.</li>
+            <li>Jangan membuat output terlalu ramai.</li>
+            <li>Pastikan prompt input mudah dipahami.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="explanation" id="explanation-20">
+        <h3>Menggabungkan Input dan Casting</h3>
+        <p>Pada langkah ini, program mulai menyerupai form digital sederhana. Pengguna memasukkan empat data. Dua data
+          berupa teks, dua data lainnya perlu menjadi angka.</p>
+        <div class="info-box">
+          <h4>Pemetaan tipe data</h4>
+          <ul>
+            <li><code>nama_lengkap</code> → string.</li>
+            <li><code>usia</code> → integer.</li>
+            <li><code>rencana_keuangan</code> → string.</li>
+            <li><code>target_nominal</code> → integer.</li>
+          </ul>
+        </div>
+        <p>Kalau kamu lupa melakukan casting pada target nominal, data tetap menjadi string. Akibatnya, data akan sulit
+          dipakai untuk perhitungan bonus seperti estimasi tabungan per bulan.</p>
+      </section>
+
+      <section class="explanation" id="explanation-21">
+        <h3>Membuat Output yang Rapi</h3>
+        <p>Ringkasan profil harus mudah dibaca. Gunakan label yang jelas, tanda titik dua yang konsisten, dan urutan
+          informasi yang masuk akal.</p>
+        <p>Bagian <code>{target_nominal:,}</code> digunakan untuk menampilkan angka dengan pemisah ribuan. Ini membuat
+          nominal seperti <strong>7500000</strong> tampil menjadi <strong>7,500,000</strong>.</p>
+        <div class="example-box">
+          <h4>Kenapa format penting?</h4>
+          <p>Dalam aplikasi finansial, angka harus mudah dibaca. Salah membaca digit bisa menyebabkan salah paham,
+            terutama pada nominal besar.</p>
+        </div>
+      </section>
+
+      <section class="explanation" id="explanation-22">
+        <h3>Program Utama</h3>
+        <p>Starter code ini sudah menggabungkan seluruh konsep utama sesi: header, input, variabel, type casting,
+          f-string, dan output terformat.</p>
+        <div class="info-box">
+          <h4>Bagian kode</h4>
+          <ol>
+            <li>Header aplikasi ditampilkan dengan <code>print()</code>.</li>
+            <li>Data pengguna diterima melalui <code>input()</code>.</li>
+            <li>Usia dan target nominal dikonversi menggunakan <code>int()</code>.</li>
+            <li>Ringkasan profil ditampilkan dengan <code>f-string</code>.</li>
+          </ol>
+        </div>
+        <p>Jika program berjalan tanpa error dan output menampilkan data sesuai input, berarti target utama sesi sudah
+          terpenuhi.</p>
+      </section>
+
+      <section class="explanation" id="explanation-23">
+        <h3>Mengapa Perlu Testing?</h3>
+        <p>Program tidak cukup berjalan untuk satu contoh saja. Program yang baik harus tetap menghasilkan output yang
+          benar ketika data input diubah.</p>
+        <div class="info-box">
+          <h4>Yang perlu dicek</h4>
+          <ul>
+            <li>Nama berubah sesuai input.</li>
+            <li>Usia berubah sesuai input.</li>
+            <li>Rencana keuangan berubah sesuai input.</li>
+            <li>Target nominal berubah dan tetap terformat rapi.</li>
+            <li>Tidak ada error ketika input angka ditulis dengan format yang benar.</li>
+          </ul>
+        </div>
+        <p>Jika output masih menampilkan data lama, cek apakah program sudah dijalankan ulang atau input simulator sudah
+          diubah pada editor yang tepat.</p>
+      </section>
+
+      <section class="explanation" id="explanation-24">
+        <h3>Edge Case</h3>
+        <p><strong>Edge case</strong> adalah kondisi input yang tidak biasa atau tidak sesuai harapan. Contohnya,
+          program meminta angka, tetapi pengguna memasukkan kata-kata.</p>
+        <p>Pada level dasar, kita mengenali dulu bentuk error-nya. Di level lanjutan, program bisa dibuat lebih kuat
+          dengan validasi input, pengulangan, atau pesan peringatan yang lebih ramah.</p>
+        <div class="warning-box">
+          <h4>Pesan penting</h4>
+          <p>Error bukan berarti kamu gagal. Error adalah informasi tentang bagian program yang perlu diperiksa.</p>
+        </div>
+      </section>
+
+      <section class="explanation" id="explanation-25">
+        <h3>Membaca Target Output</h3>
+        <p>Target terminal membantu kamu membandingkan hasil program. Kamu tidak harus menyalin setiap garis secara sama
+          persis, tetapi struktur informasinya harus jelas.</p>
+        <div class="info-box">
+          <h4>Yang wajib terlihat</h4>
+          <ul>
+            <li>Header program.</li>
+            <li>Prompt input untuk empat data.</li>
+            <li>Ringkasan profil nasabah.</li>
+            <li>Nama, usia, rencana, dan target nominal.</li>
+            <li>Target nominal tampil dengan format yang mudah dibaca.</li>
+          </ul>
+        </div>
+        <p>Jika output berantakan, cek kembali urutan <code>print()</code>, label teks, dan penggunaan
+          <code>f-string</code>.</p>
+      </section>
+
+      <section class="explanation" id="explanation-26">
+        <h3>Debugging yang Terarah</h3>
+        <p>Debugging sebaiknya dilakukan dengan urutan yang jelas. Jangan langsung menghapus semua kode. Baca gejala
+          error, cari baris yang berhubungan, lalu perbaiki bagian kecil yang kemungkinan menjadi penyebab.</p>
+        <div class="info-box">
+          <h4>Urutan cek</h4>
+          <ol>
+            <li>Baca pesan error atau gejala output.</li>
+            <li>Cek baris input dan casting.</li>
+            <li>Cek nama variabel.</li>
+            <li>Cek tanda kutip dan huruf <code>f</code> pada f-string.</li>
+            <li>Jalankan ulang setelah memperbaiki.</li>
+          </ol>
+        </div>
+        <p>Semakin sering kamu membaca error, semakin mudah kamu mengenali pola masalahnya.</p>
+      </section>
+
+      <section class="explanation" id="explanation-27">
+        <h3>Checklist Berhasil</h3>
+        <p>Output minimum adalah target wajib sebelum mencoba challenge. Kalau semua checklist sudah terpenuhi, berarti
+          kamu sudah memahami inti sesi: input, variabel, tipe data, casting, dan output.</p>
+        <div class="warning-box">
+          <h4>Jangan lompat terlalu cepat</h4>
+          <p>Pastikan program utama berjalan dulu. Jika langsung menambah fitur bonus saat program dasar masih error,
+            debugging akan lebih sulit.</p>
+        </div>
+        <p>Setelah output minimum aman, kamu boleh menambah fitur seperti estimasi tabungan per bulan.</p>
+      </section>
+
+      <section class="explanation" id="explanation-28">
+        <h3>Extension Challenge</h3>
+        <p>Challenge ini menghubungkan materi sesi 2 dengan perhitungan yang akan berguna pada sesi berikutnya. Program
+          meminta durasi dalam bulan, lalu menghitung estimasi tabungan per bulan.</p>
+        <div class="info-box">
+          <h4>Rumus</h4>
+          <p><strong>tabungan_per_bulan = target_nominal / durasi_bulan</strong></p>
+        </div>
+        <p>Input durasi harus lebih besar dari 0. Jika durasi bernilai 0, Python tidak bisa melakukan pembagian dan akan
+          menghasilkan <strong>ZeroDivisionError</strong>.</p>
+        <div class="warning-box">
+          <h4>Catatan</h4>
+          <p>Di aplikasi nyata, developer perlu menambahkan validasi agar pengguna tidak bisa memasukkan durasi 0 atau
+            input yang tidak sesuai.</p>
+        </div>
+      </section>
+
+      <section class="explanation" id="explanation-29">
+        <h3>Refleksi Akhir</h3>
+        <p>Hari ini kamu sudah membuat program yang lebih interaktif dibanding sesi sebelumnya. Program tidak hanya
+          menampilkan data yang sudah ditulis di kode, tetapi juga menerima data baru dari pengguna.</p>
+        <div class="example-box">
+          <h4>Yang sudah dipelajari</h4>
+          <ul>
+            <li>Alur <strong>Input → Process → Output</strong>.</li>
+            <li><code>input()</code> untuk menerima ketikan pengguna.</li>
+            <li>Nama variabel dengan gaya <strong>snake_case</strong>.</li>
+            <li>Tipe data <code>str</code>, <code>int</code>, dan <code>float</code>.</li>
+            <li><em>Type casting</em> dengan <code>int()</code> dan <code>float()</code>.</li>
+            <li>Keamanan data saat memakai data latihan.</li>
+            <li>Testing dan debugging dasar.</li>
+          </ul>
+        </div>
+        <p>Di sesi berikutnya, konsep ini akan dipakai untuk membuat perhitungan yang lebih bermakna. Jadi, pastikan
+          kamu paham kenapa angka dari input perlu dikonversi sebelum dihitung.</p>
+      </section>
+    </div>
+  </div>
+  <script>
+    const ACCESS_CODE = 'RGMDSHS26'; let currentSlide = 1; let totalSlides = 0;
+    window.addEventListener('load', () => { totalSlides = document.querySelectorAll('.slide').length; document.getElementById('totalSlides').textContent = totalSlides; setTimeout(() => document.querySelector('.access-popup').classList.add('show'), 50); const input = document.getElementById('accessInput'); input.focus(); input.addEventListener('input', e => { e.target.value = e.target.value.toUpperCase() }); input.addEventListener('keydown', e => { if (e.key === 'Enter') checkAccessCode() }); initPyEditors(); updateSlide(); });
+    function checkAccessCode() { const input = document.getElementById('accessInput'); const error = document.getElementById('accessError'); if (input.value.trim().toUpperCase() === ACCESS_CODE) { document.getElementById('accessPopup').style.display = 'none'; document.getElementById('mainContent').style.display = 'flex'; updateSlide(); } else { error.classList.add('show'); input.value = ''; input.focus(); } }
+    function changeSlide(direction) { const next = currentSlide + direction; if (next < 1 || next > totalSlides) return; currentSlide = next; updateSlide(); }
+    function updateSlide() { document.querySelectorAll('.slide').forEach(s => s.classList.remove('active')); document.querySelectorAll('.explanation').forEach(e => e.classList.remove('active')); const s = document.getElementById(`slide-${currentSlide}`); if (s) s.classList.add('active'); const e = document.getElementById(`explanation-${currentSlide}`); if (e) e.classList.add('active'); document.getElementById('currentSlide').textContent = currentSlide; document.getElementById('prevBtn').disabled = currentSlide === 1; document.getElementById('nextBtn').disabled = currentSlide === totalSlides; document.getElementById('progressFill').style.width = `${(currentSlide / totalSlides) * 100}%`; }
+    document.addEventListener('keydown', e => { if (document.getElementById('mainContent').style.display === 'none') return; if (e.key === 'ArrowRight') changeSlide(1); if (e.key === 'ArrowLeft') changeSlide(-1); });
+    function deviceCheck(btn) { btn.classList.toggle('correct'); }
+    function selectAny(btn) { const group = btn.parentElement; group.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); }
+    function quiz(btn, ok, feedbackId) { const group = btn.parentElement; group.querySelectorAll('.choice-btn').forEach(b => b.disabled = true); btn.classList.add(ok ? 'correct' : 'wrong'); const fb = document.getElementById(feedbackId); fb.textContent = ok ? 'Betul.' : 'Belum tepat. Baca kembali penjelasan di panel kanan.'; fb.style.color = ok ? '#176b35' : '#a42820'; }
+    function showLmsStep(step, btn) { document.querySelectorAll('.lms-map-wrap .hotspot,.lms-map-wrap .session-card-hotspot').forEach(b => b.classList.remove('active')); btn.classList.add('active'); const box = document.getElementById('lmsStepInfo'); if (step === 1) box.innerHTML = '<h4><span class="area-number">1</span>Menu Sesi Kelas</h4><p>Klik menu Sesi Kelas untuk melihat daftar sesi yang tersedia.</p>'; else box.innerHTML = '<h4><span class="area-number">2</span>Kartu Sesi</h4><p>Pilih kartu Sesi 2 sesuai arahan guru dan pastikan judulnya Profil Nasabah.</p>'; }
+    function showPretestStep(step, btn) { document.querySelectorAll('.test-map-wrap .hotspot,.test-map-wrap .test-card-hotspot').forEach(b => b.classList.remove('active')); btn.classList.add('active'); const box = document.getElementById('pretestStepInfo'); if (step === 1) box.innerHTML = '<h4><span class="area-number">1</span>Menu Tes</h4><p>Klik menu Tes untuk melihat daftar asesmen.</p>'; else box.innerHTML = '<h4><span class="area-number">2</span>Kartu Tes</h4><p>Pilih tes sesuai jenjang dan tunggu instruksi sebelum mulai.</p>'; }
+    function showIPO(type) { const data = { input: ['Input', 'Program menerima data dari pengguna, misalnya nama, usia, rencana, dan target nominal.'], process: ['Process', 'Python menyimpan data ke variabel, mengubah tipe data angka, lalu menyusun format output.'], output: ['Output', 'Terminal menampilkan ringkasan profil nasabah yang rapi dan mudah dibaca.'] }; document.getElementById('ipoInfo').innerHTML = `<h4>${data[type][0]}</h4><p>${data[type][1]}</p>`; }
+    function showNaming(type, btn) { document.querySelectorAll('.memory-slot').forEach(b => b.classList.remove('active')); btn.classList.add('active'); const data = { snake: ['snake_case', 'Gunakan huruf kecil dan garis bawah untuk memisahkan kata, misalnya target_nominal.'], space: ['Tanpa spasi', 'Variabel tidak boleh memakai spasi. Gunakan garis bawah sebagai pengganti.'], number: ['Tidak diawali angka', 'Nama variabel tidak boleh dimulai dengan angka. target_2 boleh, 2target tidak boleh.'], case: ['Case-sensitive', 'nama dan Nama dianggap dua variabel yang berbeda oleh Python.'] }; document.getElementById('namingInfo').innerHTML = `<h4>${data[type][0]}</h4><p>${data[type][1]}</p>`; }
+    function showDataType(type, btn) { document.querySelectorAll('.type-card').forEach(b => b.classList.remove('active')); btn.classList.add('active'); const data = { str: ['str', 'Untuk teks, kalimat, nama, atau data yang tidak dihitung. Contoh: "Alya Nabila".'], int: ['int', 'Untuk angka bulat yang bisa dihitung. Contoh: 16 atau 7500000.'], float: ['float', 'Untuk angka desimal atau hasil pembagian. Contoh: 4.5 atau 750000.0.'] }; document.getElementById('typeInfo').innerHTML = `<h4><code>${data[type][0]}</code></h4><p>${data[type][1]}</p>`; }
+    function markSafety(btn, ok) { btn.classList.remove('safe', 'risky'); btn.classList.add(ok ? 'safe' : 'risky'); }
+    function showDebug(id, btn) { document.querySelectorAll('.debug-tab').forEach(b => b.classList.remove('active')); btn.classList.add('active'); document.querySelectorAll('.debug-scenario').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+    function toggleCheck(item) { const cb = item.querySelector('input'); cb.checked = !cb.checked; item.classList.toggle('done', cb.checked); }
+    function fillPreset(id, value) { const el = document.getElementById(id); if (el) { el.value = value; } }
+    function loadTestCase(btn, testNumber) {
+      const cases = {
+        1: { label: 'Test Case 1', lines: ['Alya Nabila', '16', 'Membeli Laptop Gaming', '7500000'] },
+        2: { label: 'Test Case 2', lines: ['Budi Hartono', '17', 'Investasi Reksadana', '12000000'] }
+      };
+      const selected = cases[testNumber];
+      const input = document.getElementById('py10_input');
+      if (!selected || !input) return;
+      input.value = selected.lines.join('\n');
+      const feedback = document.getElementById('testCaseFeedback');
+      if (feedback) {
+        feedback.textContent = `${selected.label} berhasil dimuat. Membuka Starter Code...`;
+        feedback.style.color = '#176b35';
+      }
+      document.querySelectorAll('#slide-23 .choice-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      const output = document.getElementById('py10_out');
+      if (output) output.textContent = `${selected.label} sudah dimuat. Klik Run code untuk menjalankan program.`;
+      currentSlide = 22;
+      updateSlide();
+      setTimeout(() => {
+        input.classList.add('preset-loaded');
+        input.focus();
+        setTimeout(() => input.classList.remove('preset-loaded'), 1600);
+      }, 80);
+    }
+    function initPyEditors() { document.querySelectorAll('.python-editor textarea[id^="py"]:not(.stdin-area)').forEach(area => { const out = document.getElementById(area.id + '_out'); if (out && !out.textContent.trim()) out.textContent = 'Output akan muncul di sini setelah kamu klik Run code.'; }); }
+    function runPyEditor(id) { const code = document.getElementById(id).value; const stdinEl = document.getElementById(id + '_input'); const stdin = stdinEl ? stdinEl.value : ''; document.getElementById(id + '_out').textContent = runMiniPython(code, stdin); }
+    function valType(v) { if (v && v.__type) return v.__type; if (typeof v === 'number') return Number.isInteger(v) ? 'int' : 'float'; return 'str'; }
+    function rawVal(v) { return v && v.__value !== undefined ? v.__value : v; }
+    function wrap(value, type) { return { __value: value, __type: type || valType(value) }; }
+    function pyString(v) { v = rawVal(v); return String(v); }
+    function formatNumber(n) { if (typeof n === 'string') n = Number(n); if (!isFinite(n)) return String(n); return n.toLocaleString('en-US', { maximumFractionDigits: 2 }); }
+    function runMiniPython(code, stdinText) {
+      if (!code.includes('\n') && code.includes('\\n')) code = code.replace(/\\n/g, '\n'); let vars = {}; let output = []; let inputs = stdinText.split(/\r?\n/); let inputIndex = 0; let lines = code.split(/\r?\n/); function nextInput(prompt) { let val = inputIndex < inputs.length ? inputs[inputIndex++] : ''; output.push(prompt + val); return wrap(val, 'str'); }
+      for (let i = 0; i < lines.length; i++) { let raw = lines[i]; let line = raw.trim(); if (!line || line.startsWith('#')) continue; let assign = line.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+)$/); if (assign) { let parsed = parseExpr(assign[2].trim(), vars, i + 1, nextInput); if (parsed.error) return parsed.error; vars[assign[1]] = parsed.value; continue; } let pr = line.match(/^print\((.*)\)$/); if (pr) { let parsed = parseExpr(pr[1].trim(), vars, i + 1, nextInput); if (parsed.error) return parsed.error; output.push(pyString(parsed.value)); continue; } if (/^Print\(/.test(line)) return `NameError on line ${i + 1}: Python uses print with lowercase p.`; return `SyntaxError on line ${i + 1}: simulator mendukung assignment sederhana, input(), int(), float(), type(), pembagian, dan print().`; }
+      return output.length ? output.join('\n') : '(Tidak ada output. Coba gunakan print().)';
+    }
+    function decodePyString(str) { return str.replace(/\\n/g, '\n').replace(/\\t/g, '\t').replace(/\\"/g, '"').replace(/\\'/g, "'"); }
+    function parseExpr(text, vars, lineNo, nextInput) {
+      text = text.trim();
+      // parenthesized
+      if (text.startsWith('(') && text.endsWith(')')) return parseExpr(text.slice(1, -1), vars, lineNo, nextInput);
+      // division, simple left/right
+      let divIndex = findTopLevel(text, '/'); if (divIndex > -1) { let left = parseExpr(text.slice(0, divIndex), vars, lineNo, nextInput); if (left.error) return left; let right = parseExpr(text.slice(divIndex + 1), vars, lineNo, nextInput); if (right.error) return right; let a = Number(rawVal(left.value)), b = Number(rawVal(right.value)); if (!isFinite(a) || !isFinite(b)) return { error: `TypeError on line ${lineNo}: pembagian membutuhkan angka.` }; if (b === 0) return { error: `ZeroDivisionError on line ${lineNo}: division by zero.` }; return { value: wrap(a / b, Number.isInteger(a / b) ? 'int' : 'float') }; }
+      let m;
+      if ((m = text.match(/^input\((.*)\)$/))) { let p = parseExpr(m[1].trim() || '""', vars, lineNo, nextInput); if (p.error) return p; return { value: nextInput(pyString(p.value)) }; }
+      if ((m = text.match(/^int\((.*)\)$/))) { let p = parseExpr(m[1].trim(), vars, lineNo, nextInput); if (p.error) return p; let s = pyString(p.value).trim(); if (!/^[+-]?\d+$/.test(s)) return { error: `ValueError on line ${lineNo}: invalid literal for int() with base 10: '${s}'` }; return { value: wrap(parseInt(s, 10), 'int') }; }
+      if ((m = text.match(/^float\((.*)\)$/))) { let p = parseExpr(m[1].trim(), vars, lineNo, nextInput); if (p.error) return p; let s = pyString(p.value).trim(); if (!/^[+-]?(\d+(\.\d*)?|\.\d+)$/.test(s)) return { error: `ValueError on line ${lineNo}: could not convert string to float: '${s}'` }; return { value: wrap(parseFloat(s), 'float') }; }
+      if ((m = text.match(/^str\((.*)\)$/))) { let p = parseExpr(m[1].trim(), vars, lineNo, nextInput); if (p.error) return p; return { value: wrap(pyString(p.value), 'str') }; }
+      if ((m = text.match(/^type\((.*)\)$/))) { let p = parseExpr(m[1].trim(), vars, lineNo, nextInput); if (p.error) return p; return { value: wrap(`<class '${valType(p.value)}'>`, 'str') }; }
+      if ((text.startsWith('f"') && text.endsWith('"')) || (text.startsWith("f'") && text.endsWith("'"))) { let inner = decodePyString(text.slice(2, -1)); let missing = null; let res = inner.replace(/\{([^{}]+)\}/g, (full, expr) => { let fmt = ''; let ex = expr.trim(); let colon = findTopLevel(ex, ':'); if (colon > -1) { fmt = ex.slice(colon + 1).trim(); ex = ex.slice(0, colon).trim(); } let p = parseExpr(ex, vars, lineNo, nextInput); if (p.error) { missing = p.error; return full; } let v = rawVal(p.value); if (fmt === ',') return formatNumber(v); return String(v); }); if (missing) return { error: missing }; return { value: wrap(res, 'str') }; }
+      if ((text.startsWith('"') && text.endsWith('"')) || (text.startsWith("'") && text.endsWith("'"))) return { value: wrap(decodePyString(text.slice(1, -1)), 'str') };
+      if (/^[+-]?\d+$/.test(text)) return { value: wrap(parseInt(text, 10), 'int') };
+      if (/^[+-]?(\d+\.\d*|\.\d+)$/.test(text)) return { value: wrap(parseFloat(text), 'float') };
+      if (Object.prototype.hasOwnProperty.call(vars, text)) return { value: vars[text] };
+      if (text.includes('{') && text.includes('}')) return { error: `f-string error on line ${lineNo}: tambahkan huruf f sebelum tanda kutip.` };
+      return { error: `NameError on line ${lineNo}: name '${text}' is not defined atau teks belum diberi tanda kutip.` };
+    }
+    function findTopLevel(text, char) { let quote = null, depth = 0; for (let i = 0; i < text.length; i++) { let c = text[i], prev = text[i - 1]; if (quote) { if (c === quote && prev !== '\\') quote = null; continue; } if (c === '"' || c === "'") { quote = c; continue; } if (c === '(') depth++; else if (c === ')') depth--; else if (c === char && depth === 0) return i; } return -1; }
+  </script>
+</body>
+
+</html>
