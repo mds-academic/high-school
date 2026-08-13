@@ -1,0 +1,2646 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UOB My Digital Space — High School Sesi 3</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐍</text></svg>">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --blue: #0056b3;
+      --light-blue: #4a9eff;
+      --uob-red: #e60012;
+      --uob-red-soft: #ff5a6b;
+      --uob-blue-deep: #0056b3;
+      --uob-blue-soft: #5aa7ff;
+      --teal: #11a9b7;
+      --bg: #f5f6f8;
+      --panel: #fff;
+      --text: #2c3e50;
+      --muted: #6c757d;
+      --line: #e3e8ef;
+      --green: #2e9d57;
+      --orange: #f39c12;
+      --red: #e74c3c;
+      --purple: #8e44ad;
+      --blue-soft: #eef7ff;
+      --green-soft: #effaf2
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      height: 100vh;
+      overflow: hidden;
+      color: var(--text)
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #f5d7da, #d9e9ff);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, .08)
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--uob-red) 0%, var(--uob-red-soft) 28%, var(--uob-blue-deep) 72%, var(--uob-blue-soft) 100%);
+      transition: width .3s ease;
+      box-shadow: 0 0 8px rgba(0, 86, 179, .18)
+    }
+
+    .main-container {
+      display: flex;
+      height: 100vh
+    }
+
+    .slides-panel {
+      width: 50%;
+      background: #f8f9fa;
+      border-right: 2px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      position: relative
+    }
+
+    .explanation-panel {
+      width: 50%;
+      background: #fff;
+      overflow-y: auto;
+      padding: 32px
+    }
+
+    .slide-header {
+      background: #fff;
+      padding: 17px 20px 15px;
+      border-bottom: 2px solid var(--line);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+      position: relative
+    }
+
+    .slide-header::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(var(--uob-red), var(--light-blue))
+    }
+
+    .slide-header h1 {
+      font-size: 1.28rem;
+      color: var(--text);
+      margin-bottom: 3px
+    }
+
+    .slide-header p {
+      font-size: .9rem;
+      color: var(--muted)
+    }
+
+    .header-badge {
+      position: absolute;
+      right: 18px;
+      top: 17px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      border: 1px solid #cce7ff;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-weight: 700;
+      font-size: .76rem
+    }
+
+    .slide-content {
+      flex: 1;
+      padding: 24px 28px 94px;
+      overflow-y: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 0
+    }
+
+    .slide,
+    .explanation {
+      display: none;
+      opacity: 0;
+      transition: opacity .25s ease
+    }
+
+    .slide.active,
+    .explanation.active {
+      display: block;
+      opacity: 1
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 820px
+    }
+
+    .explanation {
+      max-width: 760px;
+      margin: 0 auto
+    }
+
+    .slide h2 {
+      font-size: 2.25rem;
+      color: var(--blue);
+      margin-bottom: 10px;
+      line-height: 1.15
+    }
+
+    .slide h3 {
+      font-size: 1.78rem;
+      color: var(--blue);
+      margin-bottom: 16px;
+      line-height: 1.2
+    }
+
+    .slide h4,
+    .explanation h4 {
+      font-size: 1.05rem;
+      margin-bottom: 9px;
+      color: var(--text)
+    }
+
+    .slide p,
+    .explanation p {
+      font-size: 1rem;
+      line-height: 1.58;
+      color: #495057;
+      margin-bottom: 14px
+    }
+
+    .explanation h3 {
+      font-size: 1.65rem;
+      margin-bottom: 16px;
+      color: var(--text);
+      line-height: 1.25
+    }
+
+    .slide ul,
+    .slide ol,
+    .explanation ul,
+    .explanation ol {
+      margin-left: 22px;
+      margin-bottom: 10px
+    }
+
+    .slide li,
+    .explanation li {
+      margin-bottom: 7px;
+      line-height: 1.5
+    }
+
+    code {
+      background: #eef3f8;
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #334155
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--uob-red);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 8px
+    }
+
+    .lead {
+      font-size: 1.08rem !important
+    }
+
+    .mini-note {
+      font-size: .9rem !important;
+      color: var(--muted) !important;
+      margin-top: 10px
+    }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      gap: 13px;
+      margin: 16px 0
+    }
+
+    .visual-card,
+    .metric-box,
+    .info-box,
+    .example-box,
+    .warning-box,
+    .interactive-box,
+    .code-card,
+    .quiz-card {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05)
+    }
+
+    .visual-card {
+      padding: 15px
+    }
+
+    .visual-card p {
+      margin-bottom: 0;
+      font-size: .92rem;
+      line-height: 1.42
+    }
+
+    .visual-icon {
+      font-size: 1.9rem;
+      margin-bottom: 8px
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 16px
+    }
+
+    .metric-box {
+      padding: 16px 12px;
+      text-align: center
+    }
+
+    .metric-box strong {
+      display: block;
+      font-size: 1.55rem;
+      color: var(--blue);
+      margin-bottom: 7px
+    }
+
+    .metric-box span {
+      font-size: .9rem;
+      line-height: 1.35;
+      color: #495057;
+      display: block
+    }
+
+    .info-box,
+    .example-box,
+    .warning-box,
+    .interactive-box {
+      padding: 17px;
+      margin: 16px 0
+    }
+
+    .info-box {
+      border-left: 5px solid var(--light-blue)
+    }
+
+    .example-box {
+      border-left: 5px solid var(--green);
+      background: #f8fff8
+    }
+
+    .warning-box {
+      border-left: 5px solid var(--orange);
+      background: #fffaf0
+    }
+
+    .interactive-box {
+      border-left: 5px solid var(--purple);
+      background: #fcf8ff
+    }
+
+    .navigation {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 2px solid var(--line);
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, .04)
+    }
+
+    .nav-btn {
+      background: var(--light-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: .94rem;
+      font-weight: 700;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      transition: .2s ease
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      background: #357abd
+    }
+
+    .nav-btn:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none
+    }
+
+    .slide-indicator {
+      font-size: .9rem;
+      color: var(--muted);
+      font-weight: 700
+    }
+
+    .floating-element {
+      position: absolute;
+      opacity: .07;
+      pointer-events: none;
+      font-size: 2rem;
+      animation: float 6s ease-in-out infinite
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0)
+      }
+
+      33% {
+        transform: translateY(-12px) rotate(4deg)
+      }
+
+      66% {
+        transform: translateY(7px) rotate(-3deg)
+      }
+    }
+
+    .access-popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .8);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center
+    }
+
+    .access-popup {
+      background: white;
+      border: 3px solid var(--light-blue);
+      border-radius: 15px;
+      padding: 38px;
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .3);
+      transform: scale(.8);
+      opacity: 0;
+      transition: all .3s ease
+    }
+
+    .access-popup.show {
+      transform: scale(1);
+      opacity: 1
+    }
+
+    .access-popup h2 {
+      color: var(--text);
+      margin-bottom: 13px;
+      font-size: 1.8rem
+    }
+
+    .access-popup p {
+      color: #666;
+      margin-bottom: 22px;
+      line-height: 1.55
+    }
+
+    .access-input {
+      width: 100%;
+      padding: 14px;
+      font-size: 1.15rem;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      text-align: center;
+      letter-spacing: 2px;
+      font-weight: bold;
+      text-transform: uppercase
+    }
+
+    .access-input:focus {
+      outline: none;
+      border-color: var(--light-blue);
+      box-shadow: 0 0 0 3px rgba(74, 158, 255, .12)
+    }
+
+    .access-submit,
+    .primary-btn,
+    .secondary-btn {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .access-submit,
+    .primary-btn {
+      background: var(--blue);
+      color: white
+    }
+
+    .secondary-btn {
+      background: #e9ecef;
+      color: var(--text)
+    }
+
+    .access-submit {
+      padding: 13px 28px;
+      font-size: 1.05rem
+    }
+
+    .access-error {
+      color: var(--red);
+      margin-top: 13px;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity .2s
+    }
+
+    .access-error.show {
+      opacity: 1
+    }
+
+    .access-hint {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 5px;
+      padding: 9px;
+      margin-top: 18px;
+      font-size: .88rem;
+      color: #856404
+    }
+
+    .scratch-map-wrap {
+      position: relative;
+      width: 100%;
+      margin: 12px auto;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .08)
+    }
+
+    .scratch-map-wrap img {
+      width: 100%;
+      display: block
+    }
+
+    .hotspot {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      background: var(--uob-red);
+      color: white;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35);
+      display: grid;
+      place-items: center;
+      transform: translate(-50%, -50%);
+      transition: transform .16s, background .16s;
+      z-index: 3
+    }
+
+    .hotspot:hover,
+    .hotspot.active {
+      transform: translate(-50%, -50%) scale(1.16);
+      background: var(--blue)
+    }
+
+    .scratch-caption {
+      text-align: center;
+      font-size: .85rem;
+      color: var(--muted);
+      margin-top: 8px
+    }
+
+    .area-live-card {
+      min-height: 110px;
+      border: 2px solid #cfe7fb;
+      background: var(--blue-soft);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 14px
+    }
+
+    .area-number {
+      display: inline-grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: white;
+      font-weight: 900;
+      margin-right: 7px
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .choice-btn {
+      border: 2px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 11px 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: .18s;
+      text-align: left
+    }
+
+    .choice-btn:hover {
+      border-color: var(--light-blue);
+      transform: translateY(-1px)
+    }
+
+    .choice-btn.correct,
+    .choice-btn.selected {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: #176b35
+    }
+
+    .choice-btn.wrong {
+      border-color: var(--red);
+      background: #fff1f0;
+      color: #a42820
+    }
+
+    .feedback-line {
+      min-height: 28px;
+      font-weight: 700;
+      margin-top: 8px
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .form-grid label {
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--text)
+    }
+
+    .form-grid input,
+    .form-grid textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      margin-top: 5px
+    }
+
+    .form-grid input:focus,
+    .form-grid textarea:focus {
+      outline: none;
+      border-color: var(--light-blue)
+    }
+
+    .lms-map-wrap,
+    .test-map-wrap {
+      position: relative
+    }
+
+    .session-card-hotspot {
+      position: absolute;
+      left: 19.1%;
+      top: 43%;
+      width: 25.5%;
+      height: 51%;
+      padding: 0;
+      border: 3px dashed transparent;
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+      transition: .2s ease
+    }
+
+    .session-card-hotspot span {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: #fff;
+      font-size: .9rem;
+      font-weight: 900;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35)
+    }
+
+    .session-card-hotspot:hover,
+    .session-card-hotspot.active {
+      border-color: var(--uob-red);
+      background: rgba(230, 0, 18, .08)
+    }
+
+    .session-card-hotspot:hover span,
+    .session-card-hotspot.active span {
+      background: var(--blue);
+      transform: scale(1.1)
+    }
+
+    .test-card-hotspot {
+      position: absolute;
+      left: 18%;
+      right: 3%;
+      bottom: 5%;
+      height: 20%;
+      padding: 0;
+      border: 3px dashed transparent;
+      border-radius: 14px;
+      background: transparent;
+      cursor: pointer;
+      transition: .2s ease
+    }
+
+    .test-number {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35)
+    }
+
+    .test-instruction {
+      position: absolute;
+      left: 50%;
+      bottom: 12px;
+      transform: translateX(-50%);
+      width: 88%;
+      padding: 7px 9px;
+      border-radius: 8px;
+      background: rgba(0, 86, 179, .94);
+      color: #fff;
+      font-size: .76rem;
+      line-height: 1.3;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, .25)
+    }
+
+    .test-card-hotspot:hover,
+    .test-card-hotspot.active {
+      border-color: var(--uob-red);
+      background: rgba(230, 0, 18, .08)
+    }
+
+    .test-card-hotspot:hover .test-instruction,
+    .test-card-hotspot.active .test-instruction {
+      background: var(--uob-red)
+    }
+
+    .flow-line {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 20px 0
+    }
+
+    .flow-box {
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--blue);
+      color: #fff;
+      text-align: center;
+      font-weight: 900;
+      cursor: pointer
+    }
+
+    .flow-arrow {
+      color: var(--uob-red);
+      font-size: 1.6rem;
+      font-weight: 900
+    }
+
+    .comparison-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    .compare-card {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      background: #fff
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 2px
+    }
+
+    .pill.blue {
+      background: var(--blue)
+    }
+
+    .pill.green {
+      background: var(--green)
+    }
+
+    .pill.purple {
+      background: var(--purple)
+    }
+
+    .colab-mock,
+    .colab-hotmap {
+      border: 2px solid #dce6ef;
+      border-radius: 14px;
+      background: #1e1e1e;
+      color: #e5e7eb;
+      overflow: hidden;
+      margin: 16px 0;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .12);
+      position: relative
+    }
+
+    .colab-title {
+      background: #111827;
+      padding: 10px 14px;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      font-size: .9rem
+    }
+
+    .colab-title span {
+      font-size: .8rem;
+      color: #9ca3af
+    }
+
+    .colab-cell {
+      margin: 12px;
+      border: 1px solid #374151;
+      border-radius: 10px;
+      background: #0f172a;
+      min-height: 72px;
+      position: relative;
+      padding: 14px 14px 14px 48px
+    }
+
+    .run-dot {
+      position: absolute;
+      left: 12px;
+      top: 15px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 0;
+      background: #16a34a;
+      color: white;
+      display: grid;
+      place-items: center
+    }
+
+    .colab-cell pre,
+    .code-card pre,
+    .receipt-preview pre {
+      white-space: pre-wrap;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .9rem;
+      line-height: 1.45
+    }
+
+    .colab-output {
+      margin: 0 12px 12px;
+      padding: 12px;
+      background: #fff;
+      color: #111827;
+      border-radius: 10px;
+      min-height: 48px;
+      position: relative
+    }
+
+    .python-editor {
+      border-radius: 18px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #152744 0%, #132742 100%);
+      box-shadow: 0 10px 24px rgba(8, 22, 46, .18);
+      margin: 16px 0;
+      border: 1px solid #274468
+    }
+
+    .editor-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #182c49;
+      color: #fff;
+      padding: 13px 18px 11px;
+      font-weight: 900
+    }
+
+    .editor-label {
+      font-size: 1.05rem;
+      letter-spacing: .05em;
+      color: #dbeafe
+    }
+
+    .editor-live {
+      font-size: .95rem;
+      letter-spacing: .04em;
+      color: #69e3a7
+    }
+
+    .python-editor textarea {
+      width: 100%;
+      min-height: 250px;
+      resize: vertical;
+      background: #0f2240;
+      color: #fff;
+      border: 0;
+      padding: 18px 18px 16px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 1rem;
+      line-height: 1.65;
+      outline: none
+    }
+
+    .python-editor textarea:focus {
+      box-shadow: inset 0 0 0 2px rgba(147, 197, 253, .22)
+    }
+
+    .editor-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      background: #182c49;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      border-bottom: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .run-code-btn {
+      background: #22b573;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-weight: 900;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, .12);
+      transition: .18s ease
+    }
+
+    .run-code-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03)
+    }
+
+    .editor-toolbar-note {
+      color: #dbeafe;
+      font-size: .98rem;
+      line-height: 1.4
+    }
+
+    .editor-output-panel {
+      padding: 0 16px 16px;
+      background: #182c49
+    }
+
+    .editor-output-label {
+      color: #93c5fd;
+      font-size: 1rem;
+      letter-spacing: .08em;
+      font-weight: 900;
+      padding: 14px 12px 8px
+    }
+
+    .output-box {
+      background: #041126;
+      color: #fff;
+      min-height: 110px;
+      white-space: pre-wrap;
+      font-family: Consolas, Monaco, monospace;
+      padding: 16px;
+      border: 1px solid #2b4f7b;
+      border-radius: 12px;
+      line-height: 1.6
+    }
+
+    .code-card {
+      padding: 14px;
+      background: #111827;
+      color: #e5e7eb;
+      overflow: auto
+    }
+
+    .receipt-preview {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 14px 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05)
+    }
+
+    .receipt-preview pre {
+      color: #111827
+    }
+
+    .component-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0
+    }
+
+    .component-pill {
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      padding: 8px 11px;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .component-pill.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    .checklist {
+      list-style: none;
+      margin-left: 0 !important;
+      display: grid;
+      gap: 8px
+    }
+
+    .check-item {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      cursor: pointer
+    }
+
+    .check-item input {
+      margin-top: 3px;
+      transform: scale(1.2)
+    }
+
+    .check-item.done {
+      background: var(--green-soft);
+      border-color: #9cd9af;
+      text-decoration: line-through;
+      color: #3e6b4c
+    }
+
+    .debug-scenario {
+      display: none
+    }
+
+    .debug-scenario.active {
+      display: block
+    }
+
+    .debug-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px
+    }
+
+    .debug-tab {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 7px 11px;
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    .debug-tab.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    @media(max-width:960px) {
+      body {
+        overflow: auto;
+        height: auto
+      }
+
+      .main-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh
+      }
+
+      .slides-panel,
+      .explanation-panel {
+        width: 100%;
+        height: auto;
+        min-height: 50vh
+      }
+
+      .slides-panel {
+        min-height: 100vh
+      }
+
+      .slide-content {
+        padding: 20px 20px 92px
+      }
+
+      .explanation-panel {
+        padding: 24px
+      }
+
+      .header-badge {
+        display: none
+      }
+
+      .flow-line,
+      .comparison-table {
+        grid-template-columns: 1fr
+      }
+
+      .flow-arrow {
+        display: none
+      }
+    }
+
+    .stdin-panel {
+      padding: 0 16px 14px;
+      background: #182c49;
+      border-top: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .stdin-label {
+      color: #93c5fd;
+      font-size: .86rem;
+      letter-spacing: .08em;
+      font-weight: 900;
+      padding: 10px 2px 6px;
+      text-transform: uppercase
+    }
+
+    .stdin-area {
+      width: 100%;
+      min-height: 74px;
+      resize: vertical;
+      border: 1px solid #2b4f7b;
+      border-radius: 10px;
+      background: #0b1a33;
+      color: #e5f0ff;
+      padding: 10px 12px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .92rem;
+      line-height: 1.45;
+      outline: none
+    }
+
+    .stdin-area:focus {
+      box-shadow: inset 0 0 0 2px rgba(147, 197, 253, .22)
+    }
+
+    .stdin-area.preset-loaded {
+      border-color: #69e3a7;
+      box-shadow: 0 0 0 3px rgba(105, 227, 167, .22), inset 0 0 0 1px rgba(105, 227, 167, .35)
+    }
+
+    .type-bank {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .type-card {
+      border: 2px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: 800
+    }
+
+    .type-card.active {
+      background: var(--blue-soft);
+      border-color: var(--blue)
+    }
+
+    .mini-terminal {
+      background: #041126;
+      color: #fff;
+      border-radius: 12px;
+      border: 1px solid #2b4f7b;
+      padding: 16px;
+      margin: 14px 0;
+      font-family: Consolas, Monaco, monospace;
+      white-space: pre-wrap;
+      line-height: 1.55;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .08)
+    }
+
+    .safe-card {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 13px;
+      cursor: pointer;
+      font-weight: 800
+    }
+
+    .safe-card.safe {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: #176b35
+    }
+
+    .safe-card.risky {
+      border-color: var(--red);
+      background: #fff1f0;
+      color: #a42820
+    }
+
+    .memory-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    .memory-slot {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      cursor: pointer
+    }
+
+    .memory-slot.active {
+      border-color: var(--blue);
+      background: var(--blue-soft)
+    }
+
+    .memory-slot code {
+      display: block;
+      margin-top: 6px;
+      color: var(--blue);
+      font-weight: 900
+    }
+
+    .thin-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 14px 0
+    }
+
+    .thin-table th {
+      background: var(--blue);
+      color: #fff;
+      text-align: left;
+      padding: 10px
+    }
+
+    .thin-table td {
+      border-top: 1px solid var(--line);
+      padding: 10px;
+      vertical-align: top
+    }
+
+    .thin-table code {
+      background: #eef3f8;
+      padding: 2px 6px;
+      border-radius: 5px
+    }
+  </style>
+</head>
+
+<body>
+  <div class="access-popup-overlay" id="accessPopup">
+    <div class="access-popup">
+      <h2>🔐 Kode Akses</h2>
+      <p>Masukkan kode akses High School untuk membuka materi Sesi 3.</p><input type="text" class="access-input"
+        id="accessInput" placeholder="MASUKKAN KODE" maxlength="20" autocomplete="off" /><button class="access-submit"
+        onclick="checkAccessCode()">Masuk</button>
+      <div class="access-error" id="accessError">Kode akses belum tepat. Coba lagi.</div>
+      <div class="access-hint">Kode akses diberikan oleh guru.</div>
+    </div>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+  <div class="main-container" id="mainContent" style="display:none;">
+    <div class="slides-panel">
+      <div class="slide-header">
+        <h1>UOB My Digital Space — High School</h1>
+        <p>Sesi 3 · Kalkulator Pajak Toko Smart</p><span class="header-badge">Python · High School</span>
+      </div>
+      <div class="slide-content">
+        <div class="floating-element" style="top:12%;left:7%;">🐍</div>
+        <div class="floating-element" style="top:18%;right:10%;">🧮</div>
+        <div class="floating-element" style="bottom:25%;left:14%;">🧾</div>
+        <div class="floating-element" style="bottom:15%;right:16%;">％</div>
+        <!-- SLIDE 1 -->
+        <section class="slide active" id="slide-1">
+
+          <span class="eyebrow">Sesi 3</span>
+          <h2>Kalkulator Pajak Toko Smart</h2>
+          <p class="lead">Di sesi ini kamu akan membuat program kasir sederhana yang menghitung pajak simulasi dan total
+            pembayaran secara otomatis.</p>
+          <div class="metrics">
+            <div class="metric-box"><strong>➕</strong><span>Menggunakan operator aritmatika</span></div>
+            <div class="metric-box"><strong>％</strong><span>Mengubah persentase menjadi desimal</span></div>
+            <div class="metric-box"><strong>🧮</strong><span>Menghitung nilai pajak dan total</span></div>
+            <div class="metric-box"><strong>🧾</strong><span>Membuat nota pembayaran</span></div>
+          </div>
+          <div class="example-box">
+            <h4>Target akhir</h4>
+            <p>Program menerima harga awal, menghitung <strong>PPN simulasi 11%</strong>, lalu menampilkan harga awal,
+              nilai pajak, dan total bayar dalam bentuk nota terminal.</p>
+          </div>
+
+        </section>
+        <!-- SLIDE 2 -->
+        <section class="slide" id="slide-2">
+
+          <h3>Misi Belajar Hari Ini</h3>
+          <div class="visual-grid">
+            <div class="visual-card">
+              <div class="visual-icon">🧭</div>
+              <h4>Buka Sesi 3</h4>
+              <p>Buka materi sesuai arahan di LMS.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🧩</div>
+              <h4>Susun Alur</h4>
+              <p>Ubah masalah kasir menjadi Input → Process → Output.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🧮</div>
+              <h4>Hitung</h4>
+              <p>Gunakan operator dan persentase di Python.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🧪</div>
+              <h4>Test</h4>
+              <p>Cek program dengan beberapa harga berbeda.</p>
+            </div>
+          </div>
+          <div class="interactive-box">
+            <h4>Cek awal</h4>
+            <p>Bagian mana yang menurutmu paling penting dalam kalkulator?</p>
+            <div class="choice-grid"><button class="choice-btn" onclick="selectAny(this)">Input harga yang
+                benar</button><button class="choice-btn" onclick="selectAny(this)">Rumus perhitungan yang
+                benar</button><button class="choice-btn" onclick="selectAny(this)">Output yang mudah
+                dibaca</button><button class="choice-btn" onclick="selectAny(this)">Semua bagian saling
+                berhubungan</button></div>
+          </div>
+
+        </section>
+        <!-- SLIDE 3 -->
+        <section class="slide" id="slide-3">
+
+          <h3>Siapkan Workspace</h3>
+          <p class="lead">Pastikan perangkat dan notebook siap sebelum mulai menghitung.</p>
+          <div class="choice-grid">
+            <button class="choice-btn" onclick="deviceCheck(this)">Laptop/komputer siap digunakan</button>
+            <button class="choice-btn" onclick="deviceCheck(this)">Internet stabil</button>
+            <button class="choice-btn" onclick="deviceCheck(this)">Browser sudah dibuka</button>
+            <button class="choice-btn" onclick="deviceCheck(this)">Google Colab siap digunakan</button>
+            <button class="choice-btn" onclick="deviceCheck(this)">Akun LMS siap</button>
+            <button class="choice-btn" onclick="deviceCheck(this)">Siap memakai data harga contoh</button>
+          </div>
+          <div class="info-box"><strong>Alamat LMS:</strong><br><a href="https://app.uobmydigitalspace.com/"
+              target="_blank" rel="noopener noreferrer">https://app.uobmydigitalspace.com/</a></div>
+
+        </section>
+        <!-- SLIDE 4 -->
+        <section class="slide" id="slide-4">
+
+          <h3>Buka Materi Sesi 3</h3>
+          <p class="lead">Buka menu Sesi Kelas, lalu pilih materi Sesi 3.</p>
+          <div class="scratch-map-wrap lms-map-wrap"><img
+              src="https://uob-1328237036.cos.ap-singapore.myqcloud.com//file-uploader/images/6a973bfb-a09a-42af-a4ea-a4db56b12f56.png"
+              alt="Tampilan LMS UOB My Digital Space"><button class="hotspot" style="left:10.5%;top:39%;"
+              onclick="showLmsStep(1,this)">1</button><button class="session-card-hotspot"
+              onclick="showLmsStep(2,this)"><span>2</span></button></div>
+          <p class="scratch-caption">Klik angka 1 untuk membuka Sesi Kelas, lalu pilih kartu sesi sesuai arahan.</p>
+          <div class="area-live-card" id="lmsStepInfo">
+            <h4>👆 Mulai dari Langkah 1</h4>
+            <p>Klik menu <strong>Sesi Kelas</strong> di sebelah kiri.</p>
+          </div>
+
+        </section>
+        <!-- SLIDE 5 -->
+        <section class="slide" id="slide-5">
+
+          <h3>Review Sesi 2</h3>
+          <p class="lead">Tiga konsep ini akan dipakai lagi.</p>
+          <div class="visual-grid">
+            <div class="visual-card">
+              <div class="visual-icon">⌨️</div>
+              <h4>input()</h4>
+              <p>Menerima ketikan pengguna.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🔁</div>
+              <h4>int() / float()</h4>
+              <p>Mengubah input teks menjadi angka.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🔤</div>
+              <h4>f-string</h4>
+              <p>Memasukkan nilai variabel ke output.</p>
+            </div>
+          </div>
+          <div class="interactive-box">
+            <h4>Quick check</h4>
+            <p>Jika harga akan dihitung, kode mana yang paling tepat?</p>
+            <div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'q5')">harga = input("Harga:
+                ")</button><button class="choice-btn" onclick="quiz(this,true,'q5')">harga = int(input("Harga:
+                "))</button><button class="choice-btn" onclick="quiz(this,false,'q5')">harga = print("Harga")</button>
+            </div>
+            <div class="feedback-line" id="q5"></div>
+          </div>
+
+        </section>
+        <!-- SLIDE 6 -->
+        <section class="slide" id="slide-6">
+
+          <h3>Kenapa Total Bisa Berbeda dari Harga Awal?</h3>
+          <p class="lead">Perhatikan contoh simulasi berikut.</p>
+          <div class="comparison-table">
+            <div class="compare-card">
+              <h4>Harga awal</h4>
+              <p style="font-size:1.35rem"><strong>Rp20.000</strong></p>
+              <p>Harga barang sebelum pajak simulasi.</p>
+            </div>
+            <div class="compare-card">
+              <h4>Total bayar</h4>
+              <p style="font-size:1.35rem"><strong>Rp22.200</strong></p>
+              <p>Harga awal + pajak simulasi 11%.</p>
+            </div>
+          </div>
+          <div class="interactive-box">
+            <h4>Menurutmu, bagian Rp2.200 berasal dari mana?</h4>
+            <div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'q6')">11% dari
+                Rp20.000</button><button class="choice-btn" onclick="quiz(this,false,'q6')">11 ditambah
+                Rp20.000</button><button class="choice-btn" onclick="quiz(this,false,'q6')">Rp20.000 dibagi 11</button>
+            </div>
+            <div class="feedback-line" id="q6"></div>
+          </div>
+
+        </section>
+        <!-- SLIDE 7 -->
+        <section class="slide" id="slide-7">
+
+          <h3>Flowchart Aritmatika</h3>
+          <p class="lead">Sebelum coding, susun dulu urutan perhitungannya.</p>
+          <div class="flow-line">
+            <div class="flow-box" onclick="showCalcFlow('input')">Input<br>harga_awal</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-box" onclick="showCalcFlow('pajak')">Process<br>nilai_pajak</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-box" onclick="showCalcFlow('total')">Process<br>total_bayar</div>
+          </div>
+          <div class="flow-line">
+            <div class="flow-box" onclick="showCalcFlow('output')">Output<br>nota</div>
+            <div class="flow-arrow">←</div>
+            <div class="flow-box">Selesai</div>
+            <div class="flow-arrow">←</div>
+            <div class="flow-box">Cek hasil</div>
+          </div>
+          <div class="area-live-card" id="calcFlowInfo">
+            <h4>Input</h4>
+            <p>Pengguna memasukkan harga awal barang.</p>
+          </div>
+
+        </section>
+        <!-- SLIDE 8 -->
+        <section class="slide" id="slide-8">
+
+          <h3>Variabel dalam Kalkulator</h3>
+          <p>Setiap variabel punya satu tugas.</p>
+          <div class="memory-box">
+            <div class="memory-slot" onclick="showCalcVar('harga',this)"><strong>harga_awal</strong><code>100000</code>
+            </div>
+            <div class="memory-slot" onclick="showCalcVar('tarif',this)"><strong>tarif_pajak</strong><code>0.11</code>
+            </div>
+            <div class="memory-slot" onclick="showCalcVar('nilai',this)"><strong>nilai_pajak</strong><code>11000</code>
+            </div>
+            <div class="memory-slot" onclick="showCalcVar('total',this)"><strong>total_bayar</strong><code>111000</code>
+            </div>
+          </div>
+          <div class="area-live-card" id="calcVarInfo">
+            <h4>Pilih variabel</h4>
+            <p>Klik salah satu kotak untuk melihat hubungannya dengan perhitungan.</p>
+          </div>
+
+        </section>
+        <!-- SLIDE 9 -->
+        <section class="slide" id="slide-9">
+
+          <h3>Data Angka Harus Benar-Benar Numerik</h3>
+          <p class="lead">Teks <code>"100000"</code> dan angka <code>100000</code> terlihat mirip, tetapi tipe datanya
+            berbeda.</p>
+          <div class="comparison-table">
+            <div class="compare-card">
+              <h4>String</h4>
+              <p><code>"100000"</code></p>
+              <p>Teks. Belum siap untuk perhitungan aritmatika.</p>
+            </div>
+            <div class="compare-card">
+              <h4>Integer / Float</h4>
+              <p><code>100000</code> atau <code>100000.0</code></p>
+              <p>Angka. Bisa dipakai untuk operasi matematika.</p>
+            </div>
+          </div>
+          <div class="interactive-box">
+            <h4>Pilih tipe yang cocok</h4>
+            <p>Harga barang Rp100.000 akan dihitung. Tipe data mana yang lebih cocok?</p>
+            <div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'q9')">str</button><button
+                class="choice-btn" onclick="quiz(this,true,'q9')">int atau float</button></div>
+            <div class="feedback-line" id="q9"></div>
+          </div>
+
+        </section>
+        <!-- SLIDE 10 -->
+        <section class="slide" id="slide-10">
+
+          <h3>Operator Matematika di Python</h3>
+          <p>Klik operator untuk melihat fungsinya.</p>
+          <div class="component-bank"><button class="component-pill" onclick="showOperator('plus',this)">+
+              Penjumlahan</button><button class="component-pill" onclick="showOperator('mul',this)">*
+              Perkalian</button><button class="component-pill" onclick="showOperator('div',this)">/ Pembagian</button>
+          </div>
+          <div class="area-live-card" id="operatorInfo">
+            <h4>Pilih operator</h4>
+            <p>Setiap operator memiliki peran berbeda dalam rumus kalkulator.</p>
+          </div>
+          <table class="thin-table">
+            <tr>
+              <th>Tujuan</th>
+              <th>Contoh</th>
+            </tr>
+            <tr>
+              <td>Mencari 11%</td>
+              <td><code>11 / 100</code></td>
+            </tr>
+            <tr>
+              <td>Menghitung nilai pajak</td>
+              <td><code>harga_awal * 0.11</code></td>
+            </tr>
+            <tr>
+              <td>Menghitung total</td>
+              <td><code>harga_awal + nilai_pajak</code></td>
+            </tr>
+          </table>
+
+        </section>
+        <!-- SLIDE 11 -->
+        <section class="slide" id="slide-11">
+
+          <h3>11% Itu Berapa dalam Desimal?</h3>
+          <div class="comparison-table">
+            <div class="compare-card">
+              <h4>Bentuk persen</h4>
+              <p style="font-size:1.4rem"><strong>11%</strong></p>
+            </div>
+            <div class="compare-card">
+              <h4>Bentuk desimal</h4>
+              <p style="font-size:1.4rem"><strong>0.11</strong></p>
+            </div>
+          </div>
+          <div class="interactive-box">
+            <h4>Uji cepat</h4>
+            <div class="form-grid"><label>Masukkan persentase<input id="percentInput" type="number"
+                  value="11"></label><button class="primary-btn" onclick="convertPercent()">Ubah ke desimal</button>
+            </div>
+            <div class="area-live-card" id="percentResult">
+              <h4>Hasil</h4>
+              <p>11% = 11 / 100 = 0.11</p>
+            </div>
+          </div>
+
+        </section>
+        <!-- SLIDE 12 -->
+        <section class="slide" id="slide-12">
+
+          <h3>Coba Operator Langsung</h3>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div><textarea id="py1" spellcheck="false">harga_awal = 100000
+tarif_pajak = 11 / 100
+nilai_pajak = harga_awal * tarif_pajak
+total_bayar = harga_awal + nilai_pajak
+
+print(tarif_pajak)
+print(nilai_pajak)
+print(total_bayar)</textarea>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py1')">Run code</button><span
+                class="editor-toolbar-note">Ubah angka, lalu jalankan lagi.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py1_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+          <p class="mini-note">Coba ganti harga_awal menjadi 200000.</p>
+
+        </section>
+        <!-- SLIDE 13 -->
+        <section class="slide" id="slide-13">
+
+          <h3>round() vs int()</h3>
+          <p class="lead">Keduanya bisa menghasilkan angka bulat, tetapi caranya berbeda.</p>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div><textarea id="py2" spellcheck="false">nilai = 2200.66
+
+print(round(nilai))
+print(int(nilai))</textarea>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py2')">Run code</button><span
+                class="editor-toolbar-note">Ganti nilai menjadi 2200.49 dan bandingkan.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py2_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+          <div class="interactive-box">
+            <h4>Apa bedanya?</h4>
+            <div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'q13')">round() membulatkan,
+                int() memotong bagian desimal</button><button class="choice-btn"
+                onclick="quiz(this,false,'q13')">Keduanya selalu memberi hasil yang sama</button></div>
+            <div class="feedback-line" id="q13"></div>
+          </div>
+
+        </section>
+        <!-- SLIDE 14 -->
+        <section class="slide" id="slide-14">
+
+          <h3>Aktivitas Mini: Hitung Manual Dulu</h3>
+          <p>Jika harga sepatu = <strong>Rp200.000</strong> dan pajak simulasi = <strong>11%</strong>, hitung sebelum
+            menjalankan kode.</p>
+          <div class="form-grid"><label>Nilai pajak<input id="manualTax"
+                placeholder="Contoh: 22000"></label><label>Total bayar<input id="manualTotal"
+                placeholder="Contoh: 222000"></label><button class="primary-btn" onclick="checkManualCalc()">Cek
+              jawaban</button></div>
+          <div class="feedback-line" id="manualFeedback"></div>
+          <div class="mini-terminal">Rumus:
+            nilai_pajak = harga_awal × 0.11
+            total_bayar = harga_awal + nilai_pajak</div>
+
+        </section>
+        <!-- SLIDE 15 -->
+        <section class="slide" id="slide-15">
+
+          <h3>Reading Code: Prediksi Tipe dan Hasil</h3>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div><textarea id="py3" spellcheck="false">harga_buku = 50000
+tarif_pajak = 0.11
+total_pajak = harga_buku * tarif_pajak
+
+print(total_pajak)
+print(type(total_pajak))</textarea>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py3')">Run code</button><span
+                class="editor-toolbar-note">Prediksi dulu, baru Run.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py3_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+          <div class="interactive-box">
+            <h4>Tipe data total_pajak adalah...</h4>
+            <div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'q15')">str</button><button
+                class="choice-btn" onclick="quiz(this,false,'q15')">int</button><button class="choice-btn"
+                onclick="quiz(this,true,'q15')">float</button></div>
+            <div class="feedback-line" id="q15"></div>
+          </div>
+
+        </section>
+        <!-- SLIDE 16 -->
+        <section class="slide" id="slide-16">
+
+          <h3>Literasi Digital: Gunakan Data Simulasi</h3>
+          <p class="lead">Kalkulator latihan tidak membutuhkan transaksi pribadi.</p>
+          <div class="choice-grid"><button class="safe-card" onclick="markSafety(this,true)">Harga contoh:
+              100000</button><button class="safe-card" onclick="markSafety(this,true)">Nama barang dummy:
+              Headphone</button><button class="safe-card" onclick="markSafety(this,false)">Nomor rekening
+              asli</button><button class="safe-card" onclick="markSafety(this,false)">PIN / password</button><button
+              class="safe-card" onclick="markSafety(this,false)">Nomor kartu pembayaran</button><button
+              class="safe-card" onclick="markSafety(this,true)">Harga contoh: 250000</button></div>
+          <p class="mini-note">Klik setiap kartu untuk melihat mana yang aman digunakan saat latihan.</p>
+
+        </section>
+        <!-- SLIDE 17 -->
+        <section class="slide" id="slide-17">
+
+          <h3>Cheat Sheet Rumus Sesi 3</h3>
+          <table class="thin-table">
+            <tr>
+              <th>Langkah</th>
+              <th>Python</th>
+            </tr>
+            <tr>
+              <td>Ambil harga</td>
+              <td><code>harga_awal = int(input(...))</code></td>
+            </tr>
+            <tr>
+              <td>Simpan tarif</td>
+              <td><code>tarif_pajak = 0.11</code></td>
+            </tr>
+            <tr>
+              <td>Hitung pajak</td>
+              <td><code>nilai_pajak = round(harga_awal * tarif_pajak)</code></td>
+            </tr>
+            <tr>
+              <td>Hitung total</td>
+              <td><code>total_bayar = harga_awal + nilai_pajak</code></td>
+            </tr>
+            <tr>
+              <td>Tampilkan</td>
+              <td><code>print(f"Rp{total_bayar:,}")</code></td>
+            </tr>
+          </table>
+          <div class="interactive-box">
+            <h4>Urutan yang benar?</h4>
+            <p>Langkah mana yang harus dilakukan sebelum menghitung total_bayar?</p>
+            <div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'q17')">Menghitung
+                nilai_pajak</button><button class="choice-btn" onclick="quiz(this,false,'q17')">Mencetak nota terlebih
+                dahulu</button></div>
+            <div class="feedback-line" id="q17"></div>
+          </div>
+
+        </section>
+        <!-- SLIDE 18 -->
+        <section class="slide" id="slide-18">
+
+          <h3>Rancang Variabel Project</h3>
+          <table class="thin-table">
+            <tr>
+              <th>Variabel</th>
+              <th>Fungsi</th>
+              <th>Contoh</th>
+            </tr>
+            <tr>
+              <td><code>harga_awal</code></td>
+              <td>Input harga barang</td>
+              <td>100000</td>
+            </tr>
+            <tr>
+              <td><code>tarif_pajak</code></td>
+              <td>Persentase dalam desimal</td>
+              <td>0.11</td>
+            </tr>
+            <tr>
+              <td><code>nilai_pajak</code></td>
+              <td>Hasil perkalian</td>
+              <td>11000</td>
+            </tr>
+            <tr>
+              <td><code>total_bayar</code></td>
+              <td>Harga + pajak</td>
+              <td>111000</td>
+            </tr>
+          </table>
+          <div class="interactive-box">
+            <h4>Cek pemahaman</h4>
+            <p>Variabel mana yang berasal langsung dari input pengguna?</p>
+            <div class="choice-grid"><button class="choice-btn"
+                onclick="quiz(this,true,'q18')">harga_awal</button><button class="choice-btn"
+                onclick="quiz(this,false,'q18')">nilai_pajak</button><button class="choice-btn"
+                onclick="quiz(this,false,'q18')">total_bayar</button></div>
+            <div class="feedback-line" id="q18"></div>
+          </div>
+
+        </section>
+        <!-- SLIDE 19 -->
+        <section class="slide" id="slide-19">
+
+          <h3>Langkah 1: Ambil Harga Awal</h3>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div><textarea id="py4" spellcheck="false">harga_awal = int(input("Masukkan harga awal barang: "))
+print(f"Harga awal: Rp{harga_awal:,}")</textarea>
+            <div class="stdin-panel">
+              <div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py4_input"
+                spellcheck="false">100000</textarea>
+            </div>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py4')">Run code</button><span
+                class="editor-toolbar-note">Ganti input dan jalankan lagi.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py4_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+
+        </section>
+        <!-- SLIDE 20 -->
+        <section class="slide" id="slide-20">
+
+          <h3>Langkah 2: Hitung Nilai Pajak</h3>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div><textarea id="py5" spellcheck="false">harga_awal = int(input("Masukkan harga awal barang: "))
+tarif_pajak = 0.11
+nilai_pajak = round(harga_awal * tarif_pajak)
+
+print(f"Nilai pajak: Rp{nilai_pajak:,}")</textarea>
+            <div class="stdin-panel">
+              <div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py5_input"
+                spellcheck="false">100000</textarea>
+            </div>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py5')">Run code</button><span
+                class="editor-toolbar-note">Cek apakah hasil pajak sesuai prediksi.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py5_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+
+        </section>
+        <!-- SLIDE 21 -->
+        <section class="slide" id="slide-21">
+
+          <h3>Langkah 3: Hitung Total Bayar</h3>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div><textarea id="py6" spellcheck="false">harga_awal = int(input("Masukkan harga awal barang: "))
+tarif_pajak = 0.11
+nilai_pajak = round(harga_awal * tarif_pajak)
+total_bayar = harga_awal + nilai_pajak
+
+print(f"Harga awal : Rp{harga_awal:,}")
+print(f"Pajak      : Rp{nilai_pajak:,}")
+print(f"Total      : Rp{total_bayar:,}")</textarea>
+            <div class="stdin-panel">
+              <div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py6_input"
+                spellcheck="false">100000</textarea>
+            </div>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py6')">Run code</button><span
+                class="editor-toolbar-note">Bandingkan ketiga nilai.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py6_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+
+        </section>
+        <!-- SLIDE 22 -->
+        <section class="slide" id="slide-22">
+
+          <h3>Langkah 4: Rapikan Nota</h3>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div><textarea id="py7" spellcheck="false" style="min-height:330px">harga_awal = 100000
+tarif_pajak = 0.11
+nilai_pajak = round(harga_awal * tarif_pajak)
+total_bayar = harga_awal + nilai_pajak
+
+print("=== KALKULATOR PAJAK TOKO SMART ===")
+print("-----------------------------------")
+print("NOTA PEMBAYARAN")
+print("-----------------------------------")
+print(f"Harga Awal   : Rp{harga_awal:,}")
+print(f"PPN Simulasi : Rp{nilai_pajak:,}")
+print(f"Total Bayar  : Rp{total_bayar:,}")</textarea>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py7')">Run code</button><span
+                class="editor-toolbar-note">Ubah harga_awal dan lihat nota ikut berubah.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py7_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+
+        </section>
+        <!-- SLIDE 23 -->
+        <section class="slide" id="slide-23">
+
+          <h3>Starter Code: Kalkulator Pajak</h3>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div><textarea id="py8" spellcheck="false" style="min-height:390px">print("=== KALKULATOR PAJAK TOKO SMART ===")
+
+harga_awal = int(input("Masukkan harga awal barang: "))
+
+tarif_pajak = 0.11
+nilai_pajak = round(harga_awal * tarif_pajak)
+total_bayar = harga_awal + nilai_pajak
+
+print("
+-----------------------------------")
+print("NOTA PEMBAYARAN")
+print("-----------------------------------")
+print(f"Harga Awal      : Rp{harga_awal:,}")
+print(f"PPN Simulasi    : Rp{nilai_pajak:,}")
+print(f"Total Bayar     : Rp{total_bayar:,}")</textarea>
+            <div class="stdin-panel">
+              <div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py8_input"
+                spellcheck="false">100000</textarea>
+            </div>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py8')">Run code</button><span
+                class="editor-toolbar-note">Gunakan editor ini untuk test case.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py8_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+
+        </section>
+        <!-- SLIDE 24 -->
+        <section class="slide" id="slide-24">
+
+          <h3>Test Case: Program Harus Dinamis</h3>
+          <p class="lead">Klik test case, lalu program akan membuka Starter Code dengan input yang dipilih.</p>
+          <div class="choice-grid"><button class="choice-btn" onclick="loadTaxCase(this,1)">Test Case 1 ·
+              100000</button><button class="choice-btn" onclick="loadTaxCase(this,2)">Test Case 2 · 250000</button>
+          </div>
+          <table class="thin-table">
+            <tr>
+              <th>Input</th>
+              <th>Pajak yang diharapkan</th>
+              <th>Total yang diharapkan</th>
+            </tr>
+            <tr>
+              <td>100000</td>
+              <td>11000</td>
+              <td>111000</td>
+            </tr>
+            <tr>
+              <td>250000</td>
+              <td>27500</td>
+              <td>277500</td>
+            </tr>
+          </table>
+          <div class="feedback-line" id="taxCaseFeedback"></div>
+
+        </section>
+        <!-- SLIDE 25 -->
+        <section class="slide" id="slide-25">
+
+          <h3>Perlu Menerima Harga Desimal?</h3>
+          <p>Versi dasar memakai <code>int(input())</code>. Jika ingin menerima angka pecahan, gunakan
+            <code>float(input())</code>.</p>
+          <div class="python-editor">
+            <div class="editor-head">
+              <div class="editor-label">PYTHON EDITOR</div>
+              <div class="editor-live">LIVE OUTPUT</div>
+            </div><textarea id="py9" spellcheck="false">harga_awal = float(input("Masukkan harga: "))
+nilai_pajak = round(harga_awal * 0.11)
+total_bayar = harga_awal + nilai_pajak
+
+print(f"Pajak: {nilai_pajak}")
+print(f"Total: {total_bayar}")</textarea>
+            <div class="stdin-panel">
+              <div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py9_input"
+                spellcheck="false">25500.5</textarea>
+            </div>
+            <div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py9')">Run code</button><span
+                class="editor-toolbar-note">Coba angka desimal.</span></div>
+            <div class="editor-output-panel">
+              <div class="editor-output-label">OUTPUT</div>
+              <div class="output-box" id="py9_out">Output akan muncul di sini.</div>
+            </div>
+          </div>
+
+        </section>
+        <!-- SLIDE 26 -->
+        <section class="slide" id="slide-26">
+
+          <h3>Detektif Kode: Debugging</h3>
+          <div class="debug-tabs"><button class="debug-tab active" onclick="showDebug('debug-type',this)">TypeError /
+              Input</button><button class="debug-tab" onclick="showDebug('debug-logic',this)">Logic
+              Error</button><button class="debug-tab" onclick="showDebug('debug-round',this)">Desimal Panjang</button>
+          </div>
+          <div class="debug-scenario active" id="debug-type">
+            <div class="warning-box">
+              <h4>Gejala</h4>
+              <p>Perhitungan gagal karena harga masih dianggap teks.</p>
+            </div>
+            <div class="info-box">
+              <h4>Cek</h4>
+              <p>Pastikan input dibungkus <code>int()</code> atau <code>float()</code>.</p>
+            </div>
+          </div>
+          <div class="debug-scenario" id="debug-logic">
+            <div class="warning-box">
+              <h4>Gejala</h4>
+              <p>Program berjalan, tetapi total lebih kecil atau terlalu besar.</p>
+            </div>
+            <div class="info-box">
+              <h4>Cek</h4>
+              <p>Periksa operator. Pajak dihitung dengan <code>*</code>, total dengan <code>+</code>.</p>
+            </div>
+          </div>
+          <div class="debug-scenario" id="debug-round">
+            <div class="warning-box">
+              <h4>Gejala</h4>
+              <p>Output memiliki bagian desimal yang tidak diinginkan.</p>
+            </div>
+            <div class="info-box">
+              <h4>Cek</h4>
+              <p>Gunakan <code>round()</code> pada hasil perhitungan yang ingin dibulatkan.</p>
+            </div>
+          </div>
+
+        </section>
+        <!-- SLIDE 27 -->
+        <section class="slide" id="slide-27">
+
+          <h3>Output Minimum</h3>
+          <p>Project dianggap berhasil jika syarat berikut terpenuhi.</p>
+          <ul class="checklist">
+            <li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"> Program menerima harga awal dalam
+              bentuk angka.</li>
+            <li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"> Pajak simulasi dihitung dengan
+              perkalian 0.11.</li>
+            <li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"> Total bayar = harga awal + nilai
+              pajak.</li>
+            <li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"> Hasil perhitungan dibulatkan
+              dengan round() jika diperlukan.</li>
+            <li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"> Nota menampilkan harga awal,
+              pajak, dan total.</li>
+            <li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"> Dua test case menghasilkan angka
+              yang benar.</li>
+          </ul>
+
+        </section>
+        <!-- SLIDE 28 -->
+        <section class="slide" id="slide-28">
+
+          <h3>Challenge Tambahan</h3>
+          <p>Jika project utama sudah berhasil, tambahkan informasi yang tidak mengubah rumus utama.</p>
+          <div class="visual-grid">
+            <div class="visual-card">
+              <div class="visual-icon">🏷️</div>
+              <h4>Nama Barang</h4>
+              <p>Tambahkan <code>nama_barang</code> dan tampilkan di nota.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🔢</div>
+              <h4>Jumlah Barang</h4>
+              <p>Tambahkan <code>jumlah_barang</code> sebagai informasi tambahan.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🎨</div>
+              <h4>Nota Lebih Rapi</h4>
+              <p>Rapikan label dan pemisah tanpa mengubah rumus.</p>
+            </div>
+          </div>
+          <div class="warning-box">
+            <h4>Preview sesi berikutnya</h4>
+            <p>Aturan seperti “jika total lebih dari ... maka diskon ...” membutuhkan percabangan <code>if</code>.
+              Materi itu belum menjadi fokus utama sesi ini.</p>
+          </div>
+
+        </section>
+        <!-- SLIDE 29 -->
+        <section class="slide" id="slide-29">
+
+          <span class="eyebrow">Penutup</span>
+          <h2>Ringkasan Sesi 3</h2>
+          <div class="visual-grid">
+            <div class="visual-card">
+              <div class="visual-icon">➕</div>
+              <h4>Operator</h4>
+              <p><code>+</code>, <code>*</code>, dan <code>/</code>.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">％</div>
+              <h4>Persentase</h4>
+              <p>11% = 0.11.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🔄</div>
+              <h4>round()</h4>
+              <p>Membulatkan hasil perhitungan.</p>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🧪</div>
+              <h4>Testing</h4>
+              <p>Cek program dan hasilnya.</p>
+            </div>
+          </div>
+          <div class="interactive-box">
+            <h4>Refleksi</h4>
+            <p>Mengapa kalkulator otomatis tetap harus diuji?</p>
+            <div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'q29')">Karena Python selalu
+                salah</button><button class="choice-btn" onclick="quiz(this,true,'q29')">Karena program bisa berjalan
+                tetapi rumusnya tetap salah</button><button class="choice-btn" onclick="quiz(this,false,'q29')">Hanya
+                untuk mencari typo</button></div>
+            <div class="feedback-line" id="q29"></div>
+          </div>
+
+        </section>
+      </div>
+      <div class="navigation"><button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)"><span>←</span>
+          Previous</button>
+        <div class="slide-indicator"><span id="currentSlide">1</span> / <span id="totalSlides">29</span></div><button
+          class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next <span>→</span></button>
+      </div>
+    </div>
+    <div class="explanation-panel">
+      <section class="explanation active" id="explanation-1">
+
+        <h3>Project yang Akan Dibuat</h3>
+        <p>Project Sesi 3 adalah <strong>Kalkulator Pajak Toko Smart</strong>. Program ini masih berbasis terminal,
+          tetapi sekarang Python tidak hanya menerima data dan menampilkannya kembali. Python akan melakukan perhitungan
+          menggunakan operator matematika.</p>
+        <p>Konteksnya adalah sistem kasir sederhana. Pengguna memasukkan harga barang, program menghitung pajak simulasi
+          sebesar 11%, lalu menjumlahkannya dengan harga awal untuk mendapatkan total pembayaran.</p>
+        <div class="info-box">
+          <h4>Konsep utama</h4>
+          <p>Kamu akan memakai <code>+</code>, <code>*</code>, dan <code>/</code>, lalu melihat bagaimana
+            <code>round()</code> membantu membuat hasil perhitungan lebih rapi.</p>
+        </div>
+        <div class="warning-box">
+          <h4>Catatan</h4>
+          <p>Angka 11% di sesi ini digunakan sebagai <strong>simulasi untuk latihan coding</strong>. Fokus pembelajaran
+            adalah cara Python menghitung persentase dan total, bukan membahas aturan pajak nyata.</p>
+        </div>
+
+      </section>
+      <section class="explanation" id="explanation-2">
+
+        <h3>Alur Belajar Sesi 3</h3>
+        <p>Sesi ini melanjutkan Sesi 2. Kamu sudah mengenal <code>input()</code>, variabel, <code>int()</code>,
+          <code>float()</code>, dan <code>f-string</code>. Sekarang data angka tersebut akan dipakai dalam operasi
+          matematika.</p>
+        <div class="info-box">
+          <h4>Urutan besar sesi</h4>
+          <ol>
+            <li>Membaca konteks nota dan pajak simulasi.</li>
+            <li>Menyusun flowchart perhitungan.</li>
+            <li>Mengenal operator <code>+</code>, <code>*</code>, dan <code>/</code>.</li>
+            <li>Membandingkan <code>round()</code> dan <code>int()</code>.</li>
+            <li>Membangun kalkulator pajak secara bertahap.</li>
+            <li>Menjalankan test case dan debugging.</li>
+          </ol>
+        </div>
+        <p>Fokusnya bukan menghafal simbol, tetapi memahami <strong>kapan</strong> operator dipakai dan
+          <strong>mengapa</strong> hasilnya harus diuji.</p>
+
+      </section>
+      <section class="explanation" id="explanation-3">
+
+        <h3>Persiapan Sebelum Praktik</h3>
+        <p>Sesi ini akan banyak melibatkan percobaan angka. Kamu akan mengubah input, menjalankan ulang kode, lalu
+          membandingkan hasilnya. Karena itu, workspace yang siap akan membuat proses belajar lebih lancar.</p>
+        <p>Gunakan notebook baru atau starter notebook sesuai arahan. Nama yang disarankan adalah
+          <strong>Sesi3_Kalkulator_Pajak.ipynb</strong>.</p>
+        <div class="warning-box">
+          <h4>Data latihan</h4>
+          <p>Gunakan harga contoh seperti 100000, 200000, atau 250000. Tidak perlu memasukkan data transaksi pribadi
+            atau informasi pembayaran nyata.</p>
+        </div>
+
+      </section>
+      <section class="explanation" id="explanation-4">
+
+        <h3>Cara Membuka Materi</h3>
+        <p>Alurnya sama seperti sesi sebelumnya. Masuk ke menu <strong>Sesi Kelas</strong>, lalu buka materi Sesi 3 yang
+          berjudul <strong>Kalkulator Pajak</strong> atau judul yang ditampilkan di akun kelasmu.</p>
+        <div class="info-box">
+          <h4>Cek sebelum lanjut</h4>
+          <ul>
+            <li>Pastikan jenjang High School.</li>
+            <li>Pastikan kamu membuka Sesi 3.</li>
+            <li>Buka materi terlebih dahulu sebelum berpindah ke notebook coding.</li>
+          </ul>
+        </div>
+        <p>Jika kartu sesi belum muncul, periksa koneksi dan waktu perangkat, lalu ikuti arahan guru.</p>
+
+      </section>
+      <section class="explanation" id="explanation-5">
+
+        <h3>Kenapa Materi Sesi 2 Masih Penting?</h3>
+        <p>Operator matematika hanya bisa bekerja dengan baik jika datanya sudah berbentuk angka. Karena hasil
+          <code>input()</code> selalu string, harga yang dimasukkan pengguna perlu dikonversi dengan <code>int()</code>
+          atau <code>float()</code>.</p>
+        <div class="example-box">
+          <h4>Contoh</h4>
+          <p><code>harga = int(input("Harga: "))</code> berarti program menerima input lalu langsung mengubahnya menjadi
+            integer agar bisa dikalikan dan dijumlahkan.</p>
+        </div>
+        <p>Di sesi ini, kamu akan melihat hubungan yang lebih jelas antara <strong>tipe data</strong> dan
+          <strong>operasi</strong>. Data yang salah tipe bisa membuat program error atau menghasilkan perilaku yang
+          tidak diinginkan.</p>
+
+      </section>
+      <section class="explanation" id="explanation-6">
+
+        <h3>Konteks Perhitungan</h3>
+        <p>Dalam simulasi ini, harga awal adalah Rp20.000. Pajak simulasi 11% berarti program perlu mencari <strong>11
+            persen dari harga awal</strong>, bukan sekadar menambahkan angka 11.</p>
+        <div class="info-box">
+          <h4>Perhitungan manual</h4>
+          <p>11% = 11/100 = 0.11. Jadi nilai pajak = 20.000 × 0.11 = 2.200. Total bayar = 20.000 + 2.200 = 22.200.</p>
+        </div>
+        <p>Komputer melakukan langkah yang sama. Bedanya, kita menuliskan aturan itu dalam bentuk variabel dan operator
+          Python agar bisa dipakai untuk harga yang berbeda-beda.</p>
+
+      </section>
+      <section class="explanation" id="explanation-7">
+
+        <h3>Urutan Perhitungan Harus Jelas</h3>
+        <p>Developer sebaiknya tidak langsung menulis banyak baris kode. Masalah dipecah dulu menjadi langkah yang
+          saling bergantung.</p>
+        <div class="info-box">
+          <h4>Urutan project</h4>
+          <ol>
+            <li>Ambil <code>harga_awal</code>.</li>
+            <li>Tentukan <code>tarif_pajak</code>.</li>
+            <li>Hitung <code>nilai_pajak</code>.</li>
+            <li>Hitung <code>total_bayar</code>.</li>
+            <li>Tampilkan nota.</li>
+          </ol>
+        </div>
+        <p>Perhatikan bahwa <code>total_bayar</code> belum bisa dihitung sebelum <code>nilai_pajak</code> diketahui.
+          Inilah alasan urutan proses penting.</p>
+
+      </section>
+      <section class="explanation" id="explanation-8">
+
+        <h3>Dekomposisi Menjadi Variabel</h3>
+        <p>Daripada menulis satu rumus panjang, perhitungan dibagi menjadi beberapa variabel. Cara ini membuat kode
+          lebih mudah dibaca dan lebih mudah diuji.</p>
+        <div class="example-box">
+          <h4>Contoh hubungan</h4>
+          <p><code>nilai_pajak</code> bergantung pada <code>harga_awal</code> dan <code>tarif_pajak</code>. Setelah itu,
+            <code>total_bayar</code> bergantung pada <code>harga_awal</code> dan <code>nilai_pajak</code>.</p>
+        </div>
+        <p>Jika hasil total salah, kamu bisa mencetak nilai pajak terlebih dahulu untuk mengetahui apakah kesalahannya
+          terjadi pada langkah pertama atau kedua.</p>
+
+      </section>
+      <section class="explanation" id="explanation-9">
+
+        <h3>Bridging dari Input ke Perhitungan</h3>
+        <p>Pada sesi sebelumnya, kamu belajar bahwa <code>input()</code> selalu menghasilkan string. Agar harga bisa
+          dikalikan dengan 0.11, nilainya perlu diubah menjadi tipe numerik.</p>
+        <div class="info-box">
+          <h4>Dua pilihan</h4>
+          <p><code>int()</code> cocok untuk harga dalam angka bulat. <code>float()</code> cocok jika program perlu
+            menerima angka desimal.</p>
+        </div>
+        <p>Untuk jalur utama project ini, kita bisa memakai <code>int(input(...))</code>. Modul juga memperkenalkan
+          <code>float(input(...))</code> sebagai perluasan ketika input desimal dibutuhkan.</p>
+
+      </section>
+      <section class="explanation" id="explanation-10">
+
+        <h3>Tiga Operator Inti</h3>
+        <p>Project ini cukup memakai tiga operator utama. Operator pembagian dipakai untuk mengubah persentase menjadi
+          desimal, perkalian untuk mencari nilai pajak, dan penjumlahan untuk mendapatkan total akhir.</p>
+        <div class="warning-box">
+          <h4>Jangan tertukar</h4>
+          <p>Kesalahan operator bisa menghasilkan <strong>logic error</strong>. Program tetap berjalan tanpa pesan
+            merah, tetapi hasilnya salah.</p>
+        </div>
+        <p>Karena logic error tidak selalu terlihat sebagai error teknis, kamu perlu membandingkan hasil program dengan
+          perhitungan manual atau test case.</p>
+
+      </section>
+      <section class="explanation" id="explanation-11">
+
+        <h3>Mengubah Persen Menjadi Desimal</h3>
+        <p>Komputer tidak membaca simbol persen seperti kita membaca tulisan sehari-hari. Untuk menghitung 11% dari
+          suatu nilai, kita mengubahnya menjadi <code>11 / 100</code> atau langsung memakai <code>0.11</code>.</p>
+        <div class="example-box">
+          <h4>Contoh</h4>
+          <p><code>100000 * 0.11</code> menghasilkan 11000. Nilai itulah yang menjadi pajak simulasi.</p>
+        </div>
+        <p>Jika nanti persentase disimpan sebagai angka 11, rumusnya bisa ditulis <code>persen / 100</code> sebelum
+          dikalikan dengan harga.</p>
+
+      </section>
+      <section class="explanation" id="explanation-12">
+
+        <h3>Melihat Urutan Operasi di Kode</h3>
+        <p>Di editor ini, setiap langkah dibuat sebagai variabel terpisah. Ini memudahkan kamu melihat perubahan nilai
+          dari satu tahap ke tahap berikutnya.</p>
+        <div class="info-box">
+          <h4>Prediksi sebelum Run</h4>
+          <p>Untuk harga 100000, <code>tarif_pajak</code> menjadi 0.11, <code>nilai_pajak</code> menjadi 11000.0, dan
+            <code>total_bayar</code> menjadi 111000.0.</p>
+        </div>
+        <p>Perkalian dengan angka desimal membuat hasil menjadi <code>float</code>. Hal ini normal. Nanti kita akan
+          membahas cara membuat tampilan nominal lebih rapi.</p>
+
+      </section>
+      <section class="explanation" id="explanation-13">
+
+        <h3>Pembulatan untuk Hasil Perhitungan</h3>
+        <p><code>round()</code> membulatkan nilai ke bilangan terdekat, sedangkan <code>int()</code> hanya mengambil
+          bagian bilangan bulat dan membuang bagian desimal.</p>
+        <div class="example-box">
+          <h4>Contoh</h4>
+          <p><code>round(2200.66)</code> menjadi 2201, sedangkan <code>int(2200.66)</code> menjadi 2200.</p>
+        </div>
+        <p>Untuk project ini, lesson plan menekankan penggunaan <code>round()</code> pada hasil perhitungan agar logika
+          pembulatan lebih sesuai daripada sekadar memotong angka.</p>
+
+      </section>
+      <section class="explanation" id="explanation-14">
+
+        <h3>Kenapa Menghitung Manual?</h3>
+        <p>Komputer bisa menjalankan rumus dengan cepat, tetapi kamu tetap perlu tahu apakah hasilnya masuk akal.
+          Perhitungan manual menjadi acuan saat melakukan testing.</p>
+        <div class="info-box">
+          <h4>Jawaban</h4>
+          <p>11% dari 200000 adalah 22000. Total akhirnya adalah 222000.</p>
+        </div>
+        <p>Jika program menampilkan angka yang jauh berbeda, berarti ada kemungkinan operator atau urutan perhitungannya
+          salah. Inilah cara sederhana mendeteksi logic error.</p>
+
+      </section>
+      <section class="explanation" id="explanation-15">
+
+        <h3>Membaca Kode Sebelum Menjalankan</h3>
+        <p><code>harga_buku</code> adalah integer, tetapi <code>tarif_pajak</code> adalah float karena nilainya 0.11.
+          Ketika operasi melibatkan float, hasilnya juga menjadi float.</p>
+        <div class="example-box">
+          <h4>Prediksi</h4>
+          <p><code>50000 * 0.11</code> menghasilkan 5500.0. Fungsi <code>type()</code> akan menunjukkan
+            <code>&lt;class 'float'&gt;</code>.</p>
+        </div>
+        <p>Kebiasaan memprediksi output membantu kamu memahami alur program tanpa selalu bergantung pada tombol Run.</p>
+
+      </section>
+      <section class="explanation" id="explanation-16">
+
+        <h3>Privasi Tetap Penting Saat Coding</h3>
+        <p>Google Colab adalah platform berbasis cloud. Notebook dapat dibagikan melalui tautan, sehingga data yang kamu
+          tulis berpotensi terlihat oleh orang lain jika file dibagikan.</p>
+        <div class="warning-box">
+          <h4>Golden rule</h4>
+          <p>Gunakan data dummy. Jangan memasukkan NIK, nomor rekening, PIN, password, nomor kartu, atau data transaksi
+            asli ke notebook latihan.</p>
+        </div>
+        <p>Untuk menguji kalkulator, angka contoh sudah cukup. Tujuan testing adalah memeriksa logika program, bukan
+          menggunakan data keuangan pribadi.</p>
+
+      </section>
+      <section class="explanation" id="explanation-17">
+
+        <h3>Rangkuman Sintaks Inti</h3>
+        <p>Cheat sheet ini bisa dipakai sebagai peta saat kamu mulai membangun project. Setiap baris mewakili satu tahap
+          dari flowchart.</p>
+        <p>Urutan penting karena <code>total_bayar</code> membutuhkan nilai dari <code>nilai_pajak</code>. Jika variabel
+          tersebut belum dibuat, program tidak punya data yang bisa dijumlahkan.</p>
+        <div class="info-box">
+          <h4>Prinsip</h4>
+          <p>Bangun proses dulu, cek hasilnya, lalu rapikan output. Tampilan yang rapi tidak akan membantu jika rumus
+            dasarnya masih salah.</p>
+        </div>
+
+      </section>
+      <section class="explanation" id="explanation-18">
+
+        <h3>Bedakan Input dan Hasil Hitung</h3>
+        <p><code>harga_awal</code> berasal dari pengguna. Tiga variabel lainnya dibuat atau dihitung oleh program. Ini
+          penting untuk memahami alur IPO.</p>
+        <div class="info-box">
+          <h4>Pemetaan</h4>
+          <p><strong>Input:</strong> harga_awal. <strong>Process:</strong> tarif_pajak, nilai_pajak, total_bayar.
+            <strong>Output:</strong> nota yang menampilkan hasil.</p>
+        </div>
+        <p>Dengan pemetaan seperti ini, kamu bisa lebih cepat mencari sumber masalah saat debugging.</p>
+
+      </section>
+      <section class="explanation" id="explanation-19">
+
+        <h3>Checkpoint 1: Input Berjalan</h3>
+        <p>Project dibangun sedikit demi sedikit. Checkpoint pertama hanya memastikan program bisa menerima harga awal
+          dan menampilkannya kembali.</p>
+        <div class="warning-box">
+          <h4>Format input</h4>
+          <p>Ketik angka murni seperti <strong>100000</strong>. Jangan mengetik <strong>Rp100.000</strong> karena
+            <code>int()</code> tidak dapat mengubah teks tersebut menjadi integer.</p>
+        </div>
+        <p>Jika bagian ini sudah berhasil, baru lanjut ke perhitungan pajak.</p>
+
+      </section>
+      <section class="explanation" id="explanation-20">
+
+        <h3>Checkpoint 2: Proses Pajak</h3>
+        <p>Setelah input aman, tambahkan <code>tarif_pajak = 0.11</code> dan hitung <code>nilai_pajak</code>. Fungsi
+          <code>round()</code> digunakan agar hasil akhirnya menjadi bilangan bulat yang lebih mudah ditampilkan.</p>
+        <div class="info-box">
+          <h4>Untuk input 100000</h4>
+          <p>Nilai pajak yang diharapkan adalah <strong>11000</strong>.</p>
+        </div>
+        <p>Jika hasil berbeda, cek kembali operator perkalian dan nilai tarif.</p>
+
+      </section>
+      <section class="explanation" id="explanation-21">
+
+        <h3>Checkpoint 3: Total Akhir</h3>
+        <p>Setelah nilai pajak tersedia, total bayar cukup dihitung dengan penjumlahan
+          <code>harga_awal + nilai_pajak</code>.</p>
+        <div class="example-box">
+          <h4>Untuk harga 100000</h4>
+          <p>Harga awal = 100000, pajak = 11000, total = 111000.</p>
+        </div>
+        <p>Jika program berjalan tetapi totalnya salah, itu bukan selalu SyntaxError. Bisa saja rumusnya memakai
+          operator yang salah. Ini disebut <strong>logic error</strong>.</p>
+
+      </section>
+      <section class="explanation" id="explanation-22">
+
+        <h3>Output yang Mudah Dibaca</h3>
+        <p>Setelah rumus benar, barulah output dirapikan. Garis pembatas dan label membantu pengguna membaca bagian
+          harga, pajak, dan total.</p>
+        <p>Format <code>{harga_awal:,}</code> menambahkan pemisah ribuan internasional. Jadi 100000 tampil sebagai
+          100,000.</p>
+        <div class="warning-box">
+          <h4>Prioritas</h4>
+          <p>Jangan menghabiskan waktu mempercantik nota jika rumusnya belum benar. Kebenaran perhitungan tetap lebih
+            penting.</p>
+        </div>
+
+      </section>
+      <section class="explanation" id="explanation-23">
+
+        <h3>Program Utama</h3>
+        <p>Starter code ini menggabungkan semua konsep utama: input numerik, tarif desimal, perkalian, pembulatan,
+          penjumlahan, dan output terformat.</p>
+        <div class="info-box">
+          <h4>Urutan yang perlu diperiksa</h4>
+          <ol>
+            <li>Input berhasil dikonversi ke angka.</li>
+            <li>Nilai pajak dihitung dengan perkalian.</li>
+            <li>Total bayar menggunakan penjumlahan.</li>
+            <li>Nota menampilkan tiga komponen utama.</li>
+          </ol>
+        </div>
+        <p>Setelah program berjalan untuk satu harga, jangan berhenti. Uji dengan harga lain untuk memastikan
+          perhitungannya benar-benar dinamis.</p>
+
+      </section>
+      <section class="explanation" id="explanation-24">
+
+        <h3>Testing dengan Hasil Ekspektasi</h3>
+        <p>Test case memberikan input dan hasil yang seharusnya muncul. Jika program menghasilkan angka yang sama,
+          berarti rumusnya kemungkinan benar untuk contoh tersebut.</p>
+        <div class="warning-box">
+          <h4>Dua hal yang dicek</h4>
+          <p><strong>Apakah program berjalan?</strong> dan <strong>apakah hasilnya benar?</strong> Program bisa berjalan
+            tanpa error, tetapi tetap salah secara logika.</p>
+        </div>
+        <p>Gunakan minimal dua test case agar program tidak hanya cocok dengan satu angka.</p>
+
+      </section>
+      <section class="explanation" id="explanation-25">
+
+        <h3>int() dan float() Sesuai Kebutuhan</h3>
+        <p>Untuk latihan utama, integer sudah cukup jika semua harga ditulis sebagai angka bulat. Namun modul juga
+          memperkenalkan <code>float()</code> supaya program bisa menerima angka desimal.</p>
+        <p>Ketika harga atau hasil operasi berbentuk float, bagian desimal dapat muncul di output. Karena itu, kamu
+          perlu memilih cara pembulatan atau format sesuai kebutuhan project.</p>
+        <div class="info-box">
+          <h4>Prinsip</h4>
+          <p>Pilih tipe data berdasarkan bentuk data yang ingin diterima dan operasi yang akan dilakukan.</p>
+        </div>
+
+      </section>
+      <section class="explanation" id="explanation-26">
+
+        <h3>Debugging Bukan Hanya Mencari Pesan Merah</h3>
+        <p>Ada dua jenis masalah yang penting di sesi ini. Pertama, error teknis yang membuat program berhenti. Kedua,
+          logic error: program berjalan, tetapi hasilnya salah.</p>
+        <div class="info-box">
+          <h4>Strategi cek</h4>
+          <ol>
+            <li>Pastikan input sudah numerik.</li>
+            <li>Cetak <code>nilai_pajak</code> sementara.</li>
+            <li>Bandingkan dengan hasil manual.</li>
+            <li>Periksa operator.</li>
+            <li>Jalankan ulang test case.</li>
+          </ol>
+        </div>
+        <p>Jangan langsung mengubah banyak baris sekaligus. Perbaiki satu dugaan, lalu test lagi.</p>
+
+      </section>
+      <section class="explanation" id="explanation-27">
+
+        <h3>Checklist Berhasil</h3>
+        <p>Output minimum adalah target utama. Kamu belum perlu menambah banyak fitur. Pastikan kalkulator dasar sudah
+          benar dan bisa diuji dengan beberapa input.</p>
+        <div class="warning-box">
+          <h4>Prioritas</h4>
+          <p>Program yang rapi tetapi salah hitung belum dianggap selesai. Fokus utama tetap pada kebenaran rumus dan
+            hasil testing.</p>
+        </div>
+        <p>Setelah semua checklist terpenuhi, simpan notebook agar bisa dilanjutkan atau dibandingkan pada sesi
+          berikutnya.</p>
+
+      </section>
+      <section class="explanation" id="explanation-28">
+
+        <h3>Extension Challenge</h3>
+        <p>Challenge yang aman untuk sesi ini adalah menambah data yang sudah kamu pahami, misalnya nama barang atau
+          jumlah barang. Keduanya bisa diterima melalui input dan ditampilkan kembali menggunakan f-string.</p>
+        <p>Modul memberi gambaran fitur diskon bersyarat sebagai preview. Namun logika <code>if</code> merupakan materi
+          percabangan, sehingga untuk sekarang cukup pahami idenya tanpa menjadikannya target wajib.</p>
+        <div class="info-box">
+          <h4>Jangan merusak program utama</h4>
+          <p>Simpan versi yang sudah berhasil sebelum menambah challenge. Dengan begitu, kamu punya versi aman jika
+            fitur tambahan menimbulkan error.</p>
+        </div>
+
+      </section>
+      <section class="explanation" id="explanation-29">
+
+        <h3>Refleksi Akhir</h3>
+        <p>Sesi ini menunjukkan bahwa otomatisasi bukan sekadar membuat komputer menghitung lebih cepat. Kita juga harus
+          memastikan rumus yang diberikan kepada komputer benar.</p>
+        <div class="example-box">
+          <h4>Yang sudah dipelajari</h4>
+          <ul>
+            <li>Menyusun alur Input → Process → Output.</li>
+            <li>Menggunakan operator <code>+</code>, <code>*</code>, dan <code>/</code>.</li>
+            <li>Mengubah persentase menjadi desimal.</li>
+            <li>Menggunakan <code>round()</code> dan memahami perbedaannya dengan <code>int()</code>.</li>
+            <li>Membangun nota pembayaran dari hasil perhitungan.</li>
+            <li>Membedakan error teknis dan logic error.</li>
+            <li>Melakukan testing dengan hasil ekspektasi.</li>
+          </ul>
+        </div>
+        <p>Di sesi berikutnya, kamu akan memakai operator yang lebih beragam untuk menghitung pendapatan dan potongan
+          pada simulasi gaji bersih.</p>
+
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const ACCESS_CODE = 'RGMDSHS26';
+    let currentSlide = 1;
+    let totalSlides = 0;
+    window.addEventListener('load', () => {
+      totalSlides = document.querySelectorAll('.slide').length;
+      document.getElementById('totalSlides').textContent = totalSlides;
+      setTimeout(() => document.querySelector('.access-popup').classList.add('show'), 50);
+      const input = document.getElementById('accessInput');
+      input.focus();
+      input.addEventListener('input', e => { e.target.value = e.target.value.toUpperCase() });
+      input.addEventListener('keydown', e => { if (e.key === 'Enter') checkAccessCode() });
+      initPyEditors();
+      updateSlide();
+    });
+    function checkAccessCode() { const input = document.getElementById('accessInput'), error = document.getElementById('accessError'); if (input.value.trim().toUpperCase() === ACCESS_CODE) { document.getElementById('accessPopup').style.display = 'none'; document.getElementById('mainContent').style.display = 'flex'; updateSlide(); } else { error.classList.add('show'); input.value = ''; input.focus(); } }
+    function changeSlide(direction) { const next = currentSlide + direction; if (next < 1 || next > totalSlides) return; currentSlide = next; updateSlide(); }
+    function updateSlide() { document.querySelectorAll('.slide').forEach(s => s.classList.remove('active')); document.querySelectorAll('.explanation').forEach(e => e.classList.remove('active')); const s = document.getElementById(`slide-${currentSlide}`); if (s) s.classList.add('active'); const e = document.getElementById(`explanation-${currentSlide}`); if (e) e.classList.add('active'); document.getElementById('currentSlide').textContent = currentSlide; document.getElementById('prevBtn').disabled = currentSlide === 1; document.getElementById('nextBtn').disabled = currentSlide === totalSlides; document.getElementById('progressFill').style.width = `${(currentSlide / totalSlides) * 100}%`; const sc = document.querySelector('.slide-content'); const ep = document.querySelector('.explanation-panel'); if (sc) sc.scrollTop = 0; if (ep) ep.scrollTop = 0; }
+    document.addEventListener('keydown', e => { if (document.getElementById('mainContent').style.display === 'none') return; if (e.key === 'ArrowRight') changeSlide(1); if (e.key === 'ArrowLeft') changeSlide(-1); });
+    function deviceCheck(btn) { btn.classList.toggle('correct'); }
+    function selectAny(btn) { const group = btn.parentElement; group.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); }
+    function quiz(btn, ok, feedbackId) { const group = btn.parentElement; group.querySelectorAll('.choice-btn').forEach(b => b.disabled = true); btn.classList.add(ok ? 'correct' : 'wrong'); const fb = document.getElementById(feedbackId); fb.textContent = ok ? 'Betul.' : 'Belum tepat. Baca kembali penjelasan di panel kanan.'; fb.style.color = ok ? '#176b35' : '#a42820'; }
+    function showLmsStep(step, btn) { document.querySelectorAll('.lms-map-wrap .hotspot,.lms-map-wrap .session-card-hotspot').forEach(b => b.classList.remove('active')); btn.classList.add('active'); const box = document.getElementById('lmsStepInfo'); if (step === 1) box.innerHTML = '<h4><span class="area-number">1</span>Menu Sesi Kelas</h4><p>Klik menu Sesi Kelas untuk melihat daftar materi.</p>'; else box.innerHTML = '<h4><span class="area-number">2</span>Kartu Sesi</h4><p>Pilih Sesi 3 dan pastikan materi Kalkulator Pajak terbuka.</p>'; }
+    function showCalcFlow(type) { const d = { input: ['Input', 'Pengguna memasukkan harga awal barang.'], pajak: ['Process 1', 'Program menghitung nilai pajak = harga_awal × 0.11.'], total: ['Process 2', 'Program menghitung total_bayar = harga_awal + nilai_pajak.'], output: ['Output', 'Program mencetak nota yang berisi harga awal, pajak simulasi, dan total.'] }; document.getElementById('calcFlowInfo').innerHTML = `<h4>${d[type][0]}</h4><p>${d[type][1]}</p>`; }
+    function showCalcVar(type, btn) { document.querySelectorAll('.memory-slot').forEach(b => b.classList.remove('active')); btn.classList.add('active'); const d = { harga: ['harga_awal', 'Data yang dimasukkan pengguna. Nilai ini menjadi dasar seluruh perhitungan.'], tarif: ['tarif_pajak', 'Nilai 0.11 mewakili 11% dalam bentuk desimal.'], nilai: ['nilai_pajak', 'Hasil dari harga_awal × tarif_pajak.'], total: ['total_bayar', 'Hasil akhir dari harga_awal + nilai_pajak.'] }; document.getElementById('calcVarInfo').innerHTML = `<h4><code>${d[type][0]}</code></h4><p>${d[type][1]}</p>`; }
+    function showOperator(type, btn) { document.querySelectorAll('.component-pill').forEach(b => b.classList.remove('active')); btn.classList.add('active'); const d = { plus: ['+ Penjumlahan', 'Dipakai untuk menjumlahkan harga awal dan nilai pajak.'], mul: ['* Perkalian', 'Dipakai untuk menghitung nilai pajak dari harga dan tarif.'], div: ['/ Pembagian', 'Dipakai untuk mengubah 11 menjadi 11/100 = 0.11.'] }; document.getElementById('operatorInfo').innerHTML = `<h4>${d[type][0]}</h4><p>${d[type][1]}</p>`; }
+    function convertPercent() { const v = Number(document.getElementById('percentInput').value); const result = document.getElementById('percentResult'); if (!isFinite(v)) { result.innerHTML = '<h4>Masukkan angka yang valid.</h4>'; return; } result.innerHTML = `<h4>Hasil</h4><p>${v}% = ${v} / 100 = <strong>${v / 100}</strong></p>`; }
+    function checkManualCalc() { const a = Number(String(document.getElementById('manualTax').value).replace(/[^0-9.-]/g, '')); const b = Number(String(document.getElementById('manualTotal').value).replace(/[^0-9.-]/g, '')); const fb = document.getElementById('manualFeedback'); const ok = a === 22000 && b === 222000; fb.textContent = ok ? 'Benar. Pajak = 22.000 dan total = 222.000.' : 'Belum tepat. Hitung 200000 × 0.11 terlebih dahulu, lalu tambahkan ke harga awal.'; fb.style.color = ok ? '#176b35' : '#a42820'; }
+    function markSafety(btn, ok) { btn.classList.remove('safe', 'risky'); btn.classList.add(ok ? 'safe' : 'risky'); }
+    function showDebug(id, btn) { document.querySelectorAll('.debug-tab').forEach(b => b.classList.remove('active')); btn.classList.add('active'); document.querySelectorAll('.debug-scenario').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+    function toggleCheck(item) { const cb = item.querySelector('input'); cb.checked = !cb.checked; item.classList.toggle('done', cb.checked); }
+    function loadTaxCase(btn, n) { const cases = { 1: { label: 'Test Case 1', value: '100000' }, 2: { label: 'Test Case 2', value: '250000' } }; const c = cases[n]; if (!c) return; const input = document.getElementById('py8_input'); input.value = c.value; document.querySelectorAll('#slide-24 .choice-btn').forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); const fb = document.getElementById('taxCaseFeedback'); fb.textContent = `${c.label} dimuat. Membuka Starter Code...`; fb.style.color = '#176b35'; currentSlide = 23; updateSlide(); setTimeout(() => { input.classList.add('preset-loaded'); input.focus(); setTimeout(() => input.classList.remove('preset-loaded'), 1400); }, 80); }
+    function initPyEditors() { document.querySelectorAll('.python-editor textarea[id^="py"]:not(.stdin-area)').forEach(area => { const out = document.getElementById(area.id + '_out'); if (out && !out.textContent.trim()) out.textContent = 'Output akan muncul di sini setelah Run code.'; }); }
+    function runPyEditor(id) { const code = document.getElementById(id).value; const stdinEl = document.getElementById(id + '_input'); const stdin = stdinEl ? stdinEl.value : ''; document.getElementById(id + '_out').textContent = runMiniPython(code, stdin); }
+    function wrap(value, type) { return { __value: value, __type: type || inferType(value) }; }
+    function rawVal(v) { return v && v.__value !== undefined ? v.__value : v; }
+    function inferType(v) { if (typeof v === 'number') return Number.isInteger(v) ? 'int' : 'float'; return 'str'; }
+    function valType(v) { return v && v.__type ? v.__type : inferType(rawVal(v)); }
+    function pyString(v) { return String(rawVal(v)); }
+    function formatNumber(n) { n = Number(rawVal(n)); if (!isFinite(n)) return String(n); return n.toLocaleString('en-US', { maximumFractionDigits: 2 }); }
+    function decodePyString(s) { return s.replace(/\\n/g, '\n').replace(/\\t/g, '\t').replace(/\\"/g, '"').replace(/\\'/g, "'"); }
+    function runMiniPython(code, stdinText) { let vars = {}, output = [], inputs = stdinText.split(/\r?\n/), inputIndex = 0, lines = code.split(/\r?\n/); function nextInput(prompt) { const val = inputIndex < inputs.length ? inputs[inputIndex++] : ''; output.push(prompt + val); return wrap(val, 'str'); } for (let i = 0; i < lines.length; i++) { let line = lines[i].trim(); if (!line || line.startsWith('#')) continue; const assign = line.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+)$/); if (assign) { const p = parseExpr(assign[2].trim(), vars, i + 1, nextInput); if (p.error) return p.error; vars[assign[1]] = p.value; continue; } const pr = line.match(/^print\((.*)\)$/); if (pr) { const p = parseExpr(pr[1].trim(), vars, i + 1, nextInput); if (p.error) return p.error; output.push(pyString(p.value)); continue; } return `SyntaxError on line ${i + 1}: simulator mendukung assignment, input(), int(), float(), round(), type(), operator + - * /, dan print().`; } return output.length ? output.join('\n') : '(Tidak ada output. Coba gunakan print().)'; }
+    function parseExpr(text, vars, lineNo, nextInput) {
+      text = text.trim(); if (text.startsWith('(') && text.endsWith(')') && matchingOuterParens(text)) return parseExpr(text.slice(1, -1), vars, lineNo, nextInput);
+      let idx = findTopLevelOperator(text, ['+', '-']); if (idx) { let a = parseExpr(text.slice(0, idx.index), vars, lineNo, nextInput); if (a.error) return a; let b = parseExpr(text.slice(idx.index + 1), vars, lineNo, nextInput); if (b.error) return b; return numericOp(a.value, b.value, idx.op, lineNo); }
+      idx = findTopLevelOperator(text, ['*', '/']); if (idx) { let a = parseExpr(text.slice(0, idx.index), vars, lineNo, nextInput); if (a.error) return a; let b = parseExpr(text.slice(idx.index + 1), vars, lineNo, nextInput); if (b.error) return b; return numericOp(a.value, b.value, idx.op, lineNo); }
+      let m; if ((m = text.match(/^input\((.*)\)$/))) { const p = parseExpr(m[1].trim() || '""', vars, lineNo, nextInput); if (p.error) return p; return { value: nextInput(pyString(p.value)) }; }
+      if ((m = text.match(/^int\((.*)\)$/))) { const p = parseExpr(m[1].trim(), vars, lineNo, nextInput); if (p.error) return p; const s = pyString(p.value).trim(); if (!/^[+-]?\d+(\.\d+)?$/.test(s)) return { error: `ValueError on line ${lineNo}: invalid literal for int(): '${s}'` }; return { value: wrap(parseInt(Number(s), 10), 'int') }; }
+      if ((m = text.match(/^float\((.*)\)$/))) { const p = parseExpr(m[1].trim(), vars, lineNo, nextInput); if (p.error) return p; const s = pyString(p.value).trim(); if (!/^[+-]?(\d+(\.\d*)?|\.\d+)$/.test(s)) return { error: `ValueError on line ${lineNo}: could not convert string to float: '${s}'` }; return { value: wrap(parseFloat(s), 'float') }; }
+      if ((m = text.match(/^round\((.*)\)$/))) { const p = parseExpr(m[1].trim(), vars, lineNo, nextInput); if (p.error) return p; const n = Number(rawVal(p.value)); if (!isFinite(n)) return { error: `TypeError on line ${lineNo}: round() membutuhkan angka.` }; return { value: wrap(Math.round(n), 'int') }; }
+      if ((m = text.match(/^type\((.*)\)$/))) { const p = parseExpr(m[1].trim(), vars, lineNo, nextInput); if (p.error) return p; return { value: wrap(`<class '${valType(p.value)}'>`, 'str') }; }
+      if ((text.startsWith('f"') && text.endsWith('"')) || (text.startsWith("f'") && text.endsWith("'"))) { let inner = decodePyString(text.slice(2, -1)); let err = null; let res = inner.replace(/\{([^{}]+)\}/g, (full, expr) => { let ex = expr.trim(), fmt = ''; const c = findTopLevelChar(ex, ':'); if (c > -1) { fmt = ex.slice(c + 1).trim(); ex = ex.slice(0, c).trim(); } const p = parseExpr(ex, vars, lineNo, nextInput); if (p.error) { err = p.error; return full; } const v = rawVal(p.value); if (fmt === ',') return formatNumber(v); return String(v); }); if (err) return { error: err }; return { value: wrap(res, 'str') }; }
+      if ((text.startsWith('"') && text.endsWith('"')) || (text.startsWith("'") && text.endsWith("'"))) return { value: wrap(decodePyString(text.slice(1, -1)), 'str') };
+      if (/^[+-]?\d+$/.test(text)) return { value: wrap(parseInt(text, 10), 'int') };
+      if (/^[+-]?(\d+\.\d*|\.\d+)$/.test(text)) return { value: wrap(parseFloat(text), 'float') };
+      if (Object.prototype.hasOwnProperty.call(vars, text)) return { value: vars[text] };
+      if (text.includes('{') && text.includes('}')) return { error: `f-string error on line ${lineNo}: tambahkan huruf f sebelum tanda kutip.` };
+      return { error: `NameError on line ${lineNo}: name '${text}' is not defined atau teks belum diberi tanda kutip.` };
+    }
+    function numericOp(a, b, op, lineNo) { const x = Number(rawVal(a)), y = Number(rawVal(b)); if (!isFinite(x) || !isFinite(y)) return { error: `TypeError on line ${lineNo}: operator ${op} membutuhkan data angka.` }; if (op === '/' && y === 0) return { error: `ZeroDivisionError on line ${lineNo}: division by zero.` }; let r; if (op === '+') r = x + y; else if (op === '-') r = x - y; else if (op === '*') r = x * y; else r = x / y; return { value: wrap(r, Number.isInteger(r) ? 'int' : 'float') }; }
+    function findTopLevelOperator(text, ops) { let quote = null, depth = 0; for (let i = text.length - 1; i >= 0; i--) { const c = text[i], prev = text[i - 1]; if (quote) { if (c === quote && prev !== '\\') quote = null; continue; } if (c === '"' || c === "'") { quote = c; continue; } if (c === ')') depth++; else if (c === '(') depth--; else if (depth === 0 && ops.includes(c)) { if ((c === '+' || c === '-') && (i === 0 || '+-*/('.includes(text[i - 1]))) continue; return { index: i, op: c }; } } return null; }
+    function findTopLevelChar(text, char) { let quote = null, depth = 0; for (let i = 0; i < text.length; i++) { const c = text[i], prev = text[i - 1]; if (quote) { if (c === quote && prev !== '\\') quote = null; continue; } if (c === '"' || c === "'") { quote = c; continue; } if (c === '(') depth++; else if (c === ')') depth--; else if (c === char && depth === 0) return i; } return -1; }
+    function matchingOuterParens(text) { let depth = 0, quote = null; for (let i = 0; i < text.length; i++) { const c = text[i], prev = text[i - 1]; if (quote) { if (c === quote && prev !== '\\') quote = null; continue; } if (c === '"' || c === "'") { quote = c; continue; } if (c === '(') depth++; else if (c === ')') { depth--; if (depth === 0 && i < text.length - 1) return false; } } return depth === 0; }
+  </script>
+
+</body>
+
+</html>
