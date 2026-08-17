@@ -1,0 +1,1525 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>UOB My Digital Space — High School Sesi 5</title><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✅</text></svg>"><style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --blue: #0056b3;
+      --light-blue: #4a9eff;
+      --uob-red: #e60012;
+      --uob-red-soft: #ff5a6b;
+      --uob-blue-deep: #0056b3;
+      --uob-blue-soft: #5aa7ff;
+      --teal: #11a9b7;
+      --bg: #f5f6f8;
+      --panel: #fff;
+      --text: #2c3e50;
+      --muted: #6c757d;
+      --line: #e3e8ef;
+      --green: #2e9d57;
+      --orange: #f39c12;
+      --red: #e74c3c;
+      --purple: #8e44ad;
+      --blue-soft: #eef7ff;
+      --green-soft: #effaf2
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      height: 100vh;
+      overflow: hidden;
+      color: var(--text)
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #f5d7da, #d9e9ff);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, .08)
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--uob-red) 0%, var(--uob-red-soft) 28%, var(--uob-blue-deep) 72%, var(--uob-blue-soft) 100%);
+      transition: width .3s ease;
+      box-shadow: 0 0 8px rgba(0, 86, 179, .18)
+    }
+
+    .main-container {
+      display: flex;
+      height: 100vh
+    }
+
+    .slides-panel {
+      width: 50%;
+      background: #f8f9fa;
+      border-right: 2px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      position: relative
+    }
+
+    .explanation-panel {
+      width: 50%;
+      background: #fff;
+      overflow-y: auto;
+      padding: 32px
+    }
+
+    .slide-header {
+      background: #fff;
+      padding: 17px 20px 15px;
+      border-bottom: 2px solid var(--line);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+      position: relative
+    }
+
+    .slide-header::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(var(--uob-red), var(--light-blue))
+    }
+
+    .slide-header h1 {
+      font-size: 1.28rem;
+      color: var(--text);
+      margin-bottom: 3px
+    }
+
+    .slide-header p {
+      font-size: .9rem;
+      color: var(--muted)
+    }
+
+    .header-badge {
+      position: absolute;
+      right: 18px;
+      top: 17px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      border: 1px solid #cce7ff;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-weight: 700;
+      font-size: .76rem
+    }
+
+    .slide-content {
+      flex: 1;
+      padding: 24px 28px 94px;
+      overflow-y: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 0
+    }
+
+    .slide,
+    .explanation {
+      display: none;
+      opacity: 0;
+      transition: opacity .25s ease
+    }
+
+    .slide.active,
+    .explanation.active {
+      display: block;
+      opacity: 1
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 820px
+    }
+
+    .explanation {
+      max-width: 760px;
+      margin: 0 auto
+    }
+
+    .slide h2 {
+      font-size: 2.25rem;
+      color: var(--blue);
+      margin-bottom: 10px;
+      line-height: 1.15
+    }
+
+    .slide h3 {
+      font-size: 1.78rem;
+      color: var(--blue);
+      margin-bottom: 16px;
+      line-height: 1.2
+    }
+
+    .slide h4,
+    .explanation h4 {
+      font-size: 1.05rem;
+      margin-bottom: 9px;
+      color: var(--text)
+    }
+
+    .slide p,
+    .explanation p {
+      font-size: 1rem;
+      line-height: 1.58;
+      color: #495057;
+      margin-bottom: 14px
+    }
+
+    .explanation h3 {
+      font-size: 1.65rem;
+      margin-bottom: 16px;
+      color: var(--text);
+      line-height: 1.25
+    }
+
+    .slide ul,
+    .slide ol,
+    .explanation ul,
+    .explanation ol {
+      margin-left: 22px;
+      margin-bottom: 10px
+    }
+
+    .slide li,
+    .explanation li {
+      margin-bottom: 7px;
+      line-height: 1.5
+    }
+
+    code {
+      background: #eef3f8;
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #334155
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--uob-red);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 8px
+    }
+
+    .lead {
+      font-size: 1.08rem !important
+    }
+
+    .mini-note {
+      font-size: .9rem !important;
+      color: var(--muted) !important;
+      margin-top: 10px
+    }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      gap: 13px;
+      margin: 16px 0
+    }
+
+    .visual-card,
+    .metric-box,
+    .info-box,
+    .example-box,
+    .warning-box,
+    .interactive-box,
+    .code-card,
+    .quiz-card {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05)
+    }
+
+    .visual-card {
+      padding: 15px
+    }
+
+    .visual-card p {
+      margin-bottom: 0;
+      font-size: .92rem;
+      line-height: 1.42
+    }
+
+    .visual-icon {
+      font-size: 1.9rem;
+      margin-bottom: 8px
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 16px
+    }
+
+    .metric-box {
+      padding: 16px 12px;
+      text-align: center
+    }
+
+    .metric-box strong {
+      display: block;
+      font-size: 1.55rem;
+      color: var(--blue);
+      margin-bottom: 7px
+    }
+
+    .metric-box span {
+      font-size: .9rem;
+      line-height: 1.35;
+      color: #495057;
+      display: block
+    }
+
+    .info-box,
+    .example-box,
+    .warning-box,
+    .interactive-box {
+      padding: 17px;
+      margin: 16px 0
+    }
+
+    .info-box {
+      border-left: 5px solid var(--light-blue)
+    }
+
+    .example-box {
+      border-left: 5px solid var(--green);
+      background: #f8fff8
+    }
+
+    .warning-box {
+      border-left: 5px solid var(--orange);
+      background: #fffaf0
+    }
+
+    .interactive-box {
+      border-left: 5px solid var(--purple);
+      background: #fcf8ff
+    }
+
+    .navigation {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 2px solid var(--line);
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, .04)
+    }
+
+    .nav-btn {
+      background: var(--light-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: .94rem;
+      font-weight: 700;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      transition: .2s ease
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      background: #357abd
+    }
+
+    .nav-btn:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none
+    }
+
+    .slide-indicator {
+      font-size: .9rem;
+      color: var(--muted);
+      font-weight: 700
+    }
+
+    .floating-element {
+      position: absolute;
+      opacity: .07;
+      pointer-events: none;
+      font-size: 2rem;
+      animation: float 6s ease-in-out infinite
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0)
+      }
+
+      33% {
+        transform: translateY(-12px) rotate(4deg)
+      }
+
+      66% {
+        transform: translateY(7px) rotate(-3deg)
+      }
+    }
+
+    .access-popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .8);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center
+    }
+
+    .access-popup {
+      background: white;
+      border: 3px solid var(--light-blue);
+      border-radius: 15px;
+      padding: 38px;
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .3);
+      transform: scale(.8);
+      opacity: 0;
+      transition: all .3s ease
+    }
+
+    .access-popup.show {
+      transform: scale(1);
+      opacity: 1
+    }
+
+    .access-popup h2 {
+      color: var(--text);
+      margin-bottom: 13px;
+      font-size: 1.8rem
+    }
+
+    .access-popup p {
+      color: #666;
+      margin-bottom: 22px;
+      line-height: 1.55
+    }
+
+    .access-input {
+      width: 100%;
+      padding: 14px;
+      font-size: 1.15rem;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      text-align: center;
+      letter-spacing: 2px;
+      font-weight: bold;
+      text-transform: uppercase
+    }
+
+    .access-input:focus {
+      outline: none;
+      border-color: var(--light-blue);
+      box-shadow: 0 0 0 3px rgba(74, 158, 255, .12)
+    }
+
+    .access-submit,
+    .primary-btn,
+    .secondary-btn {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .access-submit,
+    .primary-btn {
+      background: var(--blue);
+      color: white
+    }
+
+    .secondary-btn {
+      background: #e9ecef;
+      color: var(--text)
+    }
+
+    .access-submit {
+      padding: 13px 28px;
+      font-size: 1.05rem
+    }
+
+    .access-error {
+      color: var(--red);
+      margin-top: 13px;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity .2s
+    }
+
+    .access-error.show {
+      opacity: 1
+    }
+
+    .access-hint {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 5px;
+      padding: 9px;
+      margin-top: 18px;
+      font-size: .88rem;
+      color: #856404
+    }
+
+    .scratch-map-wrap {
+      position: relative;
+      width: 100%;
+      margin: 12px auto;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .08)
+    }
+
+    .scratch-map-wrap img {
+      width: 100%;
+      display: block
+    }
+
+    .hotspot {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      background: var(--uob-red);
+      color: white;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35);
+      display: grid;
+      place-items: center;
+      transform: translate(-50%, -50%);
+      transition: transform .16s, background .16s;
+      z-index: 3
+    }
+
+    .hotspot:hover,
+    .hotspot.active {
+      transform: translate(-50%, -50%) scale(1.16);
+      background: var(--blue)
+    }
+
+    .scratch-caption {
+      text-align: center;
+      font-size: .85rem;
+      color: var(--muted);
+      margin-top: 8px
+    }
+
+    .area-live-card {
+      min-height: 110px;
+      border: 2px solid #cfe7fb;
+      background: var(--blue-soft);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 14px
+    }
+
+    .area-number {
+      display: inline-grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: white;
+      font-weight: 900;
+      margin-right: 7px
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .choice-btn {
+      border: 2px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 11px 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: .18s;
+      text-align: left
+    }
+
+    .choice-btn:hover {
+      border-color: var(--light-blue);
+      transform: translateY(-1px)
+    }
+
+    .choice-btn.correct,
+    .choice-btn.selected {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: #176b35
+    }
+
+    .choice-btn.wrong {
+      border-color: var(--red);
+      background: #fff1f0;
+      color: #a42820
+    }
+
+    .feedback-line {
+      min-height: 28px;
+      font-weight: 700;
+      margin-top: 8px
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .form-grid label {
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--text)
+    }
+
+    .form-grid input,
+    .form-grid textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      margin-top: 5px
+    }
+
+    .form-grid input:focus,
+    .form-grid textarea:focus {
+      outline: none;
+      border-color: var(--light-blue)
+    }
+
+    .lms-map-wrap,
+    .test-map-wrap {
+      position: relative
+    }
+
+    .session-card-hotspot {
+      position: absolute;
+      left: 19.1%;
+      top: 43%;
+      width: 25.5%;
+      height: 51%;
+      padding: 0;
+      border: 3px dashed transparent;
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+      transition: .2s ease
+    }
+
+    .session-card-hotspot span {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: #fff;
+      font-size: .9rem;
+      font-weight: 900;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35)
+    }
+
+    .session-card-hotspot:hover,
+    .session-card-hotspot.active {
+      border-color: var(--uob-red);
+      background: rgba(230, 0, 18, .08)
+    }
+
+    .session-card-hotspot:hover span,
+    .session-card-hotspot.active span {
+      background: var(--blue);
+      transform: scale(1.1)
+    }
+
+    .test-card-hotspot {
+      position: absolute;
+      left: 18%;
+      right: 3%;
+      bottom: 5%;
+      height: 20%;
+      padding: 0;
+      border: 3px dashed transparent;
+      border-radius: 14px;
+      background: transparent;
+      cursor: pointer;
+      transition: .2s ease
+    }
+
+    .test-number {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35)
+    }
+
+    .test-instruction {
+      position: absolute;
+      left: 50%;
+      bottom: 12px;
+      transform: translateX(-50%);
+      width: 88%;
+      padding: 7px 9px;
+      border-radius: 8px;
+      background: rgba(0, 86, 179, .94);
+      color: #fff;
+      font-size: .76rem;
+      line-height: 1.3;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, .25)
+    }
+
+    .test-card-hotspot:hover,
+    .test-card-hotspot.active {
+      border-color: var(--uob-red);
+      background: rgba(230, 0, 18, .08)
+    }
+
+    .test-card-hotspot:hover .test-instruction,
+    .test-card-hotspot.active .test-instruction {
+      background: var(--uob-red)
+    }
+
+    .flow-line {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 20px 0
+    }
+
+    .flow-box {
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--blue);
+      color: #fff;
+      text-align: center;
+      font-weight: 900;
+      cursor: pointer
+    }
+
+    .flow-arrow {
+      color: var(--uob-red);
+      font-size: 1.6rem;
+      font-weight: 900
+    }
+
+    .comparison-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    .compare-card {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      background: #fff
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 2px
+    }
+
+    .pill.blue {
+      background: var(--blue)
+    }
+
+    .pill.green {
+      background: var(--green)
+    }
+
+    .pill.purple {
+      background: var(--purple)
+    }
+
+    .colab-mock,
+    .colab-hotmap {
+      border: 2px solid #dce6ef;
+      border-radius: 14px;
+      background: #1e1e1e;
+      color: #e5e7eb;
+      overflow: hidden;
+      margin: 16px 0;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .12);
+      position: relative
+    }
+
+    .colab-title {
+      background: #111827;
+      padding: 10px 14px;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      font-size: .9rem
+    }
+
+    .colab-title span {
+      font-size: .8rem;
+      color: #9ca3af
+    }
+
+    .colab-cell {
+      margin: 12px;
+      border: 1px solid #374151;
+      border-radius: 10px;
+      background: #0f172a;
+      min-height: 72px;
+      position: relative;
+      padding: 14px 14px 14px 48px
+    }
+
+    .run-dot {
+      position: absolute;
+      left: 12px;
+      top: 15px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 0;
+      background: #16a34a;
+      color: white;
+      display: grid;
+      place-items: center
+    }
+
+    .colab-cell pre,
+    .code-card pre,
+    .receipt-preview pre {
+      white-space: pre-wrap;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .9rem;
+      line-height: 1.45
+    }
+
+    .colab-output {
+      margin: 0 12px 12px;
+      padding: 12px;
+      background: #fff;
+      color: #111827;
+      border-radius: 10px;
+      min-height: 48px;
+      position: relative
+    }
+
+    .python-editor {
+      border-radius: 18px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #152744 0%, #132742 100%);
+      box-shadow: 0 10px 24px rgba(8, 22, 46, .18);
+      margin: 16px 0;
+      border: 1px solid #274468
+    }
+
+    .editor-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #182c49;
+      color: #fff;
+      padding: 13px 18px 11px;
+      font-weight: 900
+    }
+
+    .editor-label {
+      font-size: 1.05rem;
+      letter-spacing: .05em;
+      color: #dbeafe
+    }
+
+    .editor-live {
+      font-size: .95rem;
+      letter-spacing: .04em;
+      color: #69e3a7
+    }
+
+    .python-editor textarea {
+      width: 100%;
+      min-height: 250px;
+      resize: vertical;
+      background: #0f2240;
+      color: #fff;
+      border: 0;
+      padding: 18px 18px 16px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 1rem;
+      line-height: 1.65;
+      outline: none
+    }
+
+    .python-editor textarea:focus {
+      box-shadow: inset 0 0 0 2px rgba(147, 197, 253, .22)
+    }
+
+    .editor-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      background: #182c49;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      border-bottom: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .run-code-btn {
+      background: #22b573;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-weight: 900;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, .12);
+      transition: .18s ease
+    }
+
+    .run-code-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03)
+    }
+
+    .editor-toolbar-note {
+      color: #dbeafe;
+      font-size: .98rem;
+      line-height: 1.4
+    }
+
+    .editor-output-panel {
+      padding: 0 16px 16px;
+      background: #182c49
+    }
+
+    .editor-output-label {
+      color: #93c5fd;
+      font-size: 1rem;
+      letter-spacing: .08em;
+      font-weight: 900;
+      padding: 14px 12px 8px
+    }
+
+    .output-box {
+      background: #041126;
+      color: #fff;
+      min-height: 110px;
+      white-space: pre-wrap;
+      font-family: Consolas, Monaco, monospace;
+      padding: 16px;
+      border: 1px solid #2b4f7b;
+      border-radius: 12px;
+      line-height: 1.6
+    }
+
+    .code-card {
+      padding: 14px;
+      background: #111827;
+      color: #e5e7eb;
+      overflow: auto
+    }
+
+    .receipt-preview {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 14px 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05)
+    }
+
+    .receipt-preview pre {
+      color: #111827
+    }
+
+    .component-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0
+    }
+
+    .component-pill {
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      padding: 8px 11px;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .component-pill.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    .checklist {
+      list-style: none;
+      margin-left: 0 !important;
+      display: grid;
+      gap: 8px
+    }
+
+    .check-item {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      cursor: pointer
+    }
+
+    .check-item input {
+      margin-top: 3px;
+      transform: scale(1.2)
+    }
+
+    .check-item.done {
+      background: var(--green-soft);
+      border-color: #9cd9af;
+      text-decoration: line-through;
+      color: #3e6b4c
+    }
+
+    .debug-scenario {
+      display: none
+    }
+
+    .debug-scenario.active {
+      display: block
+    }
+
+    .debug-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px
+    }
+
+    .debug-tab {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 7px 11px;
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    .debug-tab.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    @media(max-width:960px) {
+      body {
+        overflow: auto;
+        height: auto
+      }
+
+      .main-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh
+      }
+
+      .slides-panel,
+      .explanation-panel {
+        width: 100%;
+        height: auto;
+        min-height: 50vh
+      }
+
+      .slides-panel {
+        min-height: 100vh
+      }
+
+      .slide-content {
+        padding: 20px 20px 92px
+      }
+
+      .explanation-panel {
+        padding: 24px
+      }
+
+      .header-badge {
+        display: none
+      }
+
+      .flow-line,
+      .comparison-table {
+        grid-template-columns: 1fr
+      }
+
+      .flow-arrow {
+        display: none
+      }
+    }
+
+    .stdin-panel {
+      padding: 0 16px 14px;
+      background: #182c49;
+      border-top: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .stdin-label {
+      color: #93c5fd;
+      font-size: .86rem;
+      letter-spacing: .08em;
+      font-weight: 900;
+      padding: 10px 2px 6px;
+      text-transform: uppercase
+    }
+
+    .stdin-area {
+      width: 100%;
+      min-height: 74px;
+      resize: vertical;
+      border: 1px solid #2b4f7b;
+      border-radius: 10px;
+      background: #0b1a33;
+      color: #e5f0ff;
+      padding: 10px 12px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .92rem;
+      line-height: 1.45;
+      outline: none
+    }
+
+    .stdin-area:focus {
+      box-shadow: inset 0 0 0 2px rgba(147, 197, 253, .22)
+    }
+
+    .stdin-area.preset-loaded {
+      border-color: #69e3a7;
+      box-shadow: 0 0 0 3px rgba(105, 227, 167, .22), inset 0 0 0 1px rgba(105, 227, 167, .35)
+    }
+
+    .type-bank {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .type-card {
+      border: 2px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: 800
+    }
+
+    .type-card.active {
+      background: var(--blue-soft);
+      border-color: var(--blue)
+    }
+
+    .mini-terminal {
+      background: #041126;
+      color: #fff;
+      border-radius: 12px;
+      border: 1px solid #2b4f7b;
+      padding: 16px;
+      margin: 14px 0;
+      font-family: Consolas, Monaco, monospace;
+      white-space: pre-wrap;
+      line-height: 1.55;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .08)
+    }
+
+    .safe-card {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 13px;
+      cursor: pointer;
+      font-weight: 800
+    }
+
+    .safe-card.safe {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: #176b35
+    }
+
+    .safe-card.risky {
+      border-color: var(--red);
+      background: #fff1f0;
+      color: #a42820
+    }
+
+    .memory-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    .memory-slot {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      cursor: pointer
+    }
+
+    .memory-slot.active {
+      border-color: var(--blue);
+      background: var(--blue-soft)
+    }
+
+    .memory-slot code {
+      display: block;
+      margin-top: 6px;
+      color: var(--blue);
+      font-weight: 900
+    }
+
+    .thin-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 14px 0
+    }
+
+    .thin-table th {
+      background: var(--blue);
+      color: #fff;
+      text-align: left;
+      padding: 10px
+    }
+
+    .thin-table td {
+      border-top: 1px solid var(--line);
+      padding: 10px;
+      vertical-align: top
+    }
+
+    .thin-table code {
+      background: #eef3f8;
+      padding: 2px 6px;
+      border-radius: 5px
+    }
+  
+    details.learn-accordion {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      margin: 10px 0;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+    details.learn-accordion summary {
+      cursor: pointer;
+      padding: 12px 14px;
+      font-weight: 900;
+      color: var(--blue);
+      background: var(--blue-soft);
+      list-style: none;
+    }
+    details.learn-accordion summary::-webkit-details-marker {display:none;}
+    details.learn-accordion .accordion-body {padding: 14px 16px;}
+    .decision-gate {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 16px 0;
+    }
+    .gate-node {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      font-weight: 900;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
+    .gate-diamond {
+      width: 112px;
+      height: 112px;
+      transform: rotate(45deg);
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--blue), var(--light-blue));
+      color: white;
+      border-radius: 16px;
+      font-weight: 900;
+      text-align: center;
+      box-shadow: 0 7px 16px rgba(0,86,179,.18);
+    }
+    .gate-diamond span {transform: rotate(-45deg); display:block; font-size:.85rem; line-height:1.25;}
+    .branch-label {font-size:.82rem; color:var(--muted); font-weight:800; margin-top:6px;}
+    .trace-card {display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin:12px 0;}
+    .trace-step {background:#fff; border:2px solid var(--line); border-radius:12px; padding:12px; text-align:center;}
+    .trace-step strong {display:block; color:var(--blue); margin-bottom:5px;}
+    .operator-board {display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin:14px 0;}
+    .operator-btn {background:#fff; border:2px solid var(--line); border-radius:12px; padding:12px; cursor:pointer; font-weight:900; text-align:center;}
+    .operator-btn:hover,.operator-btn.active {border-color:var(--blue); background:var(--blue-soft); color:var(--blue); transform:translateY(-1px);}
+    .true-false {display:flex; gap:8px; flex-wrap:wrap; margin:10px 0;}
+    .true-pill,.false-pill {padding:7px 11px; border-radius:999px; color:white; font-weight:900;}
+    .true-pill {background:var(--green);} .false-pill{background:var(--red);}
+    .compact-code {max-height: 260px; overflow:auto;}
+    @media(max-width:960px){.decision-gate{grid-template-columns:1fr}.gate-diamond{margin:0 auto}.flow-arrow{display:none}}
+
+  </style></head>
+<body>
+<div class="access-popup-overlay" id="accessPopup"><div class="access-popup"><h2>🔐 Kode Akses</h2><p>Masukkan kode akses High School untuk membuka materi Sesi 5.</p><input type="text" class="access-input" id="accessInput" placeholder="MASUKKAN KODE" maxlength="20" autocomplete="off" /><button class="access-submit" onclick="checkAccessCode()">Masuk</button><div class="access-error" id="accessError">Kode akses belum tepat. Coba lagi.</div><div class="access-hint">Kode akses diberikan oleh guru.</div></div></div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="main-container" id="mainContent" style="display:none;"><div class="slides-panel"><div class="slide-header"><h1>UOB My Digital Space — High School</h1><p>Sesi 5 · Validator Usia</p><span class="header-badge">Python · High School</span></div><div class="slide-content"><div class="floating-element" style="top:12%;left:7%;">🐍</div><div class="floating-element" style="top:18%;right:10%;">🔀</div><div class="floating-element" style="bottom:25%;left:14%;">✅</div><div class="floating-element" style="bottom:15%;right:16%;">🧪</div><section class="slide active" id="slide-1"><span class="eyebrow">Sesi 5</span><h2>Validator Usia</h2><p class="lead">Hari ini kita mulai masuk ke dunia <strong>percabangan logika</strong>: program tidak hanya berjalan lurus, tapi bisa memilih jalur berdasarkan kondisi.</p><div class="metrics"><div class="metric-box"><strong>if</strong><span>jalur jika kondisi benar</span></div><div class="metric-box"><strong>else</strong><span>jalur jika kondisi salah</span></div><div class="metric-box"><strong>≥</strong><span>operator pembanding</span></div><div class="metric-box"><strong>🧪</strong><span>test case batas usia</span></div></div><div class="example-box"><h4>Target akhir</h4><p>Kamu membuat program Python yang meminta input usia, mengecek batas simulasi, lalu menampilkan status akses yang sesuai.</p></div></section><section class="slide" id="slide-2"><span class="eyebrow">Rencana Belajar</span><h3>Misi Belajar Hari Ini</h3><div class="visual-grid"><div class="visual-card"><div class="visual-icon">🧭</div><h4>1. Pahami kondisi</h4><p>Mengenali kondisi yang hasilnya True atau False.</p></div><div class="visual-card"><div class="visual-icon">🔀</div><h4>2. Pakai if-else</h4><p>Membuat dua jalur output dalam program.</p></div><div class="visual-card"><div class="visual-icon">⚖️</div><h4>3. Bandingkan nilai</h4><p>Menggunakan operator <code>&gt;=</code>, <code>&lt;</code>, dan <code>==</code>.</p></div><div class="visual-card"><div class="visual-icon">🧪</div><h4>4. Uji batas</h4><p>Mencoba input 16, 17, dan 18.</p></div></div><div class="interactive-box"><h4>Cek awal</h4><p>Menurutmu, bagian mana yang paling rawan bikin validator salah?</p><div class="choice-grid"><button class="choice-btn" onclick="selectAny(this)">Salah operator</button><button class="choice-btn" onclick="selectAny(this)">Lupa titik dua</button><button class="choice-btn" onclick="selectAny(this)">Indentasi berantakan</button><button class="choice-btn" onclick="selectAny(this)">Semua bisa terjadi</button></div></div></section><section class="slide" id="slide-3"><h3>Siapkan Workspace</h3><p class="lead">Pastikan lingkungan coding siap sebelum masuk ke project.</p><div class="choice-grid"><button class="choice-btn" onclick="deviceCheck(this)">Laptop/komputer siap</button><button class="choice-btn" onclick="deviceCheck(this)">Internet stabil</button><button class="choice-btn" onclick="deviceCheck(this)">Google Colab/editor terbuka</button><button class="choice-btn" onclick="deviceCheck(this)">Notebook diberi nama <strong>Sesi5_Validator_Usia</strong></button><button class="choice-btn" onclick="deviceCheck(this)">Input memakai data dummy</button><button class="choice-btn" onclick="deviceCheck(this)">Siap mengetes 16, 17, 18</button></div><div class="info-box"><strong>Alamat LMS:</strong><br><a href="https://app.uobmydigitalspace.com/" target="_blank" rel="noopener noreferrer">https://app.uobmydigitalspace.com/</a></div><p class="mini-note">Klik kotak persiapan yang sudah kamu lakukan.</p></section><section class="slide" id="slide-4"><h3>Dari Kode Lurus ke Kode Bercabang</h3><p class="lead">Pada sesi sebelumnya, kode berjalan lurus. Sekarang, kode bisa memilih jalur.</p><div class="comparison-table"><div class="compare-card"><h4>Kode lurus</h4><div class="flow-line" style="grid-template-columns:1fr auto 1fr;"><div class="flow-box">Input</div><div class="flow-arrow">→</div><div class="flow-box">Output</div></div><p>Semua baris dijalankan berurutan.</p></div><div class="compare-card"><h4>Kode bercabang</h4><div class="decision-gate" style="grid-template-columns:1fr;"><div class="gate-diamond"><span>Kondisi?</span></div></div><p>Jalur output tergantung hasil kondisi.</p></div></div><div class="interactive-box"><h4>Contoh</h4><p>Kalau usia memenuhi batas, tampilkan akses diberikan. Kalau belum, tampilkan pesan edukatif.</p></div></section><section class="slide" id="slide-5"><h3>Kondisi: True atau False</h3><p class="lead">Kondisi adalah pertanyaan yang jawabannya hanya dua: benar atau salah.</p><div class="true-false"><span class="true-pill">True</span><span class="false-pill">False</span></div><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py1" spellcheck="false">usia_user = 16
+batas_usia = 17
+
+# Cek apakah usia_user memenuhi batas
+print(usia_user >= batas_usia)
+print(usia_user < batas_usia)</textarea><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py1')">Run code</button><span class="editor-toolbar-note">Ubah usia_user menjadi 17 atau 18, lalu jalankan lagi.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py1_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-6"><h3>Aktivitas Mini: Kalau–Maka</h3><p class="lead">Klik pasangan yang menurutmu paling masuk akal.</p><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'km1')">Kalau saldo cukup → pembelian lanjut</button><button class="choice-btn" onclick="quiz(this,false,'km1')">Kalau saldo cukup → aplikasi menolak</button></div><div class="feedback-line" id="km1"></div><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'km2')">Kalau PIN salah → akses dibuka</button><button class="choice-btn" onclick="quiz(this,true,'km2')">Kalau PIN salah → akses ditolak</button></div><div class="feedback-line" id="km2"></div><div class="example-box"><h4>Pola berpikir</h4><p>Kalau kondisi terpenuhi, lakukan aksi A. Kalau tidak terpenuhi, lakukan aksi B.</p></div></section><section class="slide" id="slide-7"><h3>Flowchart if-else</h3><p class="lead">Flowchart membantu kita melihat jalur keputusan sebelum menulis kode.</p><div class="decision-gate"><div class="gate-node">Input usia</div><div class="gate-diamond"><span>usia ≥ 17?</span></div><div class="gate-node">Output status</div></div><div class="comparison-table"><div class="compare-card"><h4>Jika True</h4><p>Akses simulator finansial diberikan.</p><div class="branch-label">Cabang if</div></div><div class="compare-card"><h4>Jika False</h4><p>Akses belum dibuka. Tampilkan pesan edukatif.</p><div class="branch-label">Cabang else</div></div></div><button class="primary-btn" onclick="revealAnswer('flowExplain')">Klik untuk lihat versi kode</button><div class="area-live-card" id="flowExplain" style="display:none"><pre><code>if usia_user >= 17:
+    print("Akses diberikan")
+else:
+    print("Akses belum dibuka")</code></pre></div></section><section class="slide" id="slide-8"><h3>Operator Pembanding</h3><p class="lead">Operator pembanding dipakai untuk membuat kondisi.</p><div class="operator-board"><button class="operator-btn" onclick="showOperatorInfo('gt',this)">&gt;</button><button class="operator-btn" onclick="showOperatorInfo('gte',this)">&gt;=</button><button class="operator-btn" onclick="showOperatorInfo('lt',this)">&lt;</button><button class="operator-btn" onclick="showOperatorInfo('lte',this)">&lt;=</button><button class="operator-btn" onclick="showOperatorInfo('eq',this)">==</button><button class="operator-btn" onclick="showOperatorInfo('neq',this)">!=</button></div><div class="area-live-card" id="operatorLearn"><h4>Pilih operator</h4><p>Klik salah satu simbol untuk melihat contoh cara membacanya.</p></div><table class="thin-table"><tr><th>Contoh</th><th>Cara baca</th></tr><tr><td><code>usia &gt;= 17</code></td><td>usia lebih besar atau sama dengan 17</td></tr><tr><td><code>usia == 17</code></td><td>usia sama dengan 17</td></tr></table></section><section class="slide" id="slide-9"><h3><code>=</code> dan <code>==</code> Itu Beda</h3><p class="lead">Salah satu bug paling sering terjadi adalah tertukar antara assignment dan comparison.</p><div class="comparison-table"><div class="compare-card"><h4><code>=</code></h4><p>Menyimpan nilai ke variabel.</p><pre><code>batas_usia = 17</code></pre></div><div class="compare-card"><h4><code>==</code></h4><p>Membandingkan apakah dua nilai sama.</p><pre><code>usia_user == 17</code></pre></div></div><div class="interactive-box"><h4>Quick check</h4><p>Mana yang dipakai untuk mengecek apakah usia tepat 17?</p><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'eqQuiz')"><code>usia = 17</code></button><button class="choice-btn" onclick="quiz(this,true,'eqQuiz')"><code>usia == 17</code></button></div><div class="feedback-line" id="eqQuiz"></div></div></section><section class="slide" id="slide-10"><h3>Boundary Test: Kenapa 17 Penting?</h3><p class="lead">Angka 17 adalah titik batas. Input tepat di batas harus diuji.</p><div class="choice-grid"><button class="choice-btn" onclick="ageBoundary(this,16)">Cek usia 16</button><button class="choice-btn" onclick="ageBoundary(this,17)">Cek usia 17</button><button class="choice-btn" onclick="ageBoundary(this,18)">Cek usia 18</button></div><div class="area-live-card" id="boundaryInfo"><h4>Pilih usia</h4><p>Lihat jalur yang akan dipilih oleh program.</p></div><div class="warning-box"><h4>Bug tersembunyi</h4><p>Jika kamu menulis <code>usia_user &gt; 17</code>, maka usia 17 justru gagal masuk. Ini logic error.</p></div></section><section class="slide" id="slide-11"><h3>Struktur if-else</h3><p class="lead">Dua hal yang tidak boleh hilang: titik dua dan indentasi.</p><div class="code-card compact-code"><pre><code># Blueprint if-else di Python
+if kondisi:
+    # blok ini jalan kalau kondisi True
+    print("Jalur if dijalankan")
+else:
+    # blok ini jalan kalau kondisi False
+    print("Jalur else dijalankan")</code></pre></div><div class="visual-grid"><div class="visual-card"><div class="visual-icon">:</div><h4>Titik dua</h4><p>Menandai awal blok baru.</p></div><div class="visual-card"><div class="visual-icon">↳</div><h4>Indentasi</h4><p>Baris di dalam cabang harus menjorok.</p></div></div></section><section class="slide" id="slide-12"><h3>Mini Editor: if-else Dasar</h3><p class="lead">Coba jalankan dulu versi paling sederhana.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py2" spellcheck="false">usia = int(input(&quot;Masukkan usia: &quot;))
+
+if usia &gt;= 17:
+    print(&quot;Memenuhi batas simulasi.&quot;)
+else:
+    print(&quot;Belum memenuhi batas simulasi.&quot;)</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py2_input" spellcheck="false">16</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py2')">Run code</button><span class="editor-toolbar-note">Edit kode atau input, lalu klik Run code.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py2_out">Output akan muncul di sini.</div></div></div><p class="mini-note">Ubah input simulator menjadi 17 dan 18. Bandingkan outputnya.</p></section><section class="slide" id="slide-13"><h3>Reading Code: Prediksi Output</h3><p>Baca kode ini tanpa menjalankan dulu.</p><div class="code-card"><pre><code>usia = 16
+if usia &gt;= 17:
+    print("Memenuhi batas simulasi.")
+else:
+    print("Belum memenuhi batas simulasi.")</code></pre></div><div class="interactive-box"><h4>Output mana yang muncul?</h4><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'readQ')">Memenuhi batas simulasi.</button><button class="choice-btn" onclick="quiz(this,true,'readQ')">Belum memenuhi batas simulasi.</button><button class="choice-btn" onclick="quiz(this,false,'readQ')">Dua-duanya muncul.</button></div><div class="feedback-line" id="readQ"></div></div></section><section class="slide" id="slide-14"><h3>Project Brief: Validator Usia</h3><p class="lead">Sekarang kita siapkan project utamanya.</p><details class="learn-accordion" open><summary>Tujuan aplikasi</summary><div class="accordion-body"><p>Program memvalidasi apakah usia user memenuhi batas simulasi akses belajar finansial.</p></div></details><details class="learn-accordion"><summary>Input</summary><div class="accordion-body"><p><code>usia_user</code> dari <code>int(input())</code>.</p></div></details><details class="learn-accordion"><summary>Process</summary><div class="accordion-body"><p>Program mengecek <code>usia_user &gt;= batas_usia</code>.</p></div></details><details class="learn-accordion"><summary>Output</summary><div class="accordion-body"><p>Status akses dan pesan edukatif.</p></div></details><div class="warning-box"><h4>Ingat</h4><p>Ini simulasi logika, bukan aturan produk finansial nyata.</p></div></section><section class="slide" id="slide-15"><h3>Langkah 1: Ambil Input Usia</h3><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py3" spellcheck="false">print(&quot;=== SISTEM VALIDASI AKSES BELAJAR FINANSIAL ===&quot;)
+
+# Mengambil input usia user sebagai angka bulat
+usia_user = int(input(&quot;Masukkan usia kamu saat ini: &quot;))
+
+# Menampilkan ulang data untuk cek awal
+print(f&quot;Usia yang diterima sistem: {usia_user} tahun&quot;)</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py3_input" spellcheck="false">17</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py3')">Run code</button><span class="editor-toolbar-note">Edit kode atau input, lalu klik Run code.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py3_out">Output akan muncul di sini.</div></div></div><p class="mini-note">Input usia harus angka murni, bukan “17 tahun”.</p></section><section class="slide" id="slide-16"><h3>Langkah 2: Tulis Cabang if</h3><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py4" spellcheck="false">usia_user = int(input(&quot;Masukkan usia kamu saat ini: &quot;))
+batas_usia = 17
+
+# Cabang ini hanya jalan jika kondisi bernilai True
+if usia_user &gt;= batas_usia:
+    print(&quot;Hasil: Usia memenuhi batas simulasi.&quot;)
+    print(&quot;Status: Akses simulator finansial diberikan.&quot;)</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py4_input" spellcheck="false">17</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py4')">Run code</button><span class="editor-toolbar-note">Edit kode atau input, lalu klik Run code.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py4_out">Output akan muncul di sini.</div></div></div><p class="mini-note">Coba input 16. Apakah ada output setelah kondisi?</p></section><section class="slide" id="slide-17"><h3>Starter Code Lengkap</h3><p class="lead">Ini versi utama project Sesi 5. Jalankan dengan input 16, 17, dan 18.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py5" spellcheck="false" style="min-height:430px">print(&quot;=== SISTEM VALIDASI AKSES BELAJAR FINANSIAL ===&quot;)
+
+# 1. Mengambil input usia user sebagai angka bulat
+usia_user = int(input(&quot;Masukkan usia kamu saat ini: &quot;))
+
+# 2. Menentukan batas usia simulasi
+batas_usia = 17
+
+print(&quot;
+-------------------------------------&quot;)
+print(&quot;📊 HASIL VALIDASI AKSES&quot;)
+print(&quot;-------------------------------------&quot;)
+
+# 3. Gerbang logika: jika usia memenuhi batas, akses dibuka
+if usia_user &gt;= batas_usia:
+    print(&quot;Hasil: Usia memenuhi batas simulasi.&quot;)
+    print(&quot;Status: Akses simulator finansial diberikan.&quot;)
+    print(&quot;Selamat mencoba modul belajar interaktif.&quot;)
+else:
+    print(&quot;Hasil: Usia belum memenuhi batas pada simulasi ini.&quot;)
+    print(&quot;Status: Fitur belum dapat diakses.&quot;)
+    print(&quot;Pesan: Belajar mengelola keuangan bisa dimulai dari sekarang.&quot;)
+
+print(&quot;-------------------------------------&quot;)</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py5_input" spellcheck="false">17</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py5')">Run code</button><span class="editor-toolbar-note">Edit kode atau input, lalu klik Run code.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py5_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-18"><h3>Test Case Wajib</h3><p class="lead">Gunakan tombol ini untuk memuat input ke Starter Code.</p><table class="thin-table"><tr><th>Input</th><th>Prediksi Jalur</th><th>Ekspektasi</th></tr><tr><td>16</td><td>else</td><td>Belum memenuhi batas</td></tr><tr><td>17</td><td>if</td><td>Memenuhi batas simulasi</td></tr><tr><td>18</td><td>if</td><td>Memenuhi batas simulasi</td></tr></table><div class="choice-grid"><button class="choice-btn" onclick="loadAgeCase(this,16)">Muat usia 16</button><button class="choice-btn" onclick="loadAgeCase(this,17)">Muat usia 17</button><button class="choice-btn" onclick="loadAgeCase(this,18)">Muat usia 18</button></div><div class="feedback-line" id="ageCaseFeedback"></div></section><section class="slide" id="slide-19"><h3>Trace Table</h3><p class="lead">Klik input untuk melihat jalur yang dipilih program.</p><div class="choice-grid"><button class="choice-btn" onclick="traceAge(16,this)">Trace 16</button><button class="choice-btn" onclick="traceAge(17,this)">Trace 17</button><button class="choice-btn" onclick="traceAge(18,this)">Trace 18</button></div><div class="trace-card" id="traceBox"><div class="trace-step"><strong>Input</strong><span>?</span></div><div class="trace-step"><strong>Kondisi</strong><span>?</span></div><div class="trace-step"><strong>Jalur</strong><span>?</span></div><div class="trace-step"><strong>Output</strong><span>?</span></div></div></section><section class="slide" id="slide-20"><h3>Detektif Kode 1: Lupa Titik Dua</h3><p>Jalankan kode ini dan baca error-nya.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py6" spellcheck="false">usia_user = 17
+
+if usia_user &gt;= 17
+    print(&quot;Memenuhi batas simulasi.&quot;)</textarea><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py6')">Run code</button><span class="editor-toolbar-note">Edit kode atau input, lalu klik Run code.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py6_out">Output akan muncul di sini.</div></div></div><div class="interactive-box"><h4>Apa yang hilang?</h4><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'colonQ')">Titik dua setelah kondisi</button><button class="choice-btn" onclick="quiz(this,false,'colonQ')">Tanda kutip pada print</button><button class="choice-btn" onclick="quiz(this,false,'colonQ')">Nama variabel</button></div><div class="feedback-line" id="colonQ"></div></div></section><section class="slide" id="slide-21"><h3>Detektif Kode 2: Indentasi</h3><p>Python membaca spasi sebagai struktur. Coba jalankan kode ini.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py7" spellcheck="false" style="min-height:300px">nilai_ujian = 75
+
+if nilai_ujian &gt; 70:
+    print(&quot;Kamu lulus ujian.&quot;)
+  print(&quot;Selamat! Pertahankan prestasimu.&quot;)
+else:
+    print(&quot;Kamu belum lulus ujian.&quot;)</textarea><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py7')">Run code</button><span class="editor-toolbar-note">Edit kode atau input, lalu klik Run code.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py7_out">Output akan muncul di sini.</div></div></div><p class="mini-note">Baris kedua di dalam if sengaja dibuat menjorok tidak konsisten.</p></section><section class="slide" id="slide-22"><h3>Detektif Kode 3: ValueError</h3><p>Program meminta angka, tetapi input simulator berisi teks.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py8" spellcheck="false">usia_user = int(input(&quot;Masukkan usia kamu saat ini: &quot;))
+print(f&quot;Usia diterima: {usia_user} tahun&quot;)</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py8_input" spellcheck="false">tujuh belas</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py8')">Run code</button><span class="editor-toolbar-note">Edit kode atau input, lalu klik Run code.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py8_out">Output akan muncul di sini.</div></div></div><div class="interactive-box"><h4>Penyebab error?</h4><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'valueQ')">int() tidak bisa mengubah teks huruf menjadi angka</button><button class="choice-btn" onclick="quiz(this,false,'valueQ')">print() tidak boleh memakai f-string</button><button class="choice-btn" onclick="quiz(this,false,'valueQ')">Variabel usia_user terlalu panjang</button></div><div class="feedback-line" id="valueQ"></div></div></section><section class="slide" id="slide-23"><h3>Detektif Kode 4: Logic Error</h3><p>Program berjalan, tapi hasilnya salah untuk usia 17.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py9" spellcheck="false">usia_user = int(input(&quot;Masukkan usia kamu saat ini: &quot;))
+
+# Bug: operator ini tidak menyertakan angka 17
+if usia_user &gt; 17:
+    print(&quot;Memenuhi batas simulasi.&quot;)
+else:
+    print(&quot;Belum memenuhi batas simulasi.&quot;)</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py9_input" spellcheck="false">17</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py9')">Run code</button><span class="editor-toolbar-note">Edit kode atau input, lalu klik Run code.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py9_out">Output akan muncul di sini.</div></div></div><div class="interactive-box"><h4>Perbaikan terbaik?</h4><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'logicQ')">Ubah 17 menjadi 18</button><button class="choice-btn" onclick="quiz(this,true,'logicQ')">Ubah <code>&gt;</code> menjadi <code>&gt;=</code></button><button class="choice-btn" onclick="quiz(this,false,'logicQ')">Hapus else</button></div><div class="feedback-line" id="logicQ"></div></div></section><section class="slide" id="slide-24"><h3>Data Dummy & Simulasi</h3><p class="lead">Karena ini latihan, gunakan data contoh. Jangan pakai data pribadi asli.</p><div class="choice-grid"><button class="safe-card" onclick="markSafety(this,true)">Usia simulasi: 17</button><button class="safe-card" onclick="markSafety(this,false)">Tanggal lahir lengkap asli</button><button class="safe-card" onclick="markSafety(this,true)">Nama dummy: Budi</button><button class="safe-card" onclick="markSafety(this,false)">NIK/KTP asli</button><button class="safe-card" onclick="markSafety(this,false)">Nomor rekening asli</button><button class="safe-card" onclick="markSafety(this,true)">Batas simulasi: 17</button></div><p class="mini-note">Hijau = aman untuk latihan. Merah = jangan dipakai.</p></section><section class="slide" id="slide-25"><h3>Challenge 1: Pesan Edukatif</h3><p class="lead">Tambahkan pesan di cabang <code>else</code> agar output tidak hanya menolak akses.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py10" spellcheck="false" style="min-height:360px">print(&quot;=== VALIDATOR USIA VERSI EDUKATIF ===&quot;)
+
+# Ambil input usia dan ubah menjadi integer
+usia_user = int(input(&quot;Masukkan usia kamu saat ini: &quot;))
+batas_usia = 17
+
+# Buat dua jalur keputusan
+if usia_user &gt;= batas_usia:
+    print(&quot;Akses diterima. Kamu masuk ke simulator finansial.&quot;)
+else:
+    print(&quot;Akses belum dibuka untuk simulasi ini.&quot;)
+    print(&quot;💡 Tips: Belajar finansial bisa dimulai sekarang lewat budgeting, menabung, dan membaca materi edukasi.&quot;)</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py10_input" spellcheck="false">15</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py10')">Run code</button><span class="editor-toolbar-note">Edit kode atau input, lalu klik Run code.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py10_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-26"><h3>Challenge 2: Hitung Sisa Tahun</h3><p class="lead">Kalau usia belum memenuhi batas, program menghitung estimasi waktu menuju batas simulasi.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py11" spellcheck="false" style="min-height:380px">print(&quot;=== VALIDATOR USIA + ESTIMASI WAKTU ===&quot;)
+
+# Program ini tetap memakai angka simulasi
+usia_user = int(input(&quot;Masukkan usia kamu saat ini: &quot;))
+batas_usia = 17
+
+if usia_user &gt;= batas_usia:
+    print(&quot;Akses simulator finansial diberikan.&quot;)
+else:
+    sisa_tahun = batas_usia - usia_user
+    print(&quot;Akses simulator belum dibuka.&quot;)
+    print(f&quot;Estimasi waktu menuju batas simulasi: {sisa_tahun} tahun lagi.&quot;)
+    print(&quot;Sambil menunggu, kamu tetap bisa belajar membuat budget dan mencatat pengeluaran.&quot;)</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py11_input" spellcheck="false">14</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py11')">Run code</button><span class="editor-toolbar-note">Edit kode atau input, lalu klik Run code.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py11_out">Output akan muncul di sini.</div></div></div><p class="mini-note">Coba input 14, 16, dan 17.</p></section><section class="slide" id="slide-27"><h3>Challenge Plus: Preview <code>elif</code></h3><p class="lead">Kalau keputusan lebih dari dua jalur, kita bisa memakai <code>elif</code>.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py12" spellcheck="false" style="min-height:380px">print(&quot;=== VALIDATOR USIA MULTI-LEVEL ===&quot;)
+
+# Preview materi berikutnya: elif untuk banyak cabang
+usia_user = int(input(&quot;Masukkan usia kamu saat ini: &quot;))
+
+if usia_user &gt;= 17:
+    print(&quot;Akses penuh: simulator finansial dibuka.&quot;)
+elif usia_user &gt;= 13:
+    print(&quot;Akses terbatas: materi edukasi finansial dibuka.&quot;)
+else:
+    print(&quot;Akses ditolak untuk simulasi ini.&quot;)
+    print(&quot;Tetap bisa belajar dasar menabung dan keamanan digital.&quot;)</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py12_input" spellcheck="false">15</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py12')">Run code</button><span class="editor-toolbar-note">Edit kode atau input, lalu klik Run code.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py12_out">Output akan muncul di sini.</div></div></div><p class="mini-note">Ini preview sesi berikutnya. Tidak wajib selesai hari ini.</p></section><section class="slide" id="slide-28"><h3>Output Minimum</h3><p class="lead">Cek apakah project kamu sudah memenuhi standar minimum.</p><ul class="checklist"><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox" /> Program meminta input usia dengan <code>int(input())</code>.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox" /> Program memakai <code>if</code> dan <code>else</code>.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox" /> Kondisi memakai operator <code>&gt;=</code> untuk batas 17.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox" /> Input 16 masuk ke cabang else.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox" /> Input 17 dan 18 masuk ke cabang if.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox" /> Output terminal mudah dibaca.</li></ul></section><section class="slide" id="slide-29"><h3>Refleksi Developer</h3><p class="lead">Jawab singkat di catatanmu atau diskusikan dengan teman.</p><div class="interactive-box"><h4>Exit Ticket</h4><ol><li>Kenapa program perlu <code>else</code>?</li><li>Apa bedanya <code>&gt;</code> dan <code>&gt;=</code> untuk input 17?</li><li>Error apa yang paling mudah kamu pahami hari ini?</li><li>Bagian mana yang perlu kamu latihan lagi?</li></ol></div><button class="primary-btn" onclick="revealAnswer('sampleReflection')">Contoh jawaban singkat</button><div class="area-live-card" id="sampleReflection" style="display:none"><p><strong>Contoh:</strong> Program perlu else supaya tetap punya output saat kondisi if salah. Untuk batas 17, operator yang tepat adalah >= karena 17 ikut lolos.</p></div></section><section class="slide" id="slide-30"><span class="eyebrow">Penutup</span><h2>Kamu Sudah Membuat Gerbang Keputusan</h2><p class="lead">Hari ini kamu belajar membuat program yang memilih jalur berdasarkan kondisi.</p><div class="metrics"><div class="metric-box"><strong>if</strong><span>jalur saat kondisi benar</span></div><div class="metric-box"><strong>else</strong><span>jalur alternatif</span></div><div class="metric-box"><strong>&gt;=</strong><span>menyertakan angka batas</span></div><div class="metric-box"><strong>🧪</strong><span>uji input batas</span></div></div><div class="example-box"><h4>Next session</h4><p>Kita akan naik level ke percabangan multi: <strong>elif</strong> dan kategorisasi skor simulasi.</p></div></section></div><div class="navigation"><button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)"><span>←</span> Previous</button><div class="slide-indicator"><span id="currentSlide">1</span> / <span id="totalSlides">30</span></div><button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next <span>→</span></button></div></div><div class="explanation-panel"><section class="explanation active" id="explanation-1"><h3>Project yang Akan Dibuat</h3><p>Di sesi ini, kamu akan membuat <strong>Validator Usia</strong>. Programnya sederhana, tetapi konsepnya penting: aplikasi bisa mengambil keputusan berdasarkan data yang dimasukkan pengguna.</p><p>Contohnya, program menerima usia, lalu mengecek apakah usia tersebut memenuhi batas simulasi. Jika memenuhi, program membuka akses. Jika belum, program menampilkan pesan lain yang tetap edukatif.</p><div class="warning-box"><h4>Catatan penting</h4><p>Ini hanya simulasi logika untuk belajar Python, bukan aturan resmi produk keuangan apa pun. Kita memakai angka contoh supaya kamu bisa memahami cara kerja <code>if</code> dan <code>else</code>.</p></div><p>Konsep ini akan sering muncul di aplikasi nyata: login, cek saldo, validasi input, sistem rekomendasi, sampai fitur keamanan digital.</p></section><section class="explanation" id="explanation-2"><h3>Misi Sesi 5</h3><p>Sesi ini adalah pintu masuk ke Bab 2: Struktur Percabangan dan Pengamanan Otentikasi. Setelah sebelumnya program berjalan lurus dari atas ke bawah, sekarang program mulai bisa memilih jalur.</p><p>Kamu akan belajar membaca kondisi, memakai operator pembanding, dan memahami mengapa satu simbol kecil seperti <code>&gt;=</code> bisa mengubah hasil program.</p><div class="info-box"><h4>Yang perlu kamu kuasai</h4><ul><li><code>if</code> untuk jalur saat kondisi benar.</li><li><code>else</code> untuk jalur alternatif saat kondisi salah.</li><li><code>int(input())</code> agar input usia bisa dihitung sebagai angka.</li><li>Testing dengan nilai batas, terutama angka 17.</li></ul></div></section><section class="explanation" id="explanation-3"><h3>Persiapan Coding</h3><p>Sebelum menulis kode, pastikan notebook atau editor Python kamu siap. Nama file yang jelas akan memudahkan kamu menemukan ulang project dan mengumpulkannya setelah kelas.</p><p>Karena project ini membahas validasi usia, gunakan angka simulasi. Tidak perlu memasukkan identitas asli, tanggal lahir lengkap, nomor kartu, nomor rekening, atau data pribadi lain.</p><div class="warning-box"><h4>Kenapa pakai data dummy?</h4><p>Notebook di platform cloud bisa dibagikan. Developer yang baik terbiasa menjaga data sejak tahap latihan, bukan baru saat project sudah besar.</p></div></section><section class="explanation" id="explanation-4"><h3>Program Mulai Bisa Memilih</h3><p>Di Bab 1, program yang kamu buat biasanya mengikuti alur Input → Process → Output. Semua baris dijalankan dari atas ke bawah.</p><p>Di sesi ini, alurnya berubah sedikit. Program tetap membaca dari atas, tetapi saat bertemu kondisi, program akan mengecek: apakah kondisi ini benar atau salah?</p><p>Jika benar, program masuk ke cabang pertama. Jika salah, program masuk ke cabang alternatif. Inilah dasar dari <strong>control flow</strong>.</p><div class="example-box"><h4>Contoh nyata</h4><p>Kalau saldo cukup, pembelian bisa lanjut. Kalau saldo belum cukup, aplikasi menampilkan kekurangan saldo. Ini konsep yang sama dengan <code>if</code> dan <code>else</code>.</p></div></section><section class="explanation" id="explanation-5"><h3>Kondisi Selalu Dievaluasi</h3><p>Di Python, kondisi seperti <code>usia_user &gt;= batas_usia</code> akan dievaluasi menjadi nilai logika: <code>True</code> atau <code>False</code>.</p><p>Kalau hasilnya <code>True</code>, baris di dalam blok <code>if</code> akan dijalankan. Kalau hasilnya <code>False</code>, Python akan melewati blok <code>if</code> dan mencari <code>else</code>.</p><div class="info-box"><h4>Cara membaca</h4><p><code>usia_user &gt;= batas_usia</code> dibaca: “apakah usia user lebih besar atau sama dengan batas usia?”</p></div><p>Latihan kecil ini membantu kamu melihat bahwa percabangan sebenarnya dimulai dari pertanyaan logis yang sangat spesifik.</p></section><section class="explanation" id="explanation-6"><h3>Membuat Kalimat Logika</h3><p>Sebelum menulis Python, kita bisa melatih logika dengan kalimat sehari-hari. Polanya adalah “Kalau kondisi terjadi, maka lakukan sesuatu.”</p><p>Contoh: kalau saldo cukup, maka pembelian lanjut. Kalau saldo belum cukup, maka sistem menampilkan informasi kekurangan saldo.</p><p>Di kode Python, kalimat seperti ini akan berubah menjadi struktur <code>if</code> dan <code>else</code>. Jadi, aktivitas ini bukan sekadar pemanasan; ini adalah cara berpikir sebelum coding.</p><div class="warning-box"><h4>Tips</h4><p>Jangan langsung menulis kode kalau logikanya belum jelas. Tulis dulu kondisi dan output yang diinginkan.</p></div></section><section class="explanation" id="explanation-7"><h3>Dari Flowchart ke Kode</h3><p>Flowchart membantu kamu melihat bentuk keputusan secara visual. Pada project ini, flowchart-nya sederhana: program menerima usia, mengecek apakah usia memenuhi batas, lalu memilih output.</p><p>Kotak “usia ≥ 17?” adalah titik keputusan. Di sana program tidak langsung mencetak semuanya. Program bertanya dulu: kondisi ini benar atau salah?</p><div class="info-box"><h4>Mapping ke Python</h4><p>Cabang True menjadi blok <code>if</code>. Cabang False menjadi blok <code>else</code>. Panah pada flowchart berubah menjadi urutan baris kode.</p></div></section><section class="explanation" id="explanation-8"><h3>Simbol Kecil, Dampaknya Besar</h3><p>Operator pembanding menentukan bagaimana program membaca kondisi. Karena itu, pilih operator sesuai aturan logika yang kamu mau.</p><p>Untuk project ini, kita memakai <code>&gt;=</code>, bukan hanya <code>&gt;</code>. Alasannya: input usia 17 harus ikut masuk ke cabang “memenuhi batas simulasi”.</p><div class="warning-box"><h4>Hati-hati</h4><p><code>&gt;</code> artinya lebih besar dari. Jadi 17 tidak lolos jika kondisinya <code>usia &gt; 17</code>. Kalau mau 17 ikut lolos, gunakan <code>&gt;=</code>.</p></div></section><section class="explanation" id="explanation-9"><h3>Assignment vs Comparison</h3><p><code>=</code> dipakai saat kamu ingin menyimpan nilai. Misalnya <code>batas_usia = 17</code> berarti variabel <code>batas_usia</code> berisi angka 17.</p><p><code>==</code> dipakai saat kamu ingin membandingkan. Misalnya <code>usia_user == 17</code> berarti Python mengecek apakah nilai <code>usia_user</code> sama dengan 17.</p><div class="info-box"><h4>Cara mengingat</h4><p>Satu sama dengan untuk menyimpan. Dua sama dengan untuk bertanya “apakah sama?”</p></div><p>Pada sesi ini, kamu paling sering memakai <code>&gt;=</code>, tetapi memahami <code>==</code> penting karena nanti akan dipakai di login terminal.</p></section><section class="explanation" id="explanation-10"><h3>Menguji Nilai Batas</h3><p>Testing tidak cukup hanya mencoba angka yang jauh dari batas. Untuk validator usia, angka yang paling penting justru angka batasnya: 17.</p><p>Kalau aturan simulasi menyebut “17 atau lebih”, maka usia 17 harus lolos. Karena itu operator yang tepat adalah <code>&gt;=</code>.</p><div class="info-box"><h4>Test case utama</h4><ul><li>16 → cabang <code>else</code></li><li>17 → cabang <code>if</code></li><li>18 → cabang <code>if</code></li></ul></div><p>Testing seperti ini disebut boundary testing. Developer menggunakannya untuk mencari bug di batas aturan.</p></section><section class="explanation" id="explanation-11"><h3>Aturan Sintaks yang Wajib Rapi</h3><p>Python memakai indentasi untuk membaca struktur kode. Artinya, spasi bukan hanya soal tampilan. Spasi menentukan baris mana yang masuk ke dalam cabang <code>if</code> atau <code>else</code>.</p><p>Setelah baris <code>if kondisi:</code>, baris di bawahnya harus masuk menjorok, biasanya 4 spasi. Setelah <code>else:</code>, baris di bawahnya juga harus menjorok.</p><div class="warning-box"><h4>Error yang sering muncul</h4><p>Jika titik dua hilang, kamu akan melihat <code>SyntaxError</code>. Jika indentasi salah, kamu bisa melihat <code>IndentationError</code>.</p></div></section><section class="explanation" id="explanation-12"><h3>Mencoba Cabang Pertama</h3><p>Editor ini adalah versi ringkas dari project utama. Program meminta usia, lalu mengecek apakah usia tersebut lebih besar atau sama dengan 17.</p><p>Saat kamu menjalankan input 16, kondisi <code>usia &gt;= 17</code> bernilai <code>False</code>, jadi output berasal dari <code>else</code>. Saat kamu menjalankan input 17 atau 18, kondisi bernilai <code>True</code>, jadi output berasal dari <code>if</code>.</p><div class="info-box"><h4>Yang harus diamati</h4><p>Program yang sama bisa menampilkan output berbeda hanya karena inputnya berubah.</p></div></section><section class="explanation" id="explanation-13"><h3>Membaca Sebelum Menjalankan</h3><p>Reading code adalah kebiasaan penting. Sebelum klik Run, coba prediksi dulu jalur mana yang akan dipilih program.</p><p>Pada kode ini, nilai <code>usia</code> adalah 16. Kondisi <code>usia &gt;= 17</code> berarti “apakah 16 lebih besar atau sama dengan 17?” Jawabannya <code>False</code>.</p><p>Karena kondisi salah, Python melewati blok <code>if</code> dan menjalankan blok <code>else</code>. Maka outputnya adalah “Belum memenuhi batas simulasi.”</p></section><section class="explanation" id="explanation-14"><h3>Merancang Project Sebelum Coding</h3><p>Validator Usia adalah program CLI sederhana. CLI berarti user berinteraksi lewat teks di terminal: mengetik input, lalu melihat output.</p><p>Project ini punya empat bagian utama: input usia, batas usia simulasi, kondisi, dan output status. Kalau empat bagian ini jelas, kode akan lebih mudah ditulis.</p><div class="info-box"><h4>Struktur berpikir</h4><p>Input → cek kondisi → pilih cabang → tampilkan hasil. Ini alur yang akan kamu pakai lagi untuk fitur login, klasifikasi skor, dan validasi data di sesi berikutnya.</p></div></section><section class="explanation" id="explanation-15"><h3>Mengambil Input Angka</h3><p>Karena usia perlu dibandingkan dengan angka 17, input harus berbentuk integer. Itulah alasan kita memakai <code>int(input())</code>.</p><p>Kalau hanya memakai <code>input()</code>, Python akan menyimpan jawaban sebagai string. String tidak cocok untuk dibandingkan dengan angka integer dalam logika usia.</p><div class="warning-box"><h4>Format input</h4><p>Tulis <strong>17</strong>, bukan <strong>17 tahun</strong> atau <strong>tujuh belas</strong>. Format salah akan memunculkan <code>ValueError</code>.</p></div></section><section class="explanation" id="explanation-16"><h3>Cabang if</h3><p>Blok <code>if</code> hanya berjalan ketika kondisinya benar. Pada kode ini, kondisi yang dicek adalah <code>usia_user &gt;= batas_usia</code>.</p><p>Jika inputnya 17 atau lebih, Python masuk ke blok <code>if</code> dan menjalankan semua baris yang menjorok di bawahnya.</p><p>Jika inputnya 16, kondisi bernilai <code>False</code>. Karena di slide ini belum ada <code>else</code>, program tidak mencetak status alternatif. Itu sebabnya cabang <code>else</code> penting.</p></section><section class="explanation" id="explanation-17"><h3>Program Utama</h3><p>Starter code ini menggabungkan semua konsep inti sesi: input angka, variabel batas, kondisi, cabang <code>if</code>, cabang <code>else</code>, dan output terminal yang rapi.</p><div class="info-box"><h4>Bagian penting kode</h4><ol><li><code>usia_user</code> menyimpan input dari pengguna.</li><li><code>batas_usia</code> menyimpan angka batas simulasi.</li><li><code>if usia_user &gt;= batas_usia:</code> mengecek apakah akses dibuka.</li><li><code>else:</code> menangani kondisi yang belum memenuhi batas.</li></ol></div><p>Program berhasil jika output berubah sesuai input dan tidak ada error.</p></section><section class="explanation" id="explanation-18"><h3>Testing Bukan Formalitas</h3><p>Test case membantu memastikan program benar untuk beberapa skenario, bukan hanya satu contoh.</p><p>Untuk sesi ini, test case paling penting adalah 16, 17, dan 18. Angka 16 mewakili kondisi belum memenuhi batas. Angka 17 adalah nilai batas. Angka 18 mewakili kondisi yang jelas memenuhi batas.</p><div class="warning-box"><h4>Kenapa 17 harus dites?</h4><p>Karena bug sering muncul di titik batas. Jika kamu keliru memakai <code>&gt;</code>, maka 17 akan masuk jalur yang salah.</p></div></section><section class="explanation" id="explanation-19"><h3>Melacak Program Baris demi Baris</h3><p><strong>Trace table</strong> membantu kamu membaca program seperti debugger manual. Kamu mencatat input, hasil kondisi, cabang yang dipilih, dan output.</p><p>Dengan cara ini, kamu tidak hanya tahu hasil akhir, tetapi juga tahu alasan program mengambil jalur tertentu.</p><div class="info-box"><h4>Kapan trace table berguna?</h4><p>Saat output program terasa aneh, trace table bisa membantu menemukan apakah masalahnya ada pada input, kondisi, operator, atau output.</p></div></section><section class="explanation" id="explanation-20"><h3>SyntaxError: expected ':'</h3><p>Setiap baris <code>if</code>, <code>elif</code>, dan <code>else</code> harus diakhiri dengan titik dua. Titik dua memberi tahu Python bahwa blok kode baru akan dimulai.</p><p>Jika titik dua hilang, Python tidak bisa memahami struktur percabangan dan program berhenti sebelum menjalankan output.</p><div class="example-box"><h4>Perbaikan</h4><p>Ubah <code>if usia_user &gt;= 17</code> menjadi <code>if usia_user &gt;= 17:</code>.</p></div></section><section class="explanation" id="explanation-21"><h3>IndentationError</h3><p>Indentasi menentukan baris mana yang masuk ke dalam blok <code>if</code> atau <code>else</code>. Jika satu baris menjorok 4 spasi dan baris berikutnya hanya 2 spasi, Python bisa bingung membaca struktur.</p><p>Untuk menghindari bug ini, gunakan indentasi 4 spasi secara konsisten. Banyak editor akan membantu otomatis, tetapi kamu tetap perlu mengeceknya.</p><div class="warning-box"><h4>Tips cepat</h4><p>Semua baris yang berada dalam blok yang sama harus punya posisi menjorok yang sama.</p></div></section><section class="explanation" id="explanation-22"><h3>Membaca ValueError</h3><p><code>ValueError</code> muncul ketika nilai yang dimasukkan tidak cocok dengan proses yang diminta. Dalam contoh ini, <code>int()</code> hanya bisa menerima teks angka seperti <code>17</code>, bukan kata <code>tujuh belas</code>.</p><p>Untuk sesi ini, solusi paling sederhana adalah memasukkan angka murni. Di sesi berikutnya, kamu akan belajar cara membuat program lebih tahan error dengan validasi yang lebih baik.</p><div class="info-box"><h4>Format yang aman</h4><p>Gunakan <code>16</code>, <code>17</code>, atau <code>18</code>. Jangan menambahkan kata “tahun” di input.</p></div></section><section class="explanation" id="explanation-23"><h3>Logic Error Lebih Licin</h3><p><strong>Logic error</strong> terjadi ketika program bisa berjalan, tetapi hasilnya tidak sesuai aturan yang diinginkan.</p><p>Contoh di slide ini tidak memunculkan SyntaxError. Kodenya sah. Namun, untuk aturan “17 atau lebih”, operator <code>&gt;</code> salah karena tidak menyertakan usia 17.</p><div class="warning-box"><h4>Solusi</h4><p>Ganti kondisinya menjadi <code>usia_user &gt;= 17</code>, lalu uji lagi dengan input 16, 17, dan 18.</p></div></section><section class="explanation" id="explanation-24"><h3>Keamanan Data Sejak Latihan</h3><p>Developer perlu terbiasa menjaga data. Walaupun project ini sederhana, kebiasaan yang dibangun tetap penting: jangan memasukkan data pribadi atau finansial asli ke notebook latihan.</p><p>Semua contoh usia, nama, atau status akses di project ini adalah simulasi. Tujuannya belajar logika Python, bukan memproses data pengguna nyata.</p><div class="warning-box"><h4>Jangan masukkan</h4><p>NIK, nomor rekening, PIN, password, OTP, alamat lengkap, atau data keluarga. Kalau butuh contoh, gunakan data dummy yang tidak mewakili orang nyata.</p></div></section><section class="explanation" id="explanation-25"><h3>Membuat Output Lebih Ramah</h3><p>Cabang <code>else</code> tidak harus terasa seperti “gagal”. Dalam aplikasi edukatif, output bisa tetap memberi arahan yang berguna.</p><p>Di challenge ini, kamu menambahkan pesan yang mengingatkan bahwa belajar finansial bisa dimulai sebelum memakai semua fitur simulasi. Ini membuat program terasa lebih manusiawi dan informatif.</p><div class="info-box"><h4>Prinsip produk digital</h4><p>Output bukan sekadar hasil. Output juga membantu pengguna memahami langkah berikutnya.</p></div></section><section class="explanation" id="explanation-26"><h3>Menggabungkan Logika dan Aritmatika</h3><p>Challenge ini menggabungkan materi Bab 1 dan Bab 2. Kamu tetap memakai <code>if-else</code>, tetapi di cabang <code>else</code> kamu menambahkan perhitungan.</p><p>Jika usia belum memenuhi batas, program menghitung <code>sisa_tahun = batas_usia - usia_user</code>. Hasilnya membuat output lebih spesifik.</p><div class="warning-box"><h4>Catatan</h4><p>Program ini masih belum punya validasi untuk usia negatif atau usia yang tidak wajar. Untuk sekarang, fokusnya adalah memahami cabang logika.</p></div></section><section class="explanation" id="explanation-27"><h3>Preview Multi-Cabang</h3><p><code>if-else</code> memberi dua jalur. Namun, aplikasi nyata sering punya lebih dari dua kemungkinan. Misalnya: akses penuh, akses terbatas, atau akses ditolak.</p><p>Untuk banyak cabang, Python memakai <code>elif</code>, singkatan dari “else if”. Python mengecek dari atas ke bawah. Cabang pertama yang kondisinya benar akan dijalankan.</p><div class="info-box"><h4>Kenapa urutan penting?</h4><p>Kondisi yang lebih besar atau lebih spesifik biasanya diletakkan lebih dulu agar tidak tertangkap oleh cabang yang lebih umum.</p></div></section><section class="explanation" id="explanation-28"><h3>Checklist Project</h3><p>Gunakan slide ini sebelum mengumpulkan atau menunjukkan project. Tujuannya agar kamu tidak hanya merasa project berjalan, tetapi benar-benar mengecek bagian pentingnya.</p><p>Kalau satu bagian belum centang, kembali ke slide terkait. Misalnya, jika usia 17 masih masuk <code>else</code>, cek operator pembanding di baris <code>if</code>.</p><div class="info-box"><h4>Definisi berhasil</h4><p>Project dinyatakan berhasil ketika cabang dua arah berjalan benar dan test case batas usia tidak gagal.</p></div></section><section class="explanation" id="explanation-29"><h3>Refleksi Singkat</h3><p>Refleksi membantu kamu menyadari apa yang sudah dipahami dan apa yang masih perlu dilatih. Dalam coding, ini penting karena error sering berulang jika kita tidak mencatat penyebabnya.</p><p>Coba tulis bug yang paling sering kamu temui hari ini. Apakah titik dua? Indentasi? Operator? Input teks?</p><div class="example-box"><h4>Mindset developer</h4><p>Bukan “kodeku error berarti gagal”, tapi “kodeku memberi informasi bagian mana yang perlu diperiksa”.</p></div></section><section class="explanation" id="explanation-30"><h3>Rangkuman Sesi 5</h3><p>Hari ini kamu sudah melewati konsep besar dalam Python: percabangan. Program tidak lagi hanya mengikuti satu jalur, tetapi bisa mengecek kondisi dan memilih output.</p><p>Kamu juga sudah melihat bahwa sintaks Python perlu rapi: titik dua, indentasi, dan operator pembanding harus tepat. Satu simbol kecil bisa membuat program error atau salah mengambil keputusan.</p><div class="info-box"><h4>Kalimat kunci</h4><p><strong>if mengecek kondisi, else menangani kondisi yang tidak terpenuhi.</strong></p></div><p>Di sesi berikutnya, kamu akan memakai lebih dari dua cabang dengan <code>elif</code>.</p></section></div></div>
+
+<script>
+const ACCESS_CODE='RGMDSHS26';
+let currentSlide=1;
+let totalSlides=0;
+window.addEventListener('load',()=>{
+  totalSlides=document.querySelectorAll('.slide').length;
+  document.getElementById('totalSlides').textContent=totalSlides;
+  setTimeout(()=>document.querySelector('.access-popup').classList.add('show'),50);
+  const input=document.getElementById('accessInput');
+  input.focus();
+  input.addEventListener('input',e=>{e.target.value=e.target.value.toUpperCase()});
+  input.addEventListener('keydown',e=>{if(e.key==='Enter')checkAccessCode()});
+  initPyEditors();
+  updateSlide();
+});
+function checkAccessCode(){const input=document.getElementById('accessInput'),error=document.getElementById('accessError');if(input.value.trim().toUpperCase()===ACCESS_CODE){document.getElementById('accessPopup').style.display='none';document.getElementById('mainContent').style.display='flex';updateSlide();}else{error.classList.add('show');input.value='';input.focus();}}
+function changeSlide(direction){const next=currentSlide+direction;if(next<1||next>totalSlides)return;currentSlide=next;updateSlide();}
+function updateSlide(){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.explanation').forEach(e=>e.classList.remove('active'));const s=document.getElementById(`slide-${currentSlide}`);if(s)s.classList.add('active');const e=document.getElementById(`explanation-${currentSlide}`);if(e)e.classList.add('active');document.getElementById('currentSlide').textContent=currentSlide;document.getElementById('prevBtn').disabled=currentSlide===1;document.getElementById('nextBtn').disabled=currentSlide===totalSlides;document.getElementById('progressFill').style.width=`${(currentSlide/totalSlides)*100}%`;const sc=document.querySelector('.slide-content');const ep=document.querySelector('.explanation-panel');if(sc)sc.scrollTop=0;if(ep)ep.scrollTop=0;}
+document.addEventListener('keydown',e=>{if(document.getElementById('mainContent').style.display==='none')return;if(e.key==='ArrowRight')changeSlide(1);if(e.key==='ArrowLeft')changeSlide(-1);});
+function deviceCheck(btn){btn.classList.toggle('correct');}
+function selectAny(btn){const group=btn.parentElement;group.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');}
+function quiz(btn,ok,feedbackId){const group=btn.parentElement;group.querySelectorAll('.choice-btn').forEach(b=>b.disabled=true);btn.classList.add(ok?'correct':'wrong');const fb=document.getElementById(feedbackId);fb.textContent=ok?'Betul.':'Belum tepat. Baca kembali penjelasan di panel kanan.';fb.style.color=ok?'#176b35':'#a42820';}
+function revealAnswer(id){const el=document.getElementById(id);if(!el)return;el.style.display=el.style.display==='none'||!el.style.display?'block':'none';}
+function markSafety(btn,ok){btn.classList.remove('safe','risky');btn.classList.add(ok?'safe':'risky');}
+function toggleCheck(item){const cb=item.querySelector('input');cb.checked=!cb.checked;item.classList.toggle('done',cb.checked);}
+function showOperatorInfo(type,btn){document.querySelectorAll('.operator-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const d={gt:['> Lebih besar dari','Contoh: usia > 17. Nilai 18 lolos, tetapi 17 tidak.'],gte:['>= Lebih besar atau sama dengan','Contoh: usia >= 17. Nilai 17 dan 18 sama-sama lolos.'],lt:['< Lebih kecil dari','Contoh: usia < 17. Nilai 16 lolos, 17 tidak.'],lte:['<= Lebih kecil atau sama dengan','Contoh: usia <= 17. Nilai 16 dan 17 lolos.'],eq:['== Sama dengan','Contoh: usia == 17. Hanya nilai 17 yang menghasilkan True.'],neq:['!= Tidak sama dengan','Contoh: usia != 17. Semua nilai selain 17 menghasilkan True.']};document.getElementById('operatorLearn').innerHTML=`<h4>${d[type][0]}</h4><p>${d[type][1]}</p>`;}
+function ageBoundary(btn,age){document.querySelectorAll('#slide-10 .choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');const ok=age>=17;document.getElementById('boundaryInfo').innerHTML=`<h4>Usia ${age}</h4><p>Kondisi <code>${age} >= 17</code> bernilai <strong>${ok?'True':'False'}</strong>.</p><p>Jalur yang dipilih: <strong>${ok?'if — memenuhi batas simulasi':'else — belum memenuhi batas'}</strong>.</p>`;}
+function traceAge(age,btn){document.querySelectorAll('#slide-19 .choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');const ok=age>=17;document.getElementById('traceBox').innerHTML=`<div class="trace-step"><strong>Input</strong><span>${age}</span></div><div class="trace-step"><strong>Kondisi</strong><span>${age} >= 17 → ${ok?'True':'False'}</span></div><div class="trace-step"><strong>Jalur</strong><span>${ok?'if':'else'}</span></div><div class="trace-step"><strong>Output</strong><span>${ok?'akses diberikan':'akses belum dibuka'}</span></div>`;}
+function loadAgeCase(btn,age){const input=document.getElementById('py5_input');if(!input)return;input.value=String(age);document.querySelectorAll('#slide-18 .choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');const fb=document.getElementById('ageCaseFeedback');const ok=age>=17;fb.textContent=`Input ${age} dimuat ke Starter Code. Ekspektasi: masuk cabang ${ok?'if':'else'}.`;fb.style.color='#176b35';const out=document.getElementById('py5_out');if(out)out.textContent=`Input ${age} sudah dimuat. Klik Run code untuk menjalankan program.`;currentSlide=17;updateSlide();setTimeout(()=>{input.classList.add('preset-loaded');input.focus();setTimeout(()=>input.classList.remove('preset-loaded'),1400);},80);}
+function showLmsStep(step,btn){document.querySelectorAll('.lms-map-wrap .hotspot,.lms-map-wrap .session-card-hotspot').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');}
+function initPyEditors(){document.querySelectorAll('.python-editor textarea[id^="py"]:not(.stdin-area)').forEach(area=>{const out=document.getElementById(area.id+'_out');if(out&&!out.textContent.trim())out.textContent='Output akan muncul di sini setelah Run code.';});}
+function runPyEditor(id){const code=document.getElementById(id).value;const stdinEl=document.getElementById(id+'_input');const stdin=stdinEl?stdinEl.value:'';document.getElementById(id+'_out').textContent=runMiniPython(code,stdin);}
+function wrap(value,type){return {__value:value,__type:type||inferType(value)};}
+function rawVal(v){return v&&v.__value!==undefined?v.__value:v;}
+function inferType(v){if(typeof v==='boolean')return 'bool';if(typeof v==='number')return Number.isInteger(v)?'int':'float';return 'str';}
+function valType(v){return v&&v.__type?v.__type:inferType(rawVal(v));}
+function pyString(v){const r=rawVal(v);if(typeof r==='boolean')return r?'True':'False';return String(r);}
+function formatNumber(n){n=Number(rawVal(n));if(!isFinite(n))return String(n);return n.toLocaleString('en-US',{maximumFractionDigits:2});}
+function decodePyString(s){return s.replace(/\\n/g,'\n').replace(/\\t/g,'\t').replace(/\\"/g,'"').replace(/\\'/g,"'");}
+function stripComment(line){let quote=null;for(let i=0;i<line.length;i++){const c=line[i],prev=line[i-1];if(quote){if(c===quote&&prev!=='\\')quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='#')return line.slice(0,i);}return line;}
+function countIndent(line){const m=line.match(/^ */);return m?m[0].length:0;}
+function normalizeLines(code){return code.split(/\r?\n/).map((raw,idx)=>{const noComment=stripComment(raw);return {raw, text:noComment.trim(), indent:countIndent(raw), lineNo:idx+1, blank:noComment.trim()===''};});}
+function runMiniPython(code,stdinText){let vars={},output=[],inputs=stdinText.split(/\r?\n/),inputIndex=0,lines=normalizeLines(code);function nextInput(prompt){const val=inputIndex<inputs.length?inputs[inputIndex++]:'';output.push(prompt+val);return wrap(val,'str');}const res=execBlock(0,0,lines,vars,output,nextInput);if(res.error)return res.error;return output.length?output.join('\n'):'(Tidak ada output. Coba gunakan print().)';}
+function execBlock(start,indent,lines,vars,output,nextInput){let i=start;while(i<lines.length){let L=lines[i];if(L.blank){i++;continue;}if(L.indent<indent)break;if(L.indent>indent)return {error:`IndentationError on line ${L.lineNo}: unexpected indent.`};if(/^elif\b|^else\b/.test(L.text))break;if(/^if\b/.test(L.text)){const r=execIfChain(i,indent,lines,vars,output,nextInput);if(r.error)return r;i=r.next;continue;}const r=execSimpleLine(L,vars,output,nextInput);if(r.error)return r.error?{error:r.error}:r;i++;}return {next:i};}
+function execIfChain(start,indent,lines,vars,output,nextInput){let i=start,executed=false;while(i<lines.length){let L=lines[i];if(L.blank){i++;continue;}if(L.indent!==indent)break;let type=null,condText=null;if(L.text.startsWith('if ')){type='if';condText=L.text.slice(3).trim();}else if(L.text.startsWith('elif ')){type='elif';condText=L.text.slice(5).trim();}else if(L.text==='else:'||L.text.startsWith('else')){type='else';}else break;if((type==='if'||type==='elif')&&!condText.endsWith(':'))return {error:`SyntaxError on line ${L.lineNo}: expected ':' after ${type} condition.`};if(type==='else'&&L.text!=='else:')return {error:`SyntaxError on line ${L.lineNo}: expected ':' after else.`};if(type==='if'||type==='elif')condText=condText.slice(0,-1).trim();let blockStart=i+1;let nextNon=blockStart;while(nextNon<lines.length&&lines[nextNon].blank)nextNon++;if(nextNon>=lines.length||lines[nextNon].indent<=indent)return {error:`IndentationError on line ${L.lineNo}: expected an indented block.`};let blockIndent=lines[nextNon].indent;let blockEnd=nextNon;while(blockEnd<lines.length){if(!lines[blockEnd].blank&&lines[blockEnd].indent<=indent)break;blockEnd++;}let shouldRun=false;if(!executed){if(type==='else')shouldRun=true;else{const p=parseExpr(condText,vars,L.lineNo,nextInput);if(p.error)return {error:p.error};shouldRun=!!rawVal(p.value);}}if(shouldRun){const r=execBlock(nextNon,blockIndent,lines,vars,output,nextInput);if(r.error)return r;if(r.next<blockEnd&&!lines[r.next].blank&&lines[r.next].indent>indent)return {error:`IndentationError on line ${lines[r.next].lineNo}: unindent does not match any outer indentation level.`};executed=true;}i=blockEnd;}return {next:i};}
+function execSimpleLine(L,vars,output,nextInput){let line=L.text;if(!line)return {};const assign=line.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+)$/);if(assign){const p=parseExpr(assign[2].trim(),vars,L.lineNo,nextInput);if(p.error)return {error:p.error};vars[assign[1]]=p.value;return {};}
+const pr=line.match(/^print\((.*)\)$/);if(pr){const p=parseExpr(pr[1].trim(),vars,L.lineNo,nextInput);if(p.error)return {error:p.error};output.push(pyString(p.value));return {};}
+if(/^if\b/.test(line)&&!line.endsWith(':'))return {error:`SyntaxError on line ${L.lineNo}: expected ':' after if condition.`};
+return {error:`SyntaxError on line ${L.lineNo}: simulator mendukung assignment, input(), int(), float(), type(), operator, if/elif/else, dan print().`};}
+function parseExpr(text,vars,lineNo,nextInput){text=text.trim();if(text.startsWith('(')&&text.endsWith(')')&&matchingOuterParens(text))return parseExpr(text.slice(1,-1),vars,lineNo,nextInput);let cmp=findTopLevelComparison(text);if(cmp){let a=parseExpr(text.slice(0,cmp.index),vars,lineNo,nextInput);if(a.error)return a;let b=parseExpr(text.slice(cmp.index+cmp.op.length),vars,lineNo,nextInput);if(b.error)return b;return compareOp(a.value,b.value,cmp.op,lineNo);}let idx=findTopLevelOperator(text,['+','-']);if(idx){let a=parseExpr(text.slice(0,idx.index),vars,lineNo,nextInput);if(a.error)return a;let b=parseExpr(text.slice(idx.index+1),vars,lineNo,nextInput);if(b.error)return b;return numericOp(a.value,b.value,idx.op,lineNo);}idx=findTopLevelOperator(text,['*','/']);if(idx){let a=parseExpr(text.slice(0,idx.index),vars,lineNo,nextInput);if(a.error)return a;let b=parseExpr(text.slice(idx.index+1),vars,lineNo,nextInput);if(b.error)return b;return numericOp(a.value,b.value,idx.op,lineNo);}let m;if((m=text.match(/^input\((.*)\)$/))){const p=parseExpr(m[1].trim()||'""',vars,lineNo,nextInput);if(p.error)return p;return {value:nextInput(pyString(p.value))};}if((m=text.match(/^int\((.*)\)$/))){const p=parseExpr(m[1].trim(),vars,lineNo,nextInput);if(p.error)return p;const s=pyString(p.value).trim();if(!/^[+-]?\d+(\.\d+)?$/.test(s))return {error:`ValueError on line ${lineNo}: invalid literal for int(): '${s}'`};return {value:wrap(parseInt(Number(s),10),'int')};}if((m=text.match(/^float\((.*)\)$/))){const p=parseExpr(m[1].trim(),vars,lineNo,nextInput);if(p.error)return p;const s=pyString(p.value).trim();if(!/^[+-]?(\d+(\.\d*)?|\.\d+)$/.test(s))return {error:`ValueError on line ${lineNo}: could not convert string to float: '${s}'`};return {value:wrap(parseFloat(s),'float')};}if((m=text.match(/^type\((.*)\)$/))){const p=parseExpr(m[1].trim(),vars,lineNo,nextInput);if(p.error)return p;return {value:wrap(`<class '${valType(p.value)}'>`,'str')};}if((text.startsWith('f"')&&text.endsWith('"'))||(text.startsWith("f'")&&text.endsWith("'"))){let inner=decodePyString(text.slice(2,-1));let err=null;let res=inner.replace(/\{([^{}]+)\}/g,(full,expr)=>{let ex=expr.trim(),fmt='';const c=findTopLevelChar(ex,':');if(c>-1){fmt=ex.slice(c+1).trim();ex=ex.slice(0,c).trim();}const p=parseExpr(ex,vars,lineNo,nextInput);if(p.error){err=p.error;return full;}const v=rawVal(p.value);if(fmt===',')return formatNumber(v);return String(v);});if(err)return {error:err};return {value:wrap(res,'str')};}if((text.startsWith('"')&&text.endsWith('"'))||(text.startsWith("'")&&text.endsWith("'")))return {value:wrap(decodePyString(text.slice(1,-1)),'str')};if(text==='True')return {value:wrap(true,'bool')};if(text==='False')return {value:wrap(false,'bool')};if(/^[+-]?\d+$/.test(text))return {value:wrap(parseInt(text,10),'int')};if(/^[+-]?(\d+\.\d*|\.\d+)$/.test(text))return {value:wrap(parseFloat(text),'float')};if(Object.prototype.hasOwnProperty.call(vars,text))return {value:vars[text]};if(text.includes('{')&&text.includes('}'))return {error:`f-string error on line ${lineNo}: tambahkan huruf f sebelum tanda kutip.`};return {error:`NameError on line ${lineNo}: name '${text}' is not defined atau teks belum diberi tanda kutip.`};}
+function compareOp(a,b,op,lineNo){let x=rawVal(a),y=rawVal(b);let r;if(typeof x==='number'&&typeof y==='number'){if(op==='>')r=x>y;else if(op==='>=')r=x>=y;else if(op==='<')r=x<y;else if(op==='<=')r=x<=y;else if(op==='==')r=x===y;else r=x!==y;}else{if(op==='==')r=String(x)===String(y);else if(op==='!=')r=String(x)!==String(y);else return {error:`TypeError on line ${lineNo}: operator ${op} membutuhkan data angka untuk perbandingan ini.`};}return {value:wrap(r,'bool')};}
+function numericOp(a,b,op,lineNo){const x=Number(rawVal(a)),y=Number(rawVal(b));if(!isFinite(x)||!isFinite(y))return {error:`TypeError on line ${lineNo}: operator ${op} membutuhkan data angka.`};if(op==='/'&&y===0)return {error:`ZeroDivisionError on line ${lineNo}: division by zero.`};let r;if(op==='+')r=x+y;else if(op==='-')r=x-y;else if(op==='*')r=x*y;else r=x/y;return {value:wrap(r,Number.isInteger(r)?'int':'float')};}
+function findTopLevelComparison(text){let quote=null,depth=0;const ops=['>=','<=','==','!=','>','<'];for(let i=0;i<text.length;i++){const c=text[i],prev=text[i-1];if(quote){if(c===quote&&prev!=='\\')quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='(')depth++;else if(c===')')depth--;else if(depth===0){for(const op of ops){if(text.slice(i,i+op.length)===op)return {index:i,op};}}}return null;}
+function findTopLevelOperator(text,ops){let quote=null,depth=0;for(let i=text.length-1;i>=0;i--){const c=text[i],prev=text[i-1];if(quote){if(c===quote&&prev!=='\\')quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c===')')depth++;else if(c==='(')depth--;else if(depth===0&&ops.includes(c)){if((c==='+'||c==='-')&&(i===0||'+-*/(<>=!'.includes(text[i-1])))continue;return {index:i,op:c};}}return null;}
+function findTopLevelChar(text,char){let quote=null,depth=0;for(let i=0;i<text.length;i++){const c=text[i],prev=text[i-1];if(quote){if(c===quote&&prev!=='\\')quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='(')depth++;else if(c===')')depth--;else if(c===char&&depth===0)return i;}return -1;}
+function matchingOuterParens(text){let depth=0,quote=null;for(let i=0;i<text.length;i++){const c=text[i],prev=text[i-1];if(quote){if(c===quote&&prev!=='\\')quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='(')depth++;else if(c===')'){depth--;if(depth===0&&i<text.length-1)return false;}}return depth===0;}
+</script>
+</body></html>

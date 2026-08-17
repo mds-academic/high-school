@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>UOB My Digital Space — High School Sesi 6</title><link href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;✅&lt;/text&gt;&lt;/svg&gt;" rel="icon"/><style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --blue: #0056b3;
+      --light-blue: #4a9eff;
+      --uob-red: #e60012;
+      --uob-red-soft: #ff5a6b;
+      --uob-blue-deep: #0056b3;
+      --uob-blue-soft: #5aa7ff;
+      --teal: #11a9b7;
+      --bg: #f5f6f8;
+      --panel: #fff;
+      --text: #2c3e50;
+      --muted: #6c757d;
+      --line: #e3e8ef;
+      --green: #2e9d57;
+      --orange: #f39c12;
+      --red: #e74c3c;
+      --purple: #8e44ad;
+      --blue-soft: #eef7ff;
+      --green-soft: #effaf2
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      height: 100vh;
+      overflow: hidden;
+      color: var(--text)
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #f5d7da, #d9e9ff);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, .08)
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--uob-red) 0%, var(--uob-red-soft) 28%, var(--uob-blue-deep) 72%, var(--uob-blue-soft) 100%);
+      transition: width .3s ease;
+      box-shadow: 0 0 8px rgba(0, 86, 179, .18)
+    }
+
+    .main-container {
+      display: flex;
+      height: 100vh
+    }
+
+    .slides-panel {
+      width: 50%;
+      background: #f8f9fa;
+      border-right: 2px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      position: relative
+    }
+
+    .explanation-panel {
+      width: 50%;
+      background: #fff;
+      overflow-y: auto;
+      padding: 32px
+    }
+
+    .slide-header {
+      background: #fff;
+      padding: 17px 20px 15px;
+      border-bottom: 2px solid var(--line);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+      position: relative
+    }
+
+    .slide-header::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(var(--uob-red), var(--light-blue))
+    }
+
+    .slide-header h1 {
+      font-size: 1.28rem;
+      color: var(--text);
+      margin-bottom: 3px
+    }
+
+    .slide-header p {
+      font-size: .9rem;
+      color: var(--muted)
+    }
+
+    .header-badge {
+      position: absolute;
+      right: 18px;
+      top: 17px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      border: 1px solid #cce7ff;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-weight: 700;
+      font-size: .76rem
+    }
+
+    .slide-content {
+      flex: 1;
+      padding: 24px 28px 94px;
+      overflow-y: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 0
+    }
+
+    .slide,
+    .explanation {
+      display: none;
+      opacity: 0;
+      transition: opacity .25s ease
+    }
+
+    .slide.active,
+    .explanation.active {
+      display: block;
+      opacity: 1
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 820px
+    }
+
+    .explanation {
+      max-width: 760px;
+      margin: 0 auto
+    }
+
+    .slide h2 {
+      font-size: 2.25rem;
+      color: var(--blue);
+      margin-bottom: 10px;
+      line-height: 1.15
+    }
+
+    .slide h3 {
+      font-size: 1.78rem;
+      color: var(--blue);
+      margin-bottom: 16px;
+      line-height: 1.2
+    }
+
+    .slide h4,
+    .explanation h4 {
+      font-size: 1.05rem;
+      margin-bottom: 9px;
+      color: var(--text)
+    }
+
+    .slide p,
+    .explanation p {
+      font-size: 1rem;
+      line-height: 1.58;
+      color: #495057;
+      margin-bottom: 14px
+    }
+
+    .explanation h3 {
+      font-size: 1.65rem;
+      margin-bottom: 16px;
+      color: var(--text);
+      line-height: 1.25
+    }
+
+    .slide ul,
+    .slide ol,
+    .explanation ul,
+    .explanation ol {
+      margin-left: 22px;
+      margin-bottom: 10px
+    }
+
+    .slide li,
+    .explanation li {
+      margin-bottom: 7px;
+      line-height: 1.5
+    }
+
+    code {
+      background: #eef3f8;
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #334155
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--uob-red);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 8px
+    }
+
+    .lead {
+      font-size: 1.08rem !important
+    }
+
+    .mini-note {
+      font-size: .9rem !important;
+      color: var(--muted) !important;
+      margin-top: 10px
+    }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      gap: 13px;
+      margin: 16px 0
+    }
+
+    .visual-card,
+    .metric-box,
+    .info-box,
+    .example-box,
+    .warning-box,
+    .interactive-box,
+    .code-card,
+    .quiz-card {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05)
+    }
+
+    .visual-card {
+      padding: 15px
+    }
+
+    .visual-card p {
+      margin-bottom: 0;
+      font-size: .92rem;
+      line-height: 1.42
+    }
+
+    .visual-icon {
+      font-size: 1.9rem;
+      margin-bottom: 8px
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 16px
+    }
+
+    .metric-box {
+      padding: 16px 12px;
+      text-align: center
+    }
+
+    .metric-box strong {
+      display: block;
+      font-size: 1.55rem;
+      color: var(--blue);
+      margin-bottom: 7px
+    }
+
+    .metric-box span {
+      font-size: .9rem;
+      line-height: 1.35;
+      color: #495057;
+      display: block
+    }
+
+    .info-box,
+    .example-box,
+    .warning-box,
+    .interactive-box {
+      padding: 17px;
+      margin: 16px 0
+    }
+
+    .info-box {
+      border-left: 5px solid var(--light-blue)
+    }
+
+    .example-box {
+      border-left: 5px solid var(--green);
+      background: #f8fff8
+    }
+
+    .warning-box {
+      border-left: 5px solid var(--orange);
+      background: #fffaf0
+    }
+
+    .interactive-box {
+      border-left: 5px solid var(--purple);
+      background: #fcf8ff
+    }
+
+    .navigation {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 2px solid var(--line);
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, .04)
+    }
+
+    .nav-btn {
+      background: var(--light-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: .94rem;
+      font-weight: 700;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      transition: .2s ease
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      background: #357abd
+    }
+
+    .nav-btn:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none
+    }
+
+    .slide-indicator {
+      font-size: .9rem;
+      color: var(--muted);
+      font-weight: 700
+    }
+
+    .floating-element {
+      position: absolute;
+      opacity: .07;
+      pointer-events: none;
+      font-size: 2rem;
+      animation: float 6s ease-in-out infinite
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0)
+      }
+
+      33% {
+        transform: translateY(-12px) rotate(4deg)
+      }
+
+      66% {
+        transform: translateY(7px) rotate(-3deg)
+      }
+    }
+
+    .access-popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .8);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center
+    }
+
+    .access-popup {
+      background: white;
+      border: 3px solid var(--light-blue);
+      border-radius: 15px;
+      padding: 38px;
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .3);
+      transform: scale(.8);
+      opacity: 0;
+      transition: all .3s ease
+    }
+
+    .access-popup.show {
+      transform: scale(1);
+      opacity: 1
+    }
+
+    .access-popup h2 {
+      color: var(--text);
+      margin-bottom: 13px;
+      font-size: 1.8rem
+    }
+
+    .access-popup p {
+      color: #666;
+      margin-bottom: 22px;
+      line-height: 1.55
+    }
+
+    .access-input {
+      width: 100%;
+      padding: 14px;
+      font-size: 1.15rem;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      text-align: center;
+      letter-spacing: 2px;
+      font-weight: bold;
+      text-transform: uppercase
+    }
+
+    .access-input:focus {
+      outline: none;
+      border-color: var(--light-blue);
+      box-shadow: 0 0 0 3px rgba(74, 158, 255, .12)
+    }
+
+    .access-submit,
+    .primary-btn,
+    .secondary-btn {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .access-submit,
+    .primary-btn {
+      background: var(--blue);
+      color: white
+    }
+
+    .secondary-btn {
+      background: #e9ecef;
+      color: var(--text)
+    }
+
+    .access-submit {
+      padding: 13px 28px;
+      font-size: 1.05rem
+    }
+
+    .access-error {
+      color: var(--red);
+      margin-top: 13px;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity .2s
+    }
+
+    .access-error.show {
+      opacity: 1
+    }
+
+    .access-hint {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 5px;
+      padding: 9px;
+      margin-top: 18px;
+      font-size: .88rem;
+      color: #856404
+    }
+
+    .scratch-map-wrap {
+      position: relative;
+      width: 100%;
+      margin: 12px auto;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .08)
+    }
+
+    .scratch-map-wrap img {
+      width: 100%;
+      display: block
+    }
+
+    .hotspot {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      background: var(--uob-red);
+      color: white;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35);
+      display: grid;
+      place-items: center;
+      transform: translate(-50%, -50%);
+      transition: transform .16s, background .16s;
+      z-index: 3
+    }
+
+    .hotspot:hover,
+    .hotspot.active {
+      transform: translate(-50%, -50%) scale(1.16);
+      background: var(--blue)
+    }
+
+    .scratch-caption {
+      text-align: center;
+      font-size: .85rem;
+      color: var(--muted);
+      margin-top: 8px
+    }
+
+    .area-live-card {
+      min-height: 110px;
+      border: 2px solid #cfe7fb;
+      background: var(--blue-soft);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 14px
+    }
+
+    .area-number {
+      display: inline-grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: white;
+      font-weight: 900;
+      margin-right: 7px
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .choice-btn {
+      border: 2px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 11px 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: .18s;
+      text-align: left
+    }
+
+    .choice-btn:hover {
+      border-color: var(--light-blue);
+      transform: translateY(-1px)
+    }
+
+    .choice-btn.correct,
+    .choice-btn.selected {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: #176b35
+    }
+
+    .choice-btn.wrong {
+      border-color: var(--red);
+      background: #fff1f0;
+      color: #a42820
+    }
+
+    .feedback-line {
+      min-height: 28px;
+      font-weight: 700;
+      margin-top: 8px
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .form-grid label {
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--text)
+    }
+
+    .form-grid input,
+    .form-grid textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      margin-top: 5px
+    }
+
+    .form-grid input:focus,
+    .form-grid textarea:focus {
+      outline: none;
+      border-color: var(--light-blue)
+    }
+
+    .lms-map-wrap,
+    .test-map-wrap {
+      position: relative
+    }
+
+    .session-card-hotspot {
+      position: absolute;
+      left: 19.1%;
+      top: 43%;
+      width: 25.5%;
+      height: 51%;
+      padding: 0;
+      border: 3px dashed transparent;
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+      transition: .2s ease
+    }
+
+    .session-card-hotspot span {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: #fff;
+      font-size: .9rem;
+      font-weight: 900;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35)
+    }
+
+    .session-card-hotspot:hover,
+    .session-card-hotspot.active {
+      border-color: var(--uob-red);
+      background: rgba(230, 0, 18, .08)
+    }
+
+    .session-card-hotspot:hover span,
+    .session-card-hotspot.active span {
+      background: var(--blue);
+      transform: scale(1.1)
+    }
+
+    .test-card-hotspot {
+      position: absolute;
+      left: 18%;
+      right: 3%;
+      bottom: 5%;
+      height: 20%;
+      padding: 0;
+      border: 3px dashed transparent;
+      border-radius: 14px;
+      background: transparent;
+      cursor: pointer;
+      transition: .2s ease
+    }
+
+    .test-number {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35)
+    }
+
+    .test-instruction {
+      position: absolute;
+      left: 50%;
+      bottom: 12px;
+      transform: translateX(-50%);
+      width: 88%;
+      padding: 7px 9px;
+      border-radius: 8px;
+      background: rgba(0, 86, 179, .94);
+      color: #fff;
+      font-size: .76rem;
+      line-height: 1.3;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, .25)
+    }
+
+    .test-card-hotspot:hover,
+    .test-card-hotspot.active {
+      border-color: var(--uob-red);
+      background: rgba(230, 0, 18, .08)
+    }
+
+    .test-card-hotspot:hover .test-instruction,
+    .test-card-hotspot.active .test-instruction {
+      background: var(--uob-red)
+    }
+
+    .flow-line {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 20px 0
+    }
+
+    .flow-box {
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--blue);
+      color: #fff;
+      text-align: center;
+      font-weight: 900;
+      cursor: pointer
+    }
+
+    .flow-arrow {
+      color: var(--uob-red);
+      font-size: 1.6rem;
+      font-weight: 900
+    }
+
+    .comparison-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    .compare-card {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      background: #fff
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 2px
+    }
+
+    .pill.blue {
+      background: var(--blue)
+    }
+
+    .pill.green {
+      background: var(--green)
+    }
+
+    .pill.purple {
+      background: var(--purple)
+    }
+
+    .colab-mock,
+    .colab-hotmap {
+      border: 2px solid #dce6ef;
+      border-radius: 14px;
+      background: #1e1e1e;
+      color: #e5e7eb;
+      overflow: hidden;
+      margin: 16px 0;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .12);
+      position: relative
+    }
+
+    .colab-title {
+      background: #111827;
+      padding: 10px 14px;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      font-size: .9rem
+    }
+
+    .colab-title span {
+      font-size: .8rem;
+      color: #9ca3af
+    }
+
+    .colab-cell {
+      margin: 12px;
+      border: 1px solid #374151;
+      border-radius: 10px;
+      background: #0f172a;
+      min-height: 72px;
+      position: relative;
+      padding: 14px 14px 14px 48px
+    }
+
+    .run-dot {
+      position: absolute;
+      left: 12px;
+      top: 15px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 0;
+      background: #16a34a;
+      color: white;
+      display: grid;
+      place-items: center
+    }
+
+    .colab-cell pre,
+    .code-card pre,
+    .receipt-preview pre {
+      white-space: pre-wrap;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .9rem;
+      line-height: 1.45
+    }
+
+    .colab-output {
+      margin: 0 12px 12px;
+      padding: 12px;
+      background: #fff;
+      color: #111827;
+      border-radius: 10px;
+      min-height: 48px;
+      position: relative
+    }
+
+    .python-editor {
+      border-radius: 18px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #152744 0%, #132742 100%);
+      box-shadow: 0 10px 24px rgba(8, 22, 46, .18);
+      margin: 16px 0;
+      border: 1px solid #274468
+    }
+
+    .editor-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #182c49;
+      color: #fff;
+      padding: 13px 18px 11px;
+      font-weight: 900
+    }
+
+    .editor-label {
+      font-size: 1.05rem;
+      letter-spacing: .05em;
+      color: #dbeafe
+    }
+
+    .editor-live {
+      font-size: .95rem;
+      letter-spacing: .04em;
+      color: #69e3a7
+    }
+
+    .python-editor textarea {
+      width: 100%;
+      min-height: 250px;
+      resize: vertical;
+      background: #0f2240;
+      color: #fff;
+      border: 0;
+      padding: 18px 18px 16px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 1rem;
+      line-height: 1.65;
+      outline: none
+    }
+
+    .python-editor textarea:focus {
+      box-shadow: inset 0 0 0 2px rgba(147, 197, 253, .22)
+    }
+
+    .editor-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      background: #182c49;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      border-bottom: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .run-code-btn {
+      background: #22b573;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-weight: 900;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, .12);
+      transition: .18s ease
+    }
+
+    .run-code-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03)
+    }
+
+    .editor-toolbar-note {
+      color: #dbeafe;
+      font-size: .98rem;
+      line-height: 1.4
+    }
+
+    .editor-output-panel {
+      padding: 0 16px 16px;
+      background: #182c49
+    }
+
+    .editor-output-label {
+      color: #93c5fd;
+      font-size: 1rem;
+      letter-spacing: .08em;
+      font-weight: 900;
+      padding: 14px 12px 8px
+    }
+
+    .output-box {
+      background: #041126;
+      color: #fff;
+      min-height: 110px;
+      white-space: pre-wrap;
+      font-family: Consolas, Monaco, monospace;
+      padding: 16px;
+      border: 1px solid #2b4f7b;
+      border-radius: 12px;
+      line-height: 1.6
+    }
+
+    .code-card {
+      padding: 14px;
+      background: #111827;
+      color: #e5e7eb;
+      overflow: auto
+    }
+
+    .receipt-preview {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 14px 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05)
+    }
+
+    .receipt-preview pre {
+      color: #111827
+    }
+
+    .component-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0
+    }
+
+    .component-pill {
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      padding: 8px 11px;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .component-pill.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    .checklist {
+      list-style: none;
+      margin-left: 0 !important;
+      display: grid;
+      gap: 8px
+    }
+
+    .check-item {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      cursor: pointer
+    }
+
+    .check-item input {
+      margin-top: 3px;
+      transform: scale(1.2)
+    }
+
+    .check-item.done {
+      background: var(--green-soft);
+      border-color: #9cd9af;
+      text-decoration: line-through;
+      color: #3e6b4c
+    }
+
+    .debug-scenario {
+      display: none
+    }
+
+    .debug-scenario.active {
+      display: block
+    }
+
+    .debug-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px
+    }
+
+    .debug-tab {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 7px 11px;
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    .debug-tab.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    @media(max-width:960px) {
+      body {
+        overflow: auto;
+        height: auto
+      }
+
+      .main-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh
+      }
+
+      .slides-panel,
+      .explanation-panel {
+        width: 100%;
+        height: auto;
+        min-height: 50vh
+      }
+
+      .slides-panel {
+        min-height: 100vh
+      }
+
+      .slide-content {
+        padding: 20px 20px 92px
+      }
+
+      .explanation-panel {
+        padding: 24px
+      }
+
+      .header-badge {
+        display: none
+      }
+
+      .flow-line,
+      .comparison-table {
+        grid-template-columns: 1fr
+      }
+
+      .flow-arrow {
+        display: none
+      }
+    }
+
+    .stdin-panel {
+      padding: 0 16px 14px;
+      background: #182c49;
+      border-top: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .stdin-label {
+      color: #93c5fd;
+      font-size: .86rem;
+      letter-spacing: .08em;
+      font-weight: 900;
+      padding: 10px 2px 6px;
+      text-transform: uppercase
+    }
+
+    .stdin-area {
+      width: 100%;
+      min-height: 74px;
+      resize: vertical;
+      border: 1px solid #2b4f7b;
+      border-radius: 10px;
+      background: #0b1a33;
+      color: #e5f0ff;
+      padding: 10px 12px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .92rem;
+      line-height: 1.45;
+      outline: none
+    }
+
+    .stdin-area:focus {
+      box-shadow: inset 0 0 0 2px rgba(147, 197, 253, .22)
+    }
+
+    .stdin-area.preset-loaded {
+      border-color: #69e3a7;
+      box-shadow: 0 0 0 3px rgba(105, 227, 167, .22), inset 0 0 0 1px rgba(105, 227, 167, .35)
+    }
+
+    .type-bank {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .type-card {
+      border: 2px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: 800
+    }
+
+    .type-card.active {
+      background: var(--blue-soft);
+      border-color: var(--blue)
+    }
+
+    .mini-terminal {
+      background: #041126;
+      color: #fff;
+      border-radius: 12px;
+      border: 1px solid #2b4f7b;
+      padding: 16px;
+      margin: 14px 0;
+      font-family: Consolas, Monaco, monospace;
+      white-space: pre-wrap;
+      line-height: 1.55;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .08)
+    }
+
+    .safe-card {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 13px;
+      cursor: pointer;
+      font-weight: 800
+    }
+
+    .safe-card.safe {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: #176b35
+    }
+
+    .safe-card.risky {
+      border-color: var(--red);
+      background: #fff1f0;
+      color: #a42820
+    }
+
+    .memory-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    .memory-slot {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      cursor: pointer
+    }
+
+    .memory-slot.active {
+      border-color: var(--blue);
+      background: var(--blue-soft)
+    }
+
+    .memory-slot code {
+      display: block;
+      margin-top: 6px;
+      color: var(--blue);
+      font-weight: 900
+    }
+
+    .thin-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 14px 0
+    }
+
+    .thin-table th {
+      background: var(--blue);
+      color: #fff;
+      text-align: left;
+      padding: 10px
+    }
+
+    .thin-table td {
+      border-top: 1px solid var(--line);
+      padding: 10px;
+      vertical-align: top
+    }
+
+    .thin-table code {
+      background: #eef3f8;
+      padding: 2px 6px;
+      border-radius: 5px
+    }
+  
+    details.learn-accordion {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      margin: 10px 0;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+    details.learn-accordion summary {
+      cursor: pointer;
+      padding: 12px 14px;
+      font-weight: 900;
+      color: var(--blue);
+      background: var(--blue-soft);
+      list-style: none;
+    }
+    details.learn-accordion summary::-webkit-details-marker {display:none;}
+    details.learn-accordion .accordion-body {padding: 14px 16px;}
+    .decision-gate {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 16px 0;
+    }
+    .gate-node {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      font-weight: 900;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
+    .gate-diamond {
+      width: 112px;
+      height: 112px;
+      transform: rotate(45deg);
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--blue), var(--light-blue));
+      color: white;
+      border-radius: 16px;
+      font-weight: 900;
+      text-align: center;
+      box-shadow: 0 7px 16px rgba(0,86,179,.18);
+    }
+    .gate-diamond span {transform: rotate(-45deg); display:block; font-size:.85rem; line-height:1.25;}
+    .branch-label {font-size:.82rem; color:var(--muted); font-weight:800; margin-top:6px;}
+    .trace-card {display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin:12px 0;}
+    .trace-step {background:#fff; border:2px solid var(--line); border-radius:12px; padding:12px; text-align:center;}
+    .trace-step strong {display:block; color:var(--blue); margin-bottom:5px;}
+    .operator-board {display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin:14px 0;}
+    .operator-btn {background:#fff; border:2px solid var(--line); border-radius:12px; padding:12px; cursor:pointer; font-weight:900; text-align:center;}
+    .operator-btn:hover,.operator-btn.active {border-color:var(--blue); background:var(--blue-soft); color:var(--blue); transform:translateY(-1px);}
+    .true-false {display:flex; gap:8px; flex-wrap:wrap; margin:10px 0;}
+    .true-pill,.false-pill {padding:7px 11px; border-radius:999px; color:white; font-weight:900;}
+    .true-pill {background:var(--green);} .false-pill{background:var(--red);}
+    .compact-code {max-height: 260px; overflow:auto;}
+    @media(max-width:960px){.decision-gate{grid-template-columns:1fr}.gate-diamond{margin:0 auto}.flow-arrow{display:none}}
+
+  
+/* Session 6 components */
+.risk-scale{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}.risk-zone{border:2px solid var(--line);background:#fff;border-radius:14px;padding:15px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:.18s ease}.risk-zone:hover,.risk-zone.active{transform:translateY(-2px);border-color:var(--blue);background:var(--blue-soft)}.risk-zone strong{display:block;font-size:1.05rem;margin-bottom:6px}.risk-zone small{color:var(--muted);font-weight:800}.risk-zone.aman{border-left:6px solid var(--green)}.risk-zone.hati{border-left:6px solid var(--orange)}.risk-zone.risk{border-left:6px solid var(--red)}.score-meter{height:26px;border-radius:999px;background:linear-gradient(90deg,#f87171 0%,#f59e0b 50%,#22c55e 100%);position:relative;margin:18px 0 10px;box-shadow:inset 0 2px 4px rgba(0,0,0,.12)}.score-marker{position:absolute;top:-9px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#fff;border:3px solid var(--blue);font-weight:900;color:var(--blue);box-shadow:0 4px 12px rgba(0,0,0,.18);transform:translateX(-50%);left:65%}.score-labels{display:flex;justify-content:space-between;font-size:.82rem;font-weight:900;color:var(--muted)}.branch-chain{display:grid;gap:10px;margin:14px 0}.branch-row{display:grid;grid-template-columns:110px 1fr;gap:10px}.branch-key{background:var(--blue);color:#fff;border-radius:12px;display:grid;place-items:center;font-weight:900}.branch-condition{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px}.branch-condition strong{color:var(--blue)}.mini-terminal.dark{background:#041126;color:#e5f0ff;border:1px solid #2b4f7b;border-radius:12px;padding:16px;margin:14px 0;font-family:Consolas,Monaco,monospace;white-space:pre-wrap;line-height:1.55}.boundary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(95px,1fr));gap:10px;margin:12px 0}.boundary-btn{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;font-weight:900;text-align:center}.boundary-btn:hover,.boundary-btn.active{border-color:var(--blue);background:var(--blue-soft);color:var(--blue)}.note-pill{display:inline-block;padding:5px 9px;border-radius:999px;background:var(--blue-soft);color:var(--blue);font-size:.82rem;font-weight:900;margin:2px}@media(max-width:960px){.risk-scale{grid-template-columns:1fr}.branch-row{grid-template-columns:1fr}}
+</style></head>
+<body>
+<div class="access-popup-overlay" id="accessPopup"><div class="access-popup"><h2>🔐 Kode Akses</h2><p>Masukkan kode akses High School untuk membuka materi Sesi 6.</p><input autocomplete="off" class="access-input" id="accessInput" maxlength="20" placeholder="MASUKKAN KODE" type="text"/><button class="access-submit" onclick="checkAccessCode()">Masuk</button><div class="access-error" id="accessError">Kode akses belum tepat. Coba lagi.</div><div class="access-hint">Kode akses diberikan oleh guru.</div></div></div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="main-container" id="mainContent" style="display:none;"><div class="slides-panel"><div class="slide-header"><h1>UOB My Digital Space — High School</h1><p>Sesi 6 · Kategorisasi Kredit</p><span class="header-badge">Python · High School</span></div><div class="slide-content"><div class="floating-element" style="top:12%;left:7%;">🐍</div><div class="floating-element" style="top:18%;right:10%;">📊</div><div class="floating-element" style="bottom:25%;left:14%;">🔀</div><div class="floating-element" style="bottom:15%;right:16%;">🧪</div><section class="slide active" id="slide-1"><span class="eyebrow">Sesi 6</span><h2>Kategorisasi Kredit</h2><p class="lead">Hari ini program Python kita naik level: bukan cuma memilih dua jalur, tapi mengelompokkan skor simulasi ke beberapa kategori.</p><div class="metrics"><div class="metric-box"><strong>if</strong><span>cek kondisi pertama</span></div><div class="metric-box"><strong>elif</strong><span>pilihan tambahan</span></div><div class="metric-box"><strong>else</strong><span>jalur terakhir</span></div><div class="metric-box"><strong>🧪</strong><span>uji nilai batas</span></div></div><div class="example-box"><h4>Target akhir</h4><p>Program menerima skor 0–100, lalu menampilkan kategori: Aman, Hati-hati, atau Berisiko.</p></div></section><section class="slide" id="slide-2"><span class="eyebrow">Rencana Belajar</span><h3>Misi Belajar Hari Ini</h3><div class="visual-grid"><div class="visual-card"><div class="visual-icon">🔀</div><h4>Multi-cabang</h4><p>Membuat program dengan lebih dari dua hasil.</p></div><div class="visual-card"><div class="visual-icon">📊</div><h4>Rentang nilai</h4><p>Membaca zona skor 0–100.</p></div><div class="visual-card"><div class="visual-icon">🧠</div><h4>Urutan logika</h4><p>Menaruh kondisi dari batas tertinggi ke bawah.</p></div><div class="visual-card"><div class="visual-icon">🐞</div><h4>Debugging</h4><p>Mengecek bug operator, indentasi, dan nilai batas.</p></div></div><div class="interactive-box"><h4>Cek awal</h4><p>Kalau skor 65, seharusnya masuk kategori apa?</p><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'introQ')">Aman</button><button class="choice-btn" onclick="quiz(this,true,'introQ')">Hati-hati</button><button class="choice-btn" onclick="quiz(this,false,'introQ')">Berisiko</button></div><div class="feedback-line" id="introQ"></div></div></section><section class="slide" id="slide-3"><h3>Siapkan Workspace</h3><p class="lead">Pastikan lingkungan coding siap dan data yang dipakai aman.</p><div class="choice-grid"><button class="choice-btn" onclick="deviceCheck(this)">Laptop/komputer siap</button><button class="choice-btn" onclick="deviceCheck(this)">Internet stabil</button><button class="choice-btn" onclick="deviceCheck(this)">Google Colab/editor terbuka</button><button class="choice-btn" onclick="deviceCheck(this)">Notebook bernama <strong>Sesi6_Kategorisasi_Kredit</strong></button><button class="choice-btn" onclick="deviceCheck(this)">Input memakai data dummy</button><button class="choice-btn" onclick="deviceCheck(this)">Siap mengetes 85, 65, 40</button></div><div class="info-box"><strong>Alamat LMS:</strong><br/><a href="https://app.uobmydigitalspace.com/" rel="noopener noreferrer" target="_blank">https://app.uobmydigitalspace.com/</a></div></section><section class="slide" id="slide-4"><h3>Kenapa Tidak Cukup if-else?</h3><p class="lead">Sesi 5 memakai dua cabang. Sesi 6 butuh tiga kategori, jadi kita butuh jalur tambahan.</p><div class="comparison-table"><div class="compare-card"><h4>if-else</h4><div class="mini-terminal dark">if kondisi:
+    hasil A
+else:
+    hasil B</div><p>Cocok untuk dua hasil.</p></div><div class="compare-card"><h4>if-elif-else</h4><div class="mini-terminal dark">if kondisi_1:
+    hasil A
+elif kondisi_2:
+    hasil B
+else:
+    hasil C</div><p>Cocok untuk tiga hasil atau lebih.</p></div></div></section><section class="slide" id="slide-5"><h3>Zona Skor Simulasi</h3><p class="lead">Klik tiap zona untuk melihat arti kategorinya.</p><div class="score-meter"><div class="score-marker" id="scoreMarker">65</div></div><div class="score-labels"><span>0</span><span>50</span><span>80</span><span>100</span></div><div class="risk-scale"><button class="risk-zone risk" onclick="showRiskZone('risk',this)"><strong>🔴 Berisiko</strong><small>0–49</small></button><button class="risk-zone hati active" onclick="showRiskZone('hati',this)"><strong>🟡 Hati-hati</strong><small>50–79</small></button><button class="risk-zone aman" onclick="showRiskZone('aman',this)"><strong>🟢 Aman</strong><small>80–100</small></button></div><div class="area-live-card" id="riskZoneInfo"><h4>Zona Hati-hati</h4><p>Skor berada di tengah. Statusnya cukup baik, tetapi masih perlu perhatian.</p></div></section><section class="slide" id="slide-6"><h3>Aktivitas Mini: Klasifikasi Skor</h3><p class="lead">Tebak kategorinya sebelum Python yang bekerja.</p><div class="boundary-grid"><button class="boundary-btn" onclick="classifyScore(85,this)">85</button><button class="boundary-btn" onclick="classifyScore(65,this)">65</button><button class="boundary-btn" onclick="classifyScore(40,this)">40</button><button class="boundary-btn" onclick="classifyScore(80,this)">80</button><button class="boundary-btn" onclick="classifyScore(49,this)">49</button></div><div class="area-live-card" id="scoreClassInfo"><h4>Pilih skor</h4><p>Klik salah satu angka untuk melihat kategori simulasinya.</p></div><p class="mini-note">Ini hanya skor simulasi untuk belajar logika program.</p></section><section class="slide" id="slide-7"><h3>Flowchart Multi-Cabang</h3><p class="lead">Python mengecek kondisi dari atas ke bawah.</p><div class="branch-chain"><div class="branch-row"><div class="branch-key">if</div><div class="branch-condition"><strong>skor_user &gt;= 80</strong><br/>Jika benar → Zona Aman</div></div><div class="branch-row"><div class="branch-key">elif</div><div class="branch-condition"><strong>skor_user &gt;= 50</strong><br/>Jika kondisi pertama salah, cek ini → Zona Hati-hati</div></div><div class="branch-row"><div class="branch-key">else</div><div class="branch-condition"><strong>sisanya</strong><br/>Jika dua kondisi sebelumnya salah → Zona Berisiko</div></div></div><button class="primary-btn" onclick="revealAnswer('flowCode')">Klik untuk lihat bentuk kode</button><div class="area-live-card" id="flowCode" style="display:none"><pre><code>if skor_user &gt;= 80:
+    print("Zona Aman")
+elif skor_user &gt;= 50:
+    print("Zona Hati-hati")
+else:
+    print("Zona Berisiko")</code></pre></div></section><section class="slide" id="slide-8"><h3>Urutan Kondisi Itu Penting</h3><p class="lead">Kalau urutannya salah, program bisa memberi kategori yang tidak sesuai.</p><div class="comparison-table"><div class="compare-card"><h4>Urutan aman</h4><pre><code>if skor &gt;= 80:
+    print("Aman")
+elif skor &gt;= 50:
+    print("Hati-hati")
+else:
+    print("Berisiko")</code></pre></div><div class="compare-card"><h4>Urutan rawan bug</h4><pre><code>if skor &gt;= 50:
+    print("Hati-hati")
+elif skor &gt;= 80:
+    print("Aman")
+else:
+    print("Berisiko")</code></pre></div></div><div class="interactive-box"><h4>Quick check</h4><p>Jika skor 85 dicek dengan urutan rawan bug, output pertama yang muncul apa?</p><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'orderBugQ')">Aman</button><button class="choice-btn" onclick="quiz(this,true,'orderBugQ')">Hati-hati</button><button class="choice-btn" onclick="quiz(this,false,'orderBugQ')">Berisiko</button></div><div class="feedback-line" id="orderBugQ"></div></div></section><section class="slide" id="slide-9"><h3>Operator Pembanding</h3><p>Klik operator untuk melihat perannya.</p><div class="operator-board"><button class="operator-btn" onclick="showCreditOperator('ge',this)">&gt;=</button><button class="operator-btn" onclick="showCreditOperator('gt',this)">&gt;</button><button class="operator-btn" onclick="showCreditOperator('eq',this)">==</button><button class="operator-btn" onclick="showCreditOperator('lt',this)">&lt;</button></div><div class="area-live-card" id="creditOperatorInfo"><h4>Pilih operator</h4><p>Operator menentukan cara Python membandingkan skor dengan batas kategori.</p></div><div class="warning-box"><h4>Yang paling sering dipakai hari ini</h4><p><code>&gt;=</code>, karena nilai batas seperti 80 dan 50 harus ikut masuk ke kategorinya.</p></div></section><section class="slide" id="slide-10"><h3>Boundary Value: Nilai Batas</h3><p class="lead">Nilai batas adalah angka yang sering menjadi sumber bug. Hari ini batasnya 80 dan 50.</p><div class="boundary-grid"><button class="boundary-btn" onclick="classifyScore(79,this)">79</button><button class="boundary-btn" onclick="classifyScore(80,this)">80</button><button class="boundary-btn" onclick="classifyScore(49,this)">49</button><button class="boundary-btn" onclick="classifyScore(50,this)">50</button></div><div class="area-live-card" id="boundaryInfo"><h4>Coba nilai batas</h4><p>Klik angka untuk melihat kenapa <code>&gt;=</code> penting.</p></div><div class="example-box"><h4>Target logika</h4><p>80 masuk Aman. 79 masuk Hati-hati. 50 masuk Hati-hati. 49 masuk Berisiko.</p></div></section><section class="slide" id="slide-11"><h3>Mini Editor: True atau False?</h3><p class="lead">Ubah skor menjadi 80, 79, 50, atau 49, lalu lihat hasil perbandingannya.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py1" spellcheck="false" style="min-height:230px">skor_user = 65
+
+# Cek hasil perbandingan terhadap batas kategori
+print(skor_user &gt;= 80)
+print(skor_user &gt;= 50)</textarea><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py1')">Run code</button><span class="editor-toolbar-note">Ubah skor_user lalu jalankan ulang.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py1_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-12"><h3>Struktur if-elif-else</h3><p class="lead">Perhatikan titik dua dan indentasi 4 spasi. Ini bagian penting di Python.</p><div class="code-card"><pre><code># Struktur dasar percabangan multi-cabang
+if kondisi_pertama:
+    # kode untuk kondisi pertama
+    print("Hasil pertama")
+elif kondisi_kedua:
+    # kode untuk kondisi kedua
+    print("Hasil kedua")
+else:
+    # kode jika semua kondisi di atas salah
+    print("Hasil terakhir")</code></pre></div><div class="warning-box"><h4>Aturan penting</h4><p><code>if</code>, <code>elif</code>, dan <code>else</code> harus sejajar. Isi bloknya harus menjorok.</p></div></section><section class="slide" id="slide-13"><h3>Reading Code: Prediksi Output</h3><p>Baca kode ini. Tanpa menjalankan dulu, tebak outputnya jika <code>skor_user = 65</code>.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py2" spellcheck="false" style="min-height:260px">skor_user = 65
+
+# Python mengecek dari atas ke bawah
+if skor_user &gt;= 80:
+    print("Zona Aman")
+elif skor_user &gt;= 50:
+    print("Zona Hati-hati")
+else:
+    print("Zona Berisiko")</textarea><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py2')">Run code</button><span class="editor-toolbar-note">Tebak dulu, baru klik Run code.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py2_out">Output akan muncul di sini.</div></div></div><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'readQ')">Zona Aman</button><button class="choice-btn" onclick="quiz(this,true,'readQ')">Zona Hati-hati</button><button class="choice-btn" onclick="quiz(this,false,'readQ')">Zona Berisiko</button></div><div class="feedback-line" id="readQ"></div></section><section class="slide" id="slide-14"><h3>Project Brief</h3><p class="lead">Kita akan membuat aplikasi CLI bernama <strong>Kategorisasi Kredit Simulasi</strong>.</p><div class="accordion-row"><details class="learn-accordion" open=""><summary>🎯 Tujuan aplikasi</summary><div class="accordion-body"><p>Mengubah skor simulasi menjadi kategori risiko yang mudah dibaca.</p></div></details><details class="learn-accordion"><summary>📥 Input</summary><div class="accordion-body"><p>Satu angka skor simulasi dari 0 sampai 100.</p></div></details><details class="learn-accordion"><summary>⚙️ Process</summary><div class="accordion-body"><p>Python mengecek skor menggunakan <code>if</code>, <code>elif</code>, dan <code>else</code>.</p></div></details><details class="learn-accordion"><summary>📤 Output</summary><div class="accordion-body"><p>Kategori simulasi: Aman, Hati-hati, atau Berisiko.</p></div></details></div><div class="warning-box"><h4>Catatan penting</h4><p>Ini simulasi untuk belajar logika. Jangan digunakan untuk menilai kondisi finansial asli seseorang.</p></div></section><section class="slide" id="slide-15"><h3>Starter Code: Ambil Input Skor</h3><p class="lead">Langkah pertama: minta skor dari user dan ubah menjadi integer.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py3" spellcheck="false" style="min-height:250px">print("=== SYSTEM ANALIS RISIKO: BANK MUDA ===")
+
+# Ambil input skor simulasi dari user
+skor_user = int(input("Masukkan skor simulasi nasabah (0-100): "))
+
+# Tampilkan skor yang masuk ke program
+print(f"Skor yang dicek: {skor_user}")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py3_input" spellcheck="false">65</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py3')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py3_out">Output akan muncul di sini.</div></div></div><p class="mini-note">Input simulator berisi satu angka skor. Coba ganti menjadi 85 atau 40.</p></section><section class="slide" id="slide-16"><h3>Bangun Cabang Pertama: Zona Aman</h3><p class="lead">Kondisi pertama mengecek apakah skor minimal 80.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py4" spellcheck="false" style="min-height:280px">skor_user = int(input("Masukkan skor simulasi nasabah (0-100): "))
+
+# Cabang pertama: skor tinggi masuk Zona Aman
+if skor_user &gt;= 80:
+    print("Kategori: ZONA AMAN 🟢")
+    print("Status: Disiplin mengelola keuangan.")
+else:
+    print("Belum masuk Zona Aman.")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py4_input" spellcheck="false">85</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py4')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py4_out">Output akan muncul di sini.</div></div></div><p class="mini-note">Coba input 79. Program akan masuk ke <code>else</code>.</p></section><section class="slide" id="slide-17"><h3>Tambah Cabang Kedua: Zona Hati-hati</h3><p class="lead"><code>elif</code> dipakai untuk mengecek skor 50 sampai 79 setelah skor 80 ke atas gagal.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py5" spellcheck="false" style="min-height:310px">skor_user = int(input("Masukkan skor simulasi nasabah (0-100): "))
+
+# Cek kategori dari batas tertinggi ke bawah
+if skor_user &gt;= 80:
+    print("Kategori: ZONA AMAN 🟢")
+elif skor_user &gt;= 50:
+    print("Kategori: ZONA HATI-HATI 🟡")
+else:
+    print("Kategori: ZONA BERISIKO 🔴")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py5_input" spellcheck="false">65</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py5')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py5_out">Output akan muncul di sini.</div></div></div><p class="mini-note">Uji dengan 85, 65, dan 40.</p></section><section class="slide" id="slide-18"><h3>Program Utama Lengkap</h3><p class="lead">Ini versi utama project. Komentar <code>#</code> membantu kamu membaca logikanya.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py6" spellcheck="false" style="min-height:440px">print("=== SYSTEM ANALIS RISIKO: BANK MUDA ===")
+
+# 1. Ambil input skor simulasi dari user
+skor_user = int(input("Masukkan skor simulasi nasabah (0-100): "))
+
+print("\n-----------------------------------")
+print("📊 HASIL EVALUASI FINANSIAL")
+print("-----------------------------------")
+
+# 2. Gerbang logika multi-cabang
+if skor_user &gt;= 80:
+    print("Kategori: ZONA AMAN 🟢")
+    print("Status: Disiplin mengelola keuangan.")
+
+elif skor_user &gt;= 50:
+    print("Kategori: ZONA HATI-HATI 🟡")
+    print("Status: Cukup baik, tetapi masih perlu perhatian.")
+
+else:
+    print("Kategori: ZONA BERISIKO 🔴")
+    print("Status: Perlu evaluasi ulang pengelolaan keuangan.")
+
+print("-----------------------------------")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py6_input" spellcheck="false">65</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py6')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py6_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-19"><h3>Preview Output Target</h3><p class="lead">Jika input skor 65, output kira-kira seperti ini.</p><div class="mini-terminal dark">=== SYSTEM ANALIS RISIKO: BANK MUDA ===
+Masukkan skor simulasi nasabah (0-100): 65
+
+-----------------------------------
+📊 HASIL EVALUASI FINANSIAL
+-----------------------------------
+Kategori: ZONA HATI-HATI 🟡
+Status: Cukup baik, tetapi masih perlu perhatian.
+-----------------------------------</div><div class="interactive-box"><h4>Quick check</h4><p>Kenapa 65 tidak masuk Zona Aman?</p><button class="primary-btn" onclick="revealAnswer('why65')">Lihat jawaban</button><div class="area-live-card" id="why65" style="display:none"><p>Karena 65 tidak memenuhi kondisi <code>skor_user &gt;= 80</code>. Setelah itu Python mengecek <code>elif skor_user &gt;= 50</code>, dan hasilnya benar.</p></div></div></section><section class="slide" id="slide-20"><h3>Test Case Wajib</h3><p class="lead">Klik test case, lalu cocokkan dengan hasil program utama.</p><div class="boundary-grid"><button class="boundary-btn" onclick="loadCreditCase(this,85)">Case 1: 85</button><button class="boundary-btn" onclick="loadCreditCase(this,65)">Case 2: 65</button><button class="boundary-btn" onclick="loadCreditCase(this,40)">Case 3: 40</button><button class="boundary-btn" onclick="loadCreditCase(this,80)">Boundary: 80</button><button class="boundary-btn" onclick="loadCreditCase(this,50)">Boundary: 50</button></div><div class="area-live-card" id="creditCaseInfo"><h4>Pilih test case</h4><p>Gunakan beberapa angka supaya kamu yakin semua cabang sudah berjalan.</p></div><table class="thin-table"><tr><th>Input</th><th>Ekspektasi</th></tr><tr><td>85</td><td>Aman</td></tr><tr><td>65</td><td>Hati-hati</td></tr><tr><td>40</td><td>Berisiko</td></tr></table></section><section class="slide" id="slide-21"><h3>Trace Table</h3><p class="lead">Trace table membantu melacak jalur program secara pelan-pelan.</p><div class="form-grid"><label>Masukkan skor untuk ditelusuri<input id="traceScoreInput" type="number" value="65"/></label><button class="primary-btn" onclick="traceCreditScore()">Trace skor</button></div><div class="trace-card"><div class="trace-step"><strong>Input</strong><span id="traceInput">65</span></div><div class="trace-step"><strong>skor ≥ 80?</strong><span id="traceIf">False</span></div><div class="trace-step"><strong>skor ≥ 50?</strong><span id="traceElif">True</span></div><div class="trace-step"><strong>Output</strong><span id="traceOutput">Hati-hati</span></div></div><p class="mini-note">Coba skor 80, 79, 50, dan 49.</p></section><section class="slide" id="slide-22"><h3>Debug 1: Lupa Titik Dua</h3><p class="lead">Titik dua menandai awal blok kode. Tanpa titik dua, Python bingung membaca struktur cabang.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py7" spellcheck="false" style="min-height:250px">skor_user = 85
+
+# BUG: baris if lupa tanda titik dua
+if skor_user &gt;= 80
+    print("Zona Aman")</textarea><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py7')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py7_out">Output akan muncul di sini.</div></div></div><div class="info-box"><h4>Perbaikan</h4><p>Tambahkan <code>:</code> setelah kondisi: <code>if skor_user &gt;= 80:</code></p></div></section><section class="slide" id="slide-23"><h3>Debug 2: Indentasi Tidak Rapi</h3><p class="lead">Isi blok menjorok. Tapi <code>if</code>, <code>elif</code>, dan <code>else</code> harus sejajar.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py8" spellcheck="false" style="min-height:310px">skor_user = 65
+
+if skor_user &gt;= 80:
+    print("Zona Aman")
+    elif skor_user &gt;= 50:
+        print("Zona Hati-hati")
+else:
+    print("Zona Berisiko")</textarea><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py8')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py8_out">Output akan muncul di sini.</div></div></div><div class="warning-box"><h4>Yang perlu dicek</h4><p><code>elif</code> harus sejajar dengan <code>if</code>, bukan masuk ke dalam blok <code>if</code>.</p></div></section><section class="slide" id="slide-24"><h3>Debug 3: Bug Nilai Batas</h3><p class="lead">Operator <code>&gt;</code> bisa membuat nilai batas masuk kategori yang salah.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py9" spellcheck="false" style="min-height:320px">skor_user = 80
+
+# BUG: skor 80 seharusnya masuk Aman,
+# tapi operator &gt; tidak memasukkan angka 80
+if skor_user &gt; 80:
+    print("Zona Aman")
+elif skor_user &gt;= 50:
+    print("Zona Hati-hati")
+else:
+    print("Zona Berisiko")</textarea><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py9')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py9_out">Output akan muncul di sini.</div></div></div><button class="primary-btn" onclick="revealAnswer('boundaryFix')">Lihat perbaikannya</button><div class="area-live-card" id="boundaryFix" style="display:none"><p>Gunakan <code>if skor_user &gt;= 80:</code> supaya skor 80 ikut masuk Zona Aman.</p></div></section><section class="slide" id="slide-25"><h3>Debug 4: ValueError</h3><p class="lead">Karena program memakai <code>int(input())</code>, input harus berupa angka bulat.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py10" spellcheck="false" style="min-height:260px"># Program meminta angka
+skor_user = int(input("Masukkan skor simulasi (0-100): "))
+
+print(f"Skor diterima: {skor_user}")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py10_input" spellcheck="false">enam puluh lima</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py10')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py10_out">Output akan muncul di sini.</div></div></div><div class="warning-box"><h4>Kenapa error?</h4><p>Teks seperti <strong>enam puluh lima</strong> tidak bisa langsung diubah menjadi integer.</p></div></section><section class="slide" id="slide-26"><h3>Data Dummy &amp; Batas Simulasi</h3><p class="lead">Project ini memakai skor simulasi. Jangan menghubungkannya dengan penilaian kredit asli.</p><div class="choice-grid"><button class="safe-card" onclick="markSafety(this,true)">Skor contoh: 85</button><button class="safe-card" onclick="markSafety(this,true)">Nama dummy: Budi</button><button class="safe-card" onclick="markSafety(this,false)">Data pinjaman asli keluarga</button><button class="safe-card" onclick="markSafety(this,false)">Nomor rekening asli</button><button class="safe-card" onclick="markSafety(this,false)">NIK/KTP asli</button><button class="safe-card" onclick="markSafety(this,true)">Skor latihan: 65</button></div><p class="mini-note">Hijau berarti aman untuk latihan. Merah berarti jangan digunakan.</p></section><section class="slide" id="slide-27"><h3>Challenge 1: Tambahkan Rekomendasi</h3><p class="lead">Program yang lebih berguna tidak cuma memberi kategori, tapi juga saran yang netral dan aman.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py11" spellcheck="false" style="min-height:520px">print("=== SYSTEM ANALIS RISIKO: BANK MUDA ===")
+
+# Data ini hanya simulasi, bukan skor kredit asli
+skor_user = int(input("Masukkan skor simulasi nasabah (0-100): "))
+
+print("\n-----------------------------------")
+print("📊 HASIL EVALUASI FINANSIAL")
+print("-----------------------------------")
+
+# Cek dari batas tertinggi dulu agar kategori tidak tertukar
+if skor_user &gt;= 80:
+    print("Kategori: ZONA AMAN 🟢")
+    print("Status: Disiplin mengelola keuangan.")
+    print("💡 Rekomendasi: Pertahankan kebiasaan baik ini.")
+
+elif skor_user &gt;= 50:
+    print("Kategori: ZONA HATI-HATI 🟡")
+    print("Status: Cukup baik, tetapi masih perlu perhatian.")
+    print("💡 Rekomendasi: Tinjau kembali pengeluaran yang belum prioritas.")
+
+else:
+    print("Kategori: ZONA BERISIKO 🔴")
+    print("Status: Perlu evaluasi ulang pengelolaan keuangan.")
+    print("💡 Rekomendasi: Susun ulang anggaran dan prioritas kebutuhan.")
+
+print("-----------------------------------")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py11_input" spellcheck="false">65</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py11')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py11_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-28"><h3>Challenge 2: Cek Rentang Skor</h3><p class="lead">Program dasar belum menolak skor di luar 0–100. Ini preview validasi sederhana.</p><div class="code-card compact-code"><pre><code># Preview validasi sederhana
+skor_user = int(input("Masukkan skor simulasi (0-100): "))
+
+if skor_user &lt; 0:
+    print("Skor terlalu kecil. Gunakan 0 sampai 100.")
+elif skor_user &gt; 100:
+    print("Skor terlalu besar. Gunakan 0 sampai 100.")
+elif skor_user &gt;= 80:
+    print("Zona Aman")
+elif skor_user &gt;= 50:
+    print("Zona Hati-hati")
+else:
+    print("Zona Berisiko")</code></pre></div><div class="interactive-box"><h4>Kenapa ini opsional?</h4><p>Fokus utama sesi ini adalah <code>if-elif-else</code>. Validasi input yang lebih tahan error akan dibahas lebih dalam di sesi berikutnya.</p></div></section><section class="slide" id="slide-29"><h3>Challenge Plus: Multi-Faktor</h3><p class="lead">Untuk siswa yang sudah cepat: kategori bisa mempertimbangkan lebih dari satu faktor.</p><details class="learn-accordion"><summary>🔐 Ide lanjutan</summary><div class="accordion-body"><p>Selain skor, sistem bisa mengecek jumlah tunggakan simulasi. Misalnya: skor tinggi tetapi masih ada tunggakan, maka masuk kategori Perhatian Khusus.</p></div></details><div class="code-card compact-code"><pre><code># Preview saja, tidak wajib untuk semua siswa
+if skor_user &gt;= 80 and jumlah_tunggakan == 0:
+    print("Zona Aman")
+elif jumlah_tunggakan &gt; 0:
+    print("Perhatian Khusus")
+elif skor_user &gt;= 50:
+    print("Potensi Risiko")
+else:
+    print("Berisiko Tinggi")</code></pre></div></section><section class="slide" id="slide-30"><h3>Output Minimum</h3><p class="lead">Sebelum submit, pastikan fitur inti sudah berjalan.</p><ul class="checklist"><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Program menerima input skor simulasi.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Ada struktur <code>if</code>, <code>elif</code>, dan <code>else</code>.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Skor 85 masuk Zona Aman.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Skor 65 masuk Zona Hati-hati.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Skor 40 masuk Zona Berisiko.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Tidak ada SyntaxError atau IndentationError.</li></ul><div class="example-box"><h4>Misi berhasil jika...</h4><p>Program menampilkan tepat satu kategori untuk setiap input skor.</p></div></section><section class="slide" id="slide-31"><h3>Refleksi Developer</h3><p class="lead">Jawab cepat sebelum keluar dari sesi.</p><div class="interactive-box"><h4>Kenapa kondisi <code>skor_user &gt;= 80</code> diletakkan paling atas?</h4><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'reflectQ1')">Agar skor tinggi dicek dulu dan tidak tertangkap oleh batas 50</button><button class="choice-btn" onclick="quiz(this,false,'reflectQ1')">Karena <code>elif</code> tidak boleh dipakai setelah <code>if</code></button><button class="choice-btn" onclick="quiz(this,false,'reflectQ1')">Karena skor 80 tidak boleh masuk kategori</button></div><div class="feedback-line" id="reflectQ1"></div></div><div class="form-grid"><label>Catat satu bug yang kamu temukan hari ini<textarea placeholder="Contoh: Aku sempat lupa titik dua setelah if..."></textarea></label></div></section><section class="slide" id="slide-32"><span class="eyebrow">Penutup</span><h2>Kamu Sudah Membuat Program Multi-Cabang</h2><p class="lead">Hari ini kamu belajar <code>elif</code>, rentang nilai, urutan kondisi, boundary testing, dan kenapa kategori simulasi harus dibaca dengan hati-hati.</p><div class="metrics"><div class="metric-box"><strong>✅</strong><span>if-elif-else</span></div><div class="metric-box"><strong>📊</strong><span>kategori skor</span></div><div class="metric-box"><strong>🧪</strong><span>test case batas</span></div><div class="metric-box"><strong>🛡️</strong><span>data dummy</span></div></div><div class="example-box"><h4>Kalimat kunci</h4><p><strong>Python mengecek cabang dari atas ke bawah, lalu berhenti di kondisi pertama yang benar.</strong></p></div><p class="mini-note">Sesi berikutnya: login terminal dan operator boolean.</p></section></div><div class="navigation"><button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)"><span>←</span> Previous</button><div class="slide-indicator"><span id="currentSlide">1</span> / <span id="totalSlides">32</span></div><button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next <span>→</span></button></div></div><div class="explanation-panel"><section class="explanation active" id="explanation-1"><h3>Project yang Akan Dibuat</h3><p>Kamu akan membuat program Kategorisasi Kredit Simulasi. Program menerima satu skor, mengecek aturan kategori, lalu menampilkan hasil. Konsepnya sederhana, tetapi penting karena banyak aplikasi perlu mengelompokkan data ke beberapa status. Skor di sini hanya data dummy untuk belajar logika, bukan penilaian finansial asli.</p></section><section class="explanation" id="explanation-2"><h3>Alur Belajar Sesi Ini</h3><p>Sesi ini memperluas if-else dari Sesi 5. Sekarang ada if, elif, dan else. Kamu akan belajar rentang nilai, urutan pengecekan, boundary testing, dan debugging. Targetnya bukan sekadar mengetik kode, tapi paham kenapa cabang harus ditulis dalam urutan tertentu.</p></section><section class="explanation" id="explanation-3"><h3>Persiapan Sebelum Coding</h3><p>Karena kamu akan sering mencoba input berbeda, workspace perlu siap sejak awal. Pakai notebook dengan nama jelas dan gunakan angka dummy. Jangan memasukkan data finansial asli, nomor rekening, NIK, atau informasi pribadi.</p></section><section class="explanation" id="explanation-4"><h3>Dua Jalur vs Banyak Jalur</h3><p>if-else cocok untuk dua hasil. Saat hasilnya lebih dari dua, gunakan elif sebagai pilihan tambahan di tengah. Pada project ini, skor bisa masuk Aman, Hati-hati, atau Berisiko, sehingga struktur if-elif-else lebih cocok.</p></section><section class="explanation" id="explanation-5"><h3>Membaca Zona Skor</h3><p>Zona skor adalah aturan kategori yang akan diterjemahkan menjadi kode. Dalam simulasi ini, 80–100 adalah Aman, 50–79 Hati-hati, dan 0–49 Berisiko. Karena Python membaca dari atas ke bawah, kita mulai dari batas tertinggi.</p></section><section class="explanation" id="explanation-6"><h3>Latihan Klasifikasi Manual</h3><p>Sebelum menjalankan Python, kamu perlu tahu ekspektasi hasil. Skor 85 masuk Aman, 65 masuk Hati-hati, dan 40 masuk Berisiko. Ini akan menjadi patokan saat mengetes program.</p></section><section class="explanation" id="explanation-7"><h3>Flowchart Multi-Cabang</h3><p>Python mengecek kondisi pertama. Jika benar, cabang itu dijalankan dan cabang lain dilewati. Jika salah, Python lanjut ke elif. Jika semua kondisi gagal, else menjadi jalur terakhir.</p></section><section class="explanation" id="explanation-8"><h3>Urutan Kondisi</h3><p>Urutan kondisi sangat penting. Jika batas 50 ditaruh sebelum batas 80, skor 85 sudah tertangkap sebagai Hati-hati. Program tidak crash, tetapi hasilnya salah. Ini disebut logic error.</p></section><section class="explanation" id="explanation-9"><h3>Operator Pembanding</h3><p>Operator pembanding menghasilkan True atau False. Untuk sesi ini, operator &gt;= paling penting karena nilai batas harus ikut masuk kategori. Skor 80 harus Aman, bukan Hati-hati.</p></section><section class="explanation" id="explanation-10"><h3>Boundary Testing</h3><p>Nilai batas seperti 80, 79, 50, dan 49 wajib dites. Angka-angka ini membantu mendeteksi kesalahan operator, terutama saat memakai &gt; padahal seharusnya &gt;=.</p></section><section class="explanation" id="explanation-11"><h3>Boolean dari Perbandingan</h3><p>Perbandingan seperti skor_user &gt;= 80 tidak langsung menampilkan kategori. Hasilnya True atau False. Dari hasil itulah Python menentukan cabang program.</p></section><section class="explanation" id="explanation-12"><h3>Struktur Sintaks</h3><p>Setiap if, elif, dan else harus diakhiri titik dua. Isi cabang harus menjorok 4 spasi. Di Python, indentasi bukan cuma gaya menulis, tapi bagian dari aturan bahasa.</p></section><section class="explanation" id="explanation-13"><h3>Reading Code</h3><p>Latihan ini membiasakan kamu memprediksi output tanpa langsung menjalankan kode. Untuk skor 65, kondisi pertama False, kondisi kedua True, jadi outputnya Zona Hati-hati.</p></section><section class="explanation" id="explanation-14"><h3>Project Brief</h3><p>Project mengikuti alur Input, Process, Output. Input adalah skor, process adalah pengecekan if-elif-else, output adalah kategori dan status singkat. Gunakan istilah simulasi agar tidak terdengar seperti keputusan finansial nyata.</p></section><section class="explanation" id="explanation-15"><h3>Input Skor</h3><p>input() menerima ketikan user sebagai string. Karena skor harus dibandingkan dengan angka, kita bungkus dengan int(). Jika user mengetik huruf, program akan error. Untuk saat ini cukup pakai input angka.</p></section><section class="explanation" id="explanation-16"><h3>Cabang Pertama</h3><p>Cabang pertama mengecek skor minimal 80. Ini harus ditaruh paling atas agar skor tinggi tidak tertangkap oleh kategori tengah.</p></section><section class="explanation" id="explanation-17"><h3>Cabang Kedua</h3><p>elif skor_user &gt;= 50 hanya dicek jika skor tidak mencapai 80. Karena itu, cabang ini efektif menangkap skor 50 sampai 79.</p></section><section class="explanation" id="explanation-18"><h3>Program Utama</h3><p>Program lengkap sudah memiliki tiga cabang. Jalankan dengan input 85, 65, dan 40. Pastikan hanya satu kategori yang muncul untuk setiap input.</p></section><section class="explanation" id="explanation-19"><h3>Output Target</h3><p>Output yang rapi membantu user membaca hasil. Namun tampilan rapi belum cukup. Logika tetap harus diuji dengan beberapa test case.</p></section><section class="explanation" id="explanation-20"><h3>Test Case</h3><p>Test case membantu memastikan setiap cabang bekerja. Minimal uji satu angka dari tiap kategori dan beberapa nilai batas.</p></section><section class="explanation" id="explanation-21"><h3>Trace Table</h3><p>Trace table menunjukkan jalur yang dilewati program. Ini berguna saat output tidak sesuai ekspektasi, karena kamu bisa melihat kondisi mana yang True atau False.</p></section><section class="explanation" id="explanation-22"><h3>Debug Titik Dua</h3><p>Lupa titik dua memicu SyntaxError. Cek semua baris if, elif, dan else. Setiap baris pembuka cabang harus diakhiri titik dua.</p></section><section class="explanation" id="explanation-23"><h3>Debug Indentasi</h3><p>elif harus sejajar dengan if. Kalau elif menjorok ke dalam blok if, struktur program menjadi salah dan bisa memicu IndentationError.</p></section><section class="explanation" id="explanation-24"><h3>Debug Nilai Batas</h3><p>Bug nilai batas sering terjadi saat memakai &gt;, bukan &gt;=. Program tetap jalan, tetapi skor 80 bisa masuk kategori yang salah.</p></section><section class="explanation" id="explanation-25"><h3>ValueError</h3><p>ValueError muncul ketika int() menerima input yang bukan angka. Ini pengantar bahwa aplikasi butuh validasi input, yang akan dipelajari lebih dalam nanti.</p></section><section class="explanation" id="explanation-26"><h3>Data Dummy dan Simulasi</h3><p>Topik risiko kredit harus dibatasi sebagai simulasi. Jangan gunakan data pinjaman, nomor rekening, NIK, atau informasi finansial asli.</p></section><section class="explanation" id="explanation-27"><h3>Challenge Rekomendasi</h3><p>Tambahkan rekomendasi netral di setiap kategori. Output jadi lebih informatif, tetapi jangan membuat klaim seperti keputusan finansial resmi.</p></section><section class="explanation" id="explanation-28"><h3>Challenge Validasi</h3><p>Validasi rentang skor membuat program lebih masuk akal. Skor di bawah 0 atau di atas 100 sebaiknya diberi pesan khusus sebelum kategori diproses.</p></section><section class="explanation" id="explanation-29"><h3>Challenge Multi-Faktor</h3><p>Preview ini menunjukkan bahwa keputusan bisa memakai lebih dari satu faktor. Materi boolean seperti and akan lebih banyak dipakai di sesi login.</p></section><section class="explanation" id="explanation-30"><h3>Output Minimum</h3><p>Project selesai jika input skor diterima, if-elif-else berjalan, tiga kategori bisa muncul sesuai test case, dan tidak ada error sintaks atau indentasi.</p></section><section class="explanation" id="explanation-31"><h3>Refleksi Developer</h3><p>Refleksi membantu kamu melihat bug yang ditemukan dan alasan teknis di balik urutan kondisi. Ini bagian penting dari cara kerja developer.</p></section><section class="explanation" id="explanation-32"><h3>Penutup</h3><p>Konsep kunci sesi ini: Python membaca cabang dari atas ke bawah dan berhenti pada kondisi pertama yang True. Ini akan dipakai lagi di login, menu CLI, dan project akhir.</p></section></div></div>
+<script>
+const ACCESS_CODE='RGMDSHS26';
+let currentSlide=1;
+let totalSlides=0;
+window.addEventListener('load',()=>{
+  totalSlides=document.querySelectorAll('.slide').length;
+  document.getElementById('totalSlides').textContent=totalSlides;
+  setTimeout(()=>document.querySelector('.access-popup').classList.add('show'),50);
+  const input=document.getElementById('accessInput');
+  input.focus();
+  input.addEventListener('input',e=>{e.target.value=e.target.value.toUpperCase()});
+  input.addEventListener('keydown',e=>{if(e.key==='Enter')checkAccessCode()});
+  initPyEditors();
+  updateSlide();
+});
+function checkAccessCode(){const input=document.getElementById('accessInput'),error=document.getElementById('accessError');if(input.value.trim().toUpperCase()===ACCESS_CODE){document.getElementById('accessPopup').style.display='none';document.getElementById('mainContent').style.display='flex';updateSlide();}else{error.classList.add('show');input.value='';input.focus();}}
+function changeSlide(direction){const next=currentSlide+direction;if(next<1||next>totalSlides)return;currentSlide=next;updateSlide();}
+function updateSlide(){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.explanation').forEach(e=>e.classList.remove('active'));const s=document.getElementById(`slide-${currentSlide}`);if(s)s.classList.add('active');const e=document.getElementById(`explanation-${currentSlide}`);if(e)e.classList.add('active');document.getElementById('currentSlide').textContent=currentSlide;document.getElementById('prevBtn').disabled=currentSlide===1;document.getElementById('nextBtn').disabled=currentSlide===totalSlides;document.getElementById('progressFill').style.width=`${(currentSlide/totalSlides)*100}%`;const sc=document.querySelector('.slide-content');const ep=document.querySelector('.explanation-panel');if(sc)sc.scrollTop=0;if(ep)ep.scrollTop=0;}
+document.addEventListener('keydown',e=>{if(document.getElementById('mainContent').style.display==='none')return;if(e.key==='ArrowRight')changeSlide(1);if(e.key==='ArrowLeft')changeSlide(-1);});
+function deviceCheck(btn){btn.classList.toggle('correct');}
+function selectAny(btn){const group=btn.parentElement;group.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');}
+function quiz(btn,ok,feedbackId){const group=btn.parentElement;group.querySelectorAll('.choice-btn').forEach(b=>b.disabled=true);btn.classList.add(ok?'correct':'wrong');const fb=document.getElementById(feedbackId);fb.textContent=ok?'Betul.':'Belum tepat. Baca kembali penjelasan di panel kanan.';fb.style.color=ok?'#176b35':'#a42820';}
+function revealAnswer(id){const el=document.getElementById(id);if(!el)return;el.style.display=el.style.display==='none'||!el.style.display?'block':'none';}
+function markSafety(btn,ok){btn.classList.remove('safe','risky');btn.classList.add(ok?'safe':'risky');}
+function toggleCheck(item){const cb=item.querySelector('input');cb.checked=!cb.checked;item.classList.toggle('done',cb.checked);}
+function showOperatorInfo(type,btn){document.querySelectorAll('.operator-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const d={gt:['> Lebih besar dari','Contoh: usia > 17. Nilai 18 lolos, tetapi 17 tidak.'],gte:['>= Lebih besar atau sama dengan','Contoh: usia >= 17. Nilai 17 dan 18 sama-sama lolos.'],lt:['< Lebih kecil dari','Contoh: usia < 17. Nilai 16 lolos, 17 tidak.'],lte:['<= Lebih kecil atau sama dengan','Contoh: usia <= 17. Nilai 16 dan 17 lolos.'],eq:['== Sama dengan','Contoh: usia == 17. Hanya nilai 17 yang menghasilkan True.'],neq:['!= Tidak sama dengan','Contoh: usia != 17. Semua nilai selain 17 menghasilkan True.']};document.getElementById('operatorLearn').innerHTML=`<h4>${d[type][0]}</h4><p>${d[type][1]}</p>`;}
+function ageBoundary(btn,age){document.querySelectorAll('#slide-10 .choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');const ok=age>=17;document.getElementById('boundaryInfo').innerHTML=`<h4>Usia ${age}</h4><p>Kondisi <code>${age} >= 17</code> bernilai <strong>${ok?'True':'False'}</strong>.</p><p>Jalur yang dipilih: <strong>${ok?'if — memenuhi batas simulasi':'else — belum memenuhi batas'}</strong>.</p>`;}
+function traceAge(age,btn){document.querySelectorAll('#slide-19 .choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');const ok=age>=17;document.getElementById('traceBox').innerHTML=`<div class="trace-step"><strong>Input</strong><span>${age}</span></div><div class="trace-step"><strong>Kondisi</strong><span>${age} >= 17 → ${ok?'True':'False'}</span></div><div class="trace-step"><strong>Jalur</strong><span>${ok?'if':'else'}</span></div><div class="trace-step"><strong>Output</strong><span>${ok?'akses diberikan':'akses belum dibuka'}</span></div>`;}
+function loadAgeCase(btn,age){const input=document.getElementById('py5_input');if(!input)return;input.value=String(age);document.querySelectorAll('#slide-18 .choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');const fb=document.getElementById('ageCaseFeedback');const ok=age>=17;fb.textContent=`Input ${age} dimuat ke Starter Code. Ekspektasi: masuk cabang ${ok?'if':'else'}.`;fb.style.color='#176b35';const out=document.getElementById('py5_out');if(out)out.textContent=`Input ${age} sudah dimuat. Klik Run code untuk menjalankan program.`;currentSlide=17;updateSlide();setTimeout(()=>{input.classList.add('preset-loaded');input.focus();setTimeout(()=>input.classList.remove('preset-loaded'),1400);},80);}
+function showLmsStep(step,btn){document.querySelectorAll('.lms-map-wrap .hotspot,.lms-map-wrap .session-card-hotspot').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');}
+function initPyEditors(){document.querySelectorAll('.python-editor textarea[id^="py"]:not(.stdin-area)').forEach(area=>{const out=document.getElementById(area.id+'_out');if(out&&!out.textContent.trim())out.textContent='Output akan muncul di sini setelah Run code.';});}
+function runPyEditor(id){const code=document.getElementById(id).value;const stdinEl=document.getElementById(id+'_input');const stdin=stdinEl?stdinEl.value:'';document.getElementById(id+'_out').textContent=runMiniPython(code,stdin);}
+function wrap(value,type){return {__value:value,__type:type||inferType(value)};}
+function rawVal(v){return v&&v.__value!==undefined?v.__value:v;}
+function inferType(v){if(typeof v==='boolean')return 'bool';if(typeof v==='number')return Number.isInteger(v)?'int':'float';return 'str';}
+function valType(v){return v&&v.__type?v.__type:inferType(rawVal(v));}
+function pyString(v){const r=rawVal(v);if(typeof r==='boolean')return r?'True':'False';return String(r);}
+function formatNumber(n){n=Number(rawVal(n));if(!isFinite(n))return String(n);return n.toLocaleString('en-US',{maximumFractionDigits:2});}
+function decodePyString(s){return s.replace(/\\n/g,'\n').replace(/\\t/g,'\t').replace(/\\"/g,'"').replace(/\\'/g,"'");}
+function stripComment(line){let quote=null;for(let i=0;i<line.length;i++){const c=line[i],prev=line[i-1];if(quote){if(c===quote&&prev!=='\\')quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='#')return line.slice(0,i);}return line;}
+function countIndent(line){const m=line.match(/^ */);return m?m[0].length:0;}
+function normalizeLines(code){return code.split(/\r?\n/).map((raw,idx)=>{const noComment=stripComment(raw);return {raw, text:noComment.trim(), indent:countIndent(raw), lineNo:idx+1, blank:noComment.trim()===''};});}
+function runMiniPython(code,stdinText){let vars={},output=[],inputs=stdinText.split(/\r?\n/),inputIndex=0,lines=normalizeLines(code);function nextInput(prompt){const val=inputIndex<inputs.length?inputs[inputIndex++]:'';output.push(prompt+val);return wrap(val,'str');}const res=execBlock(0,0,lines,vars,output,nextInput);if(res.error)return res.error;return output.length?output.join('\n'):'(Tidak ada output. Coba gunakan print().)';}
+function execBlock(start,indent,lines,vars,output,nextInput){let i=start;while(i<lines.length){let L=lines[i];if(L.blank){i++;continue;}if(L.indent<indent)break;if(L.indent>indent)return {error:`IndentationError on line ${L.lineNo}: unexpected indent.`};if(/^elif\b|^else\b/.test(L.text))break;if(/^if\b/.test(L.text)){const r=execIfChain(i,indent,lines,vars,output,nextInput);if(r.error)return r;i=r.next;continue;}const r=execSimpleLine(L,vars,output,nextInput);if(r.error)return r.error?{error:r.error}:r;i++;}return {next:i};}
+function execIfChain(start,indent,lines,vars,output,nextInput){let i=start,executed=false;while(i<lines.length){let L=lines[i];if(L.blank){i++;continue;}if(L.indent!==indent)break;let type=null,condText=null;if(L.text.startsWith('if ')){type='if';condText=L.text.slice(3).trim();}else if(L.text.startsWith('elif ')){type='elif';condText=L.text.slice(5).trim();}else if(L.text==='else:'||L.text.startsWith('else')){type='else';}else break;if((type==='if'||type==='elif')&&!condText.endsWith(':'))return {error:`SyntaxError on line ${L.lineNo}: expected ':' after ${type} condition.`};if(type==='else'&&L.text!=='else:')return {error:`SyntaxError on line ${L.lineNo}: expected ':' after else.`};if(type==='if'||type==='elif')condText=condText.slice(0,-1).trim();let blockStart=i+1;let nextNon=blockStart;while(nextNon<lines.length&&lines[nextNon].blank)nextNon++;if(nextNon>=lines.length||lines[nextNon].indent<=indent)return {error:`IndentationError on line ${L.lineNo}: expected an indented block.`};let blockIndent=lines[nextNon].indent;let blockEnd=nextNon;while(blockEnd<lines.length){if(!lines[blockEnd].blank&&lines[blockEnd].indent<=indent)break;blockEnd++;}let shouldRun=false;if(!executed){if(type==='else')shouldRun=true;else{const p=parseExpr(condText,vars,L.lineNo,nextInput);if(p.error)return {error:p.error};shouldRun=!!rawVal(p.value);}}if(shouldRun){const r=execBlock(nextNon,blockIndent,lines,vars,output,nextInput);if(r.error)return r;if(r.next<blockEnd&&!lines[r.next].blank&&lines[r.next].indent>indent)return {error:`IndentationError on line ${lines[r.next].lineNo}: unindent does not match any outer indentation level.`};executed=true;}i=blockEnd;}return {next:i};}
+function execSimpleLine(L,vars,output,nextInput){let line=L.text;if(!line)return {};const assign=line.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+)$/);if(assign){const p=parseExpr(assign[2].trim(),vars,L.lineNo,nextInput);if(p.error)return {error:p.error};vars[assign[1]]=p.value;return {};}
+const pr=line.match(/^print\((.*)\)$/);if(pr){const p=parseExpr(pr[1].trim(),vars,L.lineNo,nextInput);if(p.error)return {error:p.error};output.push(pyString(p.value));return {};}
+if(/^if\b/.test(line)&&!line.endsWith(':'))return {error:`SyntaxError on line ${L.lineNo}: expected ':' after if condition.`};
+return {error:`SyntaxError on line ${L.lineNo}: simulator mendukung assignment, input(), int(), float(), type(), operator, if/elif/else, dan print().`};}
+function parseExpr(text,vars,lineNo,nextInput){text=text.trim();if(text.startsWith('(')&&text.endsWith(')')&&matchingOuterParens(text))return parseExpr(text.slice(1,-1),vars,lineNo,nextInput);let cmp=findTopLevelComparison(text);if(cmp){let a=parseExpr(text.slice(0,cmp.index),vars,lineNo,nextInput);if(a.error)return a;let b=parseExpr(text.slice(cmp.index+cmp.op.length),vars,lineNo,nextInput);if(b.error)return b;return compareOp(a.value,b.value,cmp.op,lineNo);}let idx=findTopLevelOperator(text,['+','-']);if(idx){let a=parseExpr(text.slice(0,idx.index),vars,lineNo,nextInput);if(a.error)return a;let b=parseExpr(text.slice(idx.index+1),vars,lineNo,nextInput);if(b.error)return b;return numericOp(a.value,b.value,idx.op,lineNo);}idx=findTopLevelOperator(text,['*','/']);if(idx){let a=parseExpr(text.slice(0,idx.index),vars,lineNo,nextInput);if(a.error)return a;let b=parseExpr(text.slice(idx.index+1),vars,lineNo,nextInput);if(b.error)return b;return numericOp(a.value,b.value,idx.op,lineNo);}let m;if((m=text.match(/^input\((.*)\)$/))){const p=parseExpr(m[1].trim()||'""',vars,lineNo,nextInput);if(p.error)return p;return {value:nextInput(pyString(p.value))};}if((m=text.match(/^int\((.*)\)$/))){const p=parseExpr(m[1].trim(),vars,lineNo,nextInput);if(p.error)return p;const s=pyString(p.value).trim();if(!/^[+-]?\d+(\.\d+)?$/.test(s))return {error:`ValueError on line ${lineNo}: invalid literal for int(): '${s}'`};return {value:wrap(parseInt(Number(s),10),'int')};}if((m=text.match(/^float\((.*)\)$/))){const p=parseExpr(m[1].trim(),vars,lineNo,nextInput);if(p.error)return p;const s=pyString(p.value).trim();if(!/^[+-]?(\d+(\.\d*)?|\.\d+)$/.test(s))return {error:`ValueError on line ${lineNo}: could not convert string to float: '${s}'`};return {value:wrap(parseFloat(s),'float')};}if((m=text.match(/^type\((.*)\)$/))){const p=parseExpr(m[1].trim(),vars,lineNo,nextInput);if(p.error)return p;return {value:wrap(`<class '${valType(p.value)}'>`,'str')};}if((text.startsWith('f"')&&text.endsWith('"'))||(text.startsWith("f'")&&text.endsWith("'"))){let inner=decodePyString(text.slice(2,-1));let err=null;let res=inner.replace(/\{([^{}]+)\}/g,(full,expr)=>{let ex=expr.trim(),fmt='';const c=findTopLevelChar(ex,':');if(c>-1){fmt=ex.slice(c+1).trim();ex=ex.slice(0,c).trim();}const p=parseExpr(ex,vars,lineNo,nextInput);if(p.error){err=p.error;return full;}const v=rawVal(p.value);if(fmt===',')return formatNumber(v);return String(v);});if(err)return {error:err};return {value:wrap(res,'str')};}if((text.startsWith('"')&&text.endsWith('"'))||(text.startsWith("'")&&text.endsWith("'")))return {value:wrap(decodePyString(text.slice(1,-1)),'str')};if(text==='True')return {value:wrap(true,'bool')};if(text==='False')return {value:wrap(false,'bool')};if(/^[+-]?\d+$/.test(text))return {value:wrap(parseInt(text,10),'int')};if(/^[+-]?(\d+\.\d*|\.\d+)$/.test(text))return {value:wrap(parseFloat(text),'float')};if(Object.prototype.hasOwnProperty.call(vars,text))return {value:vars[text]};if(text.includes('{')&&text.includes('}'))return {error:`f-string error on line ${lineNo}: tambahkan huruf f sebelum tanda kutip.`};return {error:`NameError on line ${lineNo}: name '${text}' is not defined atau teks belum diberi tanda kutip.`};}
+function compareOp(a,b,op,lineNo){let x=rawVal(a),y=rawVal(b);let r;if(typeof x==='number'&&typeof y==='number'){if(op==='>')r=x>y;else if(op==='>=')r=x>=y;else if(op==='<')r=x<y;else if(op==='<=')r=x<=y;else if(op==='==')r=x===y;else r=x!==y;}else{if(op==='==')r=String(x)===String(y);else if(op==='!=')r=String(x)!==String(y);else return {error:`TypeError on line ${lineNo}: operator ${op} membutuhkan data angka untuk perbandingan ini.`};}return {value:wrap(r,'bool')};}
+function numericOp(a,b,op,lineNo){const x=Number(rawVal(a)),y=Number(rawVal(b));if(!isFinite(x)||!isFinite(y))return {error:`TypeError on line ${lineNo}: operator ${op} membutuhkan data angka.`};if(op==='/'&&y===0)return {error:`ZeroDivisionError on line ${lineNo}: division by zero.`};let r;if(op==='+')r=x+y;else if(op==='-')r=x-y;else if(op==='*')r=x*y;else r=x/y;return {value:wrap(r,Number.isInteger(r)?'int':'float')};}
+function findTopLevelComparison(text){let quote=null,depth=0;const ops=['>=','<=','==','!=','>','<'];for(let i=0;i<text.length;i++){const c=text[i],prev=text[i-1];if(quote){if(c===quote&&prev!=='\\')quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='(')depth++;else if(c===')')depth--;else if(depth===0){for(const op of ops){if(text.slice(i,i+op.length)===op)return {index:i,op};}}}return null;}
+function findTopLevelOperator(text,ops){let quote=null,depth=0;for(let i=text.length-1;i>=0;i--){const c=text[i],prev=text[i-1];if(quote){if(c===quote&&prev!=='\\')quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c===')')depth++;else if(c==='(')depth--;else if(depth===0&&ops.includes(c)){if((c==='+'||c==='-')&&(i===0||'+-*/(<>=!'.includes(text[i-1])))continue;return {index:i,op:c};}}return null;}
+function findTopLevelChar(text,char){let quote=null,depth=0;for(let i=0;i<text.length;i++){const c=text[i],prev=text[i-1];if(quote){if(c===quote&&prev!=='\\')quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='(')depth++;else if(c===')')depth--;else if(c===char&&depth===0)return i;}return -1;}
+function matchingOuterParens(text){let depth=0,quote=null;for(let i=0;i<text.length;i++){const c=text[i],prev=text[i-1];if(quote){if(c===quote&&prev!=='\\')quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='(')depth++;else if(c===')'){depth--;if(depth===0&&i<text.length-1)return false;}}return depth===0;}
+
+function showRiskZone(zone,btn){document.querySelectorAll('.risk-zone').forEach(b=>b.classList.remove('active')); if(btn)btn.classList.add('active'); const data={aman:['Zona Aman','Skor 80–100. Dalam simulasi, kategori ini menunjukkan kondisi paling kuat.'],hati:['Zona Hati-hati','Skor 50–79. Cukup baik, tetapi masih perlu perhatian.'],risk:['Zona Berisiko','Skor 0–49. Perlu evaluasi ulang pengelolaan keuangan.']}; const info=document.getElementById('riskZoneInfo'); if(info)info.innerHTML='<h4>'+data[zone][0]+'</h4><p>'+data[zone][1]+'</p>'; const marker=document.getElementById('scoreMarker'); if(marker){const v=zone==='aman'?85:zone==='hati'?65:40; marker.textContent=v; marker.style.left=v+'%';}}
+function catFor(score){score=Number(score); if(score>=80)return ['Aman','🟢','Skor '+score+' masuk Zona Aman.']; if(score>=50)return ['Hati-hati','🟡','Skor '+score+' masuk Zona Hati-hati.']; return ['Berisiko','🔴','Skor '+score+' masuk Zona Berisiko.'];}
+function classifyScore(score,btn){document.querySelectorAll('.boundary-btn').forEach(b=>b.classList.remove('active')); if(btn)btn.classList.add('active'); const c=catFor(score); ['scoreClassInfo','boundaryInfo'].forEach(id=>{const el=document.getElementById(id); if(el)el.innerHTML='<h4>'+c[1]+' '+c[0]+'</h4><p>'+c[2]+'</p>';}); const marker=document.getElementById('scoreMarker'); if(marker){marker.textContent=score; marker.style.left=Math.max(0,Math.min(100,score))+'%';}}
+function showCreditOperator(op,btn){document.querySelectorAll('.operator-btn').forEach(b=>b.classList.remove('active')); if(btn)btn.classList.add('active'); const data={ge:['>=','Lebih besar atau sama dengan. Dipakai agar nilai batas seperti 80 dan 50 ikut masuk kategori.'],gt:['>','Lebih besar dari. Hati-hati: skor 80 tidak masuk jika syaratnya hanya > 80.'],eq:['==','Sama dengan. Berguna untuk mengecek angka tertentu, tetapi bukan pilihan utama untuk rentang.'],lt:['<','Lebih kecil dari. Bisa dipakai untuk validasi, misalnya skor < 0.']}; const el=document.getElementById('creditOperatorInfo'); if(el)el.innerHTML='<h4>'+data[op][0]+'</h4><p>'+data[op][1]+'</p>';}
+function loadCreditCase(btn,score){document.querySelectorAll('.boundary-btn').forEach(b=>b.classList.remove('active')); if(btn)btn.classList.add('active'); const c=catFor(score); const el=document.getElementById('creditCaseInfo'); if(el)el.innerHTML='<h4>Input '+score+' → '+c[0]+' '+c[1]+'</h4><p>'+c[2]+' Coba masukkan angka ini ke program utama.</p>'; const input=document.getElementById('py6_input'); if(input){input.value=score; input.classList.add('preset-loaded'); setTimeout(()=>input.classList.remove('preset-loaded'),900);}}
+function traceCreditScore(){const score=Number(document.getElementById('traceScoreInput').value||0); const c1=score>=80, c2=score>=50, cat=catFor(score)[0]; document.getElementById('traceInput').textContent=score; document.getElementById('traceIf').textContent=c1?'True':'False'; document.getElementById('traceElif').textContent=c1?'Dilewati':(c2?'True':'False'); document.getElementById('traceOutput').textContent=cat;}
+</script>
+</body></html>

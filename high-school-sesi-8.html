@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>UOB My Digital Space — High School Sesi 8</title><link href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;📈&lt;/text&gt;&lt;/svg&gt;" rel="icon"/><style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --blue: #0056b3;
+      --light-blue: #4a9eff;
+      --uob-red: #e60012;
+      --uob-red-soft: #ff5a6b;
+      --uob-blue-deep: #0056b3;
+      --uob-blue-soft: #5aa7ff;
+      --teal: #11a9b7;
+      --bg: #f5f6f8;
+      --panel: #fff;
+      --text: #2c3e50;
+      --muted: #6c757d;
+      --line: #e3e8ef;
+      --green: #2e9d57;
+      --orange: #f39c12;
+      --red: #e74c3c;
+      --purple: #8e44ad;
+      --blue-soft: #eef7ff;
+      --green-soft: #effaf2
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      height: 100vh;
+      overflow: hidden;
+      color: var(--text)
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #f5d7da, #d9e9ff);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, .08)
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--uob-red) 0%, var(--uob-red-soft) 28%, var(--uob-blue-deep) 72%, var(--uob-blue-soft) 100%);
+      transition: width .3s ease;
+      box-shadow: 0 0 8px rgba(0, 86, 179, .18)
+    }
+
+    .main-container {
+      display: flex;
+      height: 100vh
+    }
+
+    .slides-panel {
+      width: 50%;
+      background: #f8f9fa;
+      border-right: 2px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      position: relative
+    }
+
+    .explanation-panel {
+      width: 50%;
+      background: #fff;
+      overflow-y: auto;
+      padding: 32px
+    }
+
+    .slide-header {
+      background: #fff;
+      padding: 17px 20px 15px;
+      border-bottom: 2px solid var(--line);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+      position: relative
+    }
+
+    .slide-header::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(var(--uob-red), var(--light-blue))
+    }
+
+    .slide-header h1 {
+      font-size: 1.28rem;
+      color: var(--text);
+      margin-bottom: 3px
+    }
+
+    .slide-header p {
+      font-size: .9rem;
+      color: var(--muted)
+    }
+
+    .header-badge {
+      position: absolute;
+      right: 18px;
+      top: 17px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      border: 1px solid #cce7ff;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-weight: 700;
+      font-size: .76rem
+    }
+
+    .slide-content {
+      flex: 1;
+      padding: 24px 28px 94px;
+      overflow-y: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 0
+    }
+
+    .slide,
+    .explanation {
+      display: none;
+      opacity: 0;
+      transition: opacity .25s ease
+    }
+
+    .slide.active,
+    .explanation.active {
+      display: block;
+      opacity: 1
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 820px
+    }
+
+    .explanation {
+      max-width: 760px;
+      margin: 0 auto
+    }
+
+    .slide h2 {
+      font-size: 2.25rem;
+      color: var(--blue);
+      margin-bottom: 10px;
+      line-height: 1.15
+    }
+
+    .slide h3 {
+      font-size: 1.78rem;
+      color: var(--blue);
+      margin-bottom: 16px;
+      line-height: 1.2
+    }
+
+    .slide h4,
+    .explanation h4 {
+      font-size: 1.05rem;
+      margin-bottom: 9px;
+      color: var(--text)
+    }
+
+    .slide p,
+    .explanation p {
+      font-size: 1rem;
+      line-height: 1.58;
+      color: #495057;
+      margin-bottom: 14px
+    }
+
+    .explanation h3 {
+      font-size: 1.65rem;
+      margin-bottom: 16px;
+      color: var(--text);
+      line-height: 1.25
+    }
+
+    .slide ul,
+    .slide ol,
+    .explanation ul,
+    .explanation ol {
+      margin-left: 22px;
+      margin-bottom: 10px
+    }
+
+    .slide li,
+    .explanation li {
+      margin-bottom: 7px;
+      line-height: 1.5
+    }
+
+    code {
+      background: #eef3f8;
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #334155
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--uob-red);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 8px
+    }
+
+    .lead {
+      font-size: 1.08rem !important
+    }
+
+    .mini-note {
+      font-size: .9rem !important;
+      color: var(--muted) !important;
+      margin-top: 10px
+    }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      gap: 13px;
+      margin: 16px 0
+    }
+
+    .visual-card,
+    .metric-box,
+    .info-box,
+    .example-box,
+    .warning-box,
+    .interactive-box,
+    .code-card,
+    .quiz-card {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05)
+    }
+
+    .visual-card {
+      padding: 15px
+    }
+
+    .visual-card p {
+      margin-bottom: 0;
+      font-size: .92rem;
+      line-height: 1.42
+    }
+
+    .visual-icon {
+      font-size: 1.9rem;
+      margin-bottom: 8px
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 16px
+    }
+
+    .metric-box {
+      padding: 16px 12px;
+      text-align: center
+    }
+
+    .metric-box strong {
+      display: block;
+      font-size: 1.55rem;
+      color: var(--blue);
+      margin-bottom: 7px
+    }
+
+    .metric-box span {
+      font-size: .9rem;
+      line-height: 1.35;
+      color: #495057;
+      display: block
+    }
+
+    .info-box,
+    .example-box,
+    .warning-box,
+    .interactive-box {
+      padding: 17px;
+      margin: 16px 0
+    }
+
+    .info-box {
+      border-left: 5px solid var(--light-blue)
+    }
+
+    .example-box {
+      border-left: 5px solid var(--green);
+      background: #f8fff8
+    }
+
+    .warning-box {
+      border-left: 5px solid var(--orange);
+      background: #fffaf0
+    }
+
+    .interactive-box {
+      border-left: 5px solid var(--purple);
+      background: #fcf8ff
+    }
+
+    .navigation {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 2px solid var(--line);
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, .04)
+    }
+
+    .nav-btn {
+      background: var(--light-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: .94rem;
+      font-weight: 700;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      transition: .2s ease
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      background: #357abd
+    }
+
+    .nav-btn:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none
+    }
+
+    .slide-indicator {
+      font-size: .9rem;
+      color: var(--muted);
+      font-weight: 700
+    }
+
+    .floating-element {
+      position: absolute;
+      opacity: .07;
+      pointer-events: none;
+      font-size: 2rem;
+      animation: float 6s ease-in-out infinite
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0)
+      }
+
+      33% {
+        transform: translateY(-12px) rotate(4deg)
+      }
+
+      66% {
+        transform: translateY(7px) rotate(-3deg)
+      }
+    }
+
+    .access-popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .8);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center
+    }
+
+    .access-popup {
+      background: white;
+      border: 3px solid var(--light-blue);
+      border-radius: 15px;
+      padding: 38px;
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .3);
+      transform: scale(.8);
+      opacity: 0;
+      transition: all .3s ease
+    }
+
+    .access-popup.show {
+      transform: scale(1);
+      opacity: 1
+    }
+
+    .access-popup h2 {
+      color: var(--text);
+      margin-bottom: 13px;
+      font-size: 1.8rem
+    }
+
+    .access-popup p {
+      color: #666;
+      margin-bottom: 22px;
+      line-height: 1.55
+    }
+
+    .access-input {
+      width: 100%;
+      padding: 14px;
+      font-size: 1.15rem;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      text-align: center;
+      letter-spacing: 2px;
+      font-weight: bold;
+      text-transform: uppercase
+    }
+
+    .access-input:focus {
+      outline: none;
+      border-color: var(--light-blue);
+      box-shadow: 0 0 0 3px rgba(74, 158, 255, .12)
+    }
+
+    .access-submit,
+    .primary-btn,
+    .secondary-btn {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .access-submit,
+    .primary-btn {
+      background: var(--blue);
+      color: white
+    }
+
+    .secondary-btn {
+      background: #e9ecef;
+      color: var(--text)
+    }
+
+    .access-submit {
+      padding: 13px 28px;
+      font-size: 1.05rem
+    }
+
+    .access-error {
+      color: var(--red);
+      margin-top: 13px;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity .2s
+    }
+
+    .access-error.show {
+      opacity: 1
+    }
+
+    .access-hint {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 5px;
+      padding: 9px;
+      margin-top: 18px;
+      font-size: .88rem;
+      color: #856404
+    }
+
+    .scratch-map-wrap {
+      position: relative;
+      width: 100%;
+      margin: 12px auto;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .08)
+    }
+
+    .scratch-map-wrap img {
+      width: 100%;
+      display: block
+    }
+
+    .hotspot {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      background: var(--uob-red);
+      color: white;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35);
+      display: grid;
+      place-items: center;
+      transform: translate(-50%, -50%);
+      transition: transform .16s, background .16s;
+      z-index: 3
+    }
+
+    .hotspot:hover,
+    .hotspot.active {
+      transform: translate(-50%, -50%) scale(1.16);
+      background: var(--blue)
+    }
+
+    .scratch-caption {
+      text-align: center;
+      font-size: .85rem;
+      color: var(--muted);
+      margin-top: 8px
+    }
+
+    .area-live-card {
+      min-height: 110px;
+      border: 2px solid #cfe7fb;
+      background: var(--blue-soft);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 14px
+    }
+
+    .area-number {
+      display: inline-grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: white;
+      font-weight: 900;
+      margin-right: 7px
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .choice-btn {
+      border: 2px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 11px 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: .18s;
+      text-align: left
+    }
+
+    .choice-btn:hover {
+      border-color: var(--light-blue);
+      transform: translateY(-1px)
+    }
+
+    .choice-btn.correct,
+    .choice-btn.selected {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: #176b35
+    }
+
+    .choice-btn.wrong {
+      border-color: var(--red);
+      background: #fff1f0;
+      color: #a42820
+    }
+
+    .feedback-line {
+      min-height: 28px;
+      font-weight: 700;
+      margin-top: 8px
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .form-grid label {
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--text)
+    }
+
+    .form-grid input,
+    .form-grid textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      margin-top: 5px
+    }
+
+    .form-grid input:focus,
+    .form-grid textarea:focus {
+      outline: none;
+      border-color: var(--light-blue)
+    }
+
+    .lms-map-wrap,
+    .test-map-wrap {
+      position: relative
+    }
+
+    .session-card-hotspot {
+      position: absolute;
+      left: 19.1%;
+      top: 43%;
+      width: 25.5%;
+      height: 51%;
+      padding: 0;
+      border: 3px dashed transparent;
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+      transition: .2s ease
+    }
+
+    .session-card-hotspot span {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: #fff;
+      font-size: .9rem;
+      font-weight: 900;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35)
+    }
+
+    .session-card-hotspot:hover,
+    .session-card-hotspot.active {
+      border-color: var(--uob-red);
+      background: rgba(230, 0, 18, .08)
+    }
+
+    .session-card-hotspot:hover span,
+    .session-card-hotspot.active span {
+      background: var(--blue);
+      transform: scale(1.1)
+    }
+
+    .test-card-hotspot {
+      position: absolute;
+      left: 18%;
+      right: 3%;
+      bottom: 5%;
+      height: 20%;
+      padding: 0;
+      border: 3px dashed transparent;
+      border-radius: 14px;
+      background: transparent;
+      cursor: pointer;
+      transition: .2s ease
+    }
+
+    .test-number {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35)
+    }
+
+    .test-instruction {
+      position: absolute;
+      left: 50%;
+      bottom: 12px;
+      transform: translateX(-50%);
+      width: 88%;
+      padding: 7px 9px;
+      border-radius: 8px;
+      background: rgba(0, 86, 179, .94);
+      color: #fff;
+      font-size: .76rem;
+      line-height: 1.3;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, .25)
+    }
+
+    .test-card-hotspot:hover,
+    .test-card-hotspot.active {
+      border-color: var(--uob-red);
+      background: rgba(230, 0, 18, .08)
+    }
+
+    .test-card-hotspot:hover .test-instruction,
+    .test-card-hotspot.active .test-instruction {
+      background: var(--uob-red)
+    }
+
+    .flow-line {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 20px 0
+    }
+
+    .flow-box {
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--blue);
+      color: #fff;
+      text-align: center;
+      font-weight: 900;
+      cursor: pointer
+    }
+
+    .flow-arrow {
+      color: var(--uob-red);
+      font-size: 1.6rem;
+      font-weight: 900
+    }
+
+    .comparison-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    .compare-card {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      background: #fff
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 2px
+    }
+
+    .pill.blue {
+      background: var(--blue)
+    }
+
+    .pill.green {
+      background: var(--green)
+    }
+
+    .pill.purple {
+      background: var(--purple)
+    }
+
+    .colab-mock,
+    .colab-hotmap {
+      border: 2px solid #dce6ef;
+      border-radius: 14px;
+      background: #1e1e1e;
+      color: #e5e7eb;
+      overflow: hidden;
+      margin: 16px 0;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .12);
+      position: relative
+    }
+
+    .colab-title {
+      background: #111827;
+      padding: 10px 14px;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      font-size: .9rem
+    }
+
+    .colab-title span {
+      font-size: .8rem;
+      color: #9ca3af
+    }
+
+    .colab-cell {
+      margin: 12px;
+      border: 1px solid #374151;
+      border-radius: 10px;
+      background: #0f172a;
+      min-height: 72px;
+      position: relative;
+      padding: 14px 14px 14px 48px
+    }
+
+    .run-dot {
+      position: absolute;
+      left: 12px;
+      top: 15px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 0;
+      background: #16a34a;
+      color: white;
+      display: grid;
+      place-items: center
+    }
+
+    .colab-cell pre,
+    .code-card pre,
+    .receipt-preview pre {
+      white-space: pre-wrap;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .9rem;
+      line-height: 1.45
+    }
+
+    .colab-output {
+      margin: 0 12px 12px;
+      padding: 12px;
+      background: #fff;
+      color: #111827;
+      border-radius: 10px;
+      min-height: 48px;
+      position: relative
+    }
+
+    .python-editor {
+      border-radius: 18px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #152744 0%, #132742 100%);
+      box-shadow: 0 10px 24px rgba(8, 22, 46, .18);
+      margin: 16px 0;
+      border: 1px solid #274468
+    }
+
+    .editor-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #182c49;
+      color: #fff;
+      padding: 13px 18px 11px;
+      font-weight: 900
+    }
+
+    .editor-label {
+      font-size: 1.05rem;
+      letter-spacing: .05em;
+      color: #dbeafe
+    }
+
+    .editor-live {
+      font-size: .95rem;
+      letter-spacing: .04em;
+      color: #69e3a7
+    }
+
+    .python-editor textarea {
+      width: 100%;
+      min-height: 250px;
+      resize: vertical;
+      background: #0f2240;
+      color: #fff;
+      border: 0;
+      padding: 18px 18px 16px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 1rem;
+      line-height: 1.65;
+      outline: none
+    }
+
+    .python-editor textarea:focus {
+      box-shadow: inset 0 0 0 2px rgba(147, 197, 253, .22)
+    }
+
+    .editor-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      background: #182c49;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      border-bottom: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .run-code-btn {
+      background: #22b573;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-weight: 900;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, .12);
+      transition: .18s ease
+    }
+
+    .run-code-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03)
+    }
+
+    .editor-toolbar-note {
+      color: #dbeafe;
+      font-size: .98rem;
+      line-height: 1.4
+    }
+
+    .editor-output-panel {
+      padding: 0 16px 16px;
+      background: #182c49
+    }
+
+    .editor-output-label {
+      color: #93c5fd;
+      font-size: 1rem;
+      letter-spacing: .08em;
+      font-weight: 900;
+      padding: 14px 12px 8px
+    }
+
+    .output-box {
+      background: #041126;
+      color: #fff;
+      min-height: 110px;
+      white-space: pre-wrap;
+      font-family: Consolas, Monaco, monospace;
+      padding: 16px;
+      border: 1px solid #2b4f7b;
+      border-radius: 12px;
+      line-height: 1.6
+    }
+
+    .code-card {
+      padding: 14px;
+      background: #111827;
+      color: #e5e7eb;
+      overflow: auto
+    }
+
+    .receipt-preview {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 14px 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05)
+    }
+
+    .receipt-preview pre {
+      color: #111827
+    }
+
+    .component-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0
+    }
+
+    .component-pill {
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      padding: 8px 11px;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .component-pill.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    .checklist {
+      list-style: none;
+      margin-left: 0 !important;
+      display: grid;
+      gap: 8px
+    }
+
+    .check-item {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      cursor: pointer
+    }
+
+    .check-item input {
+      margin-top: 3px;
+      transform: scale(1.2)
+    }
+
+    .check-item.done {
+      background: var(--green-soft);
+      border-color: #9cd9af;
+      text-decoration: line-through;
+      color: #3e6b4c
+    }
+
+    .debug-scenario {
+      display: none
+    }
+
+    .debug-scenario.active {
+      display: block
+    }
+
+    .debug-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px
+    }
+
+    .debug-tab {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 7px 11px;
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    .debug-tab.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    @media(max-width:960px) {
+      body {
+        overflow: auto;
+        height: auto
+      }
+
+      .main-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh
+      }
+
+      .slides-panel,
+      .explanation-panel {
+        width: 100%;
+        height: auto;
+        min-height: 50vh
+      }
+
+      .slides-panel {
+        min-height: 100vh
+      }
+
+      .slide-content {
+        padding: 20px 20px 92px
+      }
+
+      .explanation-panel {
+        padding: 24px
+      }
+
+      .header-badge {
+        display: none
+      }
+
+      .flow-line,
+      .comparison-table {
+        grid-template-columns: 1fr
+      }
+
+      .flow-arrow {
+        display: none
+      }
+    }
+
+    .stdin-panel {
+      padding: 0 16px 14px;
+      background: #182c49;
+      border-top: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .stdin-label {
+      color: #93c5fd;
+      font-size: .86rem;
+      letter-spacing: .08em;
+      font-weight: 900;
+      padding: 10px 2px 6px;
+      text-transform: uppercase
+    }
+
+    .stdin-area {
+      width: 100%;
+      min-height: 74px;
+      resize: vertical;
+      border: 1px solid #2b4f7b;
+      border-radius: 10px;
+      background: #0b1a33;
+      color: #e5f0ff;
+      padding: 10px 12px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .92rem;
+      line-height: 1.45;
+      outline: none
+    }
+
+    .stdin-area:focus {
+      box-shadow: inset 0 0 0 2px rgba(147, 197, 253, .22)
+    }
+
+    .stdin-area.preset-loaded {
+      border-color: #69e3a7;
+      box-shadow: 0 0 0 3px rgba(105, 227, 167, .22), inset 0 0 0 1px rgba(105, 227, 167, .35)
+    }
+
+    .type-bank {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .type-card {
+      border: 2px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: 800
+    }
+
+    .type-card.active {
+      background: var(--blue-soft);
+      border-color: var(--blue)
+    }
+
+    .mini-terminal {
+      background: #041126;
+      color: #fff;
+      border-radius: 12px;
+      border: 1px solid #2b4f7b;
+      padding: 16px;
+      margin: 14px 0;
+      font-family: Consolas, Monaco, monospace;
+      white-space: pre-wrap;
+      line-height: 1.55;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .08)
+    }
+
+    .safe-card {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 13px;
+      cursor: pointer;
+      font-weight: 800
+    }
+
+    .safe-card.safe {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: #176b35
+    }
+
+    .safe-card.risky {
+      border-color: var(--red);
+      background: #fff1f0;
+      color: #a42820
+    }
+
+    .memory-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    .memory-slot {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      cursor: pointer
+    }
+
+    .memory-slot.active {
+      border-color: var(--blue);
+      background: var(--blue-soft)
+    }
+
+    .memory-slot code {
+      display: block;
+      margin-top: 6px;
+      color: var(--blue);
+      font-weight: 900
+    }
+
+    .thin-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 14px 0
+    }
+
+    .thin-table th {
+      background: var(--blue);
+      color: #fff;
+      text-align: left;
+      padding: 10px
+    }
+
+    .thin-table td {
+      border-top: 1px solid var(--line);
+      padding: 10px;
+      vertical-align: top
+    }
+
+    .thin-table code {
+      background: #eef3f8;
+      padding: 2px 6px;
+      border-radius: 5px
+    }
+  
+    details.learn-accordion {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      margin: 10px 0;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+    details.learn-accordion summary {
+      cursor: pointer;
+      padding: 12px 14px;
+      font-weight: 900;
+      color: var(--blue);
+      background: var(--blue-soft);
+      list-style: none;
+    }
+    details.learn-accordion summary::-webkit-details-marker {display:none;}
+    details.learn-accordion .accordion-body {padding: 14px 16px;}
+    .decision-gate {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 16px 0;
+    }
+    .gate-node {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      font-weight: 900;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
+    .gate-diamond {
+      width: 112px;
+      height: 112px;
+      transform: rotate(45deg);
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--blue), var(--light-blue));
+      color: white;
+      border-radius: 16px;
+      font-weight: 900;
+      text-align: center;
+      box-shadow: 0 7px 16px rgba(0,86,179,.18);
+    }
+    .gate-diamond span {transform: rotate(-45deg); display:block; font-size:.85rem; line-height:1.25;}
+    .branch-label {font-size:.82rem; color:var(--muted); font-weight:800; margin-top:6px;}
+    .trace-card {display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin:12px 0;}
+    .trace-step {background:#fff; border:2px solid var(--line); border-radius:12px; padding:12px; text-align:center;}
+    .trace-step strong {display:block; color:var(--blue); margin-bottom:5px;}
+    .operator-board {display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin:14px 0;}
+    .operator-btn {background:#fff; border:2px solid var(--line); border-radius:12px; padding:12px; cursor:pointer; font-weight:900; text-align:center;}
+    .operator-btn:hover,.operator-btn.active {border-color:var(--blue); background:var(--blue-soft); color:var(--blue); transform:translateY(-1px);}
+    .true-false {display:flex; gap:8px; flex-wrap:wrap; margin:10px 0;}
+    .true-pill,.false-pill {padding:7px 11px; border-radius:999px; color:white; font-weight:900;}
+    .true-pill {background:var(--green);} .false-pill{background:var(--red);}
+    .compact-code {max-height: 260px; overflow:auto;}
+    @media(max-width:960px){.decision-gate{grid-template-columns:1fr}.gate-diamond{margin:0 auto}.flow-arrow{display:none}}
+
+  
+/* Session 6 components */
+.risk-scale{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}.risk-zone{border:2px solid var(--line);background:#fff;border-radius:14px;padding:15px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:.18s ease}.risk-zone:hover,.risk-zone.active{transform:translateY(-2px);border-color:var(--blue);background:var(--blue-soft)}.risk-zone strong{display:block;font-size:1.05rem;margin-bottom:6px}.risk-zone small{color:var(--muted);font-weight:800}.risk-zone.aman{border-left:6px solid var(--green)}.risk-zone.hati{border-left:6px solid var(--orange)}.risk-zone.risk{border-left:6px solid var(--red)}.score-meter{height:26px;border-radius:999px;background:linear-gradient(90deg,#f87171 0%,#f59e0b 50%,#22c55e 100%);position:relative;margin:18px 0 10px;box-shadow:inset 0 2px 4px rgba(0,0,0,.12)}.score-marker{position:absolute;top:-9px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#fff;border:3px solid var(--blue);font-weight:900;color:var(--blue);box-shadow:0 4px 12px rgba(0,0,0,.18);transform:translateX(-50%);left:65%}.score-labels{display:flex;justify-content:space-between;font-size:.82rem;font-weight:900;color:var(--muted)}.branch-chain{display:grid;gap:10px;margin:14px 0}.branch-row{display:grid;grid-template-columns:110px 1fr;gap:10px}.branch-key{background:var(--blue);color:#fff;border-radius:12px;display:grid;place-items:center;font-weight:900}.branch-condition{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px}.branch-condition strong{color:var(--blue)}.mini-terminal.dark{background:#041126;color:#e5f0ff;border:1px solid #2b4f7b;border-radius:12px;padding:16px;margin:14px 0;font-family:Consolas,Monaco,monospace;white-space:pre-wrap;line-height:1.55}.boundary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(95px,1fr));gap:10px;margin:12px 0}.boundary-btn{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;font-weight:900;text-align:center}.boundary-btn:hover,.boundary-btn.active{border-color:var(--blue);background:var(--blue-soft);color:var(--blue)}.note-pill{display:inline-block;padding:5px 9px;border-radius:999px;background:var(--blue-soft);color:var(--blue);font-size:.82rem;font-weight:900;margin:2px}@media(max-width:960px){.risk-scale{grid-template-columns:1fr}.branch-row{grid-template-columns:1fr}}
+
+/* Session 7 components */
+.login-gate{display:grid;grid-template-columns:1fr 90px 1fr;gap:12px;align-items:center;margin:18px 0}.key-card{background:#fff;border:2px solid var(--line);border-radius:14px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,.05);cursor:pointer;transition:.18s ease}.key-card:hover,.key-card.active{border-color:var(--blue);background:var(--blue-soft);transform:translateY(-2px)}.lock-core{display:grid;place-items:center;width:82px;height:82px;border-radius:50%;background:linear-gradient(135deg,var(--uob-red),var(--blue));color:#fff;font-size:2.2rem;font-weight:900;box-shadow:0 8px 18px rgba(0,0,0,.16)}.logic-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:14px 0}.logic-card{background:#fff;border:2px solid var(--line);border-radius:14px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,.05);cursor:pointer}.logic-card.active{border-color:var(--blue);background:var(--blue-soft)}.truth-table{width:100%;border-collapse:collapse;background:#fff;border:2px solid var(--line);border-radius:12px;overflow:hidden;margin:14px 0}.truth-table th{background:var(--blue);color:#fff;text-align:left;padding:10px}.truth-table td{border-top:1px solid var(--line);padding:10px}.truth-table tr.good td{background:#effaf2}.truth-table tr.bad td{background:#fff7f7}.terminal-login{background:#041126;color:#e5f0ff;border:1px solid #2b4f7b;border-radius:12px;padding:16px;margin:14px 0;font-family:Consolas,Monaco,monospace;white-space:pre-wrap;line-height:1.55}.trace-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin:12px 0}.trace-step{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px}.trace-step strong{display:block;color:var(--blue);margin-bottom:5px}.operator-btn{border:2px solid var(--line);background:#fff;border-radius:12px;padding:12px 14px;font-weight:900;cursor:pointer}.operator-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}.accordion{border:2px solid var(--line);border-radius:12px;background:#fff;margin:10px 0;overflow:hidden}.accordion button{width:100%;border:0;background:#f8fbfe;padding:12px 14px;text-align:left;font-weight:900;cursor:pointer;color:var(--text)}.accordion-content{display:none;padding:14px;border-top:1px solid var(--line)}.accordion.open .accordion-content{display:block}.password-meter{height:18px;border-radius:999px;background:#e5e7eb;overflow:hidden;margin:10px 0}.password-meter span{display:block;height:100%;width:35%;background:var(--red);transition:.2s ease}.password-meter.medium span{width:65%;background:var(--orange)}.password-meter.strong span{width:100%;background:var(--green)}.mono-tag{font-family:Consolas,Monaco,monospace;background:#eef3f8;border-radius:6px;padding:2px 6px}.mini-code{max-height:360px;overflow:auto}.safe-card{border:2px solid var(--line);border-radius:12px;background:#fff;padding:13px;cursor:pointer;font-weight:800}.safe-card.safe{border-color:var(--green);background:var(--green-soft);color:#176b35}.safe-card.risky{border-color:var(--red);background:#fff1f0;color:#a42820}@media(max-width:960px){.login-gate{grid-template-columns:1fr}.lock-core{margin:0 auto}}
+
+.growth-bars{display:grid;gap:10px;margin-top:12px}.growth-bars div{display:grid;grid-template-columns:72px 1fr;align-items:center;gap:8px}.growth-bars span{font-weight:900;color:var(--muted);font-size:.85rem}.growth-bars b{display:block;height:18px;border-radius:999px;background:linear-gradient(90deg,var(--uob-red),var(--blue));box-shadow:inset 0 1px 2px rgba(0,0,0,.12)}.growth-bars.compound b{background:linear-gradient(90deg,var(--green),var(--blue))}.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:14px 0}.timeline button{border:2px solid var(--line);background:#fff;border-radius:12px;padding:12px;cursor:pointer;font-weight:900}.timeline button.active,.timeline button:hover{background:var(--blue-soft);border-color:var(--blue);color:var(--blue)}.range-track{display:flex;gap:12px;align-items:center;justify-content:center;margin:22px 0;flex-wrap:wrap}.range-track span{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;border:3px solid var(--line);background:#fff;font-weight:900;font-size:1.2rem}.range-track span.active{background:var(--blue);border-color:var(--blue);color:#fff}.range-track span.stop{background:#fff1f0;border-color:var(--uob-red);color:var(--uob-red);position:relative}.range-track span.stop::after{content:'stop';position:absolute;bottom:-22px;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}.compound-mini{background:#fff;border:2px solid var(--line);border-radius:12px;padding:13px;margin:10px 0}.compound-mini strong{color:var(--blue)}
+</style></head>
+<body>
+<div class="access-popup-overlay" id="accessPopup"><div class="access-popup"><h2>🔐 Kode Akses</h2><p>Masukkan kode akses High School untuk membuka materi Sesi 8.</p><input autocomplete="off" class="access-input" id="accessInput" maxlength="20" placeholder="MASUKKAN KODE" type="text"/><button class="access-submit" onclick="checkAccessCode()">Masuk</button><div class="access-error" id="accessError">Kode akses belum tepat. Coba lagi.</div><div class="access-hint">Kode akses diberikan oleh guru.</div></div></div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="main-container" id="mainContent" style="display:none;"><div class="slides-panel"><div class="slide-header"><h1>UOB My Digital Space — High School</h1><p>Sesi 8 · Simulasi Bunga Majemuk</p><span class="header-badge">Python · High School</span></div><div class="slide-content"><div class="floating-element" style="top:12%;left:7%;">🐍</div><div class="floating-element" style="top:18%;right:10%;">📈</div><div class="floating-element" style="bottom:25%;left:14%;">🔁</div><div class="floating-element" style="bottom:15%;right:16%;">🧮</div><section class="slide active" id="slide-1"><span class="eyebrow">Sesi 8</span><h2>Simulasi Bunga Majemuk</h2><p class="lead">Hari ini kamu akan membuat program Python yang menampilkan pertumbuhan saldo dari tahun ke tahun menggunakan <strong>for loop</strong>.</p><div class="metrics"><div class="metric-box"><strong>for</strong><span>mengulang kode</span></div><div class="metric-box"><strong>range()</strong><span>mengatur jumlah putaran</span></div><div class="metric-box"><strong>📈</strong><span>bunga majemuk simulasi</span></div><div class="metric-box"><strong>🧪</strong><span>test case tahunan</span></div></div><div class="example-box"><h4>Target akhir</h4><p>Program menerima modal awal, persentase pertumbuhan, dan durasi tahun, lalu mencetak saldo setiap tahun secara otomatis.</p></div></section><section class="slide" id="slide-2"><span class="eyebrow">Rencana Belajar</span><h3>Misi Belajar Hari Ini</h3><div class="visual-grid"><div class="visual-card"><div class="visual-icon">🔁</div><h4>Loop</h4><p>Mengulang proses yang sama tanpa menulis kode berkali-kali.</p></div><div class="visual-card"><div class="visual-icon">🧮</div><h4>Rumus</h4><p>Menghitung keuntungan dari saldo terbaru.</p></div><div class="visual-card"><div class="visual-icon">📊</div><h4>Deret Saldo</h4><p>Menampilkan saldo tahun 1, 2, 3, dan seterusnya.</p></div><div class="visual-card"><div class="visual-icon">🧠</div><h4>Debugging</h4><p>Mengecek range, indentasi, dan input angka.</p></div></div><div class="interactive-box"><h4>Quick poll</h4><p>Menurutmu, apa alasan paling kuat memakai loop?</p><div class="choice-grid"><button class="choice-btn" onclick="selectAny(this)">Kode jadi lebih pendek</button><button class="choice-btn" onclick="selectAny(this)">Jumlah tahun bisa fleksibel</button><button class="choice-btn" onclick="selectAny(this)">Risiko salah ketik berkurang</button><button class="choice-btn" onclick="selectAny(this)">Semuanya benar</button></div></div></section><section class="slide" id="slide-3"><h3>Siapkan Workspace</h3><p class="lead">Sebelum coding, pastikan Colab/editor siap dan kamu memakai data simulasi.</p><div class="choice-grid"><button class="choice-btn" onclick="deviceCheck(this)">Laptop/komputer siap</button><button class="choice-btn" onclick="deviceCheck(this)">Internet stabil</button><button class="choice-btn" onclick="deviceCheck(this)">Google Colab/editor terbuka</button><button class="choice-btn" onclick="deviceCheck(this)">Notebook bernama <strong>Sesi8_Bunga_Majemuk</strong></button><button class="choice-btn" onclick="deviceCheck(this)">Angka yang dipakai adalah data dummy</button><button class="choice-btn" onclick="deviceCheck(this)">Siap menguji beberapa durasi tahun</button></div><div class="info-box"><strong>Alamat LMS:</strong><br/><a href="https://app.uobmydigitalspace.com/" rel="noopener noreferrer" target="_blank">https://app.uobmydigitalspace.com/</a></div></section><section class="slide" id="slide-4"><h3>Kenapa Kita Butuh Loop?</h3><p class="lead">Kalau ingin menghitung 10 tahun, kita tidak mau menulis rumus yang sama 10 kali.</p><div class="comparison-table"><div class="compare-card"><h4>Tanpa loop</h4><p>Kode bisa panjang, berulang, dan mudah salah edit.</p><div class="mini-terminal dark">Tahun 1: hitung<br/>Tahun 2: hitung lagi<br/>Tahun 3: hitung lagi<br/>... ulang manual</div></div><div class="compare-card"><h4>Dengan loop</h4><p>Satu pola kode bisa berjalan sebanyak durasi yang kita tentukan.</p><div class="mini-terminal dark">for tahun in range(...):<br/>    hitung<br/>    cetak</div></div></div><div class="interactive-box"><h4>Quick check</h4><p>Kalau user memasukkan durasi 15 tahun, cara mana yang lebih masuk akal?</p><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'loopNeedQ')">Tulis 15 blok print manual</button><button class="choice-btn" onclick="quiz(this,true,'loopNeedQ')">Gunakan loop</button></div><div class="feedback-line" id="loopNeedQ"></div></div></section><section class="slide" id="slide-5"><h3>Bunga Sederhana vs Bunga Majemuk</h3><p class="lead">Di simulasi ini, saldo tahun berikutnya dihitung dari saldo terbaru, bukan hanya dari modal awal.</p><div class="comparison-table"><div class="compare-card"><h4>Bunga sederhana</h4><p>Keuntungan dihitung dari modal awal yang sama.</p><div class="growth-bars"><div><span>Awal</span><b style="width:45%"></b></div><div><span>Tahun 1</span><b style="width:55%"></b></div><div><span>Tahun 2</span><b style="width:65%"></b></div></div></div><div class="compare-card"><h4>Bunga majemuk</h4><p>Keuntungan dihitung dari saldo yang sudah bertambah.</p><div class="growth-bars compound"><div><span>Awal</span><b style="width:45%"></b></div><div><span>Tahun 1</span><b style="width:56%"></b></div><div><span>Tahun 2</span><b style="width:70%"></b></div></div></div></div><div class="warning-box"><h4>Catatan aman</h4><p>Ini simulasi belajar coding, bukan saran investasi. Kita fokus pada logika loop dan perhitungan.</p></div></section><section class="slide" id="slide-6"><h3>Iterasi: Satu Putaran Loop</h3><p class="lead">Setiap kali loop berjalan, kita menyebutnya satu <strong>iterasi</strong>.</p><div class="timeline"><button onclick="showIteration(1,this)">Tahun 1</button><button onclick="showIteration(2,this)">Tahun 2</button><button onclick="showIteration(3,this)">Tahun 3</button></div><div class="area-live-card" id="iterationInfo"><h4>Tahun 1</h4><p>Saldo awal dihitung, keuntungan ditambahkan, lalu saldo baru dicetak.</p></div><div class="flow-line"><div class="flow-box">Hitung keuntungan</div><div class="flow-arrow">→</div><div class="flow-box">Update saldo</div><div class="flow-arrow">→</div><div class="flow-box">Cetak tahun</div></div></section><section class="slide" id="slide-7"><h3>Anatomi <code>for loop</code></h3><p class="lead">Loop punya tiga bagian penting: variabel sementara, <code>range()</code>, dan blok kode yang diulang.</p><div class="code-card"><pre><code>for tahun in range(1, 4):
+    print(f"Loop putaran ke-{tahun}")</code></pre></div><div class="component-bank"><button class="component-pill" onclick="showForPart('var',this)">tahun</button><button class="component-pill" onclick="showForPart('range',this)">range(1, 4)</button><button class="component-pill" onclick="showForPart('colon',this)">:</button><button class="component-pill" onclick="showForPart('indent',this)">indentasi</button></div><div class="area-live-card" id="forPartInfo"><h4>Pilih bagian kode</h4><p>Klik salah satu bagian untuk melihat tugasnya.</p></div></section><section class="slide" id="slide-8"><h3>Memahami <code>range(1, 4)</code></h3><p class="lead">Di Python, angka terakhir pada <code>range()</code> tidak ikut dijalankan.</p><div class="range-track"><span class="active">1</span><span class="active">2</span><span class="active">3</span><span class="stop">4</span></div><div class="info-box"><h4>Artinya</h4><p><code>range(1, 4)</code> menghasilkan 1, 2, dan 3. Angka 4 hanya menjadi batas berhenti.</p></div><div class="interactive-box"><h4>Tebak cepat</h4><p><code>range(1, 6)</code> akan mencetak angka berapa saja?</p><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'rangeQ1')">1 sampai 6</button><button class="choice-btn" onclick="quiz(this,true,'rangeQ1')">1 sampai 5</button><button class="choice-btn" onclick="quiz(this,false,'rangeQ1')">0 sampai 6</button></div><div class="feedback-line" id="rangeQ1"></div></div></section><section class="slide" id="slide-9"><h3>Kenapa Pakai <code>durasi_tahun + 1</code>?</h3><p class="lead">Kalau user memilih 3 tahun, kita ingin loop berjalan untuk tahun 1, 2, dan 3.</p><div class="comparison-table"><div class="compare-card"><h4><code>range(1, durasi_tahun)</code></h4><p>Jika durasi 3, hasilnya hanya 1 dan 2.</p><div class="mini-terminal dark">Tahun 1<br/>Tahun 2</div></div><div class="compare-card"><h4><code>range(1, durasi_tahun + 1)</code></h4><p>Jika durasi 3, hasilnya 1, 2, dan 3.</p><div class="mini-terminal dark">Tahun 1<br/>Tahun 2<br/>Tahun 3</div></div></div><div class="warning-box"><h4>Bug yang sering muncul</h4><p>Program terlihat jalan, tapi jumlah tahunnya kurang satu. Ini disebut off-by-one error.</p></div></section><section class="slide" id="slide-10"><h3>Indentasi: Garis Batas Blok Loop</h3><p class="lead">Baris yang ingin diulang harus menjorok ke dalam.</p><div class="comparison-table"><div class="compare-card"><h4>Benar</h4><div class="code-card"><pre><code>for tahun in range(1, 4):
+    print(tahun)</code></pre></div></div><div class="compare-card"><h4>Salah</h4><div class="code-card"><pre><code>for tahun in range(1, 4):
+print(tahun)</code></pre></div></div></div><div class="interactive-box"><h4>Quick check</h4><p>Baris mana yang harus menjorok?</p><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'indentQ')"><code>for tahun in range(...):</code></button><button class="choice-btn" onclick="quiz(this,true,'indentQ')"><code>print(...)</code> yang ingin diulang</button></div><div class="feedback-line" id="indentQ"></div></div></section><section class="slide" id="slide-11"><h3>Hitung Manual 3 Tahun</h3><p class="lead">Sebelum percaya pada program, kita hitung ekspektasinya dulu.</p><div class="form-grid"><label>Saldo awal<input id="manualSaldo" type="number" value="100000"/></label><label>Pertumbuhan per tahun (%)<input id="manualGrow" type="number" value="10"/></label><label>Durasi tahun<input id="manualYears" type="number" value="3"/></label><button class="primary-btn" onclick="calculateCompoundManual()">Hitung simulasi</button></div><div class="area-live-card" id="compoundManualResult"><h4>Hasil simulasi</h4><p>Tahun 1: Rp 110,000<br/>Tahun 2: Rp 121,000<br/>Tahun 3: Rp 133,100</p></div><p class="mini-note">Hasil ini akan jadi pembanding saat program Python dijalankan.</p></section><section class="slide" id="slide-12"><h3>Alur Input → Process → Output</h3><p class="lead">Program bunga majemuk tetap mengikuti pola IPO seperti project sebelumnya.</p><div class="flow-line"><div class="flow-box" onclick="showCompoundFlow('input')">Input</div><div class="flow-arrow">→</div><div class="flow-box" onclick="showCompoundFlow('process')">Process</div><div class="flow-arrow">→</div><div class="flow-box" onclick="showCompoundFlow('output')">Output</div></div><div class="area-live-card" id="compoundFlowInfo"><h4>Input</h4><p>Program meminta modal awal, persen pertumbuhan, dan durasi tahun.</p></div><div class="example-box"><h4>Tujuan aplikasi</h4><p>Membantu user melihat proyeksi saldo simulasi secara otomatis dari tahun ke tahun.</p></div></section><section class="slide" id="slide-13"><h3>Variabel Project</h3><p class="lead">Klik variabel untuk melihat tugasnya di program.</p><div class="memory-box"><div class="memory-slot" onclick="showCompoundVar('awal',this)"><strong>Modal Awal</strong><code>saldo_awal</code></div><div class="memory-slot" onclick="showCompoundVar('persen',this)"><strong>Persen</strong><code>persen_tumbuh</code></div><div class="memory-slot" onclick="showCompoundVar('durasi',this)"><strong>Durasi</strong><code>durasi_tahun</code></div><div class="memory-slot" onclick="showCompoundVar('faktor',this)"><strong>Faktor</strong><code>faktor_pertumbuhan</code></div><div class="memory-slot" onclick="showCompoundVar('saldo',this)"><strong>Saldo Aktif</strong><code>saldo_sekarang</code></div><div class="memory-slot" onclick="showCompoundVar('untung',this)"><strong>Keuntungan</strong><code>keuntungan</code></div></div><div class="area-live-card" id="compoundVarInfo"><h4>Pilih variabel</h4><p>Klik salah satu kotak untuk melihat perannya.</p></div></section><section class="slide" id="slide-14"><h3>Reading Code: Tebak Output</h3><p>Baca kode ini tanpa menjalankan dulu.</p><div class="code-card"><pre><code>for tahun in range(1, 4):
+    print(f"Loop putaran ke-{tahun}")</code></pre></div><div class="interactive-box"><h4>Apa outputnya?</h4><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'readLoopQ')">Loop putaran ke-1, ke-2, ke-3</button><button class="choice-btn" onclick="quiz(this,false,'readLoopQ')">Loop putaran ke-1 sampai ke-4</button><button class="choice-btn" onclick="quiz(this,false,'readLoopQ')">Tidak ada output</button></div><div class="feedback-line" id="readLoopQ"></div></div></section><section class="slide" id="slide-15"><h3>Mini Editor: Loop Dasar</h3><p class="lead">Coba jalankan loop kecil ini dulu sebelum masuk ke project utama.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py1" spellcheck="false" style="min-height:190px"># for loop mengulang kode sebanyak jumlah yang ditentukan
+for tahun in range(1, 4):
+    # Baris ini masuk ke dalam loop karena indentasinya menjorok
+    print(f"Loop putaran ke-{tahun}")</textarea><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py1')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py1_out">Output akan muncul di sini.</div></div></div><p class="mini-note">Ubah <code>range(1, 4)</code> menjadi <code>range(1, 6)</code>, lalu lihat perbedaannya.</p></section><section class="slide" id="slide-16"><h3>Project Brief: Tangga Kekayaan</h3><p class="lead">Sekarang kita rakit program utama: simulasi pertumbuhan saldo dari tahun ke tahun.</p><div class="accordion open"><button onclick="toggleAccordion(this)">🎯 Tujuan aplikasi</button><div class="accordion-content"><p>Membuat simulasi bunga majemuk yang mencetak saldo tiap tahun berdasarkan input user.</p></div></div><div class="accordion"><button onclick="toggleAccordion(this)">📥 Input</button><div class="accordion-content"><p><code>saldo_awal</code>, <code>persen_tumbuh</code>, dan <code>durasi_tahun</code>.</p></div></div><div class="accordion"><button onclick="toggleAccordion(this)">⚙️ Process</button><div class="accordion-content"><p>Ubah persen menjadi desimal, lalu ulang proses hitung keuntungan dan update saldo.</p></div></div><div class="accordion"><button onclick="toggleAccordion(this)">📤 Output</button><div class="accordion-content"><p>Deret saldo: Tahun 1, Tahun 2, Tahun 3, dan seterusnya.</p></div></div></section><section class="slide" id="slide-17"><h3>Langkah 1: Ambil Input</h3><p class="lead">Mulai dari mengambil data yang dibutuhkan program.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py2" spellcheck="false" style="min-height:300px">print("=== SIMULASI INVESTASI MASA DEPAN: BANK MUDA ===")
+
+# 1. Mengambil data input dari user
+saldo_awal = float(input("Masukkan Modal Awal Simulasi (Rp): "))
+persen_tumbuh = float(input("Masukkan Persentase Pertumbuhan per Tahun (%): "))
+durasi_tahun = int(input("Ingin simulasi berapa tahun?: "))
+
+# Mengecek data awal yang sudah masuk
+print(f"Modal awal: Rp {int(saldo_awal):,}")
+print(f"Pertumbuhan: {persen_tumbuh}% per tahun")
+print(f"Durasi: {durasi_tahun} tahun")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py2_input" spellcheck="false">100000
+10
+3</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py2')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py2_out">Output akan muncul di sini.</div></div></div><p class="mini-note">Input simulator punya tiga baris: modal awal, persen, dan durasi tahun.</p></section><section class="slide" id="slide-18"><h3>Langkah 2: Ubah Persen ke Desimal</h3><p class="lead">Python menghitung persentase dalam bentuk desimal.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py3" spellcheck="false" style="min-height:220px"># Persentase perlu diubah menjadi desimal sebelum dihitung
+persen_tumbuh = float(input("Masukkan persen pertumbuhan: "))
+faktor_pertumbuhan = persen_tumbuh / 100
+
+print(f"{persen_tumbuh}% sama dengan {faktor_pertumbuhan}")
+print(f"Artinya, saldo dikali {faktor_pertumbuhan} untuk menghitung keuntungan.")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py3_input" spellcheck="false">10</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py3')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py3_out">Output akan muncul di sini.</div></div></div><div class="info-box"><h4>Rumus</h4><p><code>faktor_pertumbuhan = persen_tumbuh / 100</code></p></div></section><section class="slide" id="slide-19"><h3>Langkah 3: Loop Pertumbuhan</h3><p class="lead">Di sinilah saldo berubah setiap tahun.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py4" spellcheck="false" style="min-height:350px">saldo_sekarang = 100000
+faktor_pertumbuhan = 0.10
+
+# Loop berjalan dari tahun 1 sampai 3
+for tahun in range(1, 4):
+    # Hitung keuntungan tahun ini dari saldo terbaru
+    keuntungan = saldo_sekarang * faktor_pertumbuhan
+
+    # Update saldo: saldo lama + keuntungan baru
+    saldo_sekarang = saldo_sekarang + keuntungan
+
+    # Cetak saldo setelah tumbuh tahun ini
+    print(f"Tahun {tahun} : Rp {int(saldo_sekarang):,}")</textarea><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py4')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py4_out">Output akan muncul di sini.</div></div></div><p class="mini-note">Perhatikan: <code>saldo_sekarang</code> di-update di dalam loop, jadi tahun berikutnya memakai saldo terbaru.</p></section><section class="slide" id="slide-20"><h3>Starter Code Lengkap</h3><p class="lead">Ini versi utama program. Jalankan, lalu coba ganti input simulator.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py5" spellcheck="false" style="min-height:520px">print("=== SIMULASI INVESTASI MASA DEPAN: BANK MUDA ===")
+
+# 1. Mengambil data input dari user
+saldo_awal = float(input("Masukkan Modal Awal Simulasi (Rp): "))
+persen_tumbuh = float(input("Masukkan Persentase Pertumbuhan per Tahun (%): "))
+durasi_tahun = int(input("Ingin simulasi berapa tahun?: "))
+
+# 2. Mengubah persen menjadi desimal, contoh 10% menjadi 0.10
+faktor_pertumbuhan = persen_tumbuh / 100
+
+# 3. Variabel ini akan berubah setiap tahun
+saldo_sekarang = saldo_awal
+
+print("
+-------------------------------------------")
+print(f"📈 PROYEKSI PERTUMBUHAN SELAMA {durasi_tahun} TAHUN")
+print("-------------------------------------------")
+
+# 4. Loop berjalan dari tahun 1 sampai durasi_tahun
+for tahun in range(1, durasi_tahun + 1):
+    # Hitung keuntungan berdasarkan saldo terbaru
+    keuntungan = saldo_sekarang * faktor_pertumbuhan
+
+    # Update saldo agar bunga tahun berikutnya ikut dihitung dari saldo baru
+    saldo_sekarang = saldo_sekarang + keuntungan
+
+    # Cetak hasil setiap tahun
+    print(f"Tahun {tahun} : Rp {int(saldo_sekarang):,}")
+
+print("-------------------------------------------")
+
+# 5. Challenge tambahan: hitung total keuntungan murni
+total_keuntungan_murni = saldo_sekarang - saldo_awal
+print(f"Total keuntungan murni: Rp {int(total_keuntungan_murni):,}")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py5_input" spellcheck="false">100000
+10
+3</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py5')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py5_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-21"><h3>Test Case Wajib</h3><p class="lead">Gunakan test case untuk mengecek apakah program menghitung dengan benar.</p><table class="thin-table"><tr><th>Case</th><th>Modal</th><th>Pertumbuhan</th><th>Durasi</th><th>Ekspektasi Akhir</th></tr><tr><td>1</td><td>100,000</td><td>10%</td><td>3 tahun</td><td>133,100</td></tr><tr><td>2</td><td>500,000</td><td>5%</td><td>4 tahun</td><td>607,753</td></tr></table><div class="choice-grid"><button class="choice-btn" onclick="loadCompoundCase(this,1)">Muat Case 1</button><button class="choice-btn" onclick="loadCompoundCase(this,2)">Muat Case 2</button><button class="choice-btn" onclick="loadCompoundCase(this,3)">Muat Edge Case</button></div><div class="feedback-line" id="compoundCaseFeedback"></div></section><section class="slide" id="slide-22"><h3>Trace Table: Lacak Saldo</h3><p class="lead">Trace table membantu melihat nilai variabel berubah setiap iterasi.</p><div class="form-grid"><label>Saldo awal<input id="traceSaldoInput" type="number" value="100000"/></label><label>Persen<input id="traceGrowInput" type="number" value="10"/></label><button class="primary-btn" onclick="traceCompound()">Buat trace 3 tahun</button></div><table class="thin-table"><tr><th>Tahun</th><th>Saldo awal tahun</th><th>Keuntungan</th><th>Saldo akhir</th></tr><tbody id="traceCompoundBody"><tr><td>1</td><td>100,000</td><td>10,000</td><td>110,000</td></tr><tr><td>2</td><td>110,000</td><td>11,000</td><td>121,000</td></tr><tr><td>3</td><td>121,000</td><td>12,100</td><td>133,100</td></tr></tbody></table></section><section class="slide" id="slide-23"><h3>Debug 1: Jumlah Tahun Kurang</h3><p class="lead">Gejala: user memasukkan 3 tahun, tapi output hanya sampai tahun 2.</p><div class="debug-tabs"><button class="debug-tab active" onclick="showDebug('s8debug-range',this)">Range salah</button><button class="debug-tab" onclick="showDebug('s8debug-fix',this)">Perbaikan</button></div><div class="debug-scenario active" id="s8debug-range"><div class="warning-box"><h4>Cek kode</h4><p><code>for tahun in range(1, durasi_tahun):</code></p><p>Angka terakhir tidak ikut dijalankan, jadi tahun terakhir bisa hilang.</p></div></div><div class="debug-scenario" id="s8debug-fix"><div class="info-box"><h4>Perbaiki menjadi</h4><p><code>for tahun in range(1, durasi_tahun + 1):</code></p><p>Dengan begitu, durasi 3 menghasilkan tahun 1, 2, dan 3.</p></div></div></section><section class="slide" id="slide-24"><h3>Debug 2: IndentationError</h3><p class="lead">Loop butuh blok kode yang menjorok. Coba jalankan kode salah ini, lalu perbaiki.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py6" spellcheck="false" style="min-height:180px">for tahun in range(1, 4):
+print(f"Tahun {tahun}")</textarea><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py6')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py6_out">Output akan muncul di sini.</div></div></div><div class="warning-box"><h4>Hint</h4><p>Baris <code>print()</code> harus masuk 4 spasi ke kanan karena berada di dalam loop.</p></div></section><section class="slide" id="slide-25"><h3>Debug 3: Input Angka</h3><p class="lead">Kalau user mengetik huruf pada input angka, program bisa error.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py7" spellcheck="false" style="min-height:180px">saldo_awal = float(input("Masukkan saldo awal: "))
+print(f"Saldo awal: Rp {int(saldo_awal):,}")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py7_input" spellcheck="false">seratus ribu</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py7')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py7_out">Output akan muncul di sini.</div></div></div><div class="info-box"><h4>Aturan input</h4><p>Ketik angka tanpa titik ribuan. Contoh: <code>100000</code>, bukan <code>100.000</code> atau <code>seratus ribu</code>.</p></div></section><section class="slide" id="slide-26"><h3>Edge Case: Angka yang Aneh</h3><p class="lead">Program dasar belum punya validasi penuh. Karena itu, kita perlu tahu batasnya.</p><div class="choice-grid"><button class="safe-card" onclick="markSafety(this,true)">Modal 100000</button><button class="safe-card" onclick="markSafety(this,true)">Pertumbuhan 10</button><button class="safe-card" onclick="markSafety(this,false)">Durasi -3</button><button class="safe-card" onclick="markSafety(this,false)">Pertumbuhan -50 tanpa penjelasan</button><button class="safe-card" onclick="markSafety(this,false)">Data saldo asli keluarga</button><button class="safe-card" onclick="markSafety(this,true)">Data dummy untuk latihan</button></div><p class="mini-note">Hijau = aman/masuk akal untuk latihan. Merah = perlu dihindari atau butuh validasi tambahan.</p></section><section class="slide" id="slide-27"><h3>Challenge 1: Total Keuntungan Murni</h3><p class="lead">Setelah loop selesai, saldo akhir bisa dibandingkan dengan modal awal.</p><div class="code-card"><pre><code># Letakkan setelah blok for selesai, sejajar dengan for
+total_keuntungan_murni = saldo_sekarang - saldo_awal
+print(f"Total keuntungan murni: Rp {int(total_keuntungan_murni):,}")</code></pre></div><div class="interactive-box"><h4>Quick check</h4><p>Baris challenge ini ditulis di mana?</p><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'profitPlaceQ')">Menjorok di dalam loop</button><button class="choice-btn" onclick="quiz(this,true,'profitPlaceQ')">Sejajar dengan for, setelah loop selesai</button></div><div class="feedback-line" id="profitPlaceQ"></div></div></section><section class="slide" id="slide-28"><h3>Challenge Plus: Kondisi Khusus</h3><p class="lead">Setiap 3 tahun, simulasi menarik 5% dari saldo. Ini menggabungkan <code>for</code>, <code>if</code>, dan modulo <code>%</code>.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py8" spellcheck="false" style="min-height:520px">saldo_awal_challenge = float(input("Masukkan Modal Awal untuk Challenge (Rp): "))
+durasi_challenge = int(input("Ingin simulasi berapa tahun untuk Challenge?: "))
+
+saldo_sekarang_challenge = saldo_awal_challenge
+persen_tumbuh_normal = 0.10  # 10% pertumbuhan per tahun
+persen_tarik = 0.05          # 5% penarikan setiap 3 tahun
+
+print("
+-------------------------------------------")
+print(f"📈 PROYEKSI DENGAN KONDISI KHUSUS SELAMA {durasi_challenge} TAHUN")
+print("-------------------------------------------")
+
+for tahun in range(1, durasi_challenge + 1):
+    # Setiap tahun saldo tumbuh 10%
+    keuntungan = saldo_sekarang_challenge * persen_tumbuh_normal
+    saldo_sekarang_challenge = saldo_sekarang_challenge + keuntungan
+
+    # Jika tahun kelipatan 3, tarik 5% dari saldo saat itu
+    if tahun % 3 == 0:
+        penarikan = saldo_sekarang_challenge * persen_tarik
+        saldo_sekarang_challenge = saldo_sekarang_challenge - penarikan
+        print(f"Tahun {tahun} : Rp {int(saldo_sekarang_challenge):,} setelah penarikan")
+    else:
+        print(f"Tahun {tahun} : Rp {int(saldo_sekarang_challenge):,}")
+
+print("-------------------------------------------")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py8_input" spellcheck="false">100000
+6</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py8')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu klik Run code untuk melihat hasilnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py8_out">Output akan muncul di sini.</div></div></div><p class="mini-note">Operator <code>%</code> dipakai untuk mengecek sisa bagi. Jika <code>tahun % 3 == 0</code>, berarti tahun itu kelipatan 3.</p></section><section class="slide" id="slide-29"><h3>Output Minimum</h3><p class="lead">Sebelum submit, pastikan fitur inti sudah berjalan.</p><ul class="checklist"><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Program meminta modal awal, persen pertumbuhan, dan durasi tahun.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Persen diubah menjadi desimal dengan <code>/ 100</code>.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Program memakai <code>for</code> dan <code>range()</code>.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Saldo di-update di dalam loop.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Output menampilkan saldo setiap tahun.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Minimal satu test case cocok dengan hitungan manual.</li></ul><div class="example-box"><h4>Misi berhasil jika...</h4><p>Input <code>100000</code>, <code>10</code>, <code>3</code> menghasilkan akhir tahun ketiga sekitar <strong>Rp 133,100</strong>.</p></div></section><section class="slide" id="slide-30"><h3>Refleksi Developer</h3><p class="lead">Jawab cepat sebelum menutup sesi.</p><div class="interactive-box"><h4>Kenapa saldo harus di-update di dalam loop?</h4><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'reflect8')">Agar tahun berikutnya memakai saldo terbaru</button><button class="choice-btn" onclick="quiz(this,false,'reflect8')">Agar output selalu sama</button><button class="choice-btn" onclick="quiz(this,false,'reflect8')">Agar range() berhenti</button></div><div class="feedback-line" id="reflect8"></div></div><div class="form-grid"><label>Catat satu bug yang kamu temukan hari ini<textarea placeholder="Contoh: Outputku kurang satu tahun karena range belum ditambah +1..."></textarea></label></div></section><section class="slide" id="slide-31"><span class="eyebrow">Penutup</span><h2>Kamu Sudah Membuat Simulasi Bunga Majemuk</h2><p class="lead">Hari ini kamu belajar <code>for loop</code>, <code>range()</code>, iterasi, update variabel, test case, dan debugging loop.</p><div class="metrics"><div class="metric-box"><strong>🔁</strong><span>for loop</span></div><div class="metric-box"><strong>range</strong><span>batas putaran</span></div><div class="metric-box"><strong>📈</strong><span>saldo bertumbuh</span></div><div class="metric-box"><strong>🧪</strong><span>testing</span></div></div><div class="example-box"><h4>Kalimat kunci</h4><p><strong>Loop membuat proses berulang jadi rapi, fleksibel, dan lebih mudah diuji.</strong></p></div><p class="mini-note">Sesi berikutnya: loop yang bisa berjalan sampai kondisi tertentu terpenuhi.</p></section></div><div class="navigation"><button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)"><span>←</span> Previous</button><div class="slide-indicator"><span id="currentSlide">1</span> / <span id="totalSlides">32</span></div><button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next <span>→</span></button></div></div><div class="explanation-panel"><section class="explanation active" id="explanation-1"><h3>Project yang Akan Dibuat</h3><p>Di sesi ini, kamu akan membuat program <strong>Simulasi Bunga Majemuk</strong>. Program ini membaca modal awal, persentase pertumbuhan, dan durasi tahun, lalu menampilkan saldo dari tahun ke tahun.</p><p>Konsep Python utamanya adalah <code>for loop</code>. Dengan loop, program tidak perlu menulis rumus pertumbuhan berulang kali. Cukup satu blok kode yang dijalankan berkali-kali sesuai durasi.</p><div class="warning-box"><h4>Catatan penting</h4><p>Semua angka di sesi ini adalah simulasi belajar coding, bukan saran investasi atau prediksi hasil keuangan nyata.</p></div></section><section class="explanation" id="explanation-2"><h3>Alur Sesi 8</h3><p>Sesi ini dimulai dari alasan kenapa loop dibutuhkan, lalu masuk ke konsep <code>for</code>, <code>range()</code>, iterasi, dan update variabel.</p><p>Setelah konsepnya jelas, kamu akan membuat project utama di Python. Kita juga akan membiasakan test case karena perhitungan finansial harus dicek, bukan hanya “kelihatannya jalan”.</p></section><section class="explanation" id="explanation-3"><h3>Persiapan Coding</h3><p>Gunakan Google Colab atau editor Python yang dipakai di kelas. Beri nama notebook dengan jelas agar mudah ditemukan saat submit.</p><p>Gunakan angka simulasi, misalnya modal awal 100000 dan pertumbuhan 10%. Hindari memakai data keuangan pribadi atau data keluarga.</p></section><section class="explanation" id="explanation-4"><h3>Masalah Kode Berulang</h3><p>Tanpa loop, menghitung pertumbuhan 10 tahun berarti kamu harus menulis rumus dan print berkali-kali. Selain panjang, kode seperti itu mudah salah.</p><p><code>for loop</code> membantu kita menjalankan pola yang sama untuk jumlah putaran tertentu. Ini cocok untuk simulasi tahun 1, tahun 2, tahun 3, dan seterusnya.</p></section><section class="explanation" id="explanation-5"><h3>Memahami Bunga Majemuk</h3><p>Bunga majemuk berarti pertumbuhan berikutnya dihitung dari saldo yang sudah bertambah. Jadi, saldo tahun kedua tidak lagi memakai modal awal saja, tetapi memakai saldo akhir tahun pertama.</p><p>Dalam program, konsep ini muncul pada variabel <code>saldo_sekarang</code>. Nilainya terus diperbarui di dalam loop.</p></section><section class="explanation" id="explanation-6"><h3>Apa Itu Iterasi?</h3><p>Iterasi adalah satu kali putaran loop. Jika loop berjalan selama 3 tahun, berarti ada 3 iterasi.</p><p>Setiap iterasi melakukan urutan yang sama: hitung keuntungan, tambahkan ke saldo, lalu cetak hasil tahun tersebut. Pola yang rapi seperti ini membuat program lebih mudah dicek.</p></section><section class="explanation" id="explanation-7"><h3>Membaca Struktur for loop</h3><p>Pada baris <code>for tahun in range(1, 4):</code>, variabel <code>tahun</code> berubah otomatis mengikuti angka dari <code>range()</code>.</p><p>Tanda titik dua membuka blok loop. Semua kode yang masuk ke dalam loop harus menjorok ke kanan dengan indentasi.</p></section><section class="explanation" id="explanation-8"><h3>Cara Kerja range()</h3><p><code>range(1, 4)</code> tidak berarti 1 sampai 4. Di Python, batas akhir tidak ikut dijalankan, sehingga hasilnya adalah 1, 2, dan 3.</p><p>Ini adalah aturan penting karena sering menyebabkan output kurang satu tahun jika kita tidak hati-hati.</p></section><section class="explanation" id="explanation-9"><h3>Off-by-one Error</h3><p>Saat user memasukkan durasi 3, kita ingin mencetak tahun 1, 2, dan 3. Karena batas akhir <code>range()</code> tidak ikut, kita menulis <code>durasi_tahun + 1</code>.</p><p>Bug seperti ini disebut off-by-one error: program berjalan, tetapi jumlah langkahnya meleset satu.</p></section><section class="explanation" id="explanation-10"><h3>Indentasi dalam Loop</h3><p>Python memakai indentasi untuk menentukan baris mana yang menjadi bagian dari loop. Ini bukan hanya soal kerapian tampilan.</p><p>Jika baris <code>print()</code> tidak menjorok, Python bisa mengeluarkan <code>IndentationError</code> atau kode tidak berjalan sesuai harapan.</p></section><section class="explanation" id="explanation-11"><h3>Hitung Manual Sebelum Coding</h3><p>Hitungan manual membantu kamu punya ekspektasi hasil. Kalau input 100000, 10%, dan 3 tahun, hasilnya harus 110000, 121000, lalu 133100.</p><p>Kalau program menghasilkan angka berbeda, kita punya alasan kuat untuk mencari bug pada rumus atau update variabel.</p></section><section class="explanation" id="explanation-12"><h3>Pola IPO</h3><p>Program ini tetap mengikuti Input–Process–Output. Input adalah modal, persen, dan durasi. Process adalah loop pertumbuhan. Output adalah deret saldo setiap tahun.</p><p>Dengan pola ini, program lebih mudah dibaca dan di-debug.</p></section><section class="explanation" id="explanation-13"><h3>Peran Variabel</h3><p>Variabel paling penting di sesi ini adalah <code>saldo_sekarang</code>. Variabel ini berubah setiap tahun dan membawa nilai terbaru ke iterasi berikutnya.</p><p>Variabel <code>keuntungan</code> dihitung ulang pada setiap iterasi karena saldo dasarnya juga berubah.</p></section><section class="explanation" id="explanation-14"><h3>Reading Code</h3><p>Sebelum menjalankan kode, biasakan memprediksi output. Ini melatih kamu membaca alur program, bukan hanya menekan tombol Run.</p><p>Untuk <code>range(1, 4)</code>, loop hanya berjalan tiga kali: 1, 2, dan 3.</p></section><section class="explanation" id="explanation-15"><h3>Mini Editor Loop</h3><p>Slide ini adalah latihan kecil untuk memastikan simulator loop sudah kamu pahami. Ubah angka pada <code>range()</code> dan amati perubahan output.</p><p>Latihan kecil seperti ini berguna sebelum masuk ke kode project yang lebih panjang.</p></section><section class="explanation" id="explanation-16"><h3>Brief Project Utama</h3><p>Project utama bernama Tangga Kekayaan karena outputnya menunjukkan saldo yang naik bertahap dari tahun ke tahun.</p><p>Fokus coding-nya adalah membuat loop yang fleksibel. User bisa memilih durasi, dan program menyesuaikan jumlah baris output.</p></section><section class="explanation" id="explanation-17"><h3>Langkah Input</h3><p>Bagian input mengambil tiga data. <code>float()</code> dipakai untuk modal dan persen agar bisa menerima angka desimal. <code>int()</code> dipakai untuk durasi karena jumlah tahun berupa angka bulat.</p><p>Jangan masukkan titik ribuan di input simulator. Tulis 100000, bukan 100.000.</p></section><section class="explanation" id="explanation-18"><h3>Konversi Persen</h3><p>Persen 10% harus diubah menjadi 0.10 agar bisa dipakai dalam perkalian Python. Caranya dengan membagi 100.</p><p>Kalau lupa membagi 100, hasil keuntungan akan terlalu besar karena Python membaca 10 sebagai sepuluh kali lipat, bukan 10 persen.</p></section><section class="explanation" id="explanation-19"><h3>Update Saldo di Dalam Loop</h3><p>Baris paling penting adalah <code>saldo_sekarang = saldo_sekarang + keuntungan</code>. Baris ini membuat saldo tahun berikutnya memakai nilai yang sudah bertambah.</p><p>Jika saldo tidak di-update, output bisa stagnan atau bunga majemuk tidak terjadi.</p></section><section class="explanation" id="explanation-20"><h3>Program Lengkap</h3><p>Program lengkap sudah menggabungkan input, konversi persen, loop, output per tahun, dan total keuntungan murni.</p><p>Gunakan test case. Jangan hanya mencoba satu angka, karena bug kadang baru terlihat saat durasi atau persen diubah.</p></section><section class="explanation" id="explanation-21"><h3>Test Case</h3><p>Test case membantu memastikan program tidak hanya “jalan”, tetapi juga benar. Bandingkan hasil program dengan hitungan manual atau tabel ekspektasi.</p><p>Case 1 cocok untuk memeriksa dasar 10% selama 3 tahun. Case 2 membantu melihat apakah rumus tetap berjalan pada nominal dan durasi berbeda.</p></section><section class="explanation" id="explanation-22"><h3>Trace Table</h3><p>Trace table memperlihatkan perubahan nilai variabel di setiap iterasi. Ini adalah cara yang sangat berguna untuk mencari logic error pada loop.</p><p>Jika saldo awal tahun kedua tidak sama dengan saldo akhir tahun pertama, berarti ada masalah pada update variabel.</p></section><section class="explanation" id="explanation-23"><h3>Debug Range</h3><p>Jika output kurang satu tahun, hal pertama yang perlu dicek adalah <code>range()</code>. Ingat, batas akhir tidak ikut dijalankan.</p><p>Untuk durasi dari user, pola yang aman adalah <code>range(1, durasi_tahun + 1)</code>.</p></section><section class="explanation" id="explanation-24"><h3>Debug Indentasi</h3><p>Indentasi adalah aturan struktur di Python. Kode yang ingin diulang harus masuk ke dalam blok loop.</p><p>Kalau muncul <code>IndentationError</code>, baca baris yang disebut Python, lalu cek apakah blok setelah titik dua sudah menjorok.</p></section><section class="explanation" id="explanation-25"><h3>Debug Input Angka</h3><p><code>float(input())</code> menuntut input berupa angka. Kalau user mengetik huruf, Python tidak bisa mengubahnya menjadi angka.</p><p>Validasi input yang lebih kuat akan dibahas lagi di sesi try-except, tetapi dari sekarang kamu sudah perlu tahu titik rawannya.</p></section><section class="explanation" id="explanation-26"><h3>Edge Case</h3><p>Edge case adalah data yang berada di batas atau terasa “aneh”. Misalnya durasi negatif, pertumbuhan negatif, atau data pribadi asli.</p><p>Program dasar belum menolak semua edge case. Tugas kita sekarang adalah mengenali risiko dulu, lalu nanti memperkuat program dengan validasi.</p></section><section class="explanation" id="explanation-27"><h3>Challenge Total Keuntungan</h3><p>Total keuntungan murni dihitung setelah loop selesai. Karena itu, barisnya harus sejajar dengan <code>for</code>, bukan menjorok ke dalam.</p><p>Kalau diletakkan di dalam loop, total keuntungan akan dicetak berulang setiap tahun, bukan hanya ringkasan akhir.</p></section><section class="explanation" id="explanation-28"><h3>Challenge Kondisi Khusus</h3><p>Challenge ini menggabungkan konsep dari sesi sebelumnya: <code>for</code> untuk pengulangan, <code>if</code> untuk kondisi, dan <code>%</code> untuk mengecek kelipatan tahun.</p><p>Operator modulo <code>%</code> mengembalikan sisa bagi. Jika <code>tahun % 3 == 0</code>, berarti tahun tersebut habis dibagi 3.</p></section><section class="explanation" id="explanation-29"><h3>Checklist Akhir</h3><p>Output minimum memastikan konsep utama sudah tercapai. Yang paling penting: program harus memakai loop, saldo harus di-update, dan hasilnya cocok dengan minimal satu test case.</p><p>Kalau challenge belum selesai tidak apa-apa, selama project inti sudah berjalan dengan benar.</p></section><section class="explanation" id="explanation-30"><h3>Refleksi Teknis</h3><p>Refleksi membantu kamu mengingat alasan di balik kode. Pada sesi ini, bug paling umum biasanya berkaitan dengan <code>range()</code>, indentasi, atau saldo yang tidak di-update.</p><p>Kalau kamu bisa menjelaskan bug yang kamu temukan, kamu sudah bergerak dari “menyalin kode” menjadi “memahami program”.</p></section><section class="explanation" id="explanation-31"><h3>Penutup Sesi 8</h3><p>Konsep loop akan terus dipakai pada project CLI semester ini: menghitung saldo tahunan, membaca daftar transaksi, mengulang menu, dan melakukan validasi input.</p><p>Setelah ini, kamu akan mempelajari loop yang berjalan sampai kondisi tertentu terpenuhi.</p></section></div></div>
+<script>
+const ACCESS_CODE='RGMDSHS26';
+let currentSlide=1;
+let totalSlides=0;
+window.addEventListener('load',()=>{
+  totalSlides=document.querySelectorAll('.slide').length;
+  document.getElementById('totalSlides').textContent=totalSlides;
+  setTimeout(()=>document.querySelector('.access-popup').classList.add('show'),50);
+  const input=document.getElementById('accessInput');
+  input.focus();
+  input.addEventListener('input',e=>{e.target.value=e.target.value.toUpperCase()});
+  input.addEventListener('keydown',e=>{if(e.key==='Enter')checkAccessCode()});
+  initPyEditors();
+  updateSlide();
+});
+function checkAccessCode(){const input=document.getElementById('accessInput'),error=document.getElementById('accessError');if(input.value.trim().toUpperCase()===ACCESS_CODE){document.getElementById('accessPopup').style.display='none';document.getElementById('mainContent').style.display='flex';updateSlide();}else{error.classList.add('show');input.value='';input.focus();}}
+function changeSlide(direction){const next=currentSlide+direction;if(next<1||next>totalSlides)return;currentSlide=next;updateSlide();}
+function updateSlide(){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.explanation').forEach(e=>e.classList.remove('active'));const s=document.getElementById(`slide-${currentSlide}`);if(s)s.classList.add('active');const e=document.getElementById(`explanation-${currentSlide}`);if(e)e.classList.add('active');document.getElementById('currentSlide').textContent=currentSlide;document.getElementById('prevBtn').disabled=currentSlide===1;document.getElementById('nextBtn').disabled=currentSlide===totalSlides;document.getElementById('progressFill').style.width=`${(currentSlide/totalSlides)*100}%`;const sc=document.querySelector('.slide-content');const ep=document.querySelector('.explanation-panel');if(sc)sc.scrollTop=0;if(ep)ep.scrollTop=0;}
+document.addEventListener('keydown',e=>{if(document.getElementById('mainContent').style.display==='none')return;if(e.key==='ArrowRight')changeSlide(1);if(e.key==='ArrowLeft')changeSlide(-1);});
+function deviceCheck(btn){btn.classList.toggle('correct');}
+function selectAny(btn){const group=btn.parentElement;group.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');}
+function quiz(btn,ok,feedbackId){const group=btn.parentElement;group.querySelectorAll('.choice-btn').forEach(b=>b.disabled=true);btn.classList.add(ok?'correct':'wrong');const fb=document.getElementById(feedbackId);fb.textContent=ok?'Betul.':'Belum tepat. Baca kembali penjelasan di panel kanan.';fb.style.color=ok?'#176b35':'#a42820';}
+function revealAnswer(id){const el=document.getElementById(id);if(!el)return;el.style.display=el.style.display==='none'||!el.style.display?'block':'none';}
+function markSafety(btn,ok){btn.classList.remove('safe','risky');btn.classList.add(ok?'safe':'risky');}
+function toggleCheck(item){const cb=item.querySelector('input');cb.checked=!cb.checked;item.classList.toggle('done',cb.checked);}
+function showOperatorInfo(type,btn){document.querySelectorAll('.operator-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const d={gt:['> Lebih besar dari','Contoh: usia > 17. Nilai 18 lolos, tetapi 17 tidak.'],gte:['>= Lebih besar atau sama dengan','Contoh: usia >= 17. Nilai 17 dan 18 sama-sama lolos.'],lt:['< Lebih kecil dari','Contoh: usia < 17. Nilai 16 lolos, 17 tidak.'],lte:['<= Lebih kecil atau sama dengan','Contoh: usia <= 17. Nilai 16 dan 17 lolos.'],eq:['== Sama dengan','Contoh: usia == 17. Hanya nilai 17 yang menghasilkan True.'],neq:['!= Tidak sama dengan','Contoh: usia != 17. Semua nilai selain 17 menghasilkan True.']};document.getElementById('operatorLearn').innerHTML=`<h4>${d[type][0]}</h4><p>${d[type][1]}</p>`;}
+function ageBoundary(btn,age){document.querySelectorAll('#slide-10 .choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');const ok=age>=17;document.getElementById('boundaryInfo').innerHTML=`<h4>Usia ${age}</h4><p>Kondisi <code>${age} >= 17</code> bernilai <strong>${ok?'True':'False'}</strong>.</p><p>Jalur yang dipilih: <strong>${ok?'if — memenuhi batas simulasi':'else — belum memenuhi batas'}</strong>.</p>`;}
+function traceAge(age,btn){document.querySelectorAll('#slide-19 .choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');const ok=age>=17;document.getElementById('traceBox').innerHTML=`<div class="trace-step"><strong>Input</strong><span>${age}</span></div><div class="trace-step"><strong>Kondisi</strong><span>${age} >= 17 → ${ok?'True':'False'}</span></div><div class="trace-step"><strong>Jalur</strong><span>${ok?'if':'else'}</span></div><div class="trace-step"><strong>Output</strong><span>${ok?'akses diberikan':'akses belum dibuka'}</span></div>`;}
+function loadAgeCase(btn,age){const input=document.getElementById('py5_input');if(!input)return;input.value=String(age);document.querySelectorAll('#slide-18 .choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');const fb=document.getElementById('ageCaseFeedback');const ok=age>=17;fb.textContent=`Input ${age} dimuat ke Starter Code. Ekspektasi: masuk cabang ${ok?'if':'else'}.`;fb.style.color='#176b35';const out=document.getElementById('py5_out');if(out)out.textContent=`Input ${age} sudah dimuat. Klik Run code untuk menjalankan program.`;currentSlide=17;updateSlide();setTimeout(()=>{input.classList.add('preset-loaded');input.focus();setTimeout(()=>input.classList.remove('preset-loaded'),1400);},80);}
+function showLmsStep(step,btn){document.querySelectorAll('.lms-map-wrap .hotspot,.lms-map-wrap .session-card-hotspot').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');}
+function initPyEditors(){document.querySelectorAll('.python-editor textarea[id^="py"]:not(.stdin-area)').forEach(area=>{const out=document.getElementById(area.id+'_out');if(out&&!out.textContent.trim())out.textContent='Output akan muncul di sini setelah Run code.';});}
+function runPyEditor(id){const code=document.getElementById(id).value;const stdinEl=document.getElementById(id+'_input');const stdin=stdinEl?stdinEl.value:'';document.getElementById(id+'_out').textContent=runMiniPython(code,stdin);}
+function wrap(value,type){return {__value:value,__type:type||inferType(value)};}
+function rawVal(v){return v&&v.__value!==undefined?v.__value:v;}
+function inferType(v){if(typeof v==='boolean')return 'bool';if(typeof v==='number')return Number.isInteger(v)?'int':'float';return 'str';}
+function valType(v){return v&&v.__type?v.__type:inferType(rawVal(v));}
+function pyString(v){const r=rawVal(v);if(typeof r==='boolean')return r?'True':'False';return String(r);}
+function formatNumber(n){n=Number(rawVal(n));if(!isFinite(n))return String(n);return n.toLocaleString('en-US',{maximumFractionDigits:2});}
+function decodePyString(s){return s.replace(/\\n/g,'\n').replace(/\\t/g,'\t').replace(/\\"/g,'"').replace(/\\'/g,"'");}
+function stripComment(line){let quote=null;for(let i=0;i<line.length;i++){const c=line[i],prev=line[i-1];if(quote){if(c===quote&&prev!=='\\')quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='#')return line.slice(0,i);}return line;}
+function countIndent(line){const m=line.match(/^ */);return m?m[0].length:0;}
+function normalizeLines(code){return code.split(/\r?\n/).map((raw,idx)=>{const noComment=stripComment(raw);return {raw, text:noComment.trim(), indent:countIndent(raw), lineNo:idx+1, blank:noComment.trim()===''};});}
+function runMiniPython(code,stdinText){let vars={},output=[],inputs=stdinText.split(/\r?\n/),inputIndex=0,lines=normalizeLines(code);function nextInput(prompt){const val=inputIndex<inputs.length?inputs[inputIndex++]:'';output.push(prompt+val);return wrap(val,'str');}const res=execBlock(0,0,lines,vars,output,nextInput);if(res.error)return res.error;return output.length?output.join('\n'):'(Tidak ada output. Coba gunakan print().)';}
+function execBlock(start,indent,lines,vars,output,nextInput){let i=start;while(i<lines.length){let L=lines[i];if(L.blank){i++;continue;}if(L.indent<indent)break;if(L.indent>indent)return {error:`IndentationError on line ${L.lineNo}: unexpected indent.`};if(/^elif\b|^else\b/.test(L.text))break;if(/^if\b/.test(L.text)){const r=execIfChain(i,indent,lines,vars,output,nextInput);if(r.error)return r;i=r.next;continue;}const r=execSimpleLine(L,vars,output,nextInput);if(r.error)return r.error?{error:r.error}:r;i++;}return {next:i};}
+function execIfChain(start,indent,lines,vars,output,nextInput){let i=start,executed=false;while(i<lines.length){let L=lines[i];if(L.blank){i++;continue;}if(L.indent!==indent)break;let type=null,condText=null;if(L.text.startsWith('if ')){type='if';condText=L.text.slice(3).trim();}else if(L.text.startsWith('elif ')){type='elif';condText=L.text.slice(5).trim();}else if(L.text==='else:'||L.text.startsWith('else')){type='else';}else break;if((type==='if'||type==='elif')&&!condText.endsWith(':'))return {error:`SyntaxError on line ${L.lineNo}: expected ':' after ${type} condition.`};if(type==='else'&&L.text!=='else:')return {error:`SyntaxError on line ${L.lineNo}: expected ':' after else.`};if(type==='if'||type==='elif')condText=condText.slice(0,-1).trim();let blockStart=i+1;let nextNon=blockStart;while(nextNon<lines.length&&lines[nextNon].blank)nextNon++;if(nextNon>=lines.length||lines[nextNon].indent<=indent)return {error:`IndentationError on line ${L.lineNo}: expected an indented block.`};let blockIndent=lines[nextNon].indent;let blockEnd=nextNon;while(blockEnd<lines.length){if(!lines[blockEnd].blank&&lines[blockEnd].indent<=indent)break;blockEnd++;}let shouldRun=false;if(!executed){if(type==='else')shouldRun=true;else{const p=parseExpr(condText,vars,L.lineNo,nextInput);if(p.error)return {error:p.error};shouldRun=!!rawVal(p.value);}}if(shouldRun){const r=execBlock(nextNon,blockIndent,lines,vars,output,nextInput);if(r.error)return r;if(r.next<blockEnd&&!lines[r.next].blank&&lines[r.next].indent>indent)return {error:`IndentationError on line ${lines[r.next].lineNo}: unindent does not match any outer indentation level.`};executed=true;}i=blockEnd;}return {next:i};}
+function execSimpleLine(L,vars,output,nextInput){let line=L.text;if(!line)return {};const assign=line.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+)$/);if(assign){const p=parseExpr(assign[2].trim(),vars,L.lineNo,nextInput);if(p.error)return {error:p.error};vars[assign[1]]=p.value;return {};}
+const pr=line.match(/^print\((.*)\)$/);if(pr){const p=parseExpr(pr[1].trim(),vars,L.lineNo,nextInput);if(p.error)return {error:p.error};output.push(pyString(p.value));return {};}
+if(/^if\b/.test(line)&&!line.endsWith(':'))return {error:`SyntaxError on line ${L.lineNo}: expected ':' after if condition.`};
+return {error:`SyntaxError on line ${L.lineNo}: simulator mendukung assignment, input(), int(), float(), type(), operator, if/elif/else, dan print().`};}
+function parseExpr(text,vars,lineNo,nextInput){text=text.trim();if(text.startsWith('(')&&text.endsWith(')')&&matchingOuterParens(text))return parseExpr(text.slice(1,-1),vars,lineNo,nextInput);let boolIdx=findTopLevelWord(text,'or');if(boolIdx>-1){let a=parseExpr(text.slice(0,boolIdx),vars,lineNo,nextInput);if(a.error)return a;let b=parseExpr(text.slice(boolIdx+3),vars,lineNo,nextInput);if(b.error)return b;return {value:wrap(!!rawVal(a.value)||!!rawVal(b.value),'bool')};}boolIdx=findTopLevelWord(text,'and');if(boolIdx>-1){let a=parseExpr(text.slice(0,boolIdx),vars,lineNo,nextInput);if(a.error)return a;let b=parseExpr(text.slice(boolIdx+4),vars,lineNo,nextInput);if(b.error)return b;return {value:wrap(!!rawVal(a.value)&&!!rawVal(b.value),'bool')};}let cmp=findTopLevelComparison(text);if(cmp){let a=parseExpr(text.slice(0,cmp.index),vars,lineNo,nextInput);if(a.error)return a;let b=parseExpr(text.slice(cmp.index+cmp.op.length),vars,lineNo,nextInput);if(b.error)return b;return compareOp(a.value,b.value,cmp.op,lineNo);}let idx=findTopLevelOperator(text,['+','-']);if(idx){let a=parseExpr(text.slice(0,idx.index),vars,lineNo,nextInput);if(a.error)return a;let b=parseExpr(text.slice(idx.index+1),vars,lineNo,nextInput);if(b.error)return b;return numericOp(a.value,b.value,idx.op,lineNo);}idx=findTopLevelOperator(text,['*','/']);if(idx){let a=parseExpr(text.slice(0,idx.index),vars,lineNo,nextInput);if(a.error)return a;let b=parseExpr(text.slice(idx.index+1),vars,lineNo,nextInput);if(b.error)return b;return numericOp(a.value,b.value,idx.op,lineNo);}let m;if((m=text.match(/^input\((.*)\)$/))){const p=parseExpr(m[1].trim()||'""',vars,lineNo,nextInput);if(p.error)return p;return {value:nextInput(pyString(p.value))};}if((m=text.match(/^int\((.*)\)$/))){const p=parseExpr(m[1].trim(),vars,lineNo,nextInput);if(p.error)return p;const s=pyString(p.value).trim();if(!/^[+-]?\d+(\.\d+)?$/.test(s))return {error:`ValueError on line ${lineNo}: invalid literal for int(): '${s}'`};return {value:wrap(parseInt(Number(s),10),'int')};}if((m=text.match(/^float\((.*)\)$/))){const p=parseExpr(m[1].trim(),vars,lineNo,nextInput);if(p.error)return p;const s=pyString(p.value).trim();if(!/^[+-]?(\d+(\.\d*)?|\.\d+)$/.test(s))return {error:`ValueError on line ${lineNo}: could not convert string to float: '${s}'`};return {value:wrap(parseFloat(s),'float')};}if((m=text.match(/^type\((.*)\)$/))){const p=parseExpr(m[1].trim(),vars,lineNo,nextInput);if(p.error)return p;return {value:wrap(`<class '${valType(p.value)}'>`,'str')};}if((text.startsWith('f"')&&text.endsWith('"'))||(text.startsWith("f'")&&text.endsWith("'"))){let inner=decodePyString(text.slice(2,-1));let err=null;let res=inner.replace(/\{([^{}]+)\}/g,(full,expr)=>{let ex=expr.trim(),fmt='';const c=findTopLevelChar(ex,':');if(c>-1){fmt=ex.slice(c+1).trim();ex=ex.slice(0,c).trim();}const p=parseExpr(ex,vars,lineNo,nextInput);if(p.error){err=p.error;return full;}const v=rawVal(p.value);if(fmt===',')return formatNumber(v);return String(v);});if(err)return {error:err};return {value:wrap(res,'str')};}if((text.startsWith('"')&&text.endsWith('"'))||(text.startsWith("'")&&text.endsWith("'")))return {value:wrap(decodePyString(text.slice(1,-1)),'str')};if(text==='True')return {value:wrap(true,'bool')};if(text==='False')return {value:wrap(false,'bool')};if(/^[+-]?\d+$/.test(text))return {value:wrap(parseInt(text,10),'int')};if(/^[+-]?(\d+\.\d*|\.\d+)$/.test(text))return {value:wrap(parseFloat(text),'float')};if(Object.prototype.hasOwnProperty.call(vars,text))return {value:vars[text]};if(text.includes('{')&&text.includes('}'))return {error:`f-string error on line ${lineNo}: tambahkan huruf f sebelum tanda kutip.`};return {error:`NameError on line ${lineNo}: name '${text}' is not defined atau teks belum diberi tanda kutip.`};}
+function compareOp(a,b,op,lineNo){let x=rawVal(a),y=rawVal(b);let r;if(typeof x==='number'&&typeof y==='number'){if(op==='>')r=x>y;else if(op==='>=')r=x>=y;else if(op==='<')r=x<y;else if(op==='<=')r=x<=y;else if(op==='==')r=x===y;else r=x!==y;}else{if(op==='==')r=String(x)===String(y);else if(op==='!=')r=String(x)!==String(y);else return {error:`TypeError on line ${lineNo}: operator ${op} membutuhkan data angka untuk perbandingan ini.`};}return {value:wrap(r,'bool')};}
+function numericOp(a,b,op,lineNo){const x=Number(rawVal(a)),y=Number(rawVal(b));if(!isFinite(x)||!isFinite(y))return {error:`TypeError on line ${lineNo}: operator ${op} membutuhkan data angka.`};if(op==='/'&&y===0)return {error:`ZeroDivisionError on line ${lineNo}: division by zero.`};let r;if(op==='+')r=x+y;else if(op==='-')r=x-y;else if(op==='*')r=x*y;else r=x/y;return {value:wrap(r,Number.isInteger(r)?'int':'float')};}
+
+function findTopLevelWord(text,word){let quote=null,depth=0;const token=' '+word+' ';for(let i=0;i<=text.length-token.length;i++){const c=text[i],prev=text[i-1];if(quote){if(c===quote&&prev!=='\\')quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='(')depth++;else if(c===')')depth--;if(depth===0&&text.slice(i,i+token.length)===token)return i+1;}return -1;}
+
+function findTopLevelComparison(text){let quote=null,depth=0;const ops=['>=','<=','==','!=','>','<'];for(let i=0;i<text.length;i++){const c=text[i],prev=text[i-1];if(quote){if(c===quote&&prev!=='\\')quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='(')depth++;else if(c===')')depth--;else if(depth===0){for(const op of ops){if(text.slice(i,i+op.length)===op)return {index:i,op};}}}return null;}
+function findTopLevelOperator(text,ops){let quote=null,depth=0;for(let i=text.length-1;i>=0;i--){const c=text[i],prev=text[i-1];if(quote){if(c===quote&&prev!=='\\')quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c===')')depth++;else if(c==='(')depth--;else if(depth===0&&ops.includes(c)){if((c==='+'||c==='-')&&(i===0||'+-*/(<>=!'.includes(text[i-1])))continue;return {index:i,op:c};}}return null;}
+function findTopLevelChar(text,char){let quote=null,depth=0;for(let i=0;i<text.length;i++){const c=text[i],prev=text[i-1];if(quote){if(c===quote&&prev!=='\\')quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='(')depth++;else if(c===')')depth--;else if(c===char&&depth===0)return i;}return -1;}
+function matchingOuterParens(text){let depth=0,quote=null;for(let i=0;i<text.length;i++){const c=text[i],prev=text[i-1];if(quote){if(c===quote&&prev!=='\\')quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='(')depth++;else if(c===')'){depth--;if(depth===0&&i<text.length-1)return false;}}return depth===0;}
+
+function showRiskZone(zone,btn){document.querySelectorAll('.risk-zone').forEach(b=>b.classList.remove('active')); if(btn)btn.classList.add('active'); const data={aman:['Zona Aman','Skor 80–100. Dalam simulasi, kategori ini menunjukkan kondisi paling kuat.'],hati:['Zona Hati-hati','Skor 50–79. Cukup baik, tetapi masih perlu perhatian.'],risk:['Zona Berisiko','Skor 0–49. Perlu evaluasi ulang pengelolaan keuangan.']}; const info=document.getElementById('riskZoneInfo'); if(info)info.innerHTML='<h4>'+data[zone][0]+'</h4><p>'+data[zone][1]+'</p>'; const marker=document.getElementById('scoreMarker'); if(marker){const v=zone==='aman'?85:zone==='hati'?65:40; marker.textContent=v; marker.style.left=v+'%';}}
+function catFor(score){score=Number(score); if(score>=80)return ['Aman','🟢','Skor '+score+' masuk Zona Aman.']; if(score>=50)return ['Hati-hati','🟡','Skor '+score+' masuk Zona Hati-hati.']; return ['Berisiko','🔴','Skor '+score+' masuk Zona Berisiko.'];}
+function classifyScore(score,btn){document.querySelectorAll('.boundary-btn').forEach(b=>b.classList.remove('active')); if(btn)btn.classList.add('active'); const c=catFor(score); ['scoreClassInfo','boundaryInfo'].forEach(id=>{const el=document.getElementById(id); if(el)el.innerHTML='<h4>'+c[1]+' '+c[0]+'</h4><p>'+c[2]+'</p>';}); const marker=document.getElementById('scoreMarker'); if(marker){marker.textContent=score; marker.style.left=Math.max(0,Math.min(100,score))+'%';}}
+function showCreditOperator(op,btn){document.querySelectorAll('.operator-btn').forEach(b=>b.classList.remove('active')); if(btn)btn.classList.add('active'); const data={ge:['>=','Lebih besar atau sama dengan. Dipakai agar nilai batas seperti 80 dan 50 ikut masuk kategori.'],gt:['>','Lebih besar dari. Hati-hati: skor 80 tidak masuk jika syaratnya hanya > 80.'],eq:['==','Sama dengan. Berguna untuk mengecek angka tertentu, tetapi bukan pilihan utama untuk rentang.'],lt:['<','Lebih kecil dari. Bisa dipakai untuk validasi, misalnya skor < 0.']}; const el=document.getElementById('creditOperatorInfo'); if(el)el.innerHTML='<h4>'+data[op][0]+'</h4><p>'+data[op][1]+'</p>';}
+function loadCreditCase(btn,score){document.querySelectorAll('.boundary-btn').forEach(b=>b.classList.remove('active')); if(btn)btn.classList.add('active'); const c=catFor(score); const el=document.getElementById('creditCaseInfo'); if(el)el.innerHTML='<h4>Input '+score+' → '+c[0]+' '+c[1]+'</h4><p>'+c[2]+' Coba masukkan angka ini ke program utama.</p>'; const input=document.getElementById('py6_input'); if(input){input.value=score; input.classList.add('preset-loaded'); setTimeout(()=>input.classList.remove('preset-loaded'),900);}}
+function traceCreditScore(){const score=Number(document.getElementById('traceScoreInput').value||0); const c1=score>=80, c2=score>=50, cat=catFor(score)[0]; document.getElementById('traceInput').textContent=score; document.getElementById('traceIf').textContent=c1?'True':'False'; document.getElementById('traceElif').textContent=c1?'Dilewati':(c2?'True':'False'); document.getElementById('traceOutput').textContent=cat;}
+
+function toggleAccordion(btn){const box=btn.closest('.accordion'); if(box)box.classList.toggle('open');}
+function showLoginGate(kind,btn){document.querySelectorAll('.key-card').forEach(b=>b.classList.remove('active')); if(btn&&btn.classList.contains('key-card'))btn.classList.add('active'); const data={user:['Kunci 1: Username','Username memberi tahu sistem akun mana yang sedang dicoba. Tapi username saja belum cukup untuk membuka akses.'],pass:['Kunci 2: Password','Password membuktikan bahwa user memang tahu kunci rahasia akun tersebut. Password salah berarti akses ditolak.'],both:['Dua Kunci Sekaligus','Login berhasil hanya jika username benar DAN password benar. Dalam Python, ini cocok memakai operator and.']}; const el=document.getElementById('loginGateInfo'); if(el)el.innerHTML='<h4>'+data[kind][0]+'</h4><p>'+data[kind][1]+'</p>';}
+function showBoolOp(type,btn){document.querySelectorAll('.logic-card').forEach(b=>b.classList.remove('active')); if(btn)btn.classList.add('active'); const data={and:['and','Semua syarat harus benar. Cocok untuk login: username benar dan password benar.'],or:['or','Cukup salah satu syarat benar. Cocok untuk diskon: punya voucher atau punya poin reward.']}; const el=document.getElementById('boolOpInfo'); if(el)el.innerHTML='<h4>'+data[type][0]+'</h4><p>'+data[type][1]+'</p>';}
+function loadLoginCase(btn,user,pass,expect){const input=document.getElementById('py6_input'); if(input){input.value=user+'\n'+pass; input.classList.add('preset-loaded'); setTimeout(()=>input.classList.remove('preset-loaded'),1200);} document.querySelectorAll('#slide-19 .choice-btn').forEach(b=>b.classList.remove('selected')); if(btn)btn.classList.add('selected'); const el=document.getElementById('loginCaseInfo'); if(el)el.innerHTML='<h4>Case dimuat</h4><p>Username: <code>'+user+'</code><br>Password: <code>'+pass+'</code><br>Ekspektasi: <strong>'+expect+'</strong></p><p>Buka slide Starter Code Lengkap, lalu klik Run code.</p>';}
+function traceLogin(btn,uok,pok){document.querySelectorAll('#slide-20 .choice-btn').forEach(b=>b.classList.remove('selected')); if(btn)btn.classList.add('selected'); const result=uok&&pok; const el=document.getElementById('traceLoginBox'); if(el)el.innerHTML='<div class="trace-step"><strong>Username</strong><span>'+uok+'</span></div><div class="trace-step"><strong>Password</strong><span>'+pok+'</span></div><div class="trace-step"><strong>and</strong><span>'+result+'</span></div><div class="trace-step"><strong>Output</strong><span>'+(result?'Login berhasil':'Akses ditolak')+'</span></div>';}
+function setPasswordExample(v){const input=document.getElementById('passwordTry'); if(input){input.value=v; checkPasswordStrength();}}
+function checkPasswordStrength(){const input=document.getElementById('passwordTry'), meter=document.getElementById('passwordMeter'), info=document.getElementById('passwordInfo'); if(!input||!meter||!info)return; const v=input.value; meter.classList.remove('medium','strong'); let title='Lemah', msg='Password ini mudah ditebak. Hindari pola umum seperti 123456 atau password.'; if(v.length>=10 && /[A-Z]/.test(v) && /[a-z]/.test(v) && /\d/.test(v) && /[^A-Za-z0-9]/.test(v)){meter.classList.add('strong'); title='Lebih kuat'; msg='Lebih baik untuk contoh belajar karena panjang dan campuran karakternya lebih beragam.';} else if(v.length>=8 && /\d/.test(v) && /[A-Za-z]/.test(v)){meter.classList.add('medium'); title='Sedang'; msg='Sudah lebih baik, tetapi masih bisa diperkuat dengan karakter khusus dan panjang yang cukup.';} info.innerHTML='<h4>'+title+'</h4><p>'+msg+'</p>';}
+
+
+// --- Session 8 simulator upgrade: for loop, range(), modulo, += ---
+var NL = String.fromCharCode(10);
+var CR = String.fromCharCode(13);
+var BS = String.fromCharCode(92);
+function stripComment(raw){let quote=null;for(let i=0;i<raw.length;i++){let c=raw[i],p=raw[i-1];if(quote){if(c===quote&&p!==BS)quote=null;}else if(c==='"'||c==="'"){quote=c;}else if(c==='#'){return raw.slice(0,i);}}return raw;}
+function normalizeLines(code){return code.replaceAll(CR,'').split(NL).map((raw,idx)=>{let noComment=stripComment(raw);let indent=0;while(indent<noComment.length&&noComment[indent]===' ')indent++;let text=noComment.trim();return {raw,text,indent,lineNo:idx+1,blank:text===''};});}
+function decodeLiteral(s){return s.split(BS+'n').join(NL).split(BS+'t').join(String.fromCharCode(9)).split(BS+'"').join('"').split(BS+"'").join("'");}
+function fmtNum(v){let n=Number(v);if(!isFinite(n))return String(v);return Math.trunc(n).toLocaleString('en-US');}
+function runMiniPython(code,stdinText){let vars={},output=[],inputs=(stdinText||'').replaceAll(CR,'').split(NL),inputIndex=0,guard={steps:0};function inputFn(prompt){let val=inputIndex<inputs.length?inputs[inputIndex++]:'';output.push(String(prompt)+val);return val;}let lines=normalizeLines(code);let res=execBlock8(0,0,lines,vars,output,inputFn,guard);if(res.error)return res.error;return output.length?output.join(NL):'(Tidak ada output. Coba gunakan print().)';}
+function execBlock8(start,indent,lines,vars,output,inputFn,guard){let i=start;while(i<lines.length){if(++guard.steps>20000)return {error:'RuntimeError: loop terlalu panjang untuk simulator slide.'};let L=lines[i];if(L.blank){i++;continue;}if(L.indent<indent)break;if(L.indent>indent)return {error:'IndentationError on line '+L.lineNo+': unexpected indent.'};if(L.text.startsWith('else')||L.text.startsWith('elif'))break;if(L.text.startsWith('for ')){let r=execFor8(i,indent,lines,vars,output,inputFn,guard);if(r.error)return r;i=r.next;continue;}if(L.text.startsWith('if ')){let r=execIf8(i,indent,lines,vars,output,inputFn,guard);if(r.error)return r;i=r.next;continue;}let r=execLine8(L,vars,output,inputFn);if(r.error)return r;i++;}return {next:i};}
+function blockBounds8(start,indent,lines){let next=start+1;while(next<lines.length&&lines[next].blank)next++;if(next>=lines.length||lines[next].indent<=indent)return null;let blockIndent=lines[next].indent;let end=next;while(end<lines.length){if(!lines[end].blank&&lines[end].indent<=indent)break;end++;}return {start:next,indent:blockIndent,end};}
+function execFor8(start,indent,lines,vars,output,inputFn,guard){let L=lines[start];if(!L.text.endsWith(':'))return {error:'SyntaxError on line '+L.lineNo+': expected colon after for.'};let inner=L.text.slice(4,-1).trim();let marker=' in range(';let idx=inner.indexOf(marker);if(idx<0||!inner.endsWith(')'))return {error:'SyntaxError on line '+L.lineNo+': simulator mendukung bentuk for nama in range(...):'};let varName=inner.slice(0,idx).trim();let argsText=inner.slice(idx+marker.length,-1);let args=splitArgs8(argsText);let startVal=0,endVal=0,stepVal=1;if(args.length===1){endVal=Number(evalExpr8(args[0],vars,inputFn,L.lineNo));}else if(args.length>=2){startVal=Number(evalExpr8(args[0],vars,inputFn,L.lineNo));endVal=Number(evalExpr8(args[1],vars,inputFn,L.lineNo));if(args.length>=3)stepVal=Number(evalExpr8(args[2],vars,inputFn,L.lineNo));}else{return {error:'ValueError on line '+L.lineNo+': range() kosong.'};}if(!isFinite(startVal)||!isFinite(endVal)||!isFinite(stepVal)||stepVal===0)return {error:'ValueError on line '+L.lineNo+': range() membutuhkan angka valid.'};let b=blockBounds8(start,indent,lines);if(!b)return {error:'IndentationError on line '+L.lineNo+': expected an indented block.'};let count=0;for(let v=startVal;stepVal>0?v<endVal:v>endVal;v+=stepVal){if(++count>2000)return {error:'RuntimeError: range terlalu panjang untuk simulator slide.'};vars[varName]=Math.trunc(v);let r=execBlock8(b.start,b.indent,lines,vars,output,inputFn,guard);if(r.error)return r;}return {next:b.end};}
+function execIf8(start,indent,lines,vars,output,inputFn,guard){let L=lines[start];if(!L.text.endsWith(':'))return {error:'SyntaxError on line '+L.lineNo+': expected colon after if condition.'};let cond=L.text.slice(3,-1).trim();let b=blockBounds8(start,indent,lines);if(!b)return {error:'IndentationError on line '+L.lineNo+': expected an indented block.'};let ran=false;if(!!evalExpr8(cond,vars,inputFn,L.lineNo)){let r=execBlock8(b.start,b.indent,lines,vars,output,inputFn,guard);if(r.error)return r;ran=true;}let i=b.end;if(i<lines.length&&lines[i].indent===indent&&lines[i].text.startsWith('else')){let E=lines[i];if(E.text!=='else:')return {error:'SyntaxError on line '+E.lineNo+': expected colon after else.'};let eb=blockBounds8(i,indent,lines);if(!eb)return {error:'IndentationError on line '+E.lineNo+': expected an indented block.'};if(!ran){let r=execBlock8(eb.start,eb.indent,lines,vars,output,inputFn,guard);if(r.error)return r;}i=eb.end;}return {next:i};}
+function execLine8(L,vars,output,inputFn){let line=L.text;if(!line)return {};let aug=findAugAssign8(line);if(aug){if(!(aug.name in vars))return {error:'NameError on line '+L.lineNo+': name '+aug.name+' is not defined.'};let right=evalExpr8(aug.expr,vars,inputFn,L.lineNo);vars[aug.name]=calc8(vars[aug.name],right,aug.op,L.lineNo);return {};}
+let eq=findAssign8(line);if(eq>=0){let name=line.slice(0,eq).trim();let expr=line.slice(eq+1).trim();if(!isName8(name))return {error:'SyntaxError on line '+L.lineNo+': nama variabel tidak valid.'};vars[name]=evalExpr8(expr,vars,inputFn,L.lineNo);return {};}
+if(line.startsWith('print(')&&line.endsWith(')')){let expr=line.slice(6,-1).trim();output.push(String(evalExpr8(expr||'""',vars,inputFn,L.lineNo)));return {};}
+if(line.startsWith('if ')&&!line.endsWith(':'))return {error:'SyntaxError on line '+L.lineNo+': expected colon after if condition.'};return {error:'SyntaxError on line '+L.lineNo+': simulator mendukung assignment, input(), int(), float(), if/else, for range(), dan print().'};}
+function isName8(s){if(!s)return false;let first=s[0];if(!((first>='A'&&first<='Z')||(first>='a'&&first<='z')||first==='_'))return false;for(let i=1;i<s.length;i++){let c=s[i];if(!((c>='A'&&c<='Z')||(c>='a'&&c<='z')||(c>='0'&&c<='9')||c==='_'))return false;}return true;}
+function findAssign8(line){let quote=null,depth=0;for(let i=0;i<line.length;i++){let c=line[i],p=line[i-1],n=line[i+1];if(quote){if(c===quote&&p!==BS)quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='(')depth++;else if(c===')')depth--;else if(c==='='&&depth===0&&p!=='='&&n!=='='&&p!=='>'&&p!=='<'&&p!=='!')return i;}return -1;}
+function findAugAssign8(line){let ops=['+=','-=','*=','/=','%='];for(let op of ops){let idx=line.indexOf(op);if(idx>0){let name=line.slice(0,idx).trim();if(isName8(name))return {name,op:op[0],expr:line.slice(idx+2).trim()};}}return null;}
+function calc8(a,b,op,lineNo){a=Number(a);b=Number(b);if(!isFinite(a)||!isFinite(b))throw new Error('TypeError on line '+lineNo+': operator membutuhkan data angka.');if((op==='/'||op==='%')&&b===0)throw new Error('ZeroDivisionError on line '+lineNo+': division by zero.');if(op==='+')return a+b;if(op==='-')return a-b;if(op==='*')return a*b;if(op==='/')return a/b;if(op==='%')return a%b;return NaN;}
+function replaceWords8(s){return s.split(' and ').join(' && ').split(' or ').join(' || ').split('True').join('true').split('False').join('false');}
+function evalExpr8(expr,vars,inputFn,lineNo){expr=expr.trim();if((expr.startsWith('f"')&&expr.endsWith('"'))||(expr.startsWith("f'")&&expr.endsWith("'")))return renderF8(expr.slice(2,-1),vars,inputFn,lineNo);if((expr.startsWith('"')&&expr.endsWith('"'))||(expr.startsWith("'")&&expr.endsWith("'")))return decodeLiteral(expr.slice(1,-1));let keys=Object.keys(vars);let vals=keys.map(k=>vars[k]);function input(prompt){let p=prompt===undefined?'':prompt;return inputFn(String(p));}function int(v){let n=Number(String(v).trim());if(!isFinite(n))throw new Error('ValueError on line '+lineNo+': invalid literal for int(): '+String(v));return Math.trunc(n);}function float(v){let n=Number(String(v).trim());if(!isFinite(n))throw new Error('ValueError on line '+lineNo+': could not convert string to float: '+String(v));return n;}function type(v){if(typeof v==='number')return Number.isInteger(v)?"<class 'int'>":"<class 'float'>";if(typeof v==='boolean')return "<class 'bool'>";return "<class 'str'>";}try{return Function(...keys,'input','int','float','type','return ('+replaceWords8(expr)+');')(...vals,input,int,float,type);}catch(e){let msg=String(e.message||e);if(msg.startsWith('ValueError')||msg.startsWith('TypeError')||msg.startsWith('ZeroDivisionError'))throw e;throw new Error('NameError on line '+lineNo+': periksa nama variabel atau sintaks ekspresi '+expr+'.');}}
+function renderF8(inner,vars,inputFn,lineNo){inner=decodeLiteral(inner);let out='',i=0;while(i<inner.length){if(inner[i]==='{'){let j=inner.indexOf('}',i+1);if(j<0)throw new Error('SyntaxError on line '+lineNo+': f-string missing closing brace.');let content=inner.slice(i+1,j);let expr=content,fmt='';let colon=content.indexOf(':');if(colon>=0){expr=content.slice(0,colon);fmt=content.slice(colon+1);}let val=evalExpr8(expr,vars,inputFn,lineNo);out+=fmt.trim()===','?fmtNum(val):String(val);i=j+1;}else{out+=inner[i];i++;}}return out;}
+function splitArgs8(s){let args=[],start=0,quote=null,depth=0;for(let i=0;i<s.length;i++){let c=s[i],p=s[i-1];if(quote){if(c===quote&&p!==BS)quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='(')depth++;else if(c===')')depth--;else if(c===','&&depth===0){args.push(s.slice(start,i).trim());start=i+1;}}args.push(s.slice(start).trim());return args.filter(x=>x.length>0);}
+function safeRunPyEditor(id){try{const code=document.getElementById(id).value;const inp=document.getElementById(id+'_input');document.getElementById(id+'_out').textContent=runMiniPython(code,inp?inp.value:'');}catch(e){document.getElementById(id+'_out').textContent=String(e.message||e);}}
+runPyEditor = safeRunPyEditor;
+
+function showIteration(year,btn){document.querySelectorAll('.timeline button').forEach(b=>b.classList.remove('active')); if(btn)btn.classList.add('active'); const data={1:['Tahun 1','Saldo awal dihitung, keuntungan pertama ditambahkan, lalu saldo baru dicetak.'],2:['Tahun 2','Saldo akhir Tahun 1 menjadi modal baru. Keuntungan dihitung dari saldo yang sudah naik.'],3:['Tahun 3','Proses yang sama diulang lagi. Inilah efek bola salju dari bunga majemuk.']}; const el=document.getElementById('iterationInfo'); if(el)el.innerHTML='<h4>'+data[year][0]+'</h4><p>'+data[year][1]+'</p>';}
+function showForPart(part,btn){document.querySelectorAll('.component-pill').forEach(b=>b.classList.remove('active')); if(btn)btn.classList.add('active'); const data={var:['tahun','Variabel sementara yang nilainya berubah otomatis setiap putaran loop.'],range:['range(1, 4)','Mengatur angka yang dipakai loop: 1, 2, dan 3. Batas akhir 4 tidak ikut.'],colon:['Titik dua (:)', 'Menandai awal blok kode yang akan diulang.'],indent:['Indentasi','Baris yang menjorok ke dalam adalah bagian yang dijalankan berulang.']}; const el=document.getElementById('forPartInfo'); if(el)el.innerHTML='<h4>'+data[part][0]+'</h4><p>'+data[part][1]+'</p>';}
+function calculateCompoundManual(){const saldo=Number(document.getElementById('manualSaldo').value||0);const grow=Number(document.getElementById('manualGrow').value||0)/100;const years=Math.max(0,Math.trunc(Number(document.getElementById('manualYears').value||0)));let now=saldo,lines=[];for(let y=1;y<=years;y++){now=now+(now*grow);lines.push('Tahun '+y+': Rp '+Math.trunc(now).toLocaleString('en-US'));}document.getElementById('compoundManualResult').innerHTML='<h4>Hasil simulasi</h4><p>'+lines.join('<br>')+'</p>';}
+function showCompoundFlow(kind){const data={input:['Input','Modal awal, persentase pertumbuhan, dan durasi tahun dari user.'],process:['Process','Loop menghitung keuntungan, meng-update saldo, lalu mengulang sampai durasi selesai.'],output:['Output','Terminal menampilkan saldo tiap tahun dan ringkasan keuntungan.']}; const el=document.getElementById('compoundFlowInfo'); if(el)el.innerHTML='<h4>'+data[kind][0]+'</h4><p>'+data[kind][1]+'</p>';}
+function showCompoundVar(kind,btn){document.querySelectorAll('.memory-slot').forEach(b=>b.classList.remove('active')); if(btn)btn.classList.add('active'); const data={awal:['saldo_awal','Modal awal simulasi. Nilai ini dipakai sebagai pembanding untuk menghitung total keuntungan.'],persen:['persen_tumbuh','Angka persen dari user, misalnya 10 untuk 10%.'],durasi:['durasi_tahun','Jumlah tahun yang menentukan berapa kali loop berjalan.'],faktor:['faktor_pertumbuhan','Persen yang sudah diubah menjadi desimal, misalnya 10% menjadi 0.10.'],saldo:['saldo_sekarang','Saldo aktif yang terus berubah setiap iterasi. Ini inti bunga majemuk.'],untung:['keuntungan','Keuntungan tahun berjalan yang dihitung dari saldo terbaru.']}; const el=document.getElementById('compoundVarInfo'); if(el)el.innerHTML='<h4>'+data[kind][0]+'</h4><p>'+data[kind][1]+'</p>';}
+function loadCompoundCase(btn,caseNo){document.querySelectorAll('#slide-21 .choice-btn').forEach(b=>b.classList.remove('selected')); if(btn)btn.classList.add('selected'); const cases={1:['100000'+NL+'10'+NL+'3','Case 1 dimuat: modal 100000, 10%, 3 tahun. Ekspektasi akhir: Rp 133,100.'],2:['500000'+NL+'5'+NL+'4','Case 2 dimuat: modal 500000, 5%, 4 tahun. Ekspektasi akhir sekitar Rp 607,753.'],3:['100000'+NL+'10'+NL+'0','Edge case dimuat: durasi 0. Output tahunan tidak muncul karena loop tidak berjalan.']}; const input=document.getElementById('py5_input'); if(input){input.value=cases[caseNo][0];input.classList.add('preset-loaded');setTimeout(()=>input.classList.remove('preset-loaded'),1000);} const el=document.getElementById('compoundCaseFeedback'); if(el)el.textContent=cases[caseNo][1];}
+function traceCompound(){const saldo=Number(document.getElementById('traceSaldoInput').value||0);const grow=Number(document.getElementById('traceGrowInput').value||0)/100;let now=saldo,rows='';for(let y=1;y<=3;y++){const start=now,profit=now*grow;now=now+profit;rows+='<tr><td>'+y+'</td><td>'+Math.trunc(start).toLocaleString('en-US')+'</td><td>'+Math.trunc(profit).toLocaleString('en-US')+'</td><td>'+Math.trunc(now).toLocaleString('en-US')+'</td></tr>';}document.getElementById('traceCompoundBody').innerHTML=rows;}
+</script>
+</body></html>
