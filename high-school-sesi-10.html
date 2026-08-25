@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>UOB My Digital Space — High School Sesi 10</title><link href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;📈&lt;/text&gt;&lt;/svg&gt;" rel="icon"/><style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --blue: #0056b3;
+      --light-blue: #4a9eff;
+      --uob-red: #e60012;
+      --uob-red-soft: #ff5a6b;
+      --uob-blue-deep: #0056b3;
+      --uob-blue-soft: #5aa7ff;
+      --teal: #11a9b7;
+      --bg: #f5f6f8;
+      --panel: #fff;
+      --text: #2c3e50;
+      --muted: #6c757d;
+      --line: #e3e8ef;
+      --green: #2e9d57;
+      --orange: #f39c12;
+      --red: #e74c3c;
+      --purple: #8e44ad;
+      --blue-soft: #eef7ff;
+      --green-soft: #effaf2
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      height: 100vh;
+      overflow: hidden;
+      color: var(--text)
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #f5d7da, #d9e9ff);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, .08)
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--uob-red) 0%, var(--uob-red-soft) 28%, var(--uob-blue-deep) 72%, var(--uob-blue-soft) 100%);
+      transition: width .3s ease;
+      box-shadow: 0 0 8px rgba(0, 86, 179, .18)
+    }
+
+    .main-container {
+      display: flex;
+      height: 100vh
+    }
+
+    .slides-panel {
+      width: 50%;
+      background: #f8f9fa;
+      border-right: 2px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      position: relative
+    }
+
+    .explanation-panel {
+      width: 50%;
+      background: #fff;
+      overflow-y: auto;
+      padding: 32px
+    }
+
+    .slide-header {
+      background: #fff;
+      padding: 17px 20px 15px;
+      border-bottom: 2px solid var(--line);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+      position: relative
+    }
+
+    .slide-header::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(var(--uob-red), var(--light-blue))
+    }
+
+    .slide-header h1 {
+      font-size: 1.28rem;
+      color: var(--text);
+      margin-bottom: 3px
+    }
+
+    .slide-header p {
+      font-size: .9rem;
+      color: var(--muted)
+    }
+
+    .header-badge {
+      position: absolute;
+      right: 18px;
+      top: 17px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      border: 1px solid #cce7ff;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-weight: 700;
+      font-size: .76rem
+    }
+
+    .slide-content {
+      flex: 1;
+      padding: 24px 28px 94px;
+      overflow-y: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 0
+    }
+
+    .slide,
+    .explanation {
+      display: none;
+      opacity: 0;
+      transition: opacity .25s ease
+    }
+
+    .slide.active,
+    .explanation.active {
+      display: block;
+      opacity: 1
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 820px
+    }
+
+    .explanation {
+      max-width: 760px;
+      margin: 0 auto
+    }
+
+    .slide h2 {
+      font-size: 2.25rem;
+      color: var(--blue);
+      margin-bottom: 10px;
+      line-height: 1.15
+    }
+
+    .slide h3 {
+      font-size: 1.78rem;
+      color: var(--blue);
+      margin-bottom: 16px;
+      line-height: 1.2
+    }
+
+    .slide h4,
+    .explanation h4 {
+      font-size: 1.05rem;
+      margin-bottom: 9px;
+      color: var(--text)
+    }
+
+    .slide p,
+    .explanation p {
+      font-size: 1rem;
+      line-height: 1.58;
+      color: #495057;
+      margin-bottom: 14px
+    }
+
+    .explanation h3 {
+      font-size: 1.65rem;
+      margin-bottom: 16px;
+      color: var(--text);
+      line-height: 1.25
+    }
+
+    .slide ul,
+    .slide ol,
+    .explanation ul,
+    .explanation ol {
+      margin-left: 22px;
+      margin-bottom: 10px
+    }
+
+    .slide li,
+    .explanation li {
+      margin-bottom: 7px;
+      line-height: 1.5
+    }
+
+    code {
+      background: #eef3f8;
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #334155
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--uob-red);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 8px
+    }
+
+    .lead {
+      font-size: 1.08rem !important
+    }
+
+    .mini-note {
+      font-size: .9rem !important;
+      color: var(--muted) !important;
+      margin-top: 10px
+    }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      gap: 13px;
+      margin: 16px 0
+    }
+
+    .visual-card,
+    .metric-box,
+    .info-box,
+    .example-box,
+    .warning-box,
+    .interactive-box,
+    .code-card,
+    .quiz-card {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05)
+    }
+
+    .visual-card {
+      padding: 15px
+    }
+
+    .visual-card p {
+      margin-bottom: 0;
+      font-size: .92rem;
+      line-height: 1.42
+    }
+
+    .visual-icon {
+      font-size: 1.9rem;
+      margin-bottom: 8px
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 16px
+    }
+
+    .metric-box {
+      padding: 16px 12px;
+      text-align: center
+    }
+
+    .metric-box strong {
+      display: block;
+      font-size: 1.55rem;
+      color: var(--blue);
+      margin-bottom: 7px
+    }
+
+    .metric-box span {
+      font-size: .9rem;
+      line-height: 1.35;
+      color: #495057;
+      display: block
+    }
+
+    .info-box,
+    .example-box,
+    .warning-box,
+    .interactive-box {
+      padding: 17px;
+      margin: 16px 0
+    }
+
+    .info-box {
+      border-left: 5px solid var(--light-blue)
+    }
+
+    .example-box {
+      border-left: 5px solid var(--green);
+      background: #f8fff8
+    }
+
+    .warning-box {
+      border-left: 5px solid var(--orange);
+      background: #fffaf0
+    }
+
+    .interactive-box {
+      border-left: 5px solid var(--purple);
+      background: #fcf8ff
+    }
+
+    .navigation {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 2px solid var(--line);
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, .04)
+    }
+
+    .nav-btn {
+      background: var(--light-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: .94rem;
+      font-weight: 700;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      transition: .2s ease
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      background: #357abd
+    }
+
+    .nav-btn:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none
+    }
+
+    .slide-indicator {
+      font-size: .9rem;
+      color: var(--muted);
+      font-weight: 700
+    }
+
+    .floating-element {
+      position: absolute;
+      opacity: .07;
+      pointer-events: none;
+      font-size: 2rem;
+      animation: float 6s ease-in-out infinite
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0)
+      }
+
+      33% {
+        transform: translateY(-12px) rotate(4deg)
+      }
+
+      66% {
+        transform: translateY(7px) rotate(-3deg)
+      }
+    }
+
+    .access-popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .8);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center
+    }
+
+    .access-popup {
+      background: white;
+      border: 3px solid var(--light-blue);
+      border-radius: 15px;
+      padding: 38px;
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .3);
+      transform: scale(.8);
+      opacity: 0;
+      transition: all .3s ease
+    }
+
+    .access-popup.show {
+      transform: scale(1);
+      opacity: 1
+    }
+
+    .access-popup h2 {
+      color: var(--text);
+      margin-bottom: 13px;
+      font-size: 1.8rem
+    }
+
+    .access-popup p {
+      color: #666;
+      margin-bottom: 22px;
+      line-height: 1.55
+    }
+
+    .access-input {
+      width: 100%;
+      padding: 14px;
+      font-size: 1.15rem;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      text-align: center;
+      letter-spacing: 2px;
+      font-weight: bold;
+      text-transform: uppercase
+    }
+
+    .access-input:focus {
+      outline: none;
+      border-color: var(--light-blue);
+      box-shadow: 0 0 0 3px rgba(74, 158, 255, .12)
+    }
+
+    .access-submit,
+    .primary-btn,
+    .secondary-btn {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .access-submit,
+    .primary-btn {
+      background: var(--blue);
+      color: white
+    }
+
+    .secondary-btn {
+      background: #e9ecef;
+      color: var(--text)
+    }
+
+    .access-submit {
+      padding: 13px 28px;
+      font-size: 1.05rem
+    }
+
+    .access-error {
+      color: var(--red);
+      margin-top: 13px;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity .2s
+    }
+
+    .access-error.show {
+      opacity: 1
+    }
+
+    .access-hint {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 5px;
+      padding: 9px;
+      margin-top: 18px;
+      font-size: .88rem;
+      color: #856404
+    }
+
+    .scratch-map-wrap {
+      position: relative;
+      width: 100%;
+      margin: 12px auto;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .08)
+    }
+
+    .scratch-map-wrap img {
+      width: 100%;
+      display: block
+    }
+
+    .hotspot {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      background: var(--uob-red);
+      color: white;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35);
+      display: grid;
+      place-items: center;
+      transform: translate(-50%, -50%);
+      transition: transform .16s, background .16s;
+      z-index: 3
+    }
+
+    .hotspot:hover,
+    .hotspot.active {
+      transform: translate(-50%, -50%) scale(1.16);
+      background: var(--blue)
+    }
+
+    .scratch-caption {
+      text-align: center;
+      font-size: .85rem;
+      color: var(--muted);
+      margin-top: 8px
+    }
+
+    .area-live-card {
+      min-height: 110px;
+      border: 2px solid #cfe7fb;
+      background: var(--blue-soft);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 14px
+    }
+
+    .area-number {
+      display: inline-grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: white;
+      font-weight: 900;
+      margin-right: 7px
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .choice-btn {
+      border: 2px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 11px 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: .18s;
+      text-align: left
+    }
+
+    .choice-btn:hover {
+      border-color: var(--light-blue);
+      transform: translateY(-1px)
+    }
+
+    .choice-btn.correct,
+    .choice-btn.selected {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: #176b35
+    }
+
+    .choice-btn.wrong {
+      border-color: var(--red);
+      background: #fff1f0;
+      color: #a42820
+    }
+
+    .feedback-line {
+      min-height: 28px;
+      font-weight: 700;
+      margin-top: 8px
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .form-grid label {
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--text)
+    }
+
+    .form-grid input,
+    .form-grid textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      margin-top: 5px
+    }
+
+    .form-grid input:focus,
+    .form-grid textarea:focus {
+      outline: none;
+      border-color: var(--light-blue)
+    }
+
+    .lms-map-wrap,
+    .test-map-wrap {
+      position: relative
+    }
+
+    .session-card-hotspot {
+      position: absolute;
+      left: 19.1%;
+      top: 43%;
+      width: 25.5%;
+      height: 51%;
+      padding: 0;
+      border: 3px dashed transparent;
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+      transition: .2s ease
+    }
+
+    .session-card-hotspot span {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: #fff;
+      font-size: .9rem;
+      font-weight: 900;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35)
+    }
+
+    .session-card-hotspot:hover,
+    .session-card-hotspot.active {
+      border-color: var(--uob-red);
+      background: rgba(230, 0, 18, .08)
+    }
+
+    .session-card-hotspot:hover span,
+    .session-card-hotspot.active span {
+      background: var(--blue);
+      transform: scale(1.1)
+    }
+
+    .test-card-hotspot {
+      position: absolute;
+      left: 18%;
+      right: 3%;
+      bottom: 5%;
+      height: 20%;
+      padding: 0;
+      border: 3px dashed transparent;
+      border-radius: 14px;
+      background: transparent;
+      cursor: pointer;
+      transition: .2s ease
+    }
+
+    .test-number {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35)
+    }
+
+    .test-instruction {
+      position: absolute;
+      left: 50%;
+      bottom: 12px;
+      transform: translateX(-50%);
+      width: 88%;
+      padding: 7px 9px;
+      border-radius: 8px;
+      background: rgba(0, 86, 179, .94);
+      color: #fff;
+      font-size: .76rem;
+      line-height: 1.3;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, .25)
+    }
+
+    .test-card-hotspot:hover,
+    .test-card-hotspot.active {
+      border-color: var(--uob-red);
+      background: rgba(230, 0, 18, .08)
+    }
+
+    .test-card-hotspot:hover .test-instruction,
+    .test-card-hotspot.active .test-instruction {
+      background: var(--uob-red)
+    }
+
+    .flow-line {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 20px 0
+    }
+
+    .flow-box {
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--blue);
+      color: #fff;
+      text-align: center;
+      font-weight: 900;
+      cursor: pointer
+    }
+
+    .flow-arrow {
+      color: var(--uob-red);
+      font-size: 1.6rem;
+      font-weight: 900
+    }
+
+    .comparison-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    .compare-card {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      background: #fff
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 2px
+    }
+
+    .pill.blue {
+      background: var(--blue)
+    }
+
+    .pill.green {
+      background: var(--green)
+    }
+
+    .pill.purple {
+      background: var(--purple)
+    }
+
+    .colab-mock,
+    .colab-hotmap {
+      border: 2px solid #dce6ef;
+      border-radius: 14px;
+      background: #1e1e1e;
+      color: #e5e7eb;
+      overflow: hidden;
+      margin: 16px 0;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .12);
+      position: relative
+    }
+
+    .colab-title {
+      background: #111827;
+      padding: 10px 14px;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      font-size: .9rem
+    }
+
+    .colab-title span {
+      font-size: .8rem;
+      color: #9ca3af
+    }
+
+    .colab-cell {
+      margin: 12px;
+      border: 1px solid #374151;
+      border-radius: 10px;
+      background: #0f172a;
+      min-height: 72px;
+      position: relative;
+      padding: 14px 14px 14px 48px
+    }
+
+    .run-dot {
+      position: absolute;
+      left: 12px;
+      top: 15px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 0;
+      background: #16a34a;
+      color: white;
+      display: grid;
+      place-items: center
+    }
+
+    .colab-cell pre,
+    .code-card pre,
+    .receipt-preview pre {
+      white-space: pre-wrap;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .9rem;
+      line-height: 1.45
+    }
+
+    .colab-output {
+      margin: 0 12px 12px;
+      padding: 12px;
+      background: #fff;
+      color: #111827;
+      border-radius: 10px;
+      min-height: 48px;
+      position: relative
+    }
+
+    .python-editor {
+      border-radius: 18px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #152744 0%, #132742 100%);
+      box-shadow: 0 10px 24px rgba(8, 22, 46, .18);
+      margin: 16px 0;
+      border: 1px solid #274468
+    }
+
+    .editor-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #182c49;
+      color: #fff;
+      padding: 13px 18px 11px;
+      font-weight: 900
+    }
+
+    .editor-label {
+      font-size: 1.05rem;
+      letter-spacing: .05em;
+      color: #dbeafe
+    }
+
+    .editor-live {
+      font-size: .95rem;
+      letter-spacing: .04em;
+      color: #69e3a7
+    }
+
+    .python-editor textarea {
+      width: 100%;
+      min-height: 250px;
+      resize: vertical;
+      background: #0f2240;
+      color: #fff;
+      border: 0;
+      padding: 18px 18px 16px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 1rem;
+      line-height: 1.65;
+      outline: none
+    }
+
+    .python-editor textarea:focus {
+      box-shadow: inset 0 0 0 2px rgba(147, 197, 253, .22)
+    }
+
+    .editor-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      background: #182c49;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      border-bottom: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .run-code-btn {
+      background: #22b573;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-weight: 900;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, .12);
+      transition: .18s ease
+    }
+
+    .run-code-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03)
+    }
+
+    .editor-toolbar-note {
+      color: #dbeafe;
+      font-size: .98rem;
+      line-height: 1.4
+    }
+
+    .editor-output-panel {
+      padding: 0 16px 16px;
+      background: #182c49
+    }
+
+    .editor-output-label {
+      color: #93c5fd;
+      font-size: 1rem;
+      letter-spacing: .08em;
+      font-weight: 900;
+      padding: 14px 12px 8px
+    }
+
+    .output-box {
+      background: #041126;
+      color: #fff;
+      min-height: 110px;
+      white-space: pre-wrap;
+      font-family: Consolas, Monaco, monospace;
+      padding: 16px;
+      border: 1px solid #2b4f7b;
+      border-radius: 12px;
+      line-height: 1.6
+    }
+
+    .code-card {
+      padding: 14px;
+      background: #111827;
+      color: #e5e7eb;
+      overflow: auto
+    }
+
+    .receipt-preview {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 14px 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05)
+    }
+
+    .receipt-preview pre {
+      color: #111827
+    }
+
+    .component-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0
+    }
+
+    .component-pill {
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      padding: 8px 11px;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .component-pill.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    .checklist {
+      list-style: none;
+      margin-left: 0 !important;
+      display: grid;
+      gap: 8px
+    }
+
+    .check-item {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      cursor: pointer
+    }
+
+    .check-item input {
+      margin-top: 3px;
+      transform: scale(1.2)
+    }
+
+    .check-item.done {
+      background: var(--green-soft);
+      border-color: #9cd9af;
+      text-decoration: line-through;
+      color: #3e6b4c
+    }
+
+    .debug-scenario {
+      display: none
+    }
+
+    .debug-scenario.active {
+      display: block
+    }
+
+    .debug-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px
+    }
+
+    .debug-tab {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 7px 11px;
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    .debug-tab.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    @media(max-width:960px) {
+      body {
+        overflow: auto;
+        height: auto
+      }
+
+      .main-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh
+      }
+
+      .slides-panel,
+      .explanation-panel {
+        width: 100%;
+        height: auto;
+        min-height: 50vh
+      }
+
+      .slides-panel {
+        min-height: 100vh
+      }
+
+      .slide-content {
+        padding: 20px 20px 92px
+      }
+
+      .explanation-panel {
+        padding: 24px
+      }
+
+      .header-badge {
+        display: none
+      }
+
+      .flow-line,
+      .comparison-table {
+        grid-template-columns: 1fr
+      }
+
+      .flow-arrow {
+        display: none
+      }
+    }
+
+    .stdin-panel {
+      padding: 0 16px 14px;
+      background: #182c49;
+      border-top: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .stdin-label {
+      color: #93c5fd;
+      font-size: .86rem;
+      letter-spacing: .08em;
+      font-weight: 900;
+      padding: 10px 2px 6px;
+      text-transform: uppercase
+    }
+
+    .stdin-area {
+      width: 100%;
+      min-height: 74px;
+      resize: vertical;
+      border: 1px solid #2b4f7b;
+      border-radius: 10px;
+      background: #0b1a33;
+      color: #e5f0ff;
+      padding: 10px 12px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .92rem;
+      line-height: 1.45;
+      outline: none
+    }
+
+    .stdin-area:focus {
+      box-shadow: inset 0 0 0 2px rgba(147, 197, 253, .22)
+    }
+
+    .stdin-area.preset-loaded {
+      border-color: #69e3a7;
+      box-shadow: 0 0 0 3px rgba(105, 227, 167, .22), inset 0 0 0 1px rgba(105, 227, 167, .35)
+    }
+
+    .type-bank {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .type-card {
+      border: 2px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: 800
+    }
+
+    .type-card.active {
+      background: var(--blue-soft);
+      border-color: var(--blue)
+    }
+
+    .mini-terminal {
+      background: #041126;
+      color: #fff;
+      border-radius: 12px;
+      border: 1px solid #2b4f7b;
+      padding: 16px;
+      margin: 14px 0;
+      font-family: Consolas, Monaco, monospace;
+      white-space: pre-wrap;
+      line-height: 1.55;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .08)
+    }
+
+    .safe-card {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 13px;
+      cursor: pointer;
+      font-weight: 800
+    }
+
+    .safe-card.safe {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: #176b35
+    }
+
+    .safe-card.risky {
+      border-color: var(--red);
+      background: #fff1f0;
+      color: #a42820
+    }
+
+    .memory-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    .memory-slot {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      cursor: pointer
+    }
+
+    .memory-slot.active {
+      border-color: var(--blue);
+      background: var(--blue-soft)
+    }
+
+    .memory-slot code {
+      display: block;
+      margin-top: 6px;
+      color: var(--blue);
+      font-weight: 900
+    }
+
+    .thin-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 14px 0
+    }
+
+    .thin-table th {
+      background: var(--blue);
+      color: #fff;
+      text-align: left;
+      padding: 10px
+    }
+
+    .thin-table td {
+      border-top: 1px solid var(--line);
+      padding: 10px;
+      vertical-align: top
+    }
+
+    .thin-table code {
+      background: #eef3f8;
+      padding: 2px 6px;
+      border-radius: 5px
+    }
+  
+    details.learn-accordion {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      margin: 10px 0;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+    details.learn-accordion summary {
+      cursor: pointer;
+      padding: 12px 14px;
+      font-weight: 900;
+      color: var(--blue);
+      background: var(--blue-soft);
+      list-style: none;
+    }
+    details.learn-accordion summary::-webkit-details-marker {display:none;}
+    details.learn-accordion .accordion-body {padding: 14px 16px;}
+    .decision-gate {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 16px 0;
+    }
+    .gate-node {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      font-weight: 900;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
+    .gate-diamond {
+      width: 112px;
+      height: 112px;
+      transform: rotate(45deg);
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--blue), var(--light-blue));
+      color: white;
+      border-radius: 16px;
+      font-weight: 900;
+      text-align: center;
+      box-shadow: 0 7px 16px rgba(0,86,179,.18);
+    }
+    .gate-diamond span {transform: rotate(-45deg); display:block; font-size:.85rem; line-height:1.25;}
+    .branch-label {font-size:.82rem; color:var(--muted); font-weight:800; margin-top:6px;}
+    .trace-card {display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin:12px 0;}
+    .trace-step {background:#fff; border:2px solid var(--line); border-radius:12px; padding:12px; text-align:center;}
+    .trace-step strong {display:block; color:var(--blue); margin-bottom:5px;}
+    .operator-board {display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin:14px 0;}
+    .operator-btn {background:#fff; border:2px solid var(--line); border-radius:12px; padding:12px; cursor:pointer; font-weight:900; text-align:center;}
+    .operator-btn:hover,.operator-btn.active {border-color:var(--blue); background:var(--blue-soft); color:var(--blue); transform:translateY(-1px);}
+    .true-false {display:flex; gap:8px; flex-wrap:wrap; margin:10px 0;}
+    .true-pill,.false-pill {padding:7px 11px; border-radius:999px; color:white; font-weight:900;}
+    .true-pill {background:var(--green);} .false-pill{background:var(--red);}
+    .compact-code {max-height: 260px; overflow:auto;}
+    @media(max-width:960px){.decision-gate{grid-template-columns:1fr}.gate-diamond{margin:0 auto}.flow-arrow{display:none}}
+
+  
+/* Session 6 components */
+.risk-scale{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}.risk-zone{border:2px solid var(--line);background:#fff;border-radius:14px;padding:15px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:.18s ease}.risk-zone:hover,.risk-zone.active{transform:translateY(-2px);border-color:var(--blue);background:var(--blue-soft)}.risk-zone strong{display:block;font-size:1.05rem;margin-bottom:6px}.risk-zone small{color:var(--muted);font-weight:800}.risk-zone.aman{border-left:6px solid var(--green)}.risk-zone.hati{border-left:6px solid var(--orange)}.risk-zone.risk{border-left:6px solid var(--red)}.score-meter{height:26px;border-radius:999px;background:linear-gradient(90deg,#f87171 0%,#f59e0b 50%,#22c55e 100%);position:relative;margin:18px 0 10px;box-shadow:inset 0 2px 4px rgba(0,0,0,.12)}.score-marker{position:absolute;top:-9px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#fff;border:3px solid var(--blue);font-weight:900;color:var(--blue);box-shadow:0 4px 12px rgba(0,0,0,.18);transform:translateX(-50%);left:65%}.score-labels{display:flex;justify-content:space-between;font-size:.82rem;font-weight:900;color:var(--muted)}.branch-chain{display:grid;gap:10px;margin:14px 0}.branch-row{display:grid;grid-template-columns:110px 1fr;gap:10px}.branch-key{background:var(--blue);color:#fff;border-radius:12px;display:grid;place-items:center;font-weight:900}.branch-condition{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px}.branch-condition strong{color:var(--blue)}.mini-terminal.dark{background:#041126;color:#e5f0ff;border:1px solid #2b4f7b;border-radius:12px;padding:16px;margin:14px 0;font-family:Consolas,Monaco,monospace;white-space:pre-wrap;line-height:1.55}.boundary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(95px,1fr));gap:10px;margin:12px 0}.boundary-btn{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;font-weight:900;text-align:center}.boundary-btn:hover,.boundary-btn.active{border-color:var(--blue);background:var(--blue-soft);color:var(--blue)}.note-pill{display:inline-block;padding:5px 9px;border-radius:999px;background:var(--blue-soft);color:var(--blue);font-size:.82rem;font-weight:900;margin:2px}@media(max-width:960px){.risk-scale{grid-template-columns:1fr}.branch-row{grid-template-columns:1fr}}
+
+/* Session 7 components */
+.login-gate{display:grid;grid-template-columns:1fr 90px 1fr;gap:12px;align-items:center;margin:18px 0}.key-card{background:#fff;border:2px solid var(--line);border-radius:14px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,.05);cursor:pointer;transition:.18s ease}.key-card:hover,.key-card.active{border-color:var(--blue);background:var(--blue-soft);transform:translateY(-2px)}.lock-core{display:grid;place-items:center;width:82px;height:82px;border-radius:50%;background:linear-gradient(135deg,var(--uob-red),var(--blue));color:#fff;font-size:2.2rem;font-weight:900;box-shadow:0 8px 18px rgba(0,0,0,.16)}.logic-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:14px 0}.logic-card{background:#fff;border:2px solid var(--line);border-radius:14px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,.05);cursor:pointer}.logic-card.active{border-color:var(--blue);background:var(--blue-soft)}.truth-table{width:100%;border-collapse:collapse;background:#fff;border:2px solid var(--line);border-radius:12px;overflow:hidden;margin:14px 0}.truth-table th{background:var(--blue);color:#fff;text-align:left;padding:10px}.truth-table td{border-top:1px solid var(--line);padding:10px}.truth-table tr.good td{background:#effaf2}.truth-table tr.bad td{background:#fff7f7}.terminal-login{background:#041126;color:#e5f0ff;border:1px solid #2b4f7b;border-radius:12px;padding:16px;margin:14px 0;font-family:Consolas,Monaco,monospace;white-space:pre-wrap;line-height:1.55}.trace-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin:12px 0}.trace-step{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px}.trace-step strong{display:block;color:var(--blue);margin-bottom:5px}.operator-btn{border:2px solid var(--line);background:#fff;border-radius:12px;padding:12px 14px;font-weight:900;cursor:pointer}.operator-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}.accordion{border:2px solid var(--line);border-radius:12px;background:#fff;margin:10px 0;overflow:hidden}.accordion button{width:100%;border:0;background:#f8fbfe;padding:12px 14px;text-align:left;font-weight:900;cursor:pointer;color:var(--text)}.accordion-content{display:none;padding:14px;border-top:1px solid var(--line)}.accordion.open .accordion-content{display:block}.password-meter{height:18px;border-radius:999px;background:#e5e7eb;overflow:hidden;margin:10px 0}.password-meter span{display:block;height:100%;width:35%;background:var(--red);transition:.2s ease}.password-meter.medium span{width:65%;background:var(--orange)}.password-meter.strong span{width:100%;background:var(--green)}.mono-tag{font-family:Consolas,Monaco,monospace;background:#eef3f8;border-radius:6px;padding:2px 6px}.mini-code{max-height:360px;overflow:auto}.safe-card{border:2px solid var(--line);border-radius:12px;background:#fff;padding:13px;cursor:pointer;font-weight:800}.safe-card.safe{border-color:var(--green);background:var(--green-soft);color:#176b35}.safe-card.risky{border-color:var(--red);background:#fff1f0;color:#a42820}@media(max-width:960px){.login-gate{grid-template-columns:1fr}.lock-core{margin:0 auto}}
+
+.growth-bars{display:grid;gap:10px;margin-top:12px}.growth-bars div{display:grid;grid-template-columns:72px 1fr;align-items:center;gap:8px}.growth-bars span{font-weight:900;color:var(--muted);font-size:.85rem}.growth-bars b{display:block;height:18px;border-radius:999px;background:linear-gradient(90deg,var(--uob-red),var(--blue));box-shadow:inset 0 1px 2px rgba(0,0,0,.12)}.growth-bars.compound b{background:linear-gradient(90deg,var(--green),var(--blue))}.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:14px 0}.timeline button{border:2px solid var(--line);background:#fff;border-radius:12px;padding:12px;cursor:pointer;font-weight:900}.timeline button.active,.timeline button:hover{background:var(--blue-soft);border-color:var(--blue);color:var(--blue)}.range-track{display:flex;gap:12px;align-items:center;justify-content:center;margin:22px 0;flex-wrap:wrap}.range-track span{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;border:3px solid var(--line);background:#fff;font-weight:900;font-size:1.2rem}.range-track span.active{background:var(--blue);border-color:var(--blue);color:#fff}.range-track span.stop{background:#fff1f0;border-color:var(--uob-red);color:var(--uob-red);position:relative}.range-track span.stop::after{content:'stop';position:absolute;bottom:-22px;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}.compound-mini{background:#fff;border:2px solid var(--line);border-radius:12px;padding:13px;margin:10px 0}.compound-mini strong{color:var(--blue)}
+
+/* Sesi 9 readability fix: code inside dark snippets uses plain light text */
+.code-card code,
+.mini-terminal code,
+.mini-terminal.dark code,
+.terminal-login code,
+.vault-panel code,
+.python-editor code {
+  background: transparent !important;
+  color: inherit !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.code-card pre, .mini-terminal, .mini-terminal.dark, .terminal-login {
+  color: #e5e7eb;
+}
+</style></head>
+<body>
+<div class="access-popup-overlay" id="accessPopup"><div class="access-popup"><h2>🔐 Kode Akses</h2><p>Masukkan kode akses High School untuk membuka materi Sesi 10.</p><input autocomplete="off" class="access-input" id="accessInput" maxlength="20" placeholder="MASUKKAN KODE" type="text"/><button class="access-submit" onclick="checkAccessCode()">Masuk</button><div class="access-error" id="accessError">Kode akses belum tepat. Coba lagi.</div><div class="access-hint">Kode akses diberikan oleh guru.</div></div></div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="main-container" id="mainContent" style="display:none;">
+<div class="slides-panel">
+<div class="slide-header"><h1>UOB My Digital Space — High School</h1><p>Sesi 10 · Anti-Crash</p><span class="header-badge">Python · High School</span></div>
+<div class="slide-content">
+<div class="floating-element" style="top:12%;left:7%;">🐍</div><div class="floating-element" style="top:18%;right:10%;">🛡️</div><div class="floating-element" style="bottom:25%;left:14%;">⚠️</div><div class="floating-element" style="bottom:15%;right:16%;">✅</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="slide active" id="slide-1"><span class="eyebrow">Sesi 10</span><h2>Anti-Crash</h2><p class="lead">Hari ini kamu akan membuat program Python yang tetap bisa menyelesaikan eksekusi meskipun user memasukkan format data yang salah.</p><div class="metrics"><div class="metric-box"><strong>try</strong><span>menguji kode rawan error</span></div><div class="metric-box"><strong>except</strong><span>menangani ValueError</span></div><div class="metric-box"><strong>🛡️</strong><span>robust input</span></div><div class="metric-box"><strong>🧪</strong><span>multi-input testing</span></div></div><div class="example-box"><h4>Target akhir</h4><p>Membuat <strong>Kalkulator Target Tabungan Anti-Crash</strong>: input angka valid dihitung, sedangkan input teks atau format yang tidak cocok menghasilkan pesan ramah tanpa traceback merah.</p></div></section><section class="slide" id="slide-2"><span class="eyebrow">Rencana Belajar</span><h3>Misi Belajar Hari Ini</h3><div class="visual-grid"><div class="visual-card"><div class="visual-icon">💥</div><h4>Crash</h4><p>Mengenali kenapa program bisa berhenti saat runtime.</p></div><div class="visual-card"><div class="visual-icon">🧯</div><h4>Error Handling</h4><p>Memakai <code>try-except</code> untuk menangani input yang salah format.</p></div><div class="visual-card"><div class="visual-icon">🔢</div><h4>Type Casting</h4><p>Menangani risiko saat <code>int()</code> atau <code>float()</code> menerima data yang tidak cocok.</p></div><div class="visual-card"><div class="visual-icon">🧪</div><h4>Testing</h4><p>Menguji angka, teks, kosong, nol, desimal, dan negatif.</p></div></div><div class="interactive-box"><h4>Alur 60 menit</h4><p><strong>Konsep &amp; Prediksi → Build → Test &amp; Debug → Save &amp; Checkout</strong></p></div></section><section class="slide" id="slide-3"><h3>Siapkan Workspace dengan Aman</h3><p class="lead">Gunakan Google Colab atau editor Python yang dipakai di kelas, lalu siapkan data simulasi.</p><div class="choice-grid"><button class="choice-btn" onclick="deviceCheck(this)">Laptop/komputer siap</button><button class="choice-btn" onclick="deviceCheck(this)">Google Colab/editor terbuka</button><button class="choice-btn" onclick="deviceCheck(this)">Notebook bernama <strong>Sesi10_Anti_Crash</strong></button><button class="choice-btn" onclick="deviceCheck(this)">Gunakan nominal dummy</button><button class="choice-btn" onclick="deviceCheck(this)">Tidak memakai data rekening pribadi</button><button class="choice-btn" onclick="deviceCheck(this)">Siap menguji input aneh</button></div><div class="info-box"><strong>Alamat LMS:</strong><br/><a href="https://app.uobmydigitalspace.com/" rel="noopener noreferrer" target="_blank">https://app.uobmydigitalspace.com/</a></div></section><section class="slide" id="slide-4"><h3>Kenapa Program Bisa Crash?</h3><p class="lead">Komputer menjalankan instruksi secara ketat. Kalau format data tidak sesuai dengan operasi yang diminta, eksekusi bisa berhenti.</p><div class="comparison-table"><div class="compare-card"><h4>Program meminta angka</h4><div class="code-card"><pre><code>target = int(input("Target: "))</code></pre></div><p>User mengetik <code>1200000</code> → konversi berhasil.</p></div><div class="compare-card"><h4>User memasukkan teks</h4><div class="mini-terminal dark">Target: seribu
+ValueError: invalid literal for int()</div><p>Tanpa penanganan error, program berhenti pada baris konversi.</p></div></div><div class="interactive-box"><h4>Quick check</h4><p>Input mana yang paling jelas memicu <code>ValueError</code> pada <code>int(input())</code>?</p><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'crashQ')">1200000</button><button class="choice-btn" onclick="quiz(this,true,'crashQ')">seribu</button><button class="choice-btn" onclick="quiz(this,false,'crashQ')">0</button></div><div class="feedback-line" id="crashQ"></div></div></section><section class="slide" id="slide-5"><h3>Bug, Exception, dan Crash</h3><p class="lead">Tiga istilah ini berhubungan, tetapi artinya tidak sama.</p><div class="logic-grid"><div class="logic-card" onclick="showCrashPart('bug',this)"><h4>🐞 Bug</h4><p>Kesalahan pada kode atau logika yang dibuat developer.</p></div><div class="logic-card" onclick="showCrashPart('exception',this)"><h4>⚠️ Exception</h4><p>Masalah yang muncul ketika program sedang berjalan.</p></div><div class="logic-card" onclick="showCrashPart('crash',this)"><h4>💥 Crash</h4><p>Program berhenti secara tidak normal.</p></div></div><div class="area-live-card" id="crashPartInfo"><h4>Klik salah satu istilah</h4><p>Lihat contoh dan hubungan ketiganya.</p></div></section><section class="slide" id="slide-6"><h3>Tanpa vs Dengan <code>try-except</code></h3><p class="lead">Input yang sama bisa menghasilkan pengalaman user yang sangat berbeda.</p><div class="flow-line"><div class="flow-box" onclick="showTryFlow('input')">Input teks</div><div class="flow-arrow">→</div><div class="flow-box" onclick="showTryFlow('convert')">int()</div><div class="flow-arrow">→</div><div class="flow-box" onclick="showTryFlow('result')">Hasil</div></div><div class="comparison-table"><div class="compare-card"><h4>Tanpa pengaman</h4><div class="mini-terminal dark">Masukkan target: seribu
+ValueError ...
+⛔ eksekusi berhenti</div></div><div class="compare-card"><h4>Dengan pengaman</h4><div class="mini-terminal dark">Masukkan target: seribu
+Peringatan: masukkan angka bulat.
+✅ sistem selesai tanpa crash</div></div></div><div class="area-live-card" id="tryFlowInfo"><h4>Input</h4><p>User memasukkan data. Program belum tahu apakah formatnya cocok.</p></div></section><section class="slide" id="slide-7"><h3>Anatomi <code>try-except ValueError</code></h3><p class="lead">Struktur dasar terdiri dari blok kode yang dicoba dan blok penyelamat untuk error tertentu.</p><div class="code-card"><pre><code>try:
+    angka = int(input("Masukkan angka bulat: "))
+    print(f"Angka valid: {angka}")
+except ValueError:
+    print("Input harus berupa angka bulat.")</code></pre></div><div class="component-bank"><button class="component-pill" onclick="showTryPart('try',this)">try:</button><button class="component-pill" onclick="showTryPart('risk',this)">int(input())</button><button class="component-pill" onclick="showTryPart('except',this)">except ValueError:</button><button class="component-pill" onclick="showTryPart('indent',this)">indentasi</button></div><div class="area-live-card" id="tryPartInfo"><h4>Pilih bagian kode</h4><p>Klik untuk melihat perannya.</p></div></section><section class="slide" id="slide-8"><h3>Bagaimana Python Mengevaluasi <code>try</code>?</h3><p class="lead">Python menjalankan kode dari atas ke bawah dan hanya pindah ke <code>except</code> jika error yang cocok terjadi.</p><div class="trace-card"><div class="trace-step"><strong>1</strong><span>Masuk blok <code>try</code></span></div><div class="trace-step"><strong>2</strong><span>Jalankan input + konversi</span></div><div class="trace-step"><strong>3A</strong><span>Berhasil → lanjut di <code>try</code></span></div><div class="trace-step"><strong>3B</strong><span><code>ValueError</code> → lompat ke <code>except</code></span></div><div class="trace-step"><strong>4</strong><span>Lanjut setelah blok</span></div></div><div class="interactive-box"><h4>Quick check</h4><p>Jika baris pertama di <code>try</code> memicu <code>ValueError</code>, apa yang terjadi pada baris setelahnya di blok <code>try</code>?</p><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'tryEvalQ')">Dilewati, lalu Python masuk ke except</button><button class="choice-btn" onclick="quiz(this,false,'tryEvalQ')">Tetap dijalankan semua</button></div><div class="feedback-line" id="tryEvalQ"></div></div></section><section class="slide" id="slide-9"><h3>Kenapa <code>except ValueError</code> Harus Spesifik?</h3><p class="lead">Kita ingin menangani kesalahan yang memang diperkirakan, bukan menutupi semua jenis masalah.</p><div class="comparison-table"><div class="compare-card"><h4>Spesifik</h4><div class="code-card"><pre><code>except ValueError:
+    print("Format angka tidak valid")</code></pre></div><p>Menangkap masalah konversi data yang memang sedang kita antisipasi.</p></div><div class="compare-card"><h4>Terlalu umum</h4><div class="code-card"><pre><code>except:
+    print("Ada error")</code></pre></div><p>Bisa menyembunyikan bug lain sehingga debugging lebih sulit.</p></div></div><div class="warning-box"><h4>Prinsip developer</h4><p>Tangkap error yang kamu pahami dan memang ingin kamu tangani.</p></div></section><section class="slide" id="slide-10"><h3>Type Casting adalah Titik Rawan</h3><p class="lead"><code>input()</code> menghasilkan string. Saat string diubah menjadi angka, formatnya harus cocok.</p><table class="thin-table"><tr><th>Masukan</th><th><code>int()</code></th><th>Hasil</th></tr><tr><td><code>"1200000"</code></td><td>valid</td><td>1200000</td></tr><tr><td><code>"seribu"</code></td><td>tidak valid</td><td>ValueError</td></tr><tr><td><code>"1200000.5"</code></td><td>tidak valid</td><td>ValueError</td></tr><tr><td><code>""</code></td><td>tidak valid</td><td>ValueError</td></tr></table><div class="info-box"><h4>Ingat</h4><p><code>int()</code> cocok untuk representasi bilangan bulat. Kalau project memang membutuhkan desimal, gunakan <code>float()</code> dan tetap pertimbangkan error handling.</p></div></section><section class="slide" id="slide-11"><h3>Aktivitas Mini: Tebak Error</h3><p class="lead">Jangan Run dulu. Prediksi apa yang terjadi ketika kode ini menerima input tertentu.</p><div class="code-card"><pre><code>nominal_tabungan = int(input("Masukkan nominal tabungan: "))
+print("Data diterima")</code></pre></div><div class="interactive-box"><h4>User mengetik <code>sejuta</code>. Apa yang terjadi?</h4><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'guessErrorQ')">Python otomatis mengubahnya menjadi 1000000</button><button class="choice-btn" onclick="quiz(this,true,'guessErrorQ')">Program memicu ValueError pada baris int()</button></div><div class="feedback-line" id="guessErrorQ"></div></div><p class="mini-note">Fungsi <code>int()</code> tidak memahami kata “sejuta” sebagai angka.</p></section><section class="slide" id="slide-12"><h3>Prediksi Sebelum Menekan Run</h3><p class="lead">Pilih sebuah input dan tentukan jalur yang akan dipakai program.</p><div class="choice-grid"><button class="choice-btn" onclick="predictAntiCrash(this,'valid')">1200000</button><button class="choice-btn" onclick="predictAntiCrash(this,'text')">seribu</button><button class="choice-btn" onclick="predictAntiCrash(this,'decimal')">1200000.5</button><button class="choice-btn" onclick="predictAntiCrash(this,'empty')">input kosong</button><button class="choice-btn" onclick="predictAntiCrash(this,'negative')">-1200000</button></div><div class="area-live-card" id="predictAntiCrashInfo"><h4>Pilih satu input</h4><p>Prediksi apakah masuk jalur <code>try</code> atau <code>except ValueError</code>.</p></div><div class="warning-box"><h4>Perhatikan angka negatif</h4><p><code>-1200000</code> tetap bisa diubah oleh <code>int()</code>. Jadi masalahnya bukan format, tetapi logika nilai.</p></div></section><section class="slide" id="slide-13"><h3>Format Validation vs Logic Validation</h3><p class="lead">Program yang kuat perlu memeriksa dua hal: apakah data bisa dibaca, dan apakah nilainya masuk akal.</p><div class="comparison-table"><div class="compare-card"><h4>Format Validation</h4><p>Apakah input secara teknis dapat dikonversi menjadi tipe data yang dibutuhkan?</p><div class="mini-terminal dark">"seribu" → gagal int()
+"1200000" → lolos int()</div></div><div class="compare-card"><h4>Logic Validation</h4><p>Setelah berhasil dikonversi, apakah nilai tersebut logis untuk konteks project?</p><div class="mini-terminal dark">-1200000 → format valid
+tetapi tidak logis sebagai target tabungan</div></div></div><div class="choice-grid"><button class="operator-btn" onclick="showValidation('format',this)">Cek Format</button><button class="operator-btn" onclick="showValidation('logic',this)">Cek Logika</button></div><div class="area-live-card" id="validationInfo"><h4>Dua lapis pemeriksaan</h4><p><code>try-except</code> dan <code>if</code> punya tugas yang berbeda.</p></div></section><section class="slide" id="slide-14"><h3><code>try-except</code> Tidak Otomatis Mengulang Input</h3><p class="lead">Error handling membuat program tidak crash, tetapi bukan berarti program langsung meminta input lagi.</p><div class="comparison-table"><div class="compare-card"><h4>Sesi 9</h4><p><code>while</code> dipakai untuk mengulang proses sampai kondisi berhenti.</p><div class="mini-terminal dark">while True:
+    input(...)
+    ...
+    break</div></div><div class="compare-card"><h4>Sesi 10</h4><p><code>try-except</code> menangani error pada satu jalur eksekusi.</p><div class="mini-terminal dark">try:
+    int(input(...))
+except ValueError:
+    print(...)</div></div></div><div class="info-box"><h4>Bisa digabung nanti</h4><p>Kalau ingin program meminta input ulang setelah salah format, <code>try-except</code> dapat ditempatkan di dalam loop. Pada project inti sesi ini, fokus kita adalah memahami error handling terlebih dahulu.</p></div></section><section class="slide" id="slide-15"><h3>Project Brief: Kalkulator Target Tabungan Anti-Crash</h3><p class="lead">Program menerima target tabungan simulasi, menghitung estimasi per bulan selama 12 bulan, lalu menangani input yang tidak dapat diubah menjadi integer.</p><div class="accordion open"><button onclick="toggleAccordion(this)">🎯 Tujuan aplikasi</button><div class="accordion-content"><p>Menghasilkan estimasi tabungan bulanan tanpa membiarkan input teks membuat program berhenti tiba-tiba.</p></div></div><div class="accordion"><button onclick="toggleAccordion(this)">📥 Input</button><div class="accordion-content"><p><code>nominal_input</code> berupa string dari user.</p></div></div><div class="accordion"><button onclick="toggleAccordion(this)">⚙️ Process</button><div class="accordion-content"><p>Konversi dengan <code>int()</code>, bagi target menjadi 12 bulan, lalu format output.</p></div></div><div class="accordion"><button onclick="toggleAccordion(this)">🛡️ Error handling</button><div class="accordion-content"><p><code>except ValueError</code> menampilkan pesan ramah ketika konversi gagal.</p></div></div></section><section class="slide" id="slide-16"><h3>Variabel dan Alur Project</h3><p class="lead">Klik variabel untuk melihat tugasnya.</p><div class="memory-box"><div class="memory-slot" onclick="showAntiVar('input',this)"><strong>Input Mentah</strong><code>nominal_input</code></div><div class="memory-slot" onclick="showAntiVar('target',this)"><strong>Target Angka</strong><code>target_angka</code></div><div class="memory-slot" onclick="showAntiVar('bulan',this)"><strong>Jumlah Bulan</strong><code>jumlah_bulan</code></div><div class="memory-slot" onclick="showAntiVar('monthly',this)"><strong>Per Bulan</strong><code>tabungan_per_bulan</code></div></div><div class="area-live-card" id="antiVarInfo"><h4>Pilih variabel</h4><p>Lihat perubahan tipe dan nilai dari input sampai output.</p></div><div class="flow-line"><div class="flow-box">String input</div><div class="flow-arrow">→</div><div class="flow-box">int()</div><div class="flow-arrow">→</div><div class="flow-box">÷ 12</div></div></section><section class="slide" id="slide-17"><h3>Mini Editor: Lihat Crash Tanpa Pengaman</h3><p class="lead">Jalankan dengan input <code>seribu</code>. Perhatikan bahwa error muncul sebelum program mencapai <code>print()</code> terakhir.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py1" spellcheck="false" style="min-height:210px">target_angka = int(input("Masukkan target tabungan: "))
+tabungan_per_bulan = target_angka / 12
+print(f"Estimasi per bulan: {tabungan_per_bulan}")
+print("Program selesai")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py1_input" spellcheck="false">seribu</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py1')">Run code</button><span class="editor-toolbar-note">Coba ganti input menjadi 1200000 setelah melihat error.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py1_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-18"><h3>Mini Editor: Tambahkan <code>try-except</code></h3><p class="lead">Sekarang jalankan input yang sama. Program menangani <code>ValueError</code> dan masih bisa mencapai baris di luar blok.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py2" spellcheck="false" style="min-height:300px">try:
+    angka = int(input("Masukkan angka bulat: "))
+    print(f"Angka valid: {angka}")
+except ValueError:
+    print("Input tidak valid. Masukkan angka bulat.")
+
+print("Sistem selesai tanpa crash.")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py2_input" spellcheck="false">seribu</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py2')">Run code</button><span class="editor-toolbar-note">Coba <code>150000</code>, <code>seratus</code>, dan input kosong.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py2_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-19"><h3>Guided Build 1: Lindungi Input dan Konversi</h3><p class="lead">Seluruh proses yang rawan <code>ValueError</code> harus berada setelah <code>try:</code> dan memiliki indentasi yang benar.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py3" spellcheck="false" style="min-height:300px">print("=== KALKULATOR TARGET TABUNGAN ANTI-CRASH ===")
+
+try:
+    nominal_input = input("Masukkan nominal target tabungan simulasi (Rp): ")
+    target_angka = int(nominal_input)
+    print(f"Target berhasil dibaca: {target_angka}")
+except ValueError:
+    print("Peringatan: masukkan angka bulat tanpa huruf.")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py3_input" spellcheck="false">1200000</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py3')">Run code</button><span class="editor-toolbar-note">Checkpoint: input angka dan input teks harus mengambil jalur yang berbeda.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py3_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-20"><h3>Guided Build 2: Hitung 12 Bulan</h3><p class="lead">Setelah konversi berhasil, lanjutkan perhitungan dan output masih di dalam blok <code>try</code>.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py4" spellcheck="false" style="min-height:400px">print("=== KALKULATOR TARGET TABUNGAN ANTI-CRASH ===")
+
+try:
+    nominal_input = input("Masukkan nominal target tabungan simulasi (Rp): ")
+    target_angka = int(nominal_input)
+
+    jumlah_bulan = 12
+    tabungan_per_bulan = target_angka / jumlah_bulan
+
+    print("\n-------------------------------------------")
+    print("DATA BERHASIL DIPROSES!")
+    print(f"Estimasi tabungan per bulan: Rp {int(tabungan_per_bulan):,}")
+    print("-------------------------------------------")
+except ValueError:
+    print("Peringatan: Harap masukkan angka bulat tanpa huruf atau pemisah desimal!")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py4_input" spellcheck="false">1200000</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py4')">Run code</button><span class="editor-toolbar-note">Target 1.200.000 selama 12 bulan menghasilkan Rp 100,000 per bulan.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py4_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-21"><h3>Starter Code Lengkap</h3><p class="lead">Versi ini sudah memiliki dua jalur output dan pesan akhir di luar blok <code>try-except</code>.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py5" spellcheck="false" style="min-height:540px">print("=== KALKULATOR TARGET TABUNGAN ANTI-CRASH ===")
+
+try:
+    nominal_input = input("Masukkan nominal target tabungan simulasi (Rp): ")
+    target_angka = int(nominal_input)
+
+    jumlah_bulan = 12
+    tabungan_per_bulan = target_angka / jumlah_bulan
+
+    print("\n-------------------------------------------")
+    print("DATA BERHASIL DIPROSES!")
+    print(f"Estimasi tabungan per bulan: Rp {int(tabungan_per_bulan):,}")
+    print("-------------------------------------------")
+
+except ValueError:
+    print("\n-------------------------------------------")
+    print("KESALAHAN FORMAT MASUKAN DETEKSI!")
+    print("-------------------------------------------")
+    print("Peringatan: Harap masukkan angka bulat tanpa huruf atau pemisah desimal!")
+    print("-------------------------------------------")
+
+print("Sistem Selesai: Eksekusi program berakhir tanpa crash.")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py5_input" spellcheck="false">1200000</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py5')">Run code</button><span class="editor-toolbar-note">Gunakan tombol test case pada slide berikutnya untuk mengganti input.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py5_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-22"><h3>Test Case Wajib: Multi-Input</h3><p class="lead">Bandingkan actual output dengan ekspektasi. Program yang robust tidak cukup diuji dengan input normal saja.</p><table class="thin-table"><tr><th>Case</th><th>Input</th><th>Prediksi Jalur</th><th>Ekspektasi</th></tr><tr><td>1</td><td>1200000</td><td>try</td><td>Rp 100,000/bulan</td></tr><tr><td>2</td><td>seribu</td><td>except</td><td>Pesan format tidak valid</td></tr><tr><td>3</td><td>1200000.5</td><td>except</td><td>Pesan format tidak valid</td></tr><tr><td>4</td><td>kosong</td><td>except</td><td>Pesan format tidak valid</td></tr><tr><td>5</td><td>-1200000</td><td>try</td><td>-Rp 100,000/bulan</td></tr></table><div class="choice-grid"><button class="choice-btn" onclick="loadAntiCrashCase(this,1)">Muat Angka Valid</button><button class="choice-btn" onclick="loadAntiCrashCase(this,2)">Muat Teks</button><button class="choice-btn" onclick="loadAntiCrashCase(this,3)">Muat Desimal</button><button class="choice-btn" onclick="loadAntiCrashCase(this,4)">Muat Kosong</button><button class="choice-btn" onclick="loadAntiCrashCase(this,5)">Muat Negatif</button></div><div class="feedback-line" id="antiCaseFeedback"></div></section><section class="slide" id="slide-23"><h3>Trace: Jalur Mana yang Dipilih?</h3><p class="lead">Trace membantu kamu menemukan titik pertama ketika jalur program berubah.</p><div class="form-grid"><label>Input untuk dianalisis<input id="traceAntiInput" type="text" value="seribu"/></label><button class="primary-btn" onclick="traceAntiCrash()">Buat trace</button></div><div class="trace-card" id="antiTraceBox"><div class="trace-step"><strong>Input</strong><span>seribu</span></div><div class="trace-step"><strong>int()</strong><span>ValueError</span></div><div class="trace-step"><strong>Jalur</strong><span>except</span></div><div class="trace-step"><strong>Akhir</strong><span>program lanjut</span></div></div><div class="info-box"><h4>Strategi debugging</h4><p>Kalau actual output berbeda dari expected, cari titik pertama saat jalur atau nilai variabel mulai berbeda.</p></div></section><section class="slide" id="slide-24"><h3>Debug 1: Konversi di Luar Blok <code>try</code></h3><p class="lead">Pengaman hanya bekerja pada kode yang benar-benar berada di dalam cakupannya.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py6" spellcheck="false" style="min-height:260px"># Salah: konversi terjadi sebelum try
+target_angka = int(input("Masukkan target: "))
+
+try:
+    tabungan = target_angka / 12
+    print(tabungan)
+except ValueError:
+    print("Format salah")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py6_input" spellcheck="false">seribu</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py6')">Run code</button><span class="editor-toolbar-note">Perbaiki dengan memindahkan input + <code>int()</code> ke dalam <code>try</code>.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py6_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-25"><h3>Debug 2: <code>except</code> Salah Indentasi</h3><p class="lead"><code>try:</code> dan <code>except ValueError:</code> harus sejajar. Isi bloknya yang menjorok empat spasi.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py7" spellcheck="false" style="min-height:220px">try:
+    nominal = int(input("Nominal: "))
+    except ValueError:
+        print("Error")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py7_input" spellcheck="false">seribu</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py7')">Run code</button><span class="editor-toolbar-note">Geser <code>except ValueError:</code> ke kiri sampai sejajar dengan <code>try:</code>.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py7_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-26"><h3>Debug 3: Pemisah Ribuan dan Desimal</h3><p class="lead">Petunjuk input harus sesuai dengan type casting yang dipakai program.</p><div class="comparison-table"><div class="compare-card"><h4><code>int("1200000")</code></h4><p class="true-pill">Valid</p><p>Hanya digit angka bulat.</p></div><div class="compare-card"><h4><code>int("1.200.000")</code></h4><p class="false-pill">ValueError</p><p>Titik dianggap karakter, bukan pemisah ribuan otomatis.</p></div><div class="compare-card"><h4><code>int("1200000.5")</code></h4><p class="false-pill">ValueError</p><p>String berdesimal tidak cocok untuk <code>int()</code>.</p></div><div class="compare-card"><h4><code>float("1200000.5")</code></h4><p class="true-pill">Valid</p><p>Cocok jika project memang membutuhkan nilai desimal.</p></div></div><div class="warning-box"><h4>Pesan input yang jelas</h4><p>Tulis instruksi seperti: “Masukkan angka bulat tanpa huruf atau pemisah desimal.”</p></div></section><section class="slide" id="slide-27"><h3>Tambahkan Logic Validation untuk Nilai Negatif</h3><p class="lead"><code>try-except</code> mengecek format. Setelah itu, <code>if</code> bisa mengecek apakah nilai masuk akal.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py8" spellcheck="false" style="min-height:360px">try:
+    target_angka = int(input("Masukkan target tabungan: "))
+
+    if target_angka &lt; 0:
+        print("Peringatan: target tabungan tidak boleh negatif.")
+    else:
+        tabungan_per_bulan = target_angka / 12
+        print(f"Estimasi per bulan: Rp {int(tabungan_per_bulan):,}")
+
+except ValueError:
+    print("Peringatan: masukkan angka bulat yang valid.")
+
+print("Program selesai.")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py8_input" spellcheck="false">-1200000</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py8')">Run code</button><span class="editor-toolbar-note">Coba negatif, teks, lalu angka positif untuk melihat tiga jalur berbeda.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py8_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-28"><h3>Extension Challenge: Kalkulator Pajak Toko Anti-Crash</h3><p class="lead">Ambil kembali pola Kalkulator Pajak PPN 11%, lalu tambahkan pengamanan format dan nilai negatif.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py9" spellcheck="false" style="min-height:480px">print("=== KALKULATOR PAJAK TOKO ANTI-CRASH ===")
+
+try:
+    harga_awal = float(input("Masukkan harga barang (Rp): "))
+
+    if harga_awal &lt; 0:
+        print("Peringatan: Harga barang tidak boleh negatif.")
+    else:
+        pajak = harga_awal * 0.11
+        total_bayar = harga_awal + pajak
+        print(f"Total Bayar termasuk PPN 11%: Rp {total_bayar:,.0f}")
+
+except ValueError:
+    print("Peringatan: Harap masukkan nominal harga dalam bentuk angka!")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py9_input" spellcheck="false">100000</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py9')">Run code</button><span class="editor-toolbar-note">Uji <code>100000</code>, <code>seribu</code>, dan <code>-50000</code>.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py9_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-29"><h3>Output Minimum</h3><p class="lead">Sebelum submit, pastikan fitur inti benar-benar berjalan.</p><ul class="checklist"><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Input dan <code>int()</code> berada di dalam blok <code>try</code>.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Ada <code>except ValueError</code> yang sejajar dengan <code>try</code>.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Input <code>1200000</code> menghasilkan estimasi <strong>Rp 100,000</strong> per bulan.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Input teks dan kosong menghasilkan pesan ramah tanpa traceback merah.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Program menampilkan pesan selesai di luar blok <code>try-except</code>.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Kamu bisa menjelaskan perbedaan format validation dan logic validation.</li></ul><div class="example-box"><h4>Misi berhasil jika...</h4><p>Program punya dua jalur yang jelas: <strong>hitung saat format valid</strong> dan <strong>beri peringatan saat format salah</strong>, tanpa berhenti secara tiba-tiba.</p></div></section><section class="slide" id="slide-30"><h3>Simpan &amp; Checkout</h3><p class="lead">Sebelum keluar dari Colab, simpan hasil kerja dan lakukan pengecekan terakhir.</p><ul class="checklist"><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Nama notebook jelas: <code>Sesi10_Anti_Crash</code>.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Test angka valid sudah dijalankan.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Test teks atau input kosong sudah dijalankan.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Notebook sudah tersimpan.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Buka CMS → Materi Belajar → Sesi 10 → Checkout Quiz.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Kerjakan 5 soal dan tekan Submit/Kirim.</li></ul><div class="form-grid"><label>Exit ticket: bug atau test paling penting hari ini<textarea placeholder="Contoh: int() harus berada di dalam try supaya ValueError bisa ditangkap..."></textarea></label></div></section><section class="slide" id="slide-31"><span class="eyebrow">Penutup</span><h2>Kamu Sudah Membuat Program Anti-Crash</h2><p class="lead">Hari ini kamu belajar menangani input yang salah format tanpa membiarkan program berhenti mendadak.</p><div class="metrics"><div class="metric-box"><strong>try</strong><span>lindungi kode rawan exception</span></div><div class="metric-box"><strong>except</strong><span>tangani ValueError</span></div><div class="metric-box"><strong>if</strong><span>cek logika nilai</span></div><div class="metric-box"><strong>🧪</strong><span>uji banyak jenis input</span></div></div><div class="example-box"><h4>Kalimat kunci</h4><p><strong><code>try-except</code> menangani format input yang bermasalah; validasi logika memastikan nilai yang sudah berhasil dibaca juga masuk akal.</strong></p></div><p class="mini-note">Sesi berikutnya: mulai menyimpan banyak data dengan struktur <code>list</code>.</p></section></div>
+<div class="navigation"><button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)"><span>←</span> Previous</button><div class="slide-indicator"><span id="currentSlide">1</span> / <span id="totalSlides">31</span></div><button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next <span>→</span></button></div>
+</div>
+<div class="explanation-panel">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="explanation active" id="explanation-1"><h3>Project yang Akan Dibuat</h3><p>Di Sesi 10, kamu akan membuat <strong>Kalkulator Target Tabungan Anti-Crash</strong>. Program menerima satu target tabungan simulasi, mengubah input menjadi angka bulat, lalu menghitung berapa estimasi yang perlu dialokasikan setiap bulan selama 12 bulan.</p><p>Masalahnya, user tidak selalu memasukkan data sesuai format. Jika program mengharapkan angka tetapi user mengetik <code>seribu</code>, input dari <code>input()</code> tetap berupa string dan <code>int()</code> tidak bisa mengubah kata tersebut menjadi integer. Tanpa penanganan error, Python menampilkan <code>ValueError</code> dan eksekusi berhenti pada titik itu.</p><p>Di sinilah <code>try-except</code> dipakai. Baris yang rawan error ditempatkan di blok <code>try</code>. Jika konversi berhasil, perhitungan berjalan normal. Jika terjadi <code>ValueError</code>, Python berpindah ke <code>except ValueError</code> dan menampilkan pesan yang lebih ramah.</p><div class="warning-box"><h4>Data latihan saja</h4><p>Gunakan nominal dummy. Jangan memasukkan saldo, nomor rekening, atau data finansial pribadi ke notebook latihan yang mungkin dibagikan atau dilihat orang lain.</p></div></section><section class="explanation" id="explanation-2"><h3>Target Belajar Sesi 10</h3><p>Sesi ini melanjutkan ide “program yang tahan terhadap kondisi yang tidak ideal”. Pada Sesi 9, kamu mengatur pengulangan dengan <code>while</code> dan kondisi berhenti. Sekarang fokusnya bergeser ke <strong>error handling</strong>: apa yang harus dilakukan ketika input user tidak bisa diproses sesuai tipe data yang dibutuhkan.</p><p>Kamu akan belajar membedakan <strong>bug</strong>, <strong>exception</strong>, dan <strong>crash</strong>; membaca alur <code>try-except</code>; mengenali <code>ValueError</code> ketika type casting gagal; serta membedakan <strong>format validation</strong> dan <strong>logic validation</strong>.</p><p>Bagian build tidak langsung dimulai dari kode lengkap. Kamu akan memprediksi hasil beberapa input, menjalankan contoh kecil, lalu merakit project bertahap. Setelah project berjalan, kamu harus mengujinya dengan beberapa jenis input, bukan hanya angka yang “normal”.</p><div class="info-box"><h4>Yang perlu bisa kamu jelaskan</h4><p>Bukan hanya “kodeku jalan”, tetapi <em>kenapa</em> input tertentu masuk ke blok <code>try</code>, kenapa input lain berpindah ke <code>except</code>, dan kenapa angka negatif membutuhkan pemeriksaan tambahan dengan <code>if</code>.</p></div></section><section class="explanation" id="explanation-3"><h3>Persiapan Coding</h3><p>Siapkan Google Colab atau editor Python yang dipakai di kelas. Gunakan nama notebook yang jelas supaya mudah ditemukan kembali saat checkout. Sebelum mulai, jalankan satu cell sederhana untuk memastikan kernel/editor aktif.</p><p>Sesi ini sengaja memakai beberapa input “aneh”: teks, desimal, kosong, nol, dan negatif. Itu bukan karena user selalu melakukan kesalahan, tetapi karena developer perlu memikirkan kondisi yang mungkin terjadi di dunia nyata.</p><p>Untuk project finansial latihan, gunakan data simulasi. Misalnya target <code>1200000</code> untuk melihat estimasi Rp 100,000 per bulan. Jangan memakai nominal tabungan asli, nomor rekening, PIN, atau informasi finansial keluarga.</p><div class="example-box"><h4>Mindset testing</h4><p>Jangan takut membuat program menerima input salah saat testing. Justru dari situlah kamu bisa mengecek apakah pengaman yang dibuat benar-benar bekerja.</p></div></section><section class="explanation" id="explanation-4"><h3>Dari Input Salah ke Crash</h3><p><code>input()</code> selalu menghasilkan string. Ketika kita menulis <code>int(input(...))</code>, Python mencoba mengubah string itu menjadi integer. String seperti <code>"1200000"</code> dapat dikonversi, tetapi <code>"seribu"</code> tidak memiliki format bilangan bulat yang bisa dipahami oleh <code>int()</code>.</p><p>Saat konversi gagal, Python memunculkan <code>ValueError</code>. Jika tidak ada kode yang menangani exception tersebut, alur eksekusi berhenti dan biasanya Colab menampilkan traceback merah. Dalam konteks aplikasi, pengalaman seperti ini terasa seperti program “crash”.</p><p>Error handling tidak membuat semua input menjadi benar. Fungsinya adalah membuat program tahu cara merespons ketika sesuatu yang sudah diperkirakan terjadi.</p><div class="warning-box"><h4>Bedakan masalahnya</h4><p>Kalau rumus pembagianmu salah, itu bukan masalah yang otomatis diselesaikan oleh <code>try-except</code>. Error handling bukan pengganti debugging logika.</p></div></section><section class="explanation" id="explanation-5"><h3>Tiga Istilah yang Sering Tercampur</h3><p><strong>Bug</strong> adalah kesalahan pada rancangan kode atau logika yang dibuat developer. Contohnya salah menulis nama variabel, salah rumus, atau membuat kondisi yang tidak sesuai kebutuhan.</p><p><strong>Exception</strong> adalah masalah yang muncul saat program sedang berjalan. Di sesi ini, contoh utamanya adalah <code>ValueError</code> ketika string dari user tidak dapat dikonversi menjadi integer.</p><p><strong>Crash</strong> adalah kondisi ketika program berhenti secara tidak normal. Exception yang tidak ditangani dapat membuat eksekusi berhenti, sehingga dari sudut pandang user program tampak crash.</p><div class="info-box"><h4>Hubungannya</h4><p>Tidak semua bug langsung memicu exception, dan tidak semua exception harus berakhir menjadi crash. Dengan error handling yang tepat, exception yang sudah diperkirakan dapat ditangani dengan aman.</p></div></section><section class="explanation" id="explanation-6"><h3>Dua Jalur untuk Input yang Sama</h3><p>Bayangkan user mengetik <code>seribu</code>. Tanpa <code>try-except</code>, baris <code>int()</code> memicu <code>ValueError</code> dan program berhenti sebelum bisa menampilkan pesan yang membantu user.</p><p>Dengan <code>try-except</code>, Python tetap mencoba konversi di dalam <code>try</code>. Ketika <code>ValueError</code> terjadi, Python tidak melanjutkan sisa blok <code>try</code>. Alur langsung berpindah ke <code>except ValueError</code>. Di sana kita dapat menampilkan instruksi yang lebih jelas, misalnya “Masukkan angka bulat tanpa huruf.”</p><p>Setelah blok <code>except</code> selesai, kode di luar pasangan <code>try-except</code> dapat tetap berjalan. Itu sebabnya project kita bisa mencetak pesan “Sistem selesai” meskipun format input salah.</p><div class="example-box"><h4>Tujuan UX</h4><p>User tidak perlu membaca traceback Python untuk tahu apa yang harus diperbaiki. Pesan error sebaiknya menjelaskan tindakan berikutnya.</p></div></section><section class="explanation" id="explanation-7"><h3>Membaca Struktur <code>try-except</code></h3><p><code>try:</code> menandai blok kode yang akan dicoba Python. Di sesi ini, bagian paling rawan adalah proses input dan type casting. Karena itu, <code>int(input(...))</code> harus berada di dalam cakupan <code>try</code>.</p><p><code>except ValueError:</code> adalah jalur yang dijalankan jika selama eksekusi blok <code>try</code> muncul <code>ValueError</code>. Kata <code>ValueError</code> penting karena kita sedang menangani jenis error tertentu: kegagalan karena nilai/format data tidak cocok untuk operasi konversi.</p><p>Indentasi menentukan struktur. Isi <code>try</code> menjorok empat spasi. Isi <code>except</code> juga menjorok empat spasi, tetapi baris <code>try:</code> dan <code>except ValueError:</code> sendiri harus sejajar.</p><div class="warning-box"><h4>Kesalahan umum</h4><p>Menaruh <code>int()</code> sebelum <code>try</code> berarti exception terjadi sebelum “jaring pengaman” aktif.</p></div></section><section class="explanation" id="explanation-8"><h3>Urutan Evaluasi Python</h3><p>Python selalu memulai dari blok <code>try</code>. Selama tidak ada error, semua baris di dalamnya dijalankan seperti biasa. Jika blok selesai tanpa <code>ValueError</code>, bagian <code>except ValueError</code> dilewati.</p><p>Jika <code>ValueError</code> terjadi di tengah blok <code>try</code>, Python berhenti menjalankan sisa baris di blok tersebut. Program langsung berpindah ke blok <code>except ValueError</code>. Jadi, baris setelah titik error di dalam <code>try</code> tidak dijalankan pada percobaan itu.</p><p>Setelah <code>try</code> atau <code>except</code> selesai, eksekusi berlanjut ke baris berikutnya di luar struktur tersebut. Ini penting untuk memahami kenapa pesan “Sistem selesai” masih bisa muncul setelah input salah.</p><div class="info-box"><h4>Teknik trace</h4><p>Saat debugging, tandai baris terakhir yang sempat dijalankan. Itu membantu menemukan titik tempat alur berpindah.</p></div></section><section class="explanation" id="explanation-9"><h3>Menangkap Error Secara Spesifik</h3><p>Menulis <code>except ValueError:</code> lebih baik daripada <code>except:</code> untuk project ini karena kita tahu error apa yang sedang diantisipasi: kegagalan konversi input menjadi angka.</p><p><code>except:</code> tanpa jenis exception dapat menangkap terlalu banyak masalah. Misalnya, jika ada nama variabel yang salah atau bug lain, program bisa tetap masuk ke blok <code>except</code> dan menampilkan “format input salah”, padahal penyebab aslinya berbeda.</p><p>Pesan yang salah membuat debugging membingungkan. Dengan exception yang spesifik, program hanya menangani skenario yang memang dirancang untuk ditangani, sementara bug lain tetap terlihat dan bisa diperbaiki.</p><div class="example-box"><h4>Kebiasaan yang bagus</h4><p>Tanyakan: “Error apa yang realistis terjadi di baris ini?” Lalu tangkap jenis error tersebut, bukan semua error sekaligus.</p></div></section><section class="explanation" id="explanation-10"><h3>Input dan Type Casting</h3><p>Karena <code>input()</code> menghasilkan string, project harus melakukan type casting sebelum nilai dipakai untuk perhitungan. Untuk target tabungan yang ditentukan sebagai angka bulat, kita memakai <code>int()</code>.</p><p><code>"1200000"</code> berisi karakter digit dan dapat menjadi integer. <code>"seribu"</code> tidak dapat dikonversi. String <code>"1200000.5"</code> juga tidak valid untuk <code>int()</code> karena memiliki format desimal. Input kosong sama sekali tidak memiliki digit yang bisa diubah menjadi integer.</p><p>Kalau project membutuhkan desimal, <code>float()</code> dapat digunakan. Namun <code>float()</code> tetap bisa memicu <code>ValueError</code> jika input berupa teks seperti <code>"seribu"</code>.</p><div class="warning-box"><h4>Tipe data mengikuti kebutuhan</h4><p>Jangan memilih <code>int()</code> atau <code>float()</code> hanya supaya error hilang. Pilih tipe yang sesuai dengan desain data project.</p></div></section><section class="explanation" id="explanation-11"><h3>Prediksi Sebelum Run</h3><p>Aktivitas “Tebak Error” melatih kamu membaca kode sebelum bergantung pada tombol Run. Baris <code>int(input(...))</code> punya dua pekerjaan: menerima string dari user, lalu mencoba mengonversinya menjadi integer.</p><p>Ketika user mengetik <code>sejuta</code>, Python tidak memiliki aturan untuk menerjemahkan kata tersebut menjadi <code>1000000</code>. Karena formatnya tidak dapat dikonversi oleh <code>int()</code>, Python menghasilkan <code>ValueError</code>.</p><p>Kemampuan memprediksi penting untuk debugging. Kalau kamu sudah punya ekspektasi sebelum menjalankan program, kamu bisa membandingkan <em>expected output</em> dengan <em>actual output</em> dan melihat apakah perilaku program sesuai rencana.</p><div class="info-box"><h4>Biasakan bertanya</h4><p>“Tipe data apa yang masuk?”, “Konversi apa yang dilakukan?”, dan “Baris mana yang paling mungkin gagal?”</p></div></section><section class="explanation" id="explanation-12"><h3>Membaca Lima Jenis Input</h3><p><code>1200000</code> dapat dikonversi menjadi integer sehingga program tetap berada di jalur <code>try</code>. <code>seribu</code>, input kosong, dan <code>1200000.5</code> gagal saat <code>int()</code> mencoba mengonversinya, sehingga program berpindah ke <code>except ValueError</code>.</p><p>Input <code>-1200000</code> berbeda. Tanda minus adalah bagian dari representasi integer yang valid, sehingga <code>int("-1200000")</code> berhasil. Artinya, <code>try-except</code> tidak menganggapnya sebagai format salah.</p><p>Namun target tabungan negatif tidak masuk akal untuk konteks project. Masalah seperti ini perlu ditangani setelah konversi dengan pemeriksaan logika, misalnya <code>if target_angka &lt; 0:</code>.</p><div class="example-box"><h4>Pelajaran penting</h4><p>“Bisa dikonversi menjadi angka” belum tentu berarti “nilai tersebut valid untuk aplikasi”.</p></div></section><section class="explanation" id="explanation-13"><h3>Dua Lapisan Validasi</h3><p><strong>Format validation</strong> menjawab pertanyaan: “Apakah input ini bisa dibaca dalam tipe data yang dibutuhkan?” Untuk project inti, mekanismenya adalah <code>try-except ValueError</code> di sekitar konversi <code>int()</code>.</p><p><strong>Logic validation</strong> menjawab pertanyaan berikutnya: “Setelah data berhasil dibaca, apakah nilainya masuk akal?” Input <code>-1200000</code> lolos format karena merupakan integer, tetapi secara logika tidak cocok sebagai target tabungan.</p><p>Kedua lapisan ini saling melengkapi. Error handling tidak otomatis mengetahui aturan bisnis atau konteks project. Hanya developer yang bisa menentukan aturan seperti “target tidak boleh negatif”.</p><div class="info-box"><h4>Pola berpikir</h4><p>1) Ubah input menjadi tipe yang benar. 2) Setelah berhasil, periksa aturan nilainya. 3) Baru lakukan perhitungan utama.</p></div></section><section class="explanation" id="explanation-14"><h3>Error Handling Bukan Loop</h3><p>Di Sesi 9, <code>while</code> dipakai karena program perlu mengulang input sampai kondisi tertentu. Di Sesi 10, <code>try-except</code> punya tugas lain: menangani exception yang terjadi saat satu bagian kode dijalankan.</p><p>Jika user memasukkan teks dan program masuk ke <code>except</code>, struktur itu sendiri tidak otomatis kembali ke <code>input()</code>. Setelah <code>except</code> selesai, Python melanjutkan ke kode setelah pasangan <code>try-except</code>.</p><p>Nanti, jika dibutuhkan, kedua konsep bisa digabung. Misalnya <code>while True</code> mengulang permintaan input, sedangkan <code>try-except</code> menjaga konversi di setiap iterasi. Namun pada sesi ini, kamu perlu memahami tanggung jawab masing-masing struktur terlebih dahulu.</p><div class="warning-box"><h4>Jangan tertukar</h4><p><code>while</code> mengatur pengulangan. <code>try-except</code> mengatur respons terhadap exception.</p></div></section><section class="explanation" id="explanation-15"><h3>Brief Project Utama</h3><p>Kalkulator Target Tabungan Anti-Crash menerima target tabungan simulasi dari user. Jika input dapat diubah menjadi integer, program membagi target tersebut dengan 12 untuk menghasilkan estimasi alokasi per bulan.</p><p>Project ini sengaja sederhana pada bagian perhitungan supaya fokus utama tetap pada robust input. Yang dinilai bukan seberapa rumit rumusnya, tetapi apakah dua jalur program bekerja dengan benar: jalur input valid dan jalur <code>ValueError</code>.</p><p>Alur build yang aman adalah kecil dan bertahap. Pertama, pastikan input + konversi bekerja. Kedua, tambahkan pembagian. Ketiga, tambahkan output. Terakhir, uji format yang salah. Jangan menunggu seluruh notebook selesai sebelum testing.</p><div class="example-box"><h4>Checkpoint</h4><p>Setelah satu bagian selesai, Run. Kalau hasilnya sesuai, baru lanjut ke bagian berikutnya.</p></div></section><section class="explanation" id="explanation-16"><h3>Perubahan Data di Dalam Project</h3><p><code>nominal_input</code> menyimpan hasil mentah dari <code>input()</code>, jadi tipenya string. Menyimpan input mentah lebih dulu membuat alur lebih mudah dibaca: kita bisa melihat data sebelum dan sesudah type casting.</p><p><code>target_angka</code> adalah hasil <code>int(nominal_input)</code>. Variabel ini baru tersedia jika konversi berhasil. Jika konversi memicu <code>ValueError</code>, baris berikutnya di blok <code>try</code> tidak dijalankan.</p><p><code>jumlah_bulan</code> bernilai 12 sesuai desain project. <code>tabungan_per_bulan</code> dihitung dari <code>target_angka / jumlah_bulan</code>. Output kemudian diformat supaya lebih mudah dibaca.</p><div class="info-box"><h4>Trace tipe data</h4><p>String input → integer target → hasil pembagian. Mengetahui tipe di setiap tahap membantu menemukan bug dan exception lebih cepat.</p></div></section><section class="explanation" id="explanation-17"><h3>Mengamati Crash Secara Terkendali</h3><p>Editor ini sengaja belum memakai <code>try-except</code>. Dengan input <code>seribu</code>, program akan gagal pada baris pertama karena <code>int()</code> tidak bisa melakukan konversi.</p><p>Perhatikan bahwa <code>tabungan_per_bulan</code> tidak pernah dihitung dan <code>print("Program selesai")</code> tidak sempat dijalankan. Ini menunjukkan bahwa exception yang tidak ditangani memutus alur eksekusi.</p><p>Setelah melihat error, ganti input menjadi <code>1200000</code>. Kode yang sama sekarang bisa selesai karena format input cocok. Perbandingan dua percobaan ini menunjukkan bahwa masalahnya bukan pada operator pembagian, tetapi pada input yang tidak sesuai untuk type casting.</p><div class="warning-box"><h4>Tujuan latihan</h4><p>Bukan sekadar membuat error, tetapi mengenali <em>di baris mana</em> program berhenti dan <em>mengapa</em>.</p></div></section><section class="explanation" id="explanation-18"><h3>Menangkap <code>ValueError</code></h3><p>Sekarang baris rawan error berada di dalam <code>try</code>. Ketika input <code>seribu</code> membuat <code>int()</code> gagal, Python langsung berpindah ke <code>except ValueError</code> dan mencetak pesan yang sudah kita siapkan.</p><p>Baris <code>print("Sistem selesai tanpa crash.")</code> berada di luar kedua blok. Karena exception sudah ditangani, baris tersebut tetap dijalankan setelah <code>except</code> selesai.</p><p>Coba beberapa input. Dengan angka valid, blok <code>except</code> dilewati. Dengan teks atau input kosong, blok <code>except</code> aktif. Tujuannya adalah melihat bahwa struktur yang sama dapat menangani dua jalur tanpa menghentikan program secara tidak normal.</p><div class="example-box"><h4>Pesan error yang baik</h4><p>Sebutkan apa yang salah dan format apa yang diharapkan user, bukan hanya “Error!”.</p></div></section><section class="explanation" id="explanation-19"><h3>Guided Build: Bagian Input</h3><p>Langkah pertama project adalah memastikan input dan type casting dilindungi. <code>nominal_input = input(...)</code> dan <code>target_angka = int(nominal_input)</code> ditempatkan di dalam <code>try</code>.</p><p>Secara teknis, <code>input()</code> sendiri biasanya tidak memicu <code>ValueError</code>, tetapi menempatkan input dan konversi bersama membuat satu unit proses mudah dibaca: ambil data, lalu ubah tipenya. Titik risiko utamanya adalah <code>int(nominal_input)</code>.</p><p>Checkpoint slide ini sederhana: dengan input <code>1200000</code>, pesan target berhasil dibaca harus muncul. Dengan <code>seribu</code>, program harus masuk ke <code>except ValueError</code>. Kalau dua jalur ini sudah benar, baru tambahkan perhitungan.</p><div class="warning-box"><h4>Jangan lanjut dulu jika...</h4><p>Input teks masih menghasilkan traceback atau <code>except</code> tidak pernah dijalankan.</p></div></section><section class="explanation" id="explanation-20"><h3>Guided Build: Perhitungan di Jalur Valid</h3><p>Perhitungan hanya boleh dilakukan setelah <code>target_angka</code> berhasil dibuat. Karena itu, <code>jumlah_bulan</code>, <code>tabungan_per_bulan</code>, dan output ditempatkan setelah konversi di dalam blok <code>try</code>.</p><p>Untuk test case utama, target <code>1200000</code> dibagi 12 sehingga menghasilkan <code>100000</code>. Output diformat dengan pemisah ribuan agar lebih mudah dibaca sebagai <code>Rp 100,000</code>.</p><p>Jika konversi gagal, semua baris perhitungan tersebut dilewati. Program langsung masuk ke <code>except ValueError</code>. Inilah alasan kita tidak perlu membuat <code>if</code> khusus untuk “apakah int berhasil”: alur exception sudah menangani kegagalan konversi.</p><div class="info-box"><h4>Expected output</h4><p>Input 1200000 → estimasi Rp 100,000 per bulan. Gunakan nilai ini sebagai pembanding saat testing.</p></div></section><section class="explanation" id="explanation-21"><h3>Program Utama Lengkap</h3><p>Versi lengkap menyatukan input, type casting, perhitungan, output jalur valid, output jalur error, dan pesan akhir. Struktur ini menjadi referensi untuk testing pada slide berikutnya.</p><p>Perhatikan posisi pesan <code>Sistem Selesai</code>. Baris tersebut berada di luar <code>try-except</code>, sehingga muncul baik setelah input valid maupun setelah <code>ValueError</code> berhasil ditangani. Ini menjadi bukti bahwa program menyelesaikan eksekusi tanpa crash.</p><p>Pesan pada <code>except</code> sengaja spesifik: user diminta memasukkan angka bulat tanpa huruf atau pemisah desimal. Pesan seperti ini lebih berguna daripada hanya mencetak “Error”, karena user tahu apa yang harus diubah.</p><div class="warning-box"><h4>Belum ada logic validation</h4><p>Versi inti ini masih menerima angka negatif karena secara format tetap valid. Itu akan diperbaiki pada challenge logic validation.</p></div></section><section class="explanation" id="explanation-22"><h3>Testing Multi-Input</h3><p>Program yang robust perlu diuji dengan variasi input. Angka normal mengecek jalur utama. Teks, desimal, dan input kosong mengecek apakah <code>except ValueError</code> benar-benar aktif. Nol dan negatif menguji nilai batas dan logika.</p><p><code>1200000.5</code> masuk ke <code>except</code> karena project memakai <code>int()</code> pada string berdesimal. Input kosong juga tidak dapat menjadi integer. <code>-1200000</code> justru lolos <code>int()</code>, sehingga versi inti menghasilkan estimasi negatif.</p><p>Jangan mengubah banyak baris sekaligus jika test case gagal. Catat <em>expected</em> dan <em>actual</em>, lalu cari penyebab pertama yang membuat jalur berbeda.</p><div class="info-box"><h4>Tester yang baik</h4><p>Tidak hanya mencoba data yang “seharusnya benar”, tetapi juga data yang bisa mengungkap kelemahan program.</p></div></section><section class="explanation" id="explanation-23"><h3>Menggunakan Trace untuk Debugging</h3><p>Trace adalah cara membaca program langkah demi langkah. Untuk input <code>seribu</code>, alurnya: input diterima sebagai string → <code>int()</code> mencoba konversi → muncul <code>ValueError</code> → program pindah ke <code>except</code> → pesan akhir di luar blok tetap dijalankan.</p><p>Untuk input <code>1200000</code>, alurnya berbeda pada titik konversi: <code>int()</code> berhasil → perhitungan 12 bulan dijalankan → <code>except</code> dilewati → pesan akhir muncul.</p><p>Trace membuat debugging lebih terarah. Daripada menebak-nebak, kamu bisa mencari titik pertama ketika nilai atau jalur aktual berbeda dari yang kamu prediksi.</p><div class="example-box"><h4>Pertanyaan trace</h4><p>“Apa nilai variabel sekarang?”, “Baris berikutnya yang dijalankan apa?”, dan “Apakah Python tetap di try atau pindah ke except?”</p></div></section><section class="explanation" id="explanation-24"><h3>Debug: Cakupan Blok <code>try</code></h3><p>Pada contoh salah, <code>target_angka = int(input(...))</code> ditulis sebelum <code>try:</code>. Artinya, jika user memasukkan teks, <code>ValueError</code> terjadi sebelum program memasuki area yang dilindungi.</p><p>Blok <code>except ValueError</code> hanya dapat menangani <code>ValueError</code> yang terjadi ketika blok <code>try</code> sedang dieksekusi. Ia tidak bisa “mundur” dan menangkap error yang sudah terjadi sebelumnya.</p><p>Perbaikannya adalah memindahkan proses input dan konversi ke dalam <code>try</code>. Setelah itu, perhitungan yang bergantung pada hasil konversi juga bisa diletakkan di jalur yang sama.</p><div class="warning-box"><h4>Checklist cepat</h4><p>Tandai semua baris yang berpotensi memicu <code>ValueError</code>. Pastikan baris tersebut benar-benar berada di dalam blok <code>try</code>.</p></div></section><section class="explanation" id="explanation-25"><h3>Debug: Struktur dan Indentasi</h3><p>Python memakai indentasi untuk menentukan hubungan antarblok. <code>try:</code> dan <code>except ValueError:</code> adalah pasangan pada level yang sama, sehingga keduanya harus sejajar secara vertikal.</p><p>Isi <code>try</code> menjorok ke kanan. Isi <code>except</code> juga menjorok ke kanan dari baris <code>except</code>. Jika <code>except</code> ikut menjorok ke dalam <code>try</code>, struktur menjadi tidak valid dan Python dapat menampilkan error sintaks/indentasi.</p><p>Gunakan empat spasi secara konsisten di Colab. Ketika memindahkan kode, cek kembali garis vertikal indentasi, bukan hanya membaca teksnya.</p><div class="info-box"><h4>Visual sederhana</h4><p><code>try:</code> dan <code>except ValueError:</code> sejajar. Baris di bawah masing-masing masuk satu tingkat ke kanan.</p></div></section><section class="explanation" id="explanation-26"><h3>Format Input Harus Jelas</h3><p>Python tidak otomatis memahami titik sebagai pemisah ribuan pada string untuk <code>int()</code>. Karena itu, <code>int("1.200.000")</code> gagal. User perlu memasukkan <code>1200000</code> jika program belum dibuat untuk membersihkan format angka.</p><p>Begitu juga dengan string desimal <code>"1200000.5"</code>. Untuk <code>int()</code>, format tersebut tidak cocok. Jika kebutuhan aplikasinya memang menerima desimal, gunakan <code>float()</code> dan sesuaikan aturan output.</p><p>Pesan input merupakan bagian dari desain program. Semakin jelas format yang diminta, semakin kecil kemungkinan user bingung saat memasukkan data.</p><div class="example-box"><h4>Instruksi yang baik</h4><p>“Masukkan angka bulat tanpa huruf atau pemisah desimal” lebih jelas daripada hanya “Masukkan nominal”.</p></div></section><section class="explanation" id="explanation-27"><h3>Logic Validation dengan <code>if</code></h3><p>Input negatif menunjukkan batas kemampuan <code>try-except</code>. <code>int("-1200000")</code> berhasil karena string tersebut memang representasi integer. Jadi tidak ada <code>ValueError</code> yang perlu ditangkap.</p><p>Namun dari konteks Kalkulator Target Tabungan, nilai negatif tidak masuk akal. Setelah type casting berhasil, gunakan <code>if target_angka &lt; 0:</code> untuk menangani aturan tersebut. Jika nilainya tidak negatif, baru lakukan pembagian 12 bulan.</p><p>Dengan pola ini, program punya tiga kemungkinan jalur: format salah → <code>except</code>; format benar tetapi nilai negatif → <code>if</code>; format dan logika benar → <code>else</code> dan perhitungan.</p><div class="info-box"><h4>Dua alat, dua tugas</h4><p><code>try-except</code> menjaga proses teknis. <code>if</code> menerapkan aturan logika aplikasi.</p></div></section><section class="explanation" id="explanation-28"><h3>Extension: Mengamankan Project Lama</h3><p>Challenge ini mengambil kembali Kalkulator Pajak Toko PPN 11% dan menambahkan pola yang baru dipelajari. Input harga menggunakan <code>float()</code> karena harga bisa saja memiliki nilai desimal.</p><p><code>try-except ValueError</code> menangani input yang tidak dapat diubah menjadi angka. Setelah berhasil, <code>if harga_awal &lt; 0:</code> menolak nilai negatif. Hanya harga yang lolos kedua pemeriksaan yang masuk ke perhitungan pajak dan total bayar.</p><p>Tujuan challenge bukan membuat kalkulator pajak yang kompleks, tetapi menunjukkan bahwa pola error handling dapat diterapkan kembali pada project yang sudah pernah dibuat.</p><div class="warning-box"><h4>Masih simulasi</h4><p>Gunakan data dummy. Perhitungan PPN di sini dipakai sebagai latihan coding sesuai project, bukan panduan transaksi atau pajak pribadi.</p></div></section><section class="explanation" id="explanation-29"><h3>Standar Output Minimum</h3><p>Project inti dianggap selesai ketika kode dapat memproses input angka yang valid dan menangani format input yang tidak valid tanpa traceback merah <code>ValueError</code>.</p><p>Test case utama adalah <code>1200000</code>, yang harus menghasilkan estimasi <strong>Rp 100,000 per bulan</strong>. Lalu uji minimal satu input teks atau input kosong untuk memastikan blok <code>except ValueError</code> berjalan.</p><p>Kamu juga perlu bisa menjelaskan struktur kodenya: bagian mana yang rawan error, kenapa berada di dalam <code>try</code>, dan kenapa angka negatif tidak otomatis ditolak oleh <code>ValueError</code>.</p><div class="example-box"><h4>Lebih penting daripada tampilan</h4><p>Pastikan jalur logika benar terlebih dahulu. Dekorasi terminal atau extension dilakukan setelah output minimum lolos testing.</p></div></section><section class="explanation" id="explanation-30"><h3>Simpan, Refleksi, lalu Checkout</h3><p>Sebelum menutup Colab, jalankan test terakhir dan pastikan notebook tersimpan. Jangan mengandalkan tab browser masih terbuka. Nama file yang jelas membantu teacher dan kamu sendiri menemukan project lagi.</p><p>Setelah itu, kembali ke CMS melalui <strong>Materi Belajar → Sesi 10 → Checkout Quiz</strong>. Checkout Quiz terdiri dari 5 soal pilihan ganda. Kerjakan berdasarkan pemahamanmu sendiri, lalu tekan Submit/Kirim dan cek bahwa status pengerjaan sudah tercatat.</p><p>Exit ticket membantu mengingat proses, bukan hanya hasil. Catat satu bug atau test yang paling penting. Contohnya: “<code>int()</code> harus berada di dalam <code>try</code> supaya <code>ValueError</code> bisa ditangkap.”</p><div class="warning-box"><h4>Sebelum keluar</h4><p>Save notebook, run/test terakhir, Submit quiz, lalu cek status selesai.</p></div></section><section class="explanation" id="explanation-31"><h3>Penutup Sesi 10</h3><p>Di akhir Bab 3, kamu sudah memakai beberapa cara untuk membuat alur program lebih tangguh: <code>for</code> untuk pengulangan terukur, <code>while</code> untuk pengulangan berbasis kondisi, <code>break</code> untuk menghentikan loop, dan sekarang <code>try-except</code> untuk menangani exception runtime yang sudah diperkirakan.</p><p>Kamu juga melihat bahwa validasi memiliki dua lapisan. <strong>Format validation</strong> memastikan data bisa dikonversi ke tipe yang dibutuhkan. <strong>Logic validation</strong> memastikan nilainya masuk akal untuk konteks aplikasi.</p><p>Program yang baik bukan program yang menganggap semua user akan selalu memasukkan data sempurna. Program yang baik punya respons yang jelas ketika input tidak sesuai dan tetap memberi informasi yang membantu user.</p><div class="example-box"><h4>Yang perlu dibawa ke sesi berikutnya</h4><p>Biasakan merancang input, proses, output, test case, dan jalur error sejak awal. Sesi berikutnya mulai masuk ke penyimpanan banyak data menggunakan <code>list</code>.</p></div></section></div>
+</div>
+<script>
+const ACCESS_CODE='RGMDSHS26';
+let currentSlide=1;
+let totalSlides=0;
+window.addEventListener('load',()=>{
+  totalSlides=document.querySelectorAll('.slide').length;
+  document.getElementById('totalSlides').textContent=totalSlides;
+  setTimeout(()=>document.querySelector('.access-popup').classList.add('show'),50);
+  const input=document.getElementById('accessInput');
+  input.focus();
+  input.addEventListener('input',e=>{e.target.value=e.target.value.toUpperCase()});
+  input.addEventListener('keydown',e=>{if(e.key==='Enter')checkAccessCode()});
+  initPyEditors();
+  updateSlide();
+});
+function checkAccessCode(){const input=document.getElementById('accessInput'),error=document.getElementById('accessError');if(input.value.trim().toUpperCase()===ACCESS_CODE){document.getElementById('accessPopup').style.display='none';document.getElementById('mainContent').style.display='flex';updateSlide();}else{error.classList.add('show');input.value='';input.focus();}}
+function changeSlide(direction){const next=currentSlide+direction;if(next<1||next>totalSlides)return;currentSlide=next;updateSlide();}
+function updateSlide(){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.explanation').forEach(e=>e.classList.remove('active'));const s=document.getElementById(`slide-${currentSlide}`);if(s)s.classList.add('active');const e=document.getElementById(`explanation-${currentSlide}`);if(e)e.classList.add('active');document.getElementById('currentSlide').textContent=currentSlide;document.getElementById('prevBtn').disabled=currentSlide===1;document.getElementById('nextBtn').disabled=currentSlide===totalSlides;document.getElementById('progressFill').style.width=`${(currentSlide/totalSlides)*100}%`;const sc=document.querySelector('.slide-content');const ep=document.querySelector('.explanation-panel');if(sc)sc.scrollTop=0;if(ep)ep.scrollTop=0;}
+document.addEventListener('keydown',e=>{if(document.getElementById('mainContent').style.display==='none')return;if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(e.key==='ArrowRight')changeSlide(1);if(e.key==='ArrowLeft')changeSlide(-1);});
+function deviceCheck(btn){btn.classList.toggle('correct');}
+function selectAny(btn){const group=btn.parentElement;group.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');}
+function quiz(btn,ok,feedbackId){const group=btn.parentElement;group.querySelectorAll('.choice-btn').forEach(b=>b.disabled=true);btn.classList.add(ok?'correct':'wrong');const fb=document.getElementById(feedbackId);fb.textContent=ok?'Betul.':'Belum tepat. Baca kembali penjelasan di panel kanan.';fb.style.color=ok?'#176b35':'#a42820';}
+function toggleCheck(item){const cb=item.querySelector('input');cb.checked=!cb.checked;item.classList.toggle('done',cb.checked);}
+function toggleAccordion(btn){const box=btn.closest('.accordion');if(box)box.classList.toggle('open');}
+function showDebug(id,btn){const wrap=btn.closest('.slide');wrap.querySelectorAll('.debug-tab').forEach(b=>b.classList.remove('active'));wrap.querySelectorAll('.debug-scenario').forEach(s=>s.classList.remove('active'));btn.classList.add('active');const el=document.getElementById(id);if(el)el.classList.add('active');}
+function showWhilePart(part,btn){document.querySelectorAll('#slide-6 .component-pill').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const d={keyword:['while','Kata kunci untuk memulai pengulangan berbasis kondisi.'],condition:['kondisi','Diperiksa sebelum setiap iterasi. Loop berjalan selama nilainya True.'],colon:['Titik dua (:)','Menandai awal blok while.'],indent:['Indentasi','Baris yang menjorok adalah bagian yang diulang.']};document.getElementById('whilePartInfo').innerHTML=`<h4>${d[part][0]}</h4><p>${d[part][1]}</p>`;}
+function calcBruteTime(){const combos=Math.max(1,Number(document.getElementById('comboCount').value)||10000);const rate=Math.max(1,Number(document.getElementById('attemptRate').value)||1000);const sec=combos/rate;const text=sec<60?`${sec.toFixed(sec<10?2:0)} detik`:`${(sec/60).toFixed(2)} menit`;document.getElementById('bruteResult').innerHTML=`<h4>Ilustrasi waktu</h4><p>${combos.toLocaleString('id-ID')} kombinasi ÷ ${rate.toLocaleString('id-ID')} percobaan/detik ≈ <strong>${text}</strong>.</p><p>Ini hanya ilustrasi untuk memahami alasan pembatasan percobaan.</p>`;}
+function traceSimplePin(btn,seq){document.querySelectorAll('#slide-9 .choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');let html='';for(let i=0;i<seq.length;i++){const pin=seq[i],ok=pin==='1211';html+=`<div class="trace-step"><strong>Iterasi ${i+1}</strong><span>${pin} → ${ok?'Benar, break':'Salah, kembali ke atas'}</span></div>`;if(ok)break;}document.getElementById('simplePinTrace').innerHTML=html;}
+function showStopReason(kind,btn){document.querySelectorAll('#slide-12 .key-card').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const d={correct:['PIN benar','Program mencetak pesan berhasil lalu menjalankan break. Loop selesai tanpa menambah counter.'],limit:['Batas percobaan','Setelah kesalahan ketiga, program mencetak pesan batas tercapai lalu menjalankan break.']};document.getElementById('stopReasonInfo').innerHTML=`<h4>${d[kind][0]}</h4><p>${d[kind][1]}</p>`;}
+function loadVaultCase(btn,n){document.querySelectorAll('#slide-21 .choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');const cases={1:['1211','Case 1 dimuat: PIN benar pada iterasi pertama.'],2:['0000\n9999\n1211','Case 2 dimuat: dua kali salah, lalu benar.'],3:['0000\n9999\n8888','Case 3 dimuat: tiga kali salah, batas percobaan tercapai.'],4:['12 11\n1211','Edge case dimuat: input dengan spasi berbeda dari 1211.']};const input=document.getElementById('py5_input');input.value=cases[n][0];input.classList.add('preset-loaded');setTimeout(()=>input.classList.remove('preset-loaded'),1000);document.getElementById('vaultCaseFeedback').textContent=cases[n][1]+' Buka slide Starter Code Lengkap lalu klik Run code.';}
+function traceVault(){const seq=[document.getElementById('tracePin1').value,document.getElementById('tracePin2').value,document.getElementById('tracePin3').value];let attempts=0,rows='';for(let i=0;i<seq.length;i++){const pin=seq[i];if(pin==='1211'){rows+=`<tr><td>${i+1}</td><td>${escapeHtml(pin)}</td><td>Benar</td><td>${attempts}</td><td>break</td></tr>`;break;}attempts++;const stop=attempts>=3;rows+=`<tr><td>${i+1}</td><td>${escapeHtml(pin)}</td><td>Salah</td><td>${attempts}</td><td>${stop?'break — batas':'Ulang'}</td></tr>`;if(stop)break;}document.getElementById('traceVaultBody').innerHTML=rows;}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
+function initPyEditors(){document.querySelectorAll('.python-editor textarea[id^="py"]:not(.stdin-area)').forEach(area=>{const out=document.getElementById(area.id+'_out');if(out&&!out.textContent.trim())out.textContent='Output akan muncul di sini setelah Run code.';});}
+function runPyEditor(id){const code=document.getElementById(id).value;const stdinEl=document.getElementById(id+'_input');const out=document.getElementById(id+'_out');try{out.textContent=runMiniPython9(code,stdinEl?stdinEl.value:'');}catch(e){out.textContent=String(e.message||e);}}
+
+// Mini Python simulator Sesi 9: assignment, input, print, if/elif/else, while, break, +=, arithmetic/comparison, f-string.
+const NL='\n', CR='\r', BS='\\';
+function stripComment9(raw){let quote=null;for(let i=0;i<raw.length;i++){const c=raw[i],p=raw[i-1];if(quote){if(c===quote&&p!==BS)quote=null;}else if(c==='"'||c==="'")quote=c;else if(c==='#')return raw.slice(0,i);}return raw;}
+function normalizeLines9(code){return code.replaceAll(CR,'').split(NL).map((raw,idx)=>{const noComment=stripComment9(raw);let indent=0;while(indent<noComment.length&&noComment[indent]===' ')indent++;const text=noComment.trim();return {raw,text,indent,lineNo:idx+1,blank:text==='' };});}
+function runMiniPython9(code,stdinText){const vars={},output=[],inputs=(stdinText||'').replaceAll(CR,'').split(NL);let inputIndex=0;const state={steps:0,loops:0};function inputFn(prompt){const val=inputIndex<inputs.length?inputs[inputIndex++]:'';output.push(String(prompt)+val);return val;}const lines=normalizeLines9(code);const res=execBlock9(0,0,lines,vars,output,inputFn,state,false);if(res.error)return res.error;return output.length?output.join(NL):'(Tidak ada output. Coba gunakan print().)';}
+function execBlock9(start,indent,lines,vars,output,inputFn,state,inLoop){let i=start;while(i<lines.length){if(++state.steps>5000)return {error:'RuntimeError: terlalu banyak langkah pada simulator.'};const L=lines[i];if(L.blank){i++;continue;}if(L.indent<indent)break;if(L.indent>indent)return {error:`IndentationError on line ${L.lineNo}: unexpected indent.`};if(L.text.startsWith('else')||L.text.startsWith('elif'))break;if(L.text.startsWith('while ')){const r=execWhile9(i,indent,lines,vars,output,inputFn,state);if(r.error)return r;i=r.next;continue;}if(L.text.startsWith('if ')){const r=execIf9(i,indent,lines,vars,output,inputFn,state,inLoop);if(r.error)return r;if(r.signal)return r;i=r.next;continue;}const r=execLine9(L,vars,output,inputFn,inLoop);if(r.error)return r;if(r.signal)return {next:i+1,signal:r.signal};i++;}return {next:i};}
+function blockBounds9(start,indent,lines){let n=start+1;while(n<lines.length&&lines[n].blank)n++;if(n>=lines.length||lines[n].indent<=indent)return null;const blockIndent=lines[n].indent;let end=n;while(end<lines.length){if(!lines[end].blank&&lines[end].indent<=indent)break;end++;}return {start:n,indent:blockIndent,end};}
+function execWhile9(start,indent,lines,vars,output,inputFn,state){const L=lines[start];if(!L.text.endsWith(':'))return {error:`SyntaxError on line ${L.lineNo}: expected ':' after while condition.`};const cond=L.text.slice(6,-1).trim();const b=blockBounds9(start,indent,lines);if(!b)return {error:`IndentationError on line ${L.lineNo}: expected an indented block.`};let count=0;while(true){let ok;try{ok=!!evalExpr9(cond,vars,inputFn,L.lineNo);}catch(e){return {error:String(e.message||e)};}if(!ok)break;if(++count>200)return {error:'RuntimeError: loop melewati 200 iterasi. Periksa apakah while True sudah memiliki break yang bisa tercapai.'};const r=execBlock9(b.start,b.indent,lines,vars,output,inputFn,state,true);if(r.error)return r;if(r.signal==='break')break;}return {next:b.end};}
+function execIf9(start,indent,lines,vars,output,inputFn,state,inLoop){let i=start,executed=false;while(i<lines.length){const L=lines[i];if(L.blank){i++;continue;}if(L.indent!==indent)break;let type=null,cond='';if(L.text.startsWith('if ')){type='if';cond=L.text.slice(3);}else if(L.text.startsWith('elif ')){type='elif';cond=L.text.slice(5);}else if(L.text.startsWith('else'))type='else';else break;if(type!=='else'){if(!cond.endsWith(':'))return {error:`SyntaxError on line ${L.lineNo}: expected ':' after condition.`};cond=cond.slice(0,-1).trim();}else if(L.text!=='else:')return {error:`SyntaxError on line ${L.lineNo}: expected ':' after else.`};const b=blockBounds9(i,indent,lines);if(!b)return {error:`IndentationError on line ${L.lineNo}: expected an indented block.`};let run=false;if(!executed){if(type==='else')run=true;else{try{run=!!evalExpr9(cond,vars,inputFn,L.lineNo);}catch(e){return {error:String(e.message||e)};}}}if(run){const r=execBlock9(b.start,b.indent,lines,vars,output,inputFn,state,inLoop);if(r.error)return r;if(r.signal)return {next:b.end,signal:r.signal};executed=true;}i=b.end;}return {next:i};}
+function execLine9(L,vars,output,inputFn,inLoop){const line=L.text;if(!line)return {};if(line==='break'){if(!inLoop)return {error:`SyntaxError on line ${L.lineNo}: 'break' outside loop.`};return {signal:'break'};}const aug=line.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*([+\-*/])=\s*(.+)$/);if(aug){if(!(aug[1] in vars))return {error:`NameError on line ${L.lineNo}: name '${aug[1]}' is not defined.`};try{vars[aug[1]]=calc9(vars[aug[1]],evalExpr9(aug[3],vars,inputFn,L.lineNo),aug[2],L.lineNo);return {};}catch(e){return {error:String(e.message||e)};}}const assign=findAssign9(line);if(assign>=0){const name=line.slice(0,assign).trim(),expr=line.slice(assign+1).trim();if(!/^[A-Za-z_][A-Za-z0-9_]*$/.test(name))return {error:`SyntaxError on line ${L.lineNo}: nama variabel tidak valid.`};try{vars[name]=evalExpr9(expr,vars,inputFn,L.lineNo);return {};}catch(e){return {error:String(e.message||e)};}}if(line.startsWith('print(')&&line.endsWith(')')){try{const expr=line.slice(6,-1).trim();output.push(String(evalExpr9(expr||'""',vars,inputFn,L.lineNo)));return {};}catch(e){return {error:String(e.message||e)};}}return {error:`SyntaxError on line ${L.lineNo}: simulator mendukung assignment, input(), print(), if/else, while, break, dan operasi dasar.`};}
+function findAssign9(line){let quote=null,depth=0;for(let i=0;i<line.length;i++){const c=line[i],p=line[i-1],n=line[i+1];if(quote){if(c===quote&&p!==BS)quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='(')depth++;else if(c===')')depth--;else if(c==='='&&depth===0&&p!=='='&&n!=='='&&p!=='>'&&p!=='<'&&p!=='!')return i;}return -1;}
+function replaceWords9(s){return s.split(' and ').join(' && ').split(' or ').join(' || ').replace(/\bTrue\b/g,'true').replace(/\bFalse\b/g,'false');}
+function evalExpr9(expr,vars,inputFn,lineNo){expr=expr.trim();if((expr.startsWith('f"')&&expr.endsWith('"'))||(expr.startsWith("f'")&&expr.endsWith("'")))return renderF9(expr.slice(2,-1),vars,inputFn,lineNo);if((expr.startsWith('"')&&expr.endsWith('"'))||(expr.startsWith("'")&&expr.endsWith("'")))return decodeLiteral9(expr.slice(1,-1));const keys=Object.keys(vars),vals=keys.map(k=>vars[k]);function input(prompt){return inputFn(prompt===undefined?'':String(prompt));}function int(v){const n=Number(String(v).trim());if(!Number.isFinite(n))throw new Error(`ValueError on line ${lineNo}: invalid literal for int(): '${v}'`);return Math.trunc(n);}function float(v){const n=Number(String(v).trim());if(!Number.isFinite(n))throw new Error(`ValueError on line ${lineNo}: could not convert string to float: '${v}'`);return n;}try{return Function(...keys,'input','int','float','return ('+replaceWords9(expr)+');')(...vals,input,int,float);}catch(e){const msg=String(e.message||e);if(msg.startsWith('ValueError')||msg.startsWith('ZeroDivisionError')||msg.startsWith('TypeError'))throw e;throw new Error(`NameError/SyntaxError on line ${lineNo}: periksa ekspresi '${expr}'.`);}}
+function renderF9(inner,vars,inputFn,lineNo){inner=decodeLiteral9(inner);let out='',i=0;while(i<inner.length){if(inner[i]==='{'){const j=inner.indexOf('}',i+1);if(j<0)throw new Error(`SyntaxError on line ${lineNo}: f-string missing closing brace.`);const content=inner.slice(i+1,j);out+=String(evalExpr9(content,vars,inputFn,lineNo));i=j+1;}else{out+=inner[i];i++;}}return out;}
+function decodeLiteral9(s){return s.replace(/\\n/g,'\n').replace(/\\t/g,'\t').replace(/\\"/g,'"').replace(/\\'/g,"'");}
+function calc9(a,b,op,lineNo){if(op==='+'&&typeof a==='string'&&typeof b==='string')return a+b;const x=Number(a),y=Number(b);if(!Number.isFinite(x)||!Number.isFinite(y))throw new Error(`TypeError on line ${lineNo}: operator ${op} membutuhkan data angka.`);if(op==='/'&&y===0)throw new Error(`ZeroDivisionError on line ${lineNo}: division by zero.`);if(op==='+')return x+y;if(op==='-')return x-y;if(op==='*')return x*y;return x/y;}
+
+
+// --- Sesi 10 helpers & Mini Python simulator: try/except ValueError, if/else, int/float, arithmetic, f-string. ---
+function showCrashPart(kind,btn){document.querySelectorAll('#slide-5 .logic-card').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');const d={bug:['Bug','Kesalahan pada logika atau kode yang dibuat developer. Contoh: salah rumus atau salah nama variabel.'],exception:['Exception','Masalah yang muncul ketika program sedang berjalan. Contoh sesi ini: ValueError saat konversi int() gagal.'],crash:['Crash','Program berhenti secara tidak normal. Exception yang tidak ditangani dapat membuat eksekusi berhenti.']};const el=document.getElementById('crashPartInfo');if(el)el.innerHTML='<h4>'+d[kind][0]+'</h4><p>'+d[kind][1]+'</p>';}
+function showTryFlow(kind){const d={input:['Input user','Data dari input() masih berupa string.'],convert:['Type casting','int() mencoba mengubah string menjadi integer. Di titik ini ValueError bisa terjadi.'],result:['Dua kemungkinan','Konversi berhasil → lanjut menghitung. ValueError → jalankan except dan tampilkan pesan ramah.']};const el=document.getElementById('tryFlowInfo');if(el)el.innerHTML='<h4>'+d[kind][0]+'</h4><p>'+d[kind][1]+'</p>';}
+function showTryPart(kind,btn){document.querySelectorAll('#slide-7 .component-pill').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');const d={try:['try:','Membuka blok kode yang akan dicoba Python. Letakkan operasi rawan exception di dalamnya.'],risk:['int(input())','Input menghasilkan string. int() mencoba konversi dan dapat memicu ValueError jika format tidak cocok.'],except:['except ValueError:','Dijalankan hanya jika ValueError terjadi di dalam blok try.'],indent:['Indentasi','Isi try dan except menjorok. Baris try: dan except ValueError: sendiri harus sejajar.']};const el=document.getElementById('tryPartInfo');if(el)el.innerHTML='<h4>'+d[kind][0]+'</h4><p>'+d[kind][1]+'</p>';}
+function predictAntiCrash(btn,key){document.querySelectorAll('#slide-12 .choice-btn').forEach(b=>b.classList.remove('selected'));if(btn)btn.classList.add('selected');const d={valid:['1200000','try','int() berhasil. Program dapat menghitung 1200000 / 12 = 100000.'],text:['seribu','except ValueError','int() tidak dapat mengubah kata menjadi integer.'],decimal:['1200000.5','except ValueError','Karena input berupa string desimal, int() pada project ini gagal mengonversinya.'],empty:['input kosong','except ValueError','String kosong tidak dapat diubah menjadi integer.'],negative:['-1200000','try','Format integer valid. Nilainya tetap perlu logic validation karena target negatif tidak masuk akal.']};const el=document.getElementById('predictAntiCrashInfo');if(el)el.innerHTML='<h4>'+d[key][0]+' → '+d[key][1]+'</h4><p>'+d[key][2]+'</p>';}
+function showValidation(kind,btn){document.querySelectorAll('#slide-13 .operator-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');const d={format:['Format Validation','Menjawab: apakah data dapat dikonversi ke tipe yang dibutuhkan? try-except ValueError menangani bagian ini.'],logic:['Logic Validation','Menjawab: setelah konversi berhasil, apakah nilainya masuk akal? Contoh: target_angka < 0 diperiksa menggunakan if.']};const el=document.getElementById('validationInfo');if(el)el.innerHTML='<h4>'+d[kind][0]+'</h4><p>'+d[kind][1]+'</p>';}
+function showAntiVar(kind,btn){document.querySelectorAll('#slide-16 .memory-slot').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');const d={input:['nominal_input','String mentah yang berasal dari input(). Contoh: "1200000" atau "seribu".'],target:['target_angka','Hasil int(nominal_input). Variabel ini hanya berhasil dibuat jika konversi tidak memicu ValueError.'],bulan:['jumlah_bulan','Konstanta 12 sesuai desain simulasi satu tahun.'],monthly:['tabungan_per_bulan','Hasil target_angka / jumlah_bulan yang dicetak jika jalur try berhasil.']};const el=document.getElementById('antiVarInfo');if(el)el.innerHTML='<h4>'+d[kind][0]+'</h4><p>'+d[kind][1]+'</p>';}
+function loadAntiCrashCase(btn,n){document.querySelectorAll('#slide-22 .choice-btn').forEach(b=>b.classList.remove('selected'));if(btn)btn.classList.add('selected');const cases={1:['1200000','Angka valid: ekspektasi Rp 100,000 per bulan.'],2:['seribu','Teks: ekspektasi masuk except ValueError.'],3:['1200000.5','Desimal dengan int(): ekspektasi masuk except ValueError.'],4:['','Input kosong: ekspektasi masuk except ValueError.'],5:['-1200000','Negatif: format integer valid, jadi versi inti tetap berada di try.']};const input=document.getElementById('py5_input');if(input){input.value=cases[n][0];input.classList.add('preset-loaded');setTimeout(()=>input.classList.remove('preset-loaded'),1000);}const fb=document.getElementById('antiCaseFeedback');if(fb){fb.textContent=cases[n][1];fb.style.color='#176b35';}currentSlide=21;updateSlide();setTimeout(()=>{if(input)input.focus();},80);}
+function traceAntiCrash(){const raw=document.getElementById('traceAntiInput').value;let cast='Berhasil',route='try',end='hitung & lanjut';if(!/^[+-]?\d+$/.test(raw.trim())){cast='ValueError';route='except';end='pesan ramah & lanjut';}else if(Number(raw)<0){cast='Berhasil';route='try';end='nilai negatif (butuh logic validation)';}const box=document.getElementById('antiTraceBox');if(box)box.innerHTML='<div class="trace-step"><strong>Input</strong><span>'+escapeHtml10(raw===''?'(kosong)':raw)+'</span></div><div class="trace-step"><strong>int()</strong><span>'+cast+'</span></div><div class="trace-step"><strong>Jalur</strong><span>'+route+'</span></div><div class="trace-step"><strong>Akhir</strong><span>'+end+'</span></div>';}
+function escapeHtml10(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+const NL10='\n', CR10='\r', BS10='\\';
+function stripComment10(raw){let q=null;for(let i=0;i<raw.length;i++){const c=raw[i],p=raw[i-1];if(q){if(c===q&&p!==BS10)q=null;}else if(c==='"'||c==="'")q=c;else if(c==='#')return raw.slice(0,i);}return raw;}
+function normalizeLines10(code){return code.replaceAll(CR10,'').split(NL10).map((raw,idx)=>{const no=stripComment10(raw);let indent=0;while(indent<no.length&&no[indent]===' ')indent++;const text=no.trim();return {raw,text,indent,lineNo:idx+1,blank:text===''};});}
+function blockBounds10(start,indent,lines){let n=start+1;while(n<lines.length&&lines[n].blank)n++;if(n>=lines.length||lines[n].indent<=indent)return null;const blockIndent=lines[n].indent;let end=n;while(end<lines.length){if(!lines[end].blank&&lines[end].indent<=indent)break;end++;}return {start:n,indent:blockIndent,end};}
+function runMiniPython10(code,stdinText){const vars={},output=[],inputs=(stdinText||'').replaceAll(CR10,'').split(NL10);let inputIndex=0;const state={steps:0};function inputFn(prompt){const v=inputIndex<inputs.length?inputs[inputIndex++]:'';output.push(String(prompt)+v);return v;}const lines=normalizeLines10(code);const r=execBlock10(0,0,lines,vars,output,inputFn,state);if(r.error)return r.error;return output.length?output.join(NL10):'(Tidak ada output. Coba gunakan print().)';}
+function execBlock10(start,indent,lines,vars,output,inputFn,state){let i=start;while(i<lines.length){if(++state.steps>5000)return {error:'RuntimeError: terlalu banyak langkah pada simulator.'};const L=lines[i];if(L.blank){i++;continue;}if(L.indent<indent)break;if(L.indent>indent)return {error:`IndentationError on line ${L.lineNo}: unexpected indent.`};if(L.text.startsWith('else')||L.text.startsWith('elif')||L.text.startsWith('except'))break;if(L.text==='try:'||L.text.startsWith('try')){const r=execTry10(i,indent,lines,vars,output,inputFn,state);if(r.error)return r;i=r.next;continue;}if(L.text.startsWith('if ')){const r=execIf10(i,indent,lines,vars,output,inputFn,state);if(r.error)return r;i=r.next;continue;}const r=execLine10(L,vars,output,inputFn);if(r.error)return r;i++;}return {next:i};}
+function execTry10(start,indent,lines,vars,output,inputFn,state){const L=lines[start];if(L.text!=='try:')return {error:`SyntaxError on line ${L.lineNo}: expected 'try:'`};const tb=blockBounds10(start,indent,lines);if(!tb)return {error:`IndentationError on line ${L.lineNo}: expected an indented block.`};let exceptIdx=tb.end;while(exceptIdx<lines.length&&lines[exceptIdx].blank)exceptIdx++;if(exceptIdx>=lines.length||lines[exceptIdx].indent!==indent||!lines[exceptIdx].text.startsWith('except'))return {error:`SyntaxError on line ${L.lineNo}: try harus diikuti except ValueError:`};const E=lines[exceptIdx];if(E.text!=='except ValueError:')return {error:`SyntaxError on line ${E.lineNo}: simulator sesi ini menggunakan 'except ValueError:'`};const eb=blockBounds10(exceptIdx,indent,lines);if(!eb)return {error:`IndentationError on line ${E.lineNo}: expected an indented block.`};const tr=execBlock10(tb.start,tb.indent,lines,vars,output,inputFn,state);if(tr.error){if(String(tr.error).startsWith('ValueError')){const er=execBlock10(eb.start,eb.indent,lines,vars,output,inputFn,state);if(er.error)return er;}else{return tr;}}return {next:eb.end};}
+function execIf10(start,indent,lines,vars,output,inputFn,state){let i=start,executed=false;while(i<lines.length){const L=lines[i];if(L.blank){i++;continue;}if(L.indent!==indent)break;let type=null,cond='';if(L.text.startsWith('if ')){type='if';cond=L.text.slice(3);}else if(L.text.startsWith('elif ')){type='elif';cond=L.text.slice(5);}else if(L.text.startsWith('else'))type='else';else break;if(type!=='else'){if(!cond.endsWith(':'))return {error:`SyntaxError on line ${L.lineNo}: expected ':' after condition.`};cond=cond.slice(0,-1).trim();}else if(L.text!=='else:')return {error:`SyntaxError on line ${L.lineNo}: expected ':' after else.`};const b=blockBounds10(i,indent,lines);if(!b)return {error:`IndentationError on line ${L.lineNo}: expected an indented block.`};let run=false;if(!executed){if(type==='else')run=true;else{try{run=!!evalExpr10(cond,vars,inputFn,L.lineNo);}catch(e){return {error:String(e.message||e)};}}}if(run){const r=execBlock10(b.start,b.indent,lines,vars,output,inputFn,state);if(r.error)return r;executed=true;}i=b.end;}return {next:i};}
+function execLine10(L,vars,output,inputFn){const line=L.text;if(!line)return {};const aug=line.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*([+\-*/])=\s*(.+)$/);if(aug){if(!(aug[1] in vars))return {error:`NameError on line ${L.lineNo}: name '${aug[1]}' is not defined.`};try{vars[aug[1]]=calc10(vars[aug[1]],evalExpr10(aug[3],vars,inputFn,L.lineNo),aug[2],L.lineNo);return {};}catch(e){return {error:String(e.message||e)};}}const eq=findAssign10(line);if(eq>=0){const name=line.slice(0,eq).trim(),expr=line.slice(eq+1).trim();if(!/^[A-Za-z_][A-Za-z0-9_]*$/.test(name))return {error:`SyntaxError on line ${L.lineNo}: nama variabel tidak valid.`};try{vars[name]=evalExpr10(expr,vars,inputFn,L.lineNo);return {};}catch(e){return {error:String(e.message||e)};}}if(line.startsWith('print(')&&line.endsWith(')')){try{const expr=line.slice(6,-1).trim();output.push(String(evalExpr10(expr||'""',vars,inputFn,L.lineNo)));return {};}catch(e){return {error:String(e.message||e)};}}return {error:`SyntaxError on line ${L.lineNo}: simulator mendukung assignment, input(), int(), float(), print(), if/else, try/except ValueError, dan operasi dasar.`};}
+function findAssign10(line){let q=null,depth=0;for(let i=0;i<line.length;i++){const c=line[i],p=line[i-1],n=line[i+1];if(q){if(c===q&&p!==BS10)q=null;continue;}if(c==='"'||c==="'"){q=c;continue;}if(c==='(')depth++;else if(c===')')depth--;else if(c==='='&&depth===0&&p!=='='&&n!=='='&&p!=='>'&&p!=='<'&&p!=='!')return i;}return -1;}
+function replaceWords10(s){return s.split(' and ').join(' && ').split(' or ').join(' || ').replace(/\bTrue\b/g,'true').replace(/\bFalse\b/g,'false');}
+function evalExpr10(expr,vars,inputFn,lineNo){expr=expr.trim();if((expr.startsWith('f"')&&expr.endsWith('"'))||(expr.startsWith("f'")&&expr.endsWith("'")))return renderF10(expr.slice(2,-1),vars,inputFn,lineNo);if((expr.startsWith('"')&&expr.endsWith('"'))||(expr.startsWith("'")&&expr.endsWith("'")))return decodeLiteral10(expr.slice(1,-1));const keys=Object.keys(vars),vals=keys.map(k=>vars[k]);function input(prompt){return inputFn(prompt===undefined?'':String(prompt));}function int(v){if(typeof v==='number'){if(!Number.isFinite(v))throw new Error(`ValueError on line ${lineNo}: invalid value for int()`);return Math.trunc(v);}const s=String(v).trim();if(!/^[+-]?\d+$/.test(s))throw new Error(`ValueError on line ${lineNo}: invalid literal for int(): '${v}'`);return parseInt(s,10);}function float(v){if(typeof v==='number'){if(!Number.isFinite(v))throw new Error(`ValueError on line ${lineNo}: invalid value for float()`);return v;}const s=String(v).trim();if(!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(s))throw new Error(`ValueError on line ${lineNo}: could not convert string to float: '${v}'`);return Number(s);}try{return Function(...keys,'input','int','float','return ('+replaceWords10(expr)+');')(...vals,input,int,float);}catch(e){const msg=String(e.message||e);if(msg.startsWith('ValueError')||msg.startsWith('ZeroDivisionError')||msg.startsWith('TypeError'))throw e;throw new Error(`NameError/SyntaxError on line ${lineNo}: periksa ekspresi '${expr}'.`);}}
+function renderF10(inner,vars,inputFn,lineNo){inner=decodeLiteral10(inner);let out='',i=0;while(i<inner.length){if(inner[i]==='{'){let depth=0,j=-1;for(let k=i+1;k<inner.length;k++){if(inner[k]==='(')depth++;else if(inner[k]===')')depth--;else if(inner[k]==='}'&&depth===0){j=k;break;}}if(j<0)throw new Error(`SyntaxError on line ${lineNo}: f-string missing closing brace.`);const content=inner.slice(i+1,j);let expr=content,fmt='';let d=0,colon=-1;for(let k=0;k<content.length;k++){if(content[k]==='(')d++;else if(content[k]===')')d--;else if(content[k]===':'&&d===0){colon=k;break;}}if(colon>=0){expr=content.slice(0,colon);fmt=content.slice(colon+1);}const v=evalExpr10(expr,vars,inputFn,lineNo);out+=formatF10(v,fmt.trim());i=j+1;}else{out+=inner[i];i++;}}return out;}
+function formatF10(v,fmt){if(!fmt)return String(v);const n=Number(v);if(!Number.isFinite(n))return String(v);if(fmt===',')return Math.trunc(n).toLocaleString('en-US');if(fmt===',.0f')return Math.round(n).toLocaleString('en-US');if(fmt==='.0f')return String(Math.round(n));return String(v);}
+function decodeLiteral10(s){return s.replace(/\\n/g,'\n').replace(/\\t/g,'\t').replace(/\\"/g,'"').replace(/\\'/g,"'");}
+function calc10(a,b,op,lineNo){if(op==='+'&&typeof a==='string'&&typeof b==='string')return a+b;const x=Number(a),y=Number(b);if(!Number.isFinite(x)||!Number.isFinite(y))throw new Error(`TypeError on line ${lineNo}: operator ${op} membutuhkan data angka.`);if(op==='/'&&y===0)throw new Error(`ZeroDivisionError on line ${lineNo}: division by zero.`);if(op==='+')return x+y;if(op==='-')return x-y;if(op==='*')return x*y;return x/y;}
+runPyEditor=function(id){const code=document.getElementById(id).value;const inp=document.getElementById(id+'_input');const out=document.getElementById(id+'_out');try{out.textContent=runMiniPython10(code,inp?inp.value:'');}catch(e){out.textContent=String(e.message||e);}};
+</script>
+</body></html>

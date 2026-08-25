@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>UOB My Digital Space — High School Sesi 9</title><link href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;📈&lt;/text&gt;&lt;/svg&gt;" rel="icon"/><style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --blue: #0056b3;
+      --light-blue: #4a9eff;
+      --uob-red: #e60012;
+      --uob-red-soft: #ff5a6b;
+      --uob-blue-deep: #0056b3;
+      --uob-blue-soft: #5aa7ff;
+      --teal: #11a9b7;
+      --bg: #f5f6f8;
+      --panel: #fff;
+      --text: #2c3e50;
+      --muted: #6c757d;
+      --line: #e3e8ef;
+      --green: #2e9d57;
+      --orange: #f39c12;
+      --red: #e74c3c;
+      --purple: #8e44ad;
+      --blue-soft: #eef7ff;
+      --green-soft: #effaf2
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      height: 100vh;
+      overflow: hidden;
+      color: var(--text)
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #f5d7da, #d9e9ff);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, .08)
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--uob-red) 0%, var(--uob-red-soft) 28%, var(--uob-blue-deep) 72%, var(--uob-blue-soft) 100%);
+      transition: width .3s ease;
+      box-shadow: 0 0 8px rgba(0, 86, 179, .18)
+    }
+
+    .main-container {
+      display: flex;
+      height: 100vh
+    }
+
+    .slides-panel {
+      width: 50%;
+      background: #f8f9fa;
+      border-right: 2px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      position: relative
+    }
+
+    .explanation-panel {
+      width: 50%;
+      background: #fff;
+      overflow-y: auto;
+      padding: 32px
+    }
+
+    .slide-header {
+      background: #fff;
+      padding: 17px 20px 15px;
+      border-bottom: 2px solid var(--line);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+      position: relative
+    }
+
+    .slide-header::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(var(--uob-red), var(--light-blue))
+    }
+
+    .slide-header h1 {
+      font-size: 1.28rem;
+      color: var(--text);
+      margin-bottom: 3px
+    }
+
+    .slide-header p {
+      font-size: .9rem;
+      color: var(--muted)
+    }
+
+    .header-badge {
+      position: absolute;
+      right: 18px;
+      top: 17px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      border: 1px solid #cce7ff;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-weight: 700;
+      font-size: .76rem
+    }
+
+    .slide-content {
+      flex: 1;
+      padding: 24px 28px 94px;
+      overflow-y: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 0
+    }
+
+    .slide,
+    .explanation {
+      display: none;
+      opacity: 0;
+      transition: opacity .25s ease
+    }
+
+    .slide.active,
+    .explanation.active {
+      display: block;
+      opacity: 1
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 820px
+    }
+
+    .explanation {
+      max-width: 760px;
+      margin: 0 auto
+    }
+
+    .slide h2 {
+      font-size: 2.25rem;
+      color: var(--blue);
+      margin-bottom: 10px;
+      line-height: 1.15
+    }
+
+    .slide h3 {
+      font-size: 1.78rem;
+      color: var(--blue);
+      margin-bottom: 16px;
+      line-height: 1.2
+    }
+
+    .slide h4,
+    .explanation h4 {
+      font-size: 1.05rem;
+      margin-bottom: 9px;
+      color: var(--text)
+    }
+
+    .slide p,
+    .explanation p {
+      font-size: 1rem;
+      line-height: 1.58;
+      color: #495057;
+      margin-bottom: 14px
+    }
+
+    .explanation h3 {
+      font-size: 1.65rem;
+      margin-bottom: 16px;
+      color: var(--text);
+      line-height: 1.25
+    }
+
+    .slide ul,
+    .slide ol,
+    .explanation ul,
+    .explanation ol {
+      margin-left: 22px;
+      margin-bottom: 10px
+    }
+
+    .slide li,
+    .explanation li {
+      margin-bottom: 7px;
+      line-height: 1.5
+    }
+
+    code {
+      background: #eef3f8;
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #334155
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--uob-red);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 8px
+    }
+
+    .lead {
+      font-size: 1.08rem !important
+    }
+
+    .mini-note {
+      font-size: .9rem !important;
+      color: var(--muted) !important;
+      margin-top: 10px
+    }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      gap: 13px;
+      margin: 16px 0
+    }
+
+    .visual-card,
+    .metric-box,
+    .info-box,
+    .example-box,
+    .warning-box,
+    .interactive-box,
+    .code-card,
+    .quiz-card {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05)
+    }
+
+    .visual-card {
+      padding: 15px
+    }
+
+    .visual-card p {
+      margin-bottom: 0;
+      font-size: .92rem;
+      line-height: 1.42
+    }
+
+    .visual-icon {
+      font-size: 1.9rem;
+      margin-bottom: 8px
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 16px
+    }
+
+    .metric-box {
+      padding: 16px 12px;
+      text-align: center
+    }
+
+    .metric-box strong {
+      display: block;
+      font-size: 1.55rem;
+      color: var(--blue);
+      margin-bottom: 7px
+    }
+
+    .metric-box span {
+      font-size: .9rem;
+      line-height: 1.35;
+      color: #495057;
+      display: block
+    }
+
+    .info-box,
+    .example-box,
+    .warning-box,
+    .interactive-box {
+      padding: 17px;
+      margin: 16px 0
+    }
+
+    .info-box {
+      border-left: 5px solid var(--light-blue)
+    }
+
+    .example-box {
+      border-left: 5px solid var(--green);
+      background: #f8fff8
+    }
+
+    .warning-box {
+      border-left: 5px solid var(--orange);
+      background: #fffaf0
+    }
+
+    .interactive-box {
+      border-left: 5px solid var(--purple);
+      background: #fcf8ff
+    }
+
+    .navigation {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 2px solid var(--line);
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, .04)
+    }
+
+    .nav-btn {
+      background: var(--light-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: .94rem;
+      font-weight: 700;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      transition: .2s ease
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      background: #357abd
+    }
+
+    .nav-btn:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none
+    }
+
+    .slide-indicator {
+      font-size: .9rem;
+      color: var(--muted);
+      font-weight: 700
+    }
+
+    .floating-element {
+      position: absolute;
+      opacity: .07;
+      pointer-events: none;
+      font-size: 2rem;
+      animation: float 6s ease-in-out infinite
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0)
+      }
+
+      33% {
+        transform: translateY(-12px) rotate(4deg)
+      }
+
+      66% {
+        transform: translateY(7px) rotate(-3deg)
+      }
+    }
+
+    .access-popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .8);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center
+    }
+
+    .access-popup {
+      background: white;
+      border: 3px solid var(--light-blue);
+      border-radius: 15px;
+      padding: 38px;
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .3);
+      transform: scale(.8);
+      opacity: 0;
+      transition: all .3s ease
+    }
+
+    .access-popup.show {
+      transform: scale(1);
+      opacity: 1
+    }
+
+    .access-popup h2 {
+      color: var(--text);
+      margin-bottom: 13px;
+      font-size: 1.8rem
+    }
+
+    .access-popup p {
+      color: #666;
+      margin-bottom: 22px;
+      line-height: 1.55
+    }
+
+    .access-input {
+      width: 100%;
+      padding: 14px;
+      font-size: 1.15rem;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      text-align: center;
+      letter-spacing: 2px;
+      font-weight: bold;
+      text-transform: uppercase
+    }
+
+    .access-input:focus {
+      outline: none;
+      border-color: var(--light-blue);
+      box-shadow: 0 0 0 3px rgba(74, 158, 255, .12)
+    }
+
+    .access-submit,
+    .primary-btn,
+    .secondary-btn {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .access-submit,
+    .primary-btn {
+      background: var(--blue);
+      color: white
+    }
+
+    .secondary-btn {
+      background: #e9ecef;
+      color: var(--text)
+    }
+
+    .access-submit {
+      padding: 13px 28px;
+      font-size: 1.05rem
+    }
+
+    .access-error {
+      color: var(--red);
+      margin-top: 13px;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity .2s
+    }
+
+    .access-error.show {
+      opacity: 1
+    }
+
+    .access-hint {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 5px;
+      padding: 9px;
+      margin-top: 18px;
+      font-size: .88rem;
+      color: #856404
+    }
+
+    .scratch-map-wrap {
+      position: relative;
+      width: 100%;
+      margin: 12px auto;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .08)
+    }
+
+    .scratch-map-wrap img {
+      width: 100%;
+      display: block
+    }
+
+    .hotspot {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      background: var(--uob-red);
+      color: white;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35);
+      display: grid;
+      place-items: center;
+      transform: translate(-50%, -50%);
+      transition: transform .16s, background .16s;
+      z-index: 3
+    }
+
+    .hotspot:hover,
+    .hotspot.active {
+      transform: translate(-50%, -50%) scale(1.16);
+      background: var(--blue)
+    }
+
+    .scratch-caption {
+      text-align: center;
+      font-size: .85rem;
+      color: var(--muted);
+      margin-top: 8px
+    }
+
+    .area-live-card {
+      min-height: 110px;
+      border: 2px solid #cfe7fb;
+      background: var(--blue-soft);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 14px
+    }
+
+    .area-number {
+      display: inline-grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: white;
+      font-weight: 900;
+      margin-right: 7px
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .choice-btn {
+      border: 2px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 11px 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: .18s;
+      text-align: left
+    }
+
+    .choice-btn:hover {
+      border-color: var(--light-blue);
+      transform: translateY(-1px)
+    }
+
+    .choice-btn.correct,
+    .choice-btn.selected {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: #176b35
+    }
+
+    .choice-btn.wrong {
+      border-color: var(--red);
+      background: #fff1f0;
+      color: #a42820
+    }
+
+    .feedback-line {
+      min-height: 28px;
+      font-weight: 700;
+      margin-top: 8px
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .form-grid label {
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--text)
+    }
+
+    .form-grid input,
+    .form-grid textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      margin-top: 5px
+    }
+
+    .form-grid input:focus,
+    .form-grid textarea:focus {
+      outline: none;
+      border-color: var(--light-blue)
+    }
+
+    .lms-map-wrap,
+    .test-map-wrap {
+      position: relative
+    }
+
+    .session-card-hotspot {
+      position: absolute;
+      left: 19.1%;
+      top: 43%;
+      width: 25.5%;
+      height: 51%;
+      padding: 0;
+      border: 3px dashed transparent;
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+      transition: .2s ease
+    }
+
+    .session-card-hotspot span {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: #fff;
+      font-size: .9rem;
+      font-weight: 900;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35)
+    }
+
+    .session-card-hotspot:hover,
+    .session-card-hotspot.active {
+      border-color: var(--uob-red);
+      background: rgba(230, 0, 18, .08)
+    }
+
+    .session-card-hotspot:hover span,
+    .session-card-hotspot.active span {
+      background: var(--blue);
+      transform: scale(1.1)
+    }
+
+    .test-card-hotspot {
+      position: absolute;
+      left: 18%;
+      right: 3%;
+      bottom: 5%;
+      height: 20%;
+      padding: 0;
+      border: 3px dashed transparent;
+      border-radius: 14px;
+      background: transparent;
+      cursor: pointer;
+      transition: .2s ease
+    }
+
+    .test-number {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35)
+    }
+
+    .test-instruction {
+      position: absolute;
+      left: 50%;
+      bottom: 12px;
+      transform: translateX(-50%);
+      width: 88%;
+      padding: 7px 9px;
+      border-radius: 8px;
+      background: rgba(0, 86, 179, .94);
+      color: #fff;
+      font-size: .76rem;
+      line-height: 1.3;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, .25)
+    }
+
+    .test-card-hotspot:hover,
+    .test-card-hotspot.active {
+      border-color: var(--uob-red);
+      background: rgba(230, 0, 18, .08)
+    }
+
+    .test-card-hotspot:hover .test-instruction,
+    .test-card-hotspot.active .test-instruction {
+      background: var(--uob-red)
+    }
+
+    .flow-line {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 20px 0
+    }
+
+    .flow-box {
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--blue);
+      color: #fff;
+      text-align: center;
+      font-weight: 900;
+      cursor: pointer
+    }
+
+    .flow-arrow {
+      color: var(--uob-red);
+      font-size: 1.6rem;
+      font-weight: 900
+    }
+
+    .comparison-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    .compare-card {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      background: #fff
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 2px
+    }
+
+    .pill.blue {
+      background: var(--blue)
+    }
+
+    .pill.green {
+      background: var(--green)
+    }
+
+    .pill.purple {
+      background: var(--purple)
+    }
+
+    .colab-mock,
+    .colab-hotmap {
+      border: 2px solid #dce6ef;
+      border-radius: 14px;
+      background: #1e1e1e;
+      color: #e5e7eb;
+      overflow: hidden;
+      margin: 16px 0;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .12);
+      position: relative
+    }
+
+    .colab-title {
+      background: #111827;
+      padding: 10px 14px;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      font-size: .9rem
+    }
+
+    .colab-title span {
+      font-size: .8rem;
+      color: #9ca3af
+    }
+
+    .colab-cell {
+      margin: 12px;
+      border: 1px solid #374151;
+      border-radius: 10px;
+      background: #0f172a;
+      min-height: 72px;
+      position: relative;
+      padding: 14px 14px 14px 48px
+    }
+
+    .run-dot {
+      position: absolute;
+      left: 12px;
+      top: 15px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 0;
+      background: #16a34a;
+      color: white;
+      display: grid;
+      place-items: center
+    }
+
+    .colab-cell pre,
+    .code-card pre,
+    .receipt-preview pre {
+      white-space: pre-wrap;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .9rem;
+      line-height: 1.45
+    }
+
+    .colab-output {
+      margin: 0 12px 12px;
+      padding: 12px;
+      background: #fff;
+      color: #111827;
+      border-radius: 10px;
+      min-height: 48px;
+      position: relative
+    }
+
+    .python-editor {
+      border-radius: 18px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #152744 0%, #132742 100%);
+      box-shadow: 0 10px 24px rgba(8, 22, 46, .18);
+      margin: 16px 0;
+      border: 1px solid #274468
+    }
+
+    .editor-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #182c49;
+      color: #fff;
+      padding: 13px 18px 11px;
+      font-weight: 900
+    }
+
+    .editor-label {
+      font-size: 1.05rem;
+      letter-spacing: .05em;
+      color: #dbeafe
+    }
+
+    .editor-live {
+      font-size: .95rem;
+      letter-spacing: .04em;
+      color: #69e3a7
+    }
+
+    .python-editor textarea {
+      width: 100%;
+      min-height: 250px;
+      resize: vertical;
+      background: #0f2240;
+      color: #fff;
+      border: 0;
+      padding: 18px 18px 16px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 1rem;
+      line-height: 1.65;
+      outline: none
+    }
+
+    .python-editor textarea:focus {
+      box-shadow: inset 0 0 0 2px rgba(147, 197, 253, .22)
+    }
+
+    .editor-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      background: #182c49;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      border-bottom: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .run-code-btn {
+      background: #22b573;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-weight: 900;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, .12);
+      transition: .18s ease
+    }
+
+    .run-code-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03)
+    }
+
+    .editor-toolbar-note {
+      color: #dbeafe;
+      font-size: .98rem;
+      line-height: 1.4
+    }
+
+    .editor-output-panel {
+      padding: 0 16px 16px;
+      background: #182c49
+    }
+
+    .editor-output-label {
+      color: #93c5fd;
+      font-size: 1rem;
+      letter-spacing: .08em;
+      font-weight: 900;
+      padding: 14px 12px 8px
+    }
+
+    .output-box {
+      background: #041126;
+      color: #fff;
+      min-height: 110px;
+      white-space: pre-wrap;
+      font-family: Consolas, Monaco, monospace;
+      padding: 16px;
+      border: 1px solid #2b4f7b;
+      border-radius: 12px;
+      line-height: 1.6
+    }
+
+    .code-card {
+      padding: 14px;
+      background: #111827;
+      color: #e5e7eb;
+      overflow: auto
+    }
+
+    .receipt-preview {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 14px 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05)
+    }
+
+    .receipt-preview pre {
+      color: #111827
+    }
+
+    .component-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0
+    }
+
+    .component-pill {
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      padding: 8px 11px;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .component-pill.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    .checklist {
+      list-style: none;
+      margin-left: 0 !important;
+      display: grid;
+      gap: 8px
+    }
+
+    .check-item {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      cursor: pointer
+    }
+
+    .check-item input {
+      margin-top: 3px;
+      transform: scale(1.2)
+    }
+
+    .check-item.done {
+      background: var(--green-soft);
+      border-color: #9cd9af;
+      text-decoration: line-through;
+      color: #3e6b4c
+    }
+
+    .debug-scenario {
+      display: none
+    }
+
+    .debug-scenario.active {
+      display: block
+    }
+
+    .debug-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px
+    }
+
+    .debug-tab {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 7px 11px;
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    .debug-tab.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    @media(max-width:960px) {
+      body {
+        overflow: auto;
+        height: auto
+      }
+
+      .main-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh
+      }
+
+      .slides-panel,
+      .explanation-panel {
+        width: 100%;
+        height: auto;
+        min-height: 50vh
+      }
+
+      .slides-panel {
+        min-height: 100vh
+      }
+
+      .slide-content {
+        padding: 20px 20px 92px
+      }
+
+      .explanation-panel {
+        padding: 24px
+      }
+
+      .header-badge {
+        display: none
+      }
+
+      .flow-line,
+      .comparison-table {
+        grid-template-columns: 1fr
+      }
+
+      .flow-arrow {
+        display: none
+      }
+    }
+
+    .stdin-panel {
+      padding: 0 16px 14px;
+      background: #182c49;
+      border-top: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .stdin-label {
+      color: #93c5fd;
+      font-size: .86rem;
+      letter-spacing: .08em;
+      font-weight: 900;
+      padding: 10px 2px 6px;
+      text-transform: uppercase
+    }
+
+    .stdin-area {
+      width: 100%;
+      min-height: 74px;
+      resize: vertical;
+      border: 1px solid #2b4f7b;
+      border-radius: 10px;
+      background: #0b1a33;
+      color: #e5f0ff;
+      padding: 10px 12px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .92rem;
+      line-height: 1.45;
+      outline: none
+    }
+
+    .stdin-area:focus {
+      box-shadow: inset 0 0 0 2px rgba(147, 197, 253, .22)
+    }
+
+    .stdin-area.preset-loaded {
+      border-color: #69e3a7;
+      box-shadow: 0 0 0 3px rgba(105, 227, 167, .22), inset 0 0 0 1px rgba(105, 227, 167, .35)
+    }
+
+    .type-bank {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .type-card {
+      border: 2px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: 800
+    }
+
+    .type-card.active {
+      background: var(--blue-soft);
+      border-color: var(--blue)
+    }
+
+    .mini-terminal {
+      background: #041126;
+      color: #fff;
+      border-radius: 12px;
+      border: 1px solid #2b4f7b;
+      padding: 16px;
+      margin: 14px 0;
+      font-family: Consolas, Monaco, monospace;
+      white-space: pre-wrap;
+      line-height: 1.55;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .08)
+    }
+
+    .safe-card {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 13px;
+      cursor: pointer;
+      font-weight: 800
+    }
+
+    .safe-card.safe {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: #176b35
+    }
+
+    .safe-card.risky {
+      border-color: var(--red);
+      background: #fff1f0;
+      color: #a42820
+    }
+
+    .memory-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    .memory-slot {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      cursor: pointer
+    }
+
+    .memory-slot.active {
+      border-color: var(--blue);
+      background: var(--blue-soft)
+    }
+
+    .memory-slot code {
+      display: block;
+      margin-top: 6px;
+      color: var(--blue);
+      font-weight: 900
+    }
+
+    .thin-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 14px 0
+    }
+
+    .thin-table th {
+      background: var(--blue);
+      color: #fff;
+      text-align: left;
+      padding: 10px
+    }
+
+    .thin-table td {
+      border-top: 1px solid var(--line);
+      padding: 10px;
+      vertical-align: top
+    }
+
+    .thin-table code {
+      background: #eef3f8;
+      padding: 2px 6px;
+      border-radius: 5px
+    }
+  
+    details.learn-accordion {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      margin: 10px 0;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+    details.learn-accordion summary {
+      cursor: pointer;
+      padding: 12px 14px;
+      font-weight: 900;
+      color: var(--blue);
+      background: var(--blue-soft);
+      list-style: none;
+    }
+    details.learn-accordion summary::-webkit-details-marker {display:none;}
+    details.learn-accordion .accordion-body {padding: 14px 16px;}
+    .decision-gate {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 16px 0;
+    }
+    .gate-node {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      font-weight: 900;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
+    .gate-diamond {
+      width: 112px;
+      height: 112px;
+      transform: rotate(45deg);
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--blue), var(--light-blue));
+      color: white;
+      border-radius: 16px;
+      font-weight: 900;
+      text-align: center;
+      box-shadow: 0 7px 16px rgba(0,86,179,.18);
+    }
+    .gate-diamond span {transform: rotate(-45deg); display:block; font-size:.85rem; line-height:1.25;}
+    .branch-label {font-size:.82rem; color:var(--muted); font-weight:800; margin-top:6px;}
+    .trace-card {display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin:12px 0;}
+    .trace-step {background:#fff; border:2px solid var(--line); border-radius:12px; padding:12px; text-align:center;}
+    .trace-step strong {display:block; color:var(--blue); margin-bottom:5px;}
+    .operator-board {display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin:14px 0;}
+    .operator-btn {background:#fff; border:2px solid var(--line); border-radius:12px; padding:12px; cursor:pointer; font-weight:900; text-align:center;}
+    .operator-btn:hover,.operator-btn.active {border-color:var(--blue); background:var(--blue-soft); color:var(--blue); transform:translateY(-1px);}
+    .true-false {display:flex; gap:8px; flex-wrap:wrap; margin:10px 0;}
+    .true-pill,.false-pill {padding:7px 11px; border-radius:999px; color:white; font-weight:900;}
+    .true-pill {background:var(--green);} .false-pill{background:var(--red);}
+    .compact-code {max-height: 260px; overflow:auto;}
+    @media(max-width:960px){.decision-gate{grid-template-columns:1fr}.gate-diamond{margin:0 auto}.flow-arrow{display:none}}
+
+  
+/* Session 6 components */
+.risk-scale{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}.risk-zone{border:2px solid var(--line);background:#fff;border-radius:14px;padding:15px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:.18s ease}.risk-zone:hover,.risk-zone.active{transform:translateY(-2px);border-color:var(--blue);background:var(--blue-soft)}.risk-zone strong{display:block;font-size:1.05rem;margin-bottom:6px}.risk-zone small{color:var(--muted);font-weight:800}.risk-zone.aman{border-left:6px solid var(--green)}.risk-zone.hati{border-left:6px solid var(--orange)}.risk-zone.risk{border-left:6px solid var(--red)}.score-meter{height:26px;border-radius:999px;background:linear-gradient(90deg,#f87171 0%,#f59e0b 50%,#22c55e 100%);position:relative;margin:18px 0 10px;box-shadow:inset 0 2px 4px rgba(0,0,0,.12)}.score-marker{position:absolute;top:-9px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#fff;border:3px solid var(--blue);font-weight:900;color:var(--blue);box-shadow:0 4px 12px rgba(0,0,0,.18);transform:translateX(-50%);left:65%}.score-labels{display:flex;justify-content:space-between;font-size:.82rem;font-weight:900;color:var(--muted)}.branch-chain{display:grid;gap:10px;margin:14px 0}.branch-row{display:grid;grid-template-columns:110px 1fr;gap:10px}.branch-key{background:var(--blue);color:#fff;border-radius:12px;display:grid;place-items:center;font-weight:900}.branch-condition{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px}.branch-condition strong{color:var(--blue)}.mini-terminal.dark{background:#041126;color:#e5f0ff;border:1px solid #2b4f7b;border-radius:12px;padding:16px;margin:14px 0;font-family:Consolas,Monaco,monospace;white-space:pre-wrap;line-height:1.55}.boundary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(95px,1fr));gap:10px;margin:12px 0}.boundary-btn{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;font-weight:900;text-align:center}.boundary-btn:hover,.boundary-btn.active{border-color:var(--blue);background:var(--blue-soft);color:var(--blue)}.note-pill{display:inline-block;padding:5px 9px;border-radius:999px;background:var(--blue-soft);color:var(--blue);font-size:.82rem;font-weight:900;margin:2px}@media(max-width:960px){.risk-scale{grid-template-columns:1fr}.branch-row{grid-template-columns:1fr}}
+
+/* Session 7 components */
+.login-gate{display:grid;grid-template-columns:1fr 90px 1fr;gap:12px;align-items:center;margin:18px 0}.key-card{background:#fff;border:2px solid var(--line);border-radius:14px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,.05);cursor:pointer;transition:.18s ease}.key-card:hover,.key-card.active{border-color:var(--blue);background:var(--blue-soft);transform:translateY(-2px)}.lock-core{display:grid;place-items:center;width:82px;height:82px;border-radius:50%;background:linear-gradient(135deg,var(--uob-red),var(--blue));color:#fff;font-size:2.2rem;font-weight:900;box-shadow:0 8px 18px rgba(0,0,0,.16)}.logic-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:14px 0}.logic-card{background:#fff;border:2px solid var(--line);border-radius:14px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,.05);cursor:pointer}.logic-card.active{border-color:var(--blue);background:var(--blue-soft)}.truth-table{width:100%;border-collapse:collapse;background:#fff;border:2px solid var(--line);border-radius:12px;overflow:hidden;margin:14px 0}.truth-table th{background:var(--blue);color:#fff;text-align:left;padding:10px}.truth-table td{border-top:1px solid var(--line);padding:10px}.truth-table tr.good td{background:#effaf2}.truth-table tr.bad td{background:#fff7f7}.terminal-login{background:#041126;color:#e5f0ff;border:1px solid #2b4f7b;border-radius:12px;padding:16px;margin:14px 0;font-family:Consolas,Monaco,monospace;white-space:pre-wrap;line-height:1.55}.trace-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin:12px 0}.trace-step{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px}.trace-step strong{display:block;color:var(--blue);margin-bottom:5px}.operator-btn{border:2px solid var(--line);background:#fff;border-radius:12px;padding:12px 14px;font-weight:900;cursor:pointer}.operator-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}.accordion{border:2px solid var(--line);border-radius:12px;background:#fff;margin:10px 0;overflow:hidden}.accordion button{width:100%;border:0;background:#f8fbfe;padding:12px 14px;text-align:left;font-weight:900;cursor:pointer;color:var(--text)}.accordion-content{display:none;padding:14px;border-top:1px solid var(--line)}.accordion.open .accordion-content{display:block}.password-meter{height:18px;border-radius:999px;background:#e5e7eb;overflow:hidden;margin:10px 0}.password-meter span{display:block;height:100%;width:35%;background:var(--red);transition:.2s ease}.password-meter.medium span{width:65%;background:var(--orange)}.password-meter.strong span{width:100%;background:var(--green)}.mono-tag{font-family:Consolas,Monaco,monospace;background:#eef3f8;border-radius:6px;padding:2px 6px}.mini-code{max-height:360px;overflow:auto}.safe-card{border:2px solid var(--line);border-radius:12px;background:#fff;padding:13px;cursor:pointer;font-weight:800}.safe-card.safe{border-color:var(--green);background:var(--green-soft);color:#176b35}.safe-card.risky{border-color:var(--red);background:#fff1f0;color:#a42820}@media(max-width:960px){.login-gate{grid-template-columns:1fr}.lock-core{margin:0 auto}}
+
+.growth-bars{display:grid;gap:10px;margin-top:12px}.growth-bars div{display:grid;grid-template-columns:72px 1fr;align-items:center;gap:8px}.growth-bars span{font-weight:900;color:var(--muted);font-size:.85rem}.growth-bars b{display:block;height:18px;border-radius:999px;background:linear-gradient(90deg,var(--uob-red),var(--blue));box-shadow:inset 0 1px 2px rgba(0,0,0,.12)}.growth-bars.compound b{background:linear-gradient(90deg,var(--green),var(--blue))}.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:14px 0}.timeline button{border:2px solid var(--line);background:#fff;border-radius:12px;padding:12px;cursor:pointer;font-weight:900}.timeline button.active,.timeline button:hover{background:var(--blue-soft);border-color:var(--blue);color:var(--blue)}.range-track{display:flex;gap:12px;align-items:center;justify-content:center;margin:22px 0;flex-wrap:wrap}.range-track span{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;border:3px solid var(--line);background:#fff;font-weight:900;font-size:1.2rem}.range-track span.active{background:var(--blue);border-color:var(--blue);color:#fff}.range-track span.stop{background:#fff1f0;border-color:var(--uob-red);color:var(--uob-red);position:relative}.range-track span.stop::after{content:'stop';position:absolute;bottom:-22px;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}.compound-mini{background:#fff;border:2px solid var(--line);border-radius:12px;padding:13px;margin:10px 0}.compound-mini strong{color:var(--blue)}
+
+/* Sesi 9 readability fix: code inside dark snippets uses plain light text */
+.code-card code,
+.mini-terminal code,
+.mini-terminal.dark code,
+.terminal-login code,
+.vault-panel code,
+.python-editor code {
+  background: transparent !important;
+  color: inherit !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.code-card pre, .mini-terminal, .mini-terminal.dark, .terminal-login {
+  color: #e5e7eb;
+}
+</style></head>
+<body>
+<div class="access-popup-overlay" id="accessPopup"><div class="access-popup"><h2>🔐 Kode Akses</h2><p>Masukkan kode akses High School untuk membuka materi Sesi 9.</p><input autocomplete="off" class="access-input" id="accessInput" maxlength="20" placeholder="MASUKKAN KODE" type="text"/><button class="access-submit" onclick="checkAccessCode()">Masuk</button><div class="access-error" id="accessError">Kode akses belum tepat. Coba lagi.</div><div class="access-hint">Kode akses diberikan oleh guru.</div></div></div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="main-container" id="mainContent" style="display:none;">
+<div class="slides-panel">
+<div class="slide-header"><h1>UOB My Digital Space — High School</h1><p>Sesi 9 · Brankas Terkunci</p><span class="header-badge">Python · High School</span></div>
+<div class="slide-content">
+<div class="floating-element" style="top:12%;left:7%;">🐍</div><div class="floating-element" style="top:18%;right:10%;">🔐</div><div class="floating-element" style="bottom:25%;left:14%;">🔁</div><div class="floating-element" style="bottom:15%;right:16%;">🛑</div>
+<section class="slide active" id="slide-1">
+<span class="eyebrow">Sesi 9</span>
+<h2>Brankas Terkunci</h2>
+<p class="lead">Hari ini kamu akan membuat program Python yang terus meminta PIN dummy sampai kondisi berhenti terpenuhi.</p>
+<div class="metrics">
+<div class="metric-box"><strong>while</strong><span>mengulang berdasarkan kondisi</span></div>
+<div class="metric-box"><strong>break</strong><span>menghentikan loop</span></div>
+<div class="metric-box"><strong>🔐</strong><span>PIN dummy sebagai string</span></div>
+<div class="metric-box"><strong>3×</strong><span>batas percobaan</span></div>
+</div>
+<div class="example-box"><h4>Target akhir</h4><p>Program meminta PIN berulang, berhenti saat PIN benar, dan pada versi challenge juga berhenti setelah maksimal tiga percobaan salah.</p></div>
+</section>
+<section class="slide" id="slide-2">
+<span class="eyebrow">Rencana Belajar</span>
+<h3>Misi Belajar Hari Ini</h3>
+<div class="visual-grid">
+<div class="visual-card"><div class="visual-icon">🔁</div><h4>While Loop</h4><p>Mengulang selama kondisi masih bernilai <code>True</code>.</p></div>
+<div class="visual-card"><div class="visual-icon">🛑</div><h4>Break</h4><p>Menghentikan loop tepat ketika kondisi tertentu terpenuhi.</p></div>
+<div class="visual-card"><div class="visual-icon">🧮</div><h4>Counter</h4><p>Mencatat berapa kali percobaan salah sudah terjadi.</p></div>
+<div class="visual-card"><div class="visual-icon">🧪</div><h4>Testing</h4><p>Menguji PIN benar, salah, dan batas percobaan.</p></div>
+</div>
+<div class="interactive-box"><h4>Alur 60 menit</h4><div class="flow-line"><div class="flow-box">Konsep &amp; Prediksi</div><div class="flow-arrow">→</div><div class="flow-box">Build</div><div class="flow-arrow">→</div><div class="flow-box">Test &amp; Debug</div></div></div>
+</section>
+<section class="slide" id="slide-3">
+<h3>Siapkan Workspace dengan Aman</h3>
+<p class="lead">Gunakan Google Colab/editor Python dan hanya gunakan data latihan.</p>
+<div class="choice-grid">
+<button class="choice-btn" onclick="deviceCheck(this)">Laptop/komputer siap</button>
+<button class="choice-btn" onclick="deviceCheck(this)">Google Colab/editor terbuka</button>
+<button class="choice-btn" onclick="deviceCheck(this)">Notebook bernama <strong>Sesi9_Brankas_Terkunci</strong></button>
+<button class="choice-btn" onclick="deviceCheck(this)">PIN yang dipakai hanya PIN dummy</button>
+<button class="choice-btn" onclick="deviceCheck(this)">Tidak menulis PIN ATM/ponsel/password pribadi</button>
+<button class="choice-btn" onclick="deviceCheck(this)">Siap melakukan testing beberapa skenario</button>
+</div>
+<div class="info-box"><strong>Alamat LMS:</strong><br/><a href="https://app.uobmydigitalspace.com/" rel="noopener noreferrer" target="_blank">https://app.uobmydigitalspace.com/</a></div>
+</section>
+<section class="slide" id="slide-4">
+<h3><code>for</code> atau <code>while</code>?</h3>
+<p class="lead">Sesi 8 memakai <code>for</code> ketika jumlah pengulangan sudah diketahui. Sesi 9 memakai <code>while</code> ketika akhir pengulangannya bergantung pada kondisi.</p>
+<div class="comparison-table">
+<div class="compare-card"><h4><code>for</code></h4><p>Cocok ketika jumlah putaran sudah jelas.</p><div class="mini-terminal dark">for tahun in range(1, 4):<br/>    print(tahun)</div></div>
+<div class="compare-card"><h4><code>while</code></h4><p>Cocok ketika kita belum tahu pada percobaan ke berapa kondisi akan terpenuhi.</p><div class="mini-terminal dark">while kondisi:<br/>    cek_lagi()</div></div>
+</div>
+<div class="interactive-box"><h4>Pilih situasi</h4><p>Sistem meminta PIN sampai pengguna memasukkan PIN yang benar. Mana yang lebih cocok?</p><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'forWhileQ')">for</button><button class="choice-btn" onclick="quiz(this,true,'forWhileQ')">while</button></div><div class="feedback-line" id="forWhileQ"></div></div>
+</section>
+<section class="slide" id="slide-5">
+<h3>Kenapa Percobaan Harus Dibatasi?</h3>
+<p class="lead">PIN 4 digit dari 0000 sampai 9999 memiliki <strong>10.000 kombinasi</strong>. Sistem tanpa batas percobaan lebih rentan terhadap brute-force.</p>
+<div class="form-grid">
+<label>Jumlah kombinasi PIN<input id="comboCount" min="1" type="number" value="10000"/></label>
+<label>Contoh kecepatan percobaan otomatis per detik<input id="attemptRate" min="1" type="number" value="1000"/></label>
+<button class="primary-btn" onclick="calcBruteTime()">Hitung ilustrasi waktu</button>
+</div>
+<div class="area-live-card" id="bruteResult"><h4>Ilustrasi</h4><p>10.000 kombinasi ÷ 1.000 percobaan/detik = 10 detik.</p></div>
+<div class="warning-box"><h4>Fokus pembelajaran</h4><p>Kita tidak membuat alat serangan. Kita mempelajari kenapa sistem perlu <strong>membatasi percobaan</strong> dan bagaimana logika itu dibuat dengan Python.</p></div>
+</section>
+<section class="slide" id="slide-6">
+<h3>Anatomi <code>while</code></h3>
+<p class="lead">Python mengecek kondisi sebelum menjalankan blok yang menjorok ke dalam.</p>
+<div class="code-card"><pre><code>while kondisi:
+    # kode ini diulang selama kondisi True
+    print("Masih berjalan")</code></pre></div>
+<div class="component-bank">
+<button class="component-pill" onclick="showWhilePart('keyword',this)">while</button>
+<button class="component-pill" onclick="showWhilePart('condition',this)">kondisi</button>
+<button class="component-pill" onclick="showWhilePart('colon',this)">:</button>
+<button class="component-pill" onclick="showWhilePart('indent',this)">indentasi</button>
+</div>
+<div class="area-live-card" id="whilePartInfo"><h4>Pilih bagian kode</h4><p>Klik salah satu bagian untuk melihat fungsinya.</p></div>
+</section>
+<section class="slide" id="slide-7">
+<h3>Apa Arti <code>while True:</code>?</h3>
+<p class="lead"><code>True</code> selalu bernilai benar, jadi loop akan terus berjalan sampai ada mekanisme penghenti.</p>
+<div class="flow-line"><div class="flow-box">Mulai loop</div><div class="flow-arrow">→</div><div class="flow-box">True?</div><div class="flow-arrow">→</div><div class="flow-box">Ulang lagi</div></div>
+<div class="warning-box"><h4>Infinite loop</h4><p>Jika <code>while True</code> tidak punya jalan keluar, program bisa terus mengulang. Karena itu kita perlu <code>break</code> atau kondisi penghenti lain.</p></div>
+<div class="interactive-box"><h4>Quick check</h4><p>Apa yang terjadi jika <code>while True</code> tidak pernah menemukan <code>break</code>?</p><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'infiniteQ')">Loop terus berjalan</button><button class="choice-btn" onclick="quiz(this,false,'infiniteQ')">Loop otomatis berhenti setelah 3 kali</button></div><div class="feedback-line" id="infiniteQ"></div></div>
+</section>
+<section class="slide" id="slide-8">
+<h3><code>break</code>: Pintu Keluar dari Loop</h3>
+<p class="lead"><code>break</code> menghentikan loop secara langsung, lalu program melanjutkan ke baris setelah loop.</p>
+<div class="code-card"><pre><code>while True:
+    jawaban = input("Ketik 'keluar' untuk berhenti: ")
+    if jawaban == "keluar":
+        break
+
+print("Loop berhasil dihentikan.")</code></pre></div>
+<div class="interactive-box"><h4>Posisi penting</h4><p>Jika <code>break</code> ingin dijalankan hanya ketika jawaban benar, harus berada...</p><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'breakPosQ')">di dalam blok if</button><button class="choice-btn" onclick="quiz(this,false,'breakPosQ')">sejajar dengan if</button></div><div class="feedback-line" id="breakPosQ"></div></div>
+</section>
+<section class="slide" id="slide-9">
+<h3>Trace: Kapan Loop Kembali ke Atas?</h3>
+<p class="lead">Klik urutan PIN untuk melacak jalur program sebelum menekan Run.</p>
+<div class="choice-grid">
+<button class="choice-btn" onclick="traceSimplePin(this,['1211'])">1211</button>
+<button class="choice-btn" onclick="traceSimplePin(this,['0000','1211'])">0000 → 1211</button>
+<button class="choice-btn" onclick="traceSimplePin(this,['0000','9999','1211'])">0000 → 9999 → 1211</button>
+</div>
+<div class="trace-card" id="simplePinTrace"><div class="trace-step"><strong>Mulai</strong><span>Pilih satu skenario.</span></div></div>
+</section>
+<section class="slide" id="slide-10">
+<h3>Kenapa PIN Disimpan sebagai <code>String</code>?</h3>
+<p class="lead">PIN adalah data identifikasi, bukan angka yang akan dihitung secara matematis.</p>
+<div class="comparison-table">
+<div class="compare-card"><h4>String</h4><div class="mini-terminal dark">PIN_DUMMY = "0121"</div><p>Karakter nol di depan tetap tersimpan.</p></div>
+<div class="compare-card"><h4>Integer</h4><div class="mini-terminal dark">PIN_DUMMY = 0121</div><p>PIN sebaiknya tidak diperlakukan sebagai bilangan untuk perhitungan.</p></div>
+</div>
+<div class="interactive-box"><h4>Quick check</h4><p>PIN <code>0121</code> paling tepat disimpan sebagai...</p><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'pinTypeQ')">"0121"</button><button class="choice-btn" onclick="quiz(this,false,'pinTypeQ')">121</button></div><div class="feedback-line" id="pinTypeQ"></div></div>
+</section>
+<section class="slide" id="slide-11">
+<h3>Counter Percobaan</h3>
+<p class="lead">Counter menyimpan jumlah percobaan salah yang sudah terjadi.</p>
+<div class="code-card"><pre><code>percobaan = 0
+
+# ketika PIN salah
+percobaan = percobaan + 1</code></pre></div>
+<div class="memory-box">
+<div class="memory-slot active"><strong>Awal</strong><code>percobaan = 0</code></div>
+<div class="memory-slot"><strong>Salah 1×</strong><code>percobaan = 1</code></div>
+<div class="memory-slot"><strong>Salah 2×</strong><code>percobaan = 2</code></div>
+<div class="memory-slot"><strong>Salah 3×</strong><code>percobaan = 3</code></div>
+</div>
+<div class="warning-box"><h4>Jangan reset di dalam loop</h4><p>Jika <code>percobaan = 0</code> ditulis di dalam <code>while</code>, nilainya kembali nol setiap putaran dan batas percobaan tidak pernah tercapai.</p></div>
+</section>
+<section class="slide" id="slide-12">
+<h3>Dua Kondisi untuk Berhenti</h3>
+<p class="lead">Versi lengkap Brankas Terkunci punya dua jalur keluar.</p>
+<div class="login-gate">
+<div class="key-card" onclick="showStopReason('correct',this)"><h4>PIN benar</h4><p><code>input_pin == PIN_ASLI</code></p></div>
+<div class="lock-core">🛑</div>
+<div class="key-card" onclick="showStopReason('limit',this)"><h4>Batas tercapai</h4><p><code>percobaan &gt;= 3</code></p></div>
+</div>
+<div class="area-live-card" id="stopReasonInfo"><h4>Pilih jalur berhenti</h4><p>Klik salah satu kondisi untuk melihat apa yang terjadi.</p></div>
+</section>
+<section class="slide" id="slide-13">
+<h3>Reading Code: Temukan Bug</h3>
+<p class="lead">Kode ini selalu berhenti setelah input pertama. Kenapa?</p>
+<div class="code-card"><pre><code>PIN_DUMMY = "1211"
+
+while True:
+    input_pin = input("Masukkan PIN: ")
+    if input_pin == PIN_DUMMY:
+        print("PIN Benar!")
+    break</code></pre></div>
+<div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'readBugQ')"><code>break</code> sejajar dengan <code>if</code></button><button class="choice-btn" onclick="quiz(this,false,'readBugQ')">PIN harus berupa integer</button><button class="choice-btn" onclick="quiz(this,false,'readBugQ')"><code>while True</code> hanya boleh sekali</button></div>
+<div class="feedback-line" id="readBugQ"></div>
+</section>
+<section class="slide" id="slide-14">
+<h3>Mini Editor: Berhenti saat Mengetik <code>stop</code></h3>
+<p class="lead">Latihan kecil ini memastikan kamu paham hubungan <code>while True</code>, <code>if</code>, dan <code>break</code>.</p>
+<div class="python-editor">
+<div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div>
+<textarea id="py1" spellcheck="false" style="min-height:260px">print("Ketik 'stop' untuk menghentikan loop.")
+
+while True:
+    perintah = input("Masukkan perintah: ")
+    if perintah == "stop":
+        break
+    print(f"Anda mengetik: {perintah}")
+
+print("Loop selesai.")</textarea>
+<div class="stdin-panel"><div class="stdin-label">Input simulator — satu input per baris</div><textarea class="stdin-area" id="py1_input" spellcheck="false">halo
+lagi
+stop</textarea></div>
+<div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py1')">Run code</button><span class="editor-toolbar-note">Ubah urutan input, lalu jalankan lagi.</span></div>
+<div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py1_out">Output akan muncul di sini.</div></div>
+</div>
+</section>
+<section class="slide" id="slide-15">
+<h3>Prediksi Sebelum Run</h3>
+<p class="lead">Biasakan membaca alur sebelum menekan tombol Run.</p>
+<div class="code-card"><pre><code>PIN_ASLI = "1211"
+while True:
+    input_pin = input("PIN: ")
+    if input_pin == PIN_ASLI:
+        print("TERBUKA")
+        break
+    else:
+        print("SALAH")</code></pre></div>
+<div class="interactive-box"><h4>Input: <code>0000 → 9999 → 1211</code></h4><p>Berapa kali loop berjalan?</p><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,false,'iterQ')">1 kali</button><button class="choice-btn" onclick="quiz(this,false,'iterQ')">2 kali</button><button class="choice-btn" onclick="quiz(this,true,'iterQ')">3 kali</button></div><div class="feedback-line" id="iterQ"></div></div>
+</section>
+<section class="slide" id="slide-16">
+<h3>Project Brief: Brankas Terkunci</h3>
+<p class="lead">Sekarang kita rakit project utama berdasarkan sample notebook Sesi 9.</p>
+<div class="accordion open"><button onclick="toggleAccordion(this)">🎯 Tujuan aplikasi</button><div class="accordion-content"><p>Meminta PIN dummy berulang sampai akses berhasil atau batas percobaan tercapai.</p></div></div>
+<div class="accordion"><button onclick="toggleAccordion(this)">📥 Input</button><div class="accordion-content"><p><code>input_pin</code> dari user. PIN diperlakukan sebagai <strong>string</strong>.</p></div></div>
+<div class="accordion"><button onclick="toggleAccordion(this)">⚙️ Process</button><div class="accordion-content"><p><code>while True</code> → bandingkan PIN → jika salah tambah counter → cek batas.</p></div></div>
+<div class="accordion"><button onclick="toggleAccordion(this)">📤 Output</button><div class="accordion-content"><p>Pesan PIN salah, brankas terbuka, atau batas percobaan tercapai.</p></div></div>
+</section>
+<section class="slide" id="slide-17">
+<h3>Langkah 1: Data Dummy &amp; Counter</h3>
+<p class="lead">Buat variabel sebelum loop dimulai.</p>
+<div class="python-editor">
+<div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div>
+<textarea id="py2" spellcheck="false" style="min-height:230px">print("=== SISTEM KEAMANAN BRANKAS: BANK MUDA ===")
+
+# PIN latihan, bukan PIN pribadi
+PIN_ASLI = "1211"
+
+# Counter dibuat sebelum while agar nilainya tidak reset
+percobaan = 0
+MAX_PERCOBAAN = 3
+
+print(f"Batas percobaan: {MAX_PERCOBAAN} kali")</textarea>
+<div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py2')">Run code</button><span class="editor-toolbar-note">Cek nilai awal sebelum loop dibuat.</span></div>
+<div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py2_out">Output akan muncul di sini.</div></div>
+</div>
+</section>
+<section class="slide" id="slide-18">
+<h3>Langkah 2: Minta PIN Berulang</h3>
+<p class="lead">Input harus berada di dalam loop supaya diminta lagi pada iterasi berikutnya.</p>
+<div class="python-editor">
+<div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div>
+<textarea id="py3" spellcheck="false" style="min-height:330px">PIN_ASLI = "1211"
+
+while True:
+    input_pin = input("Masukkan 4-Digit PIN Brankas: ")
+
+    if input_pin == PIN_ASLI:
+        print("🔓 BRANKAS TERBUKA!")
+        break
+    else:
+        print("❌ PIN SALAH! Coba lagi.")
+
+print("Sistem selesai.")</textarea>
+<div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py3_input" spellcheck="false">0000
+1211</textarea></div>
+<div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py3')">Run code</button><span class="editor-toolbar-note">Coba 1211 langsung, lalu coba satu PIN salah sebelum 1211.</span></div>
+<div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py3_out">Output akan muncul di sini.</div></div>
+</div>
+</section>
+<section class="slide" id="slide-19">
+<h3>Langkah 3: Tambahkan Counter</h3>
+<p class="lead">Saat PIN salah, nilai <code>percobaan</code> bertambah satu.</p>
+<div class="python-editor">
+<div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div>
+<textarea id="py4" spellcheck="false" style="min-height:420px">PIN_ASLI = "1211"
+percobaan = 0
+MAX_PERCOBAAN = 3
+
+while True:
+    input_pin = input("Masukkan 4-Digit PIN Brankas: ")
+
+    if input_pin == PIN_ASLI:
+        print("🔓 BRANKAS TERBUKA!")
+        break
+    else:
+        percobaan = percobaan + 1
+        print(f"❌ PIN SALAH! Percobaan ke-{percobaan}.")
+
+        if percobaan &gt;= MAX_PERCOBAAN:
+            print("🚨 BATAS PERCOBAAN TERCAPAI!")
+            break
+
+print("Sistem selesai.")</textarea>
+<div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py4_input" spellcheck="false">0000
+9999
+1211</textarea></div>
+<div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py4')">Run code</button><span class="editor-toolbar-note">Perhatikan nilai counter setelah tiap PIN salah.</span></div>
+<div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py4_out">Output akan muncul di sini.</div></div>
+</div>
+</section>
+<section class="slide" id="slide-20">
+<h3>Starter Code Lengkap</h3>
+<p class="lead">Ini versi yang aligned dengan Student/Teacher Project: dua <code>break</code>, satu untuk PIN benar dan satu untuk batas percobaan.</p>
+<div class="python-editor">
+<div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div>
+<textarea id="py5" spellcheck="false" style="min-height:560px">print("=== SISTEM KEAMANAN BRANKAS: BANK MUDA ===")
+
+# Menentukan PIN Rahasia Brankas — tetap gunakan data dummy
+PIN_ASLI = "1211"
+
+# Inisialisasi penghitung percobaan
+percobaan = 0
+MAX_PERCOBAAN = 3
+
+# Memulai pengulangan tanpa batas
+while True:
+    input_pin = input("Masukkan 4-Digit PIN Brankas: ")
+
+    if input_pin == PIN_ASLI:
+        print("\n🔓 BRANKAS TERBUKA!")
+        print("Selamat, Anda berhasil mengakses aset simulasi Anda.")
+        break
+
+    else:
+        percobaan = percobaan + 1
+        print("❌ PIN SALAH! Akses ditolak. Silakan coba lagi.\n")
+
+        if percobaan &gt;= MAX_PERCOBAAN:
+            print(f"🚨 BRANKAS TERKUNCI OTOMATIS! Anda salah {MAX_PERCOBAAN} kali.")
+            break
+
+print("------------------------------------------")
+print("Sistem Selesai: Terima kasih telah menjaga keamanan data!")</textarea>
+<div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py5_input" spellcheck="false">0000
+9999
+1211</textarea></div>
+<div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py5')">Run code</button><span class="editor-toolbar-note">Gunakan tombol test case di slide berikutnya untuk mengganti input.</span></div>
+<div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py5_out">Output akan muncul di sini.</div></div>
+</div>
+</section>
+<section class="slide" id="slide-21">
+<h3>Test Case Wajib</h3>
+<p class="lead">Bandingkan <strong>actual output</strong> dengan ekspektasi. Jangan hanya melihat apakah program “jalan”.</p>
+<table class="thin-table"><tr><th>Case</th><th>Urutan PIN</th><th>Ekspektasi</th></tr><tr><td>1</td><td>1211</td><td>Langsung terbuka, 1 iterasi</td></tr><tr><td>2</td><td>0000 → 9999 → 1211</td><td>2 pesan salah, lalu terbuka</td></tr><tr><td>3</td><td>0000 → 9999 → 8888</td><td>Batas 3 salah tercapai</td></tr><tr><td>Edge</td><td>12 11</td><td>Tetap salah karena spasi dihitung karakter</td></tr></table>
+<div class="choice-grid"><button class="choice-btn" onclick="loadVaultCase(this,1)">Muat Case 1</button><button class="choice-btn" onclick="loadVaultCase(this,2)">Muat Case 2</button><button class="choice-btn" onclick="loadVaultCase(this,3)">Muat Case 3</button><button class="choice-btn" onclick="loadVaultCase(this,4)">Muat Edge Case</button></div>
+<div class="feedback-line" id="vaultCaseFeedback"></div>
+</section>
+<section class="slide" id="slide-22">
+<h3>Trace Table: Lacak State Program</h3>
+<p class="lead">Masukkan urutan tiga PIN dan lihat perubahan <code>percobaan</code>.</p>
+<div class="form-grid">
+<label>PIN 1<input id="tracePin1" value="0000"/></label>
+<label>PIN 2<input id="tracePin2" value="9999"/></label>
+<label>PIN 3<input id="tracePin3" value="1211"/></label>
+<button class="primary-btn" onclick="traceVault()">Buat trace</button>
+</div>
+<table class="thin-table"><tr><th>Iterasi</th><th>Input</th><th>Hasil cek</th><th>Counter</th><th>Aksi</th></tr><tbody id="traceVaultBody"><tr><td>1</td><td>0000</td><td>Salah</td><td>1</td><td>Ulang</td></tr><tr><td>2</td><td>9999</td><td>Salah</td><td>2</td><td>Ulang</td></tr><tr><td>3</td><td>1211</td><td>Benar</td><td>2</td><td>break</td></tr></tbody></table>
+</section>
+<section class="slide" id="slide-23">
+<h3>Debug 1: <code>break</code> Salah Posisi</h3>
+<p class="lead">Gejala: program selalu berhenti setelah input pertama, bahkan ketika PIN salah.</p>
+<div class="debug-tabs"><button class="debug-tab active" onclick="showDebug('s9debug-breakbad',this)">Kode salah</button><button class="debug-tab" onclick="showDebug('s9debug-breakfix',this)">Perbaikan</button></div>
+<div class="debug-scenario active" id="s9debug-breakbad"><div class="warning-box"><h4>Masalah</h4><p><code>break</code> sejajar dengan <code>if</code>, sehingga selalu dijalankan pada iterasi pertama.</p><div class="code-card"><pre><code>if input_pin == PIN_ASLI:
+    print("TERBUKA")
+break</code></pre></div></div></div>
+<div class="debug-scenario" id="s9debug-breakfix"><div class="info-box"><h4>Perbaiki indentasi</h4><div class="code-card"><pre><code>if input_pin == PIN_ASLI:
+    print("TERBUKA")
+    break</code></pre></div></div></div>
+</section>
+<section class="slide" id="slide-24">
+<h3>Debug 2: Counter Terus Kembali ke Nol</h3>
+<p class="lead">Gejala: meskipun PIN salah berkali-kali, program tidak pernah mencapai batas tiga percobaan.</p>
+<div class="comparison-table"><div class="compare-card"><h4>Salah</h4><div class="code-card"><pre><code>while True:
+    percobaan = 0
+    # setiap iterasi reset lagi</code></pre></div></div><div class="compare-card"><h4>Benar</h4><div class="code-card"><pre><code>percobaan = 0
+
+while True:
+    # counter mempertahankan nilai</code></pre></div></div></div>
+<div class="interactive-box"><h4>Quick check</h4><p>Counter harus dibuat...</p><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'counterPlaceQ')">sebelum while</button><button class="choice-btn" onclick="quiz(this,false,'counterPlaceQ')">di awal setiap iterasi</button></div><div class="feedback-line" id="counterPlaceQ"></div></div>
+</section>
+<section class="slide" id="slide-25">
+<h3>Debug 3: Infinite Loop</h3>
+<p class="lead">Coba jalankan kode yang lupa <code>break</code>. Simulator slide akan menghentikannya otomatis agar browser tidak hang.</p>
+<div class="python-editor">
+<div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div>
+<textarea id="py6" spellcheck="false" style="min-height:300px">PIN_ASLI = "1211"
+
+while True:
+    input_pin = input("Masukkan PIN: ")
+    if input_pin == PIN_ASLI:
+        print("BRANKAS TERBUKA!")
+        # BUG: break belum ditulis
+    else:
+        print("PIN SALAH")</textarea>
+<div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py6_input" spellcheck="false">1211</textarea></div>
+<div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py6')">Run code</button><span class="editor-toolbar-note">Setelah melihat masalahnya, tambahkan <code>break</code> di dalam <code>if</code>.</span></div>
+<div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py6_out">Output akan muncul di sini.</div></div>
+</div>
+</section>
+<section class="slide" id="slide-26">
+<h3>Literasi Digital: Pembatasan Itu Lapisan Dasar</h3>
+<p class="lead">Sistem profesional tidak hanya mengandalkan satu PIN dan satu loop.</p>
+<div class="visual-grid"><div class="visual-card"><div class="visual-icon">3️⃣</div><h4>Batas Percobaan</h4><p>Menghentikan percobaan berulang setelah jumlah tertentu.</p></div><div class="visual-card"><div class="visual-icon">⏳</div><h4>Cooldown</h4><p>Memberi jeda sebelum percobaan berikutnya.</p></div><div class="visual-card"><div class="visual-icon">2️⃣</div><h4>2FA</h4><p>Memerlukan bukti kedua selain password/PIN.</p></div></div>
+<div class="warning-box"><h4>Data pribadi</h4><p>Notebook bisa dibagikan atau dilihat orang lain. Jangan pernah menyimpan PIN ATM, PIN ponsel, password, atau rahasia pribadi di project latihan.</p></div>
+</section>
+<section class="slide" id="slide-27">
+<h3>Extension Challenge: Tampilkan Sisa Percobaan</h3>
+<p class="lead">Setelah PIN salah, beri user informasi berapa kesempatan yang masih tersisa.</p>
+<div class="python-editor">
+<div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div>
+<textarea id="py7" spellcheck="false" style="min-height:480px">PIN_ASLI = "1211"
+percobaan = 0
+MAX_PERCOBAAN = 3
+
+while True:
+    input_pin = input("Masukkan PIN: ")
+
+    if input_pin == PIN_ASLI:
+        print("🔓 BRANKAS TERBUKA!")
+        break
+    else:
+        percobaan = percobaan + 1
+        sisa = MAX_PERCOBAAN - percobaan
+        print(f"❌ PIN SALAH! Sisa percobaan: {sisa}")
+
+        if percobaan &gt;= MAX_PERCOBAAN:
+            print("🚨 Akses diblokir sementara.")
+            break</textarea>
+<div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py7_input" spellcheck="false">0000
+9999
+8888</textarea></div>
+<div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py7')">Run code</button><span class="editor-toolbar-note">Coba ubah input ketiga menjadi 1211.</span></div>
+<div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py7_out">Output akan muncul di sini.</div></div>
+</div>
+</section>
+<section class="slide" id="slide-28">
+<h3>Output Minimum</h3>
+<p class="lead">Sebelum submit, pastikan fitur inti ini sudah berjalan.</p>
+<ul class="checklist">
+<li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> PIN latihan disimpan sebagai <code>string</code>.</li>
+<li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Program memakai <code>while True</code>.</li>
+<li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Input PIN berada di dalam loop.</li>
+<li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> <code>break</code> menghentikan loop saat PIN benar.</li>
+<li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Counter dibuat sebelum <code>while</code> dan bertambah saat PIN salah.</li>
+<li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Batas maksimal tiga kesalahan dapat menghentikan loop.</li>
+<li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Minimal dua test case sudah cocok dengan ekspektasi.</li>
+</ul>
+</section>
+<section class="slide" id="slide-29">
+<h3>Refleksi Developer</h3>
+<p class="lead">Pilih jawaban yang paling tepat, lalu tulis satu catatan debugging.</p>
+<div class="interactive-box"><h4>Apa perbedaan utama <code>for</code> dan <code>while</code> pada dua sesi ini?</h4><div class="choice-grid"><button class="choice-btn" onclick="quiz(this,true,'reflect9')"><code>for</code> cocok untuk jumlah putaran yang diketahui; <code>while</code> bergantung pada kondisi</button><button class="choice-btn" onclick="quiz(this,false,'reflect9')">Keduanya selalu harus berjalan 3 kali</button></div><div class="feedback-line" id="reflect9"></div></div>
+<div class="form-grid"><label>Satu bug yang kamu temukan hari ini<textarea placeholder="Contoh: break-ku sejajar dengan if, jadi loop berhenti terlalu cepat..."></textarea></label></div>
+</section>
+<section class="slide" id="slide-30">
+<h3>Simpan &amp; Checkout</h3>
+<p class="lead">Pastikan project tersimpan sebelum kembali ke CMS.</p>
+<ul class="checklist"><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Nama notebook jelas dan sesuai sesi.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Jalankan test terakhir setelah perbaikan.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Pastikan perubahan sudah tersimpan di Colab.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Kembali ke <strong>Materi Belajar → Sesi 9 → Checkout Quiz</strong>.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox"/> Jawab 5 soal, tekan Submit/Kirim, lalu cek status penyelesaian.</li></ul>
+<div class="info-box"><h4>Jika ada kendala</h4><p>Minta bantuan untuk masalah navigasi, koneksi, atau tombol submit. Kerjakan isi quiz secara mandiri.</p></div>
+</section>
+<section class="slide" id="slide-31">
+<span class="eyebrow">Penutup</span>
+<h2>Kamu Sudah Membuat Brankas Terkunci</h2>
+<p class="lead">Hari ini kamu memakai pengulangan bersyarat untuk membuat program yang terus meminta input sampai kondisi berhenti terpenuhi.</p>
+<div class="metrics"><div class="metric-box"><strong>while</strong><span>ulang berdasarkan kondisi</span></div><div class="metric-box"><strong>break</strong><span>keluar dari loop</span></div><div class="metric-box"><strong>counter</strong><span>catat percobaan</span></div><div class="metric-box"><strong>🔐</strong><span>keamanan dasar</span></div></div>
+<div class="example-box"><h4>Kalimat kunci</h4><p><strong><code>while</code> mengontrol kapan proses terus berulang, sedangkan <code>break</code> menentukan kapan loop harus berhenti.</strong></p></div>
+<p class="mini-note">Sesi berikutnya: membuat program lebih tahan input salah dengan <code>try-except</code> dan <code>ValueError</code>.</p>
+</section>
+</div>
+<div class="navigation"><button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)"><span>←</span> Previous</button><div class="slide-indicator"><span id="currentSlide">1</span> / <span id="totalSlides">31</span></div><button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next <span>→</span></button></div>
+</div>
+<div class="explanation-panel">
+<section class="explanation active" id="explanation-1"><h3>Project yang Akan Dibuat</h3>
+<p>Di Sesi 9, kamu akan membuat <strong>Brankas Terkunci</strong>: program CLI yang meminta PIN berulang kali sampai kondisi berhenti tercapai. Konsep utamanya adalah <code>while loop</code>, yaitu pengulangan yang cocok ketika kita <em>belum tahu</em> sejak awal berapa kali proses harus diulang.</p>
+<p>Pada versi dasar, program terus meminta PIN. Jika PIN cocok dengan PIN dummy, program menampilkan pesan bahwa brankas terbuka lalu menjalankan <code>break</code>. Pada versi challenge, program juga mencatat jumlah kesalahan dan menghentikan percobaan setelah maksimal tiga kali.</p>
+<div class="info-box"><h4>Hubungan dengan Sesi 8</h4><p>Sesi 8 memakai <code>for</code> karena jumlah iterasinya sudah diketahui. Di sini, jumlah percobaan bergantung pada input user, jadi <code>while</code> lebih cocok.</p></div>
+<div class="warning-box"><h4>Data latihan saja</h4><p>PIN pada project adalah PIN simulasi. Jangan pernah memasukkan PIN ATM, password akun, atau kode rahasia asli ke notebook latihan.</p></div></section>
+<section class="explanation" id="explanation-2"><h3>Target Belajar Sesi 9</h3>
+<p>Alur sesi ini dirancang dari memahami masalah sampai membuat project yang bisa diuji. Kamu akan membandingkan <code>for</code> dan <code>while</code>, membaca struktur <code>while True</code>, memahami fungsi <code>break</code>, lalu menerapkannya pada sistem PIN berulang.</p>
+<p>Setelah logika dasar berjalan, kamu akan menambah <strong>counter percobaan</strong>, melakukan test case, membaca trace program, dan memperbaiki bug seperti <code>break</code> yang salah posisi atau counter yang terus kembali ke nol.</p>
+<div class="example-box"><h4>Kompetensi yang perlu terlihat</h4><p>Kamu bukan hanya bisa menyalin kode, tetapi bisa menjelaskan <em>mengapa</em> loop mengulang, kapan loop berhenti, dan apa risiko keamanan jika percobaan input tidak dibatasi.</p></div></section>
+<section class="explanation" id="explanation-3"><h3>Workspace dan Digital Safety</h3>
+<p>Gunakan Google Colab atau editor Python yang biasa dipakai di kelas. Buat notebook khusus Sesi 9 agar kode, output, dan hasil debugging mudah ditemukan kembali saat pengumpulan.</p>
+<p>Karena project membahas PIN, gunakan nilai dummy seperti <code>1211</code>. Notebook dapat tersimpan di cloud dan mungkin dibagikan lewat izin Google Drive, jadi jangan menyimpan PIN ATM, password email, OTP, nomor kartu, atau data rahasia lain di dalam kode.</p>
+<div class="warning-box"><h4>Prinsip developer</h4><p>Data uji harus cukup realistis untuk menguji program, tetapi tidak boleh merupakan data sensitif sungguhan.</p></div></section>
+<section class="explanation" id="explanation-4"><h3>Memilih Loop yang Tepat</h3>
+<p><code>for</code> dipakai ketika jumlah pengulangan sudah bisa ditentukan, misalnya “ulang 5 kali” atau “proses tahun 1 sampai 10”. <code>while</code> dipakai ketika pengulangan bergantung pada kondisi yang terus dievaluasi.</p>
+<p>Pada Brankas Terkunci, kita tidak tahu apakah PIN akan benar pada percobaan pertama, kedua, atau ketiga. Karena jumlah putaran belum pasti, program lebih alami ditulis dengan <code>while</code>.</p>
+<div class="example-box"><h4>Cara berpikir cepat</h4><p><strong>Sudah tahu jumlah putaran?</strong> Pertimbangkan <code>for</code>. <strong>Berhenti saat kondisi berubah?</strong> Pertimbangkan <code>while</code>.</p></div></section>
+<section class="explanation" id="explanation-5"><h3>Percobaan Tak Terbatas dan Brute-Force</h3>
+<p>Jika sistem mengizinkan input PIN tanpa batas, seseorang atau program otomatis dapat mencoba kombinasi berulang kali sampai menemukan nilai yang benar. Pola mencoba banyak kombinasi seperti ini disebut <strong>brute-force</strong>.</p>
+<p>Karena itu, sistem autentikasi sebaiknya tidak hanya mengecek “PIN benar atau salah”, tetapi juga mengendalikan berapa banyak percobaan yang diizinkan. Di project ini, kita menyederhanakannya menjadi batas maksimal tiga kesalahan.</p>
+<div class="warning-box"><h4>Fokus sesi</h4><p>Kita mempelajari risiko dan logika pertahanannya, bukan cara melakukan serangan. Tujuannya adalah memahami mengapa batas percobaan penting dalam desain sistem.</p></div></section>
+<section class="explanation" id="explanation-6"><h3>Struktur Dasar <code>while</code></h3>
+<p>Bentuk umum <code>while</code> adalah <code>while kondisi:</code>. Python mengecek kondisi sebelum setiap iterasi. Selama hasilnya <code>True</code>, seluruh baris yang terindentasi di bawahnya dijalankan.</p>
+<p>Setelah blok selesai, alur kembali ke baris <code>while</code> dan kondisi dicek lagi. Jika suatu saat kondisi menjadi <code>False</code>, loop selesai dan Python melanjutkan ke baris sesudah loop.</p>
+<div class="info-box"><h4>Perhatikan indentasi</h4><p>Seperti pada <code>if</code> dan <code>for</code>, tanda titik dua membuka blok. Baris yang menjadi bagian dari loop harus menjorok ke kanan secara konsisten.</p></div></section>
+<section class="explanation" id="explanation-7"><h3><code>while True</code> dan Infinite Loop</h3>
+<p><code>True</code> adalah nilai Boolean yang selalu benar. Jadi, <code>while True:</code> berarti “terus ulangi blok ini”. Pola ini berguna untuk program yang menunggu input user sampai kondisi tertentu terjadi.</p>
+<p>Namun, karena kondisinya tidak pernah berubah menjadi <code>False</code>, program membutuhkan jalan keluar yang jelas. Pada Brankas Terkunci, jalan keluarnya adalah <code>break</code> ketika PIN benar dan, pada challenge, <code>break</code> lain ketika batas percobaan tercapai.</p>
+<div class="warning-box"><h4>Tanpa jalan keluar</h4><p><code>while True</code> tanpa mekanisme berhenti dapat menghasilkan <em>infinite loop</em>: program terus berulang dan tidak pernah mencapai kode setelah loop.</p></div></section>
+<section class="explanation" id="explanation-8"><h3>Fungsi <code>break</code></h3>
+<p><code>break</code> menghentikan loop terdekat secara langsung. Python tidak menunggu kondisi <code>while</code> menjadi <code>False</code>; eksekusi langsung keluar dari loop dan berlanjut ke baris setelah blok pengulangan.</p>
+<p>Karena itu, posisi <code>break</code> sangat penting. Pada project ini, <code>break</code> untuk membuka brankas harus berada di dalam cabang <code>if input_pin == PIN_DUMMY:</code>. Jika indentasinya salah, program bisa berhenti walaupun PIN salah.</p>
+<div class="example-box"><h4>Bayangkan sebagai pintu darurat</h4><p>Loop boleh terus berputar, tetapi saat kondisi target tercapai, <code>break</code> membuka pintu keluar dan proses pengulangan selesai.</p></div></section>
+<section class="explanation" id="explanation-9"><h3>Membaca Alur per Iterasi</h3>
+<p>Trace membantu kita mengikuti program langkah demi langkah. Misalnya input yang diberikan adalah <code>0000</code>, lalu <code>9999</code>, lalu <code>1211</code>. Pada iterasi pertama dan kedua, perbandingan menghasilkan <code>False</code>, sehingga loop kembali ke atas dan meminta input baru.</p>
+<p>Pada iterasi ketiga, <code>input_pin == PIN_DUMMY</code> menjadi <code>True</code>. Program menampilkan pesan berhasil, menjalankan <code>break</code>, lalu keluar dari <code>while</code>.</p>
+<div class="info-box"><h4>Kenapa trace penting?</h4><p>Kalau output program berbeda dari prediksi, kamu bisa mencari pada iterasi mana state atau jalur kondisinya mulai melenceng.</p></div></section>
+<section class="explanation" id="explanation-10"><h3>Kenapa PIN Lebih Tepat sebagai <code>string</code>?</h3>
+<p>PIN adalah <strong>kode identifikasi</strong>, bukan angka untuk dihitung. Karena itu, PIN lebih aman dimodelkan sebagai teks: <code>PIN_DUMMY = "1211"</code>.</p>
+<p>String juga mempertahankan nol di depan. PIN <code>"0121"</code> tetap memiliki empat karakter, sedangkan jika diperlakukan sebagai integer, nilai tersebut secara numerik menjadi <code>121</code> dan format aslinya hilang.</p>
+<div class="example-box"><h4>Yang kita lakukan</h4><p><code>input()</code> menghasilkan string, sehingga perbandingan bisa langsung dilakukan dengan <code>==</code> terhadap PIN dummy yang juga berupa string.</p></div></section>
+<section class="explanation" id="explanation-11"><h3>State Counter</h3>
+<p>Counter menyimpan jumlah kesalahan yang sudah terjadi. Nilai awalnya <code>percobaan = 0</code> karena sebelum user memasukkan PIN, belum ada percobaan salah.</p>
+<p>Ketika PIN salah, baris <code>percobaan = percobaan + 1</code> mengambil nilai lama lalu menambah satu. Nilai ini harus <strong>bertahan</strong> dari satu iterasi ke iterasi berikutnya: 0 → 1 → 2 → 3.</p>
+<div class="warning-box"><h4>Jangan reset di dalam loop</h4><p>Jika <code>percobaan = 0</code> diletakkan di dalam <code>while</code>, setiap putaran nilainya kembali ke nol. Akibatnya, batas tiga kali tidak pernah benar-benar tercapai.</p></div>
+<div class="info-box"><h4>Ini disebut state</h4><p>State adalah informasi tentang kondisi program saat ini yang perlu dibawa ke langkah berikutnya. Counter adalah contoh state sederhana.</p></div></section>
+<section class="explanation" id="explanation-12"><h3>Dua Kondisi Terminal</h3>
+<p>Versi challenge memiliki dua alasan untuk keluar dari loop. Pertama, <strong>PIN benar</strong>: program membuka brankas dan menghentikan pengulangan. Kedua, <strong>kesalahan sudah mencapai tiga kali</strong>: program memblokir akses sementara lalu berhenti.</p>
+<p>Dua kondisi ini sama-sama menjalankan <code>break</code>, tetapi berada pada jalur logika yang berbeda. Karena itu, susunan <code>if</code>, <code>else</code>, counter, dan pengecekan batas harus dibaca sesuai urutan.</p>
+<div class="example-box"><h4>Urutan saat PIN salah</h4><p>Tambah counter → tampilkan nomor percobaan → cek apakah counter sudah ≥ 3 → jika ya, blokir dan <code>break</code>; jika belum, kembali ke atas.</p></div></section>
+<section class="explanation" id="explanation-13"><h3>Bug Reading Code: <code>break</code> Salah Posisi</h3>
+<p>Bug ini tidak selalu menghasilkan pesan error. Program bisa tetap berjalan, tetapi perilakunya salah. Jika <code>break</code> ditulis sejajar dengan <code>if</code> di dalam <code>while</code>, baris itu akan dijalankan pada setiap iterasi, bukan hanya ketika PIN benar.</p>
+<p>Akibatnya, program berhenti setelah satu input saja. Ini disebut <strong>logic error</strong>: sintaks sah, tetapi logikanya tidak sesuai tujuan.</p>
+<div class="info-box"><h4>Cara debug</h4><p>Baca indentasi seperti struktur bertingkat. Tanyakan: “Kondisi apa yang seharusnya mengaktifkan baris ini?” Lalu pastikan posisi baris berada di dalam blok kondisi tersebut.</p></div></section>
+<section class="explanation" id="explanation-14"><h3>Latihan Pola <code>while True</code> + <code>break</code></h3>
+<p>Latihan dengan kata <code>stop</code> memisahkan konsep loop dari konteks PIN. Program terus meminta teks selama user belum mengetik kata yang menjadi sinyal berhenti.</p>
+<p>Strukturnya sama dengan project utama: <code>input()</code> berada di dalam loop supaya mendapat nilai baru setiap iterasi, <code>if</code> memeriksa target, lalu <code>break</code> menghentikan loop saat target ditemukan.</p>
+<div class="example-box"><h4>Coba eksperimen</h4><p>Masukkan beberapa baris input sebelum <code>stop</code>. Perhatikan berapa kali output muncul dan pada titik mana program tidak membaca input berikutnya lagi.</p></div></section>
+<section class="explanation" id="explanation-15"><h3>Prediksi sebelum Menekan Run</h3>
+<p>Kebiasaan developer yang baik adalah menentukan <em>expected output</em> lebih dulu. Untuk input <code>0000</code>, <code>9999</code>, lalu <code>1211</code>, kita mengharapkan dua pesan PIN salah dan satu pesan brankas terbuka.</p>
+<p>Jika hasil aktual berbeda, prediksi tadi menjadi alat debugging. Misalnya program berhenti setelah <code>0000</code>, kemungkinan besar <code>break</code> berada di posisi yang salah. Jika program tidak pernah berhenti setelah <code>1211</code>, cek kondisi perbandingan atau posisi <code>break</code>.</p></section>
+<section class="explanation" id="explanation-16"><h3>Blueprint Project Brankas Terkunci</h3>
+<p>Project dapat dipecah menjadi pola Input–Process–Output. <strong>Input</strong>: PIN yang diketik user. <strong>Process</strong>: loop, perbandingan string, counter kesalahan, dan pengecekan batas. <strong>Output</strong>: pesan berhasil, pesan PIN salah, atau pesan akses diblokir.</p>
+<p>Bangun program secara bertahap. Pertama buat PIN dummy dan loop dasar. Setelah itu pastikan <code>break</code> bekerja. Baru tambahkan counter dan batas tiga percobaan. Cara ini membuat sumber bug lebih mudah ditemukan.</p>
+<div class="info-box"><h4>Checkpoint</h4><p>Setiap kali menambah satu fitur, jalankan minimal satu test case sebelum lanjut ke fitur berikutnya.</p></div></section>
+<section class="explanation" id="explanation-17"><h3>Variabel yang Harus Ada sebelum Loop</h3>
+<p>PIN dummy perlu tersedia setiap kali input dibandingkan. Counter juga perlu mempertahankan nilainya. Karena itu, keduanya dibuat sebelum <code>while True</code>.</p>
+<p>Jika memakai konstanta batas seperti <code>MAX_PERCOBAAN = 3</code>, letakkan bersama variabel awal agar aturan program mudah dibaca dan tidak tersebar di banyak baris.</p>
+<div class="example-box"><h4>State awal</h4><p><code>PIN_DUMMY = "1211"</code><br/><code>percobaan = 0</code><br/><code>MAX_PERCOBAAN = 3</code></p></div></section>
+<section class="explanation" id="explanation-18"><h3>Kenapa <code>input()</code> Harus di Dalam Loop?</h3>
+<p>Tujuan loop adalah memberi kesempatan user memasukkan nilai baru setiap putaran. Karena itu, <code>input_pin = input(...)</code> harus dieksekusi lagi pada setiap iterasi.</p>
+<p>Jika <code>input()</code> diletakkan sebelum <code>while</code>, variabel <code>input_pin</code> hanya diisi sekali. Loop kemudian membandingkan nilai yang sama berulang-ulang, sehingga user tidak punya kesempatan memperbaiki PIN.</p>
+<div class="info-box"><h4>Urutan satu iterasi</h4><p>Minta input → bandingkan → tentukan aksi → bila belum selesai, kembali meminta input baru.</p></div></section>
+<section class="explanation" id="explanation-19"><h3>Menambah Counter dan Batas</h3>
+<p>Counter hanya bertambah ketika PIN salah. Itu sebabnya baris penambahan ditempatkan di dalam cabang <code>else</code>, bukan pada jalur PIN benar.</p>
+<p>Setelah nilai bertambah, program mengecek <code>percobaan &gt;= MAX_PERCOBAAN</code>. Operator <code>&gt;=</code> dipakai agar saat nilai tepat 3, kondisi langsung dianggap benar dan akses dihentikan.</p>
+<div class="warning-box"><h4>Dua bug umum</h4><p>Counter dibuat ulang di dalam loop → nilainya tidak pernah mencapai 3. <code>break</code> pengecekan batas salah indentasi → program bisa berhenti terlalu cepat atau justru tidak berhenti.</p></div></section>
+<section class="explanation" id="explanation-20"><h3>Membaca Starter Code Lengkap</h3>
+<p>Kode lengkap menggabungkan semua konsep inti Sesi 9: PIN dummy sebagai string, <code>while True</code>, <code>input()</code> berulang, perbandingan <code>==</code>, counter, dan dua <code>break</code>.</p>
+<p>Baca program dari atas ke bawah, lalu ulangi secara mental bagian loop. Ingat bahwa setelah blok loop selesai tanpa <code>break</code>, Python kembali ke <code>while True</code>. Jika salah satu <code>break</code> dijalankan, alur meloncat ke baris setelah loop.</p>
+<div class="warning-box"><h4>Nama variabel bukan izin memakai data asli</h4><p>Walaupun sample project mungkin memakai nama seperti <code>PIN_ASLI</code>, nilainya tetap harus berupa PIN dummy untuk latihan.</p></div></section>
+<section class="explanation" id="explanation-21"><h3>Testing yang Terstruktur</h3>
+<p>Satu test case saja tidak cukup. Program perlu diuji pada beberapa jalur logika. <strong>PIN benar langsung</strong> memeriksa jalur sukses. <strong>Dua salah lalu benar</strong> memeriksa apakah loop kembali dan counter bertambah. <strong>Tiga kali salah</strong> memeriksa apakah batas benar-benar menghentikan sistem.</p>
+<p>Karena PIN berupa string, pengujian juga bisa melihat format input. String dibandingkan persis sesuai karakter yang dimasukkan, jadi tambahan spasi atau perubahan karakter membuat hasil perbandingan berbeda.</p>
+<div class="info-box"><h4>Prinsip test</h4><p>Untuk setiap case, tulis dulu input dan hasil yang diharapkan. Setelah Run, bandingkan output aktual dengan ekspektasi.</p></div></section>
+<section class="explanation" id="explanation-22"><h3>Trace Table dan Perubahan State</h3>
+<p>Trace table mencatat apa yang terjadi pada setiap iterasi: input yang masuk, apakah perbandingan PIN menghasilkan True/False, nilai counter setelah proses, dan aksi berikutnya.</p>
+<p>Pada PIN salah, counter bertambah. Pada PIN benar, program seharusnya keluar sebelum menambah counter. Hubungan ini membantu kamu mengecek apakah baris berada di cabang yang tepat.</p>
+<div class="example-box"><h4>Contoh pola</h4><p>Iterasi 1: salah → counter 1 → ulang. Iterasi 2: salah → counter 2 → ulang. Iterasi 3: benar → buka → <code>break</code>.</p></div></section>
+<section class="explanation" id="explanation-23"><h3>Debug: Program Berhenti Terlalu Cepat</h3>
+<p>Jika program berhenti setelah input pertama walaupun PIN salah, cek terlebih dahulu posisi <code>break</code>. Bug ini sering terjadi karena indentasi membuat <code>break</code> berada di luar cabang yang seharusnya.</p>
+<p>Jangan langsung mengganti seluruh program. Bandingkan struktur indentasi dengan blueprint: <code>break</code> sukses hanya boleh dijalankan ketika kondisi PIN benar.</p>
+<div class="info-box"><h4>Debug satu hal dulu</h4><p>Perbaiki posisi <code>break</code>, Run ulang dengan test case salah-lalu-benar, lalu baru lanjut mengecek bagian lain.</p></div></section>
+<section class="explanation" id="explanation-24"><h3>Debug: Counter Tidak Pernah Naik</h3>
+<p>Gejalanya biasanya pesan selalu menunjukkan percobaan pertama, atau batas tiga kali tidak pernah tercapai. Penyebab umum: <code>percobaan = 0</code> berada di dalam loop.</p>
+<p>Inisialisasi seharusnya terjadi satu kali sebelum pengulangan dimulai. Setelah itu, loop hanya mengubah nilainya saat PIN salah. Dengan begitu, state bergerak 0 → 1 → 2 → 3.</p>
+<div class="warning-box"><h4>Lokasi baris memengaruhi perilaku</h4><p>Baris yang sama dapat menghasilkan program berbeda hanya karena ditempatkan sebelum loop atau di dalam loop.</p></div></section>
+<section class="explanation" id="explanation-25"><h3>Debug: Infinite Loop</h3>
+<p><code>while True</code> memang dirancang terus berjalan. Jika tidak ada <code>break</code> yang bisa dicapai, program dapat mengulang tanpa akhir. Pada program input interaktif, kamu mungkin melihat prompt terus muncul atau proses tidak pernah sampai ke bagian setelah loop.</p>
+<p>Untuk mencari penyebabnya, cek dua hal: apakah kondisi target benar-benar bisa menjadi True, dan apakah <code>break</code> berada di jalur yang dapat dieksekusi.</p>
+<div class="warning-box"><h4>Simulator slide</h4><p>Editor di slide memiliki batas keselamatan agar halaman tidak hang. Di Python/Colab asli, hentikan eksekusi jika loop tidak terkendali, lalu perbaiki logikanya sebelum Run lagi.</p></div></section>
+<section class="explanation" id="explanation-26"><h3>Keamanan Tidak Berhenti pada “3 Kali”</h3>
+<p>Batas percobaan adalah lapisan dasar untuk memperkecil kesempatan mencoba PIN berkali-kali. Modul juga mengenalkan contoh mekanisme yang dipakai sistem profesional, seperti <strong>cooldown time</strong> setelah beberapa kegagalan dan <strong>Two-Factor Authentication (2FA)</strong>.</p>
+<p>Artinya, autentikasi yang baik biasanya memakai beberapa lapisan, bukan hanya satu kondisi <code>if</code>. Project kita sengaja disederhanakan agar fokus pada logika loop dan literasi digital.</p>
+<div class="info-box"><h4>Yang perlu dipahami</h4><p>Developer harus memikirkan bukan hanya “fitur bekerja”, tetapi juga “apa yang terjadi jika user atau program mencoba sistem berkali-kali?”.</p></div></section>
+<section class="explanation" id="explanation-27"><h3>Extension Challenge: Sisa Percobaan</h3>
+<p>Setelah counter berfungsi, kamu bisa membuat feedback yang lebih informatif. Nilai sisa kesempatan dapat dihitung dengan <code>MAX_PERCOBAAN - percobaan</code>.</p>
+<p>Pesan seperti “Percobaan ke-2 dari 3” atau “Sisa 1 kesempatan” membantu user memahami state sistem. Namun, logika utamanya tetap sama: saat counter mencapai batas, tampilkan pesan blokir lalu <code>break</code>.</p>
+<div class="example-box"><h4>Urutan yang aman</h4><p>Tambah counter → hitung/tampilkan sisa → cek batas → bila batas tercapai, blokir dan keluar.</p></div></section>
+<section class="explanation" id="explanation-28"><h3>Checklist Output Minimum</h3>
+<p>Project inti dianggap berhasil jika loop benar-benar meminta input berulang, PIN benar dapat menghentikan loop, dan versi challenge mampu menghentikan sistem setelah batas kesalahan tercapai.</p>
+<p>Selain “tidak error”, cek juga perilaku. Program yang berjalan tanpa SyntaxError masih bisa memiliki logic error, misalnya counter reset atau <code>break</code> selalu dieksekusi.</p>
+<div class="info-box"><h4>Sebelum submit</h4><p>Run minimal tiga test case: benar langsung, salah lalu benar, dan tiga kali salah. Pastikan output sesuai dengan expected result.</p></div></section>
+<section class="explanation" id="explanation-29"><h3>Refleksi sebagai Developer</h3>
+<p>Empat pertanyaan refleksi utama sesi ini menguji apakah kamu benar-benar memahami keputusan desain program: kapan memakai <code>for</code> atau <code>while</code>, mengapa PIN disimpan sebagai string, mengapa <code>while True</code> membutuhkan <code>break</code>, dan mengapa counter harus dibuat sebelum loop.</p>
+<p>Coba jawab dengan alasan, bukan hanya definisi. Misalnya: “PIN memakai string karena merupakan identifier dan bisa memiliki nol di depan,” bukan sekadar “karena PIN adalah teks”.</p>
+<div class="example-box"><h4>Tanda kamu sudah paham</h4><p>Kamu bisa memprediksi apa yang rusak jika satu baris dipindahkan, dihapus, atau diubah indentasinya.</p></div></section>
+<section class="explanation" id="explanation-30"><h3>Simpan, Uji, lalu Checkout</h3>
+<p>Sebelum keluar dari notebook, pastikan versi terakhir sudah disimpan dan sudah pernah dijalankan dari state yang bersih. Periksa bahwa output test case masih sesuai setelah perubahan terakhir.</p>
+<p>Setelah project selesai, kembali ke LMS dan kerjakan Checkout Quiz Sesi 9 sesuai instruksi kelas. Kuis digunakan untuk mengecek pemahaman konsep, bukan hanya keberhasilan menyalin project.</p>
+<div class="warning-box"><h4>Sebelum pengumpulan</h4><p>Pastikan notebook tidak berisi PIN/password asli, tidak ada cell eksperimen yang membuat infinite loop, dan nama file mudah dikenali.</p></div></section>
+<section class="explanation" id="explanation-31"><h3>Penutup Sesi 9</h3>
+<p>Hari ini kamu berpindah dari pengulangan dengan jumlah pasti ke pengulangan berbasis kondisi. Kamu sudah melihat bagaimana <code>while</code> mengevaluasi kondisi setiap iterasi, bagaimana <code>while True</code> membuat loop terus berjalan, dan bagaimana <code>break</code> menjadi mekanisme keluar.</p>
+<p>Kamu juga menambahkan state melalui counter, membatasi percobaan, melakukan testing beberapa jalur, dan menghubungkan desain program dengan risiko brute-force secara sederhana.</p>
+<div class="example-box"><h4>Kalimat kunci</h4><p><strong>Loop yang baik tidak hanya tahu bagaimana mengulang, tetapi juga punya kondisi berhenti yang jelas dan bisa diuji.</strong></p></div>
+<p>Sesi berikutnya akan melanjutkan ide program yang lebih tahan terhadap kesalahan user melalui penanganan error.</p></section>
+</div>
+</div>
+<script>
+const ACCESS_CODE='RGMDSHS26';
+let currentSlide=1;
+let totalSlides=0;
+window.addEventListener('load',()=>{
+  totalSlides=document.querySelectorAll('.slide').length;
+  document.getElementById('totalSlides').textContent=totalSlides;
+  setTimeout(()=>document.querySelector('.access-popup').classList.add('show'),50);
+  const input=document.getElementById('accessInput');
+  input.focus();
+  input.addEventListener('input',e=>{e.target.value=e.target.value.toUpperCase()});
+  input.addEventListener('keydown',e=>{if(e.key==='Enter')checkAccessCode()});
+  initPyEditors();
+  updateSlide();
+});
+function checkAccessCode(){const input=document.getElementById('accessInput'),error=document.getElementById('accessError');if(input.value.trim().toUpperCase()===ACCESS_CODE){document.getElementById('accessPopup').style.display='none';document.getElementById('mainContent').style.display='flex';updateSlide();}else{error.classList.add('show');input.value='';input.focus();}}
+function changeSlide(direction){const next=currentSlide+direction;if(next<1||next>totalSlides)return;currentSlide=next;updateSlide();}
+function updateSlide(){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.explanation').forEach(e=>e.classList.remove('active'));const s=document.getElementById(`slide-${currentSlide}`);if(s)s.classList.add('active');const e=document.getElementById(`explanation-${currentSlide}`);if(e)e.classList.add('active');document.getElementById('currentSlide').textContent=currentSlide;document.getElementById('prevBtn').disabled=currentSlide===1;document.getElementById('nextBtn').disabled=currentSlide===totalSlides;document.getElementById('progressFill').style.width=`${(currentSlide/totalSlides)*100}%`;const sc=document.querySelector('.slide-content');const ep=document.querySelector('.explanation-panel');if(sc)sc.scrollTop=0;if(ep)ep.scrollTop=0;}
+document.addEventListener('keydown',e=>{if(document.getElementById('mainContent').style.display==='none')return;if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(e.key==='ArrowRight')changeSlide(1);if(e.key==='ArrowLeft')changeSlide(-1);});
+function deviceCheck(btn){btn.classList.toggle('correct');}
+function selectAny(btn){const group=btn.parentElement;group.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');}
+function quiz(btn,ok,feedbackId){const group=btn.parentElement;group.querySelectorAll('.choice-btn').forEach(b=>b.disabled=true);btn.classList.add(ok?'correct':'wrong');const fb=document.getElementById(feedbackId);fb.textContent=ok?'Betul.':'Belum tepat. Baca kembali penjelasan di panel kanan.';fb.style.color=ok?'#176b35':'#a42820';}
+function toggleCheck(item){const cb=item.querySelector('input');cb.checked=!cb.checked;item.classList.toggle('done',cb.checked);}
+function toggleAccordion(btn){const box=btn.closest('.accordion');if(box)box.classList.toggle('open');}
+function showDebug(id,btn){const wrap=btn.closest('.slide');wrap.querySelectorAll('.debug-tab').forEach(b=>b.classList.remove('active'));wrap.querySelectorAll('.debug-scenario').forEach(s=>s.classList.remove('active'));btn.classList.add('active');const el=document.getElementById(id);if(el)el.classList.add('active');}
+function showWhilePart(part,btn){document.querySelectorAll('#slide-6 .component-pill').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const d={keyword:['while','Kata kunci untuk memulai pengulangan berbasis kondisi.'],condition:['kondisi','Diperiksa sebelum setiap iterasi. Loop berjalan selama nilainya True.'],colon:['Titik dua (:)','Menandai awal blok while.'],indent:['Indentasi','Baris yang menjorok adalah bagian yang diulang.']};document.getElementById('whilePartInfo').innerHTML=`<h4>${d[part][0]}</h4><p>${d[part][1]}</p>`;}
+function calcBruteTime(){const combos=Math.max(1,Number(document.getElementById('comboCount').value)||10000);const rate=Math.max(1,Number(document.getElementById('attemptRate').value)||1000);const sec=combos/rate;const text=sec<60?`${sec.toFixed(sec<10?2:0)} detik`:`${(sec/60).toFixed(2)} menit`;document.getElementById('bruteResult').innerHTML=`<h4>Ilustrasi waktu</h4><p>${combos.toLocaleString('id-ID')} kombinasi ÷ ${rate.toLocaleString('id-ID')} percobaan/detik ≈ <strong>${text}</strong>.</p><p>Ini hanya ilustrasi untuk memahami alasan pembatasan percobaan.</p>`;}
+function traceSimplePin(btn,seq){document.querySelectorAll('#slide-9 .choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');let html='';for(let i=0;i<seq.length;i++){const pin=seq[i],ok=pin==='1211';html+=`<div class="trace-step"><strong>Iterasi ${i+1}</strong><span>${pin} → ${ok?'Benar, break':'Salah, kembali ke atas'}</span></div>`;if(ok)break;}document.getElementById('simplePinTrace').innerHTML=html;}
+function showStopReason(kind,btn){document.querySelectorAll('#slide-12 .key-card').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const d={correct:['PIN benar','Program mencetak pesan berhasil lalu menjalankan break. Loop selesai tanpa menambah counter.'],limit:['Batas percobaan','Setelah kesalahan ketiga, program mencetak pesan batas tercapai lalu menjalankan break.']};document.getElementById('stopReasonInfo').innerHTML=`<h4>${d[kind][0]}</h4><p>${d[kind][1]}</p>`;}
+function loadVaultCase(btn,n){document.querySelectorAll('#slide-21 .choice-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');const cases={1:['1211','Case 1 dimuat: PIN benar pada iterasi pertama.'],2:['0000\n9999\n1211','Case 2 dimuat: dua kali salah, lalu benar.'],3:['0000\n9999\n8888','Case 3 dimuat: tiga kali salah, batas percobaan tercapai.'],4:['12 11\n1211','Edge case dimuat: input dengan spasi berbeda dari 1211.']};const input=document.getElementById('py5_input');input.value=cases[n][0];input.classList.add('preset-loaded');setTimeout(()=>input.classList.remove('preset-loaded'),1000);document.getElementById('vaultCaseFeedback').textContent=cases[n][1]+' Buka slide Starter Code Lengkap lalu klik Run code.';}
+function traceVault(){const seq=[document.getElementById('tracePin1').value,document.getElementById('tracePin2').value,document.getElementById('tracePin3').value];let attempts=0,rows='';for(let i=0;i<seq.length;i++){const pin=seq[i];if(pin==='1211'){rows+=`<tr><td>${i+1}</td><td>${escapeHtml(pin)}</td><td>Benar</td><td>${attempts}</td><td>break</td></tr>`;break;}attempts++;const stop=attempts>=3;rows+=`<tr><td>${i+1}</td><td>${escapeHtml(pin)}</td><td>Salah</td><td>${attempts}</td><td>${stop?'break — batas':'Ulang'}</td></tr>`;if(stop)break;}document.getElementById('traceVaultBody').innerHTML=rows;}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
+function initPyEditors(){document.querySelectorAll('.python-editor textarea[id^="py"]:not(.stdin-area)').forEach(area=>{const out=document.getElementById(area.id+'_out');if(out&&!out.textContent.trim())out.textContent='Output akan muncul di sini setelah Run code.';});}
+function runPyEditor(id){const code=document.getElementById(id).value;const stdinEl=document.getElementById(id+'_input');const out=document.getElementById(id+'_out');try{out.textContent=runMiniPython9(code,stdinEl?stdinEl.value:'');}catch(e){out.textContent=String(e.message||e);}}
+
+// Mini Python simulator Sesi 9: assignment, input, print, if/elif/else, while, break, +=, arithmetic/comparison, f-string.
+const NL='\n', CR='\r', BS='\\';
+function stripComment9(raw){let quote=null;for(let i=0;i<raw.length;i++){const c=raw[i],p=raw[i-1];if(quote){if(c===quote&&p!==BS)quote=null;}else if(c==='"'||c==="'")quote=c;else if(c==='#')return raw.slice(0,i);}return raw;}
+function normalizeLines9(code){return code.replaceAll(CR,'').split(NL).map((raw,idx)=>{const noComment=stripComment9(raw);let indent=0;while(indent<noComment.length&&noComment[indent]===' ')indent++;const text=noComment.trim();return {raw,text,indent,lineNo:idx+1,blank:text==='' };});}
+function runMiniPython9(code,stdinText){const vars={},output=[],inputs=(stdinText||'').replaceAll(CR,'').split(NL);let inputIndex=0;const state={steps:0,loops:0};function inputFn(prompt){const val=inputIndex<inputs.length?inputs[inputIndex++]:'';output.push(String(prompt)+val);return val;}const lines=normalizeLines9(code);const res=execBlock9(0,0,lines,vars,output,inputFn,state,false);if(res.error)return res.error;return output.length?output.join(NL):'(Tidak ada output. Coba gunakan print().)';}
+function execBlock9(start,indent,lines,vars,output,inputFn,state,inLoop){let i=start;while(i<lines.length){if(++state.steps>5000)return {error:'RuntimeError: terlalu banyak langkah pada simulator.'};const L=lines[i];if(L.blank){i++;continue;}if(L.indent<indent)break;if(L.indent>indent)return {error:`IndentationError on line ${L.lineNo}: unexpected indent.`};if(L.text.startsWith('else')||L.text.startsWith('elif'))break;if(L.text.startsWith('while ')){const r=execWhile9(i,indent,lines,vars,output,inputFn,state);if(r.error)return r;i=r.next;continue;}if(L.text.startsWith('if ')){const r=execIf9(i,indent,lines,vars,output,inputFn,state,inLoop);if(r.error)return r;if(r.signal)return r;i=r.next;continue;}const r=execLine9(L,vars,output,inputFn,inLoop);if(r.error)return r;if(r.signal)return {next:i+1,signal:r.signal};i++;}return {next:i};}
+function blockBounds9(start,indent,lines){let n=start+1;while(n<lines.length&&lines[n].blank)n++;if(n>=lines.length||lines[n].indent<=indent)return null;const blockIndent=lines[n].indent;let end=n;while(end<lines.length){if(!lines[end].blank&&lines[end].indent<=indent)break;end++;}return {start:n,indent:blockIndent,end};}
+function execWhile9(start,indent,lines,vars,output,inputFn,state){const L=lines[start];if(!L.text.endsWith(':'))return {error:`SyntaxError on line ${L.lineNo}: expected ':' after while condition.`};const cond=L.text.slice(6,-1).trim();const b=blockBounds9(start,indent,lines);if(!b)return {error:`IndentationError on line ${L.lineNo}: expected an indented block.`};let count=0;while(true){let ok;try{ok=!!evalExpr9(cond,vars,inputFn,L.lineNo);}catch(e){return {error:String(e.message||e)};}if(!ok)break;if(++count>200)return {error:'RuntimeError: loop melewati 200 iterasi. Periksa apakah while True sudah memiliki break yang bisa tercapai.'};const r=execBlock9(b.start,b.indent,lines,vars,output,inputFn,state,true);if(r.error)return r;if(r.signal==='break')break;}return {next:b.end};}
+function execIf9(start,indent,lines,vars,output,inputFn,state,inLoop){let i=start,executed=false;while(i<lines.length){const L=lines[i];if(L.blank){i++;continue;}if(L.indent!==indent)break;let type=null,cond='';if(L.text.startsWith('if ')){type='if';cond=L.text.slice(3);}else if(L.text.startsWith('elif ')){type='elif';cond=L.text.slice(5);}else if(L.text.startsWith('else'))type='else';else break;if(type!=='else'){if(!cond.endsWith(':'))return {error:`SyntaxError on line ${L.lineNo}: expected ':' after condition.`};cond=cond.slice(0,-1).trim();}else if(L.text!=='else:')return {error:`SyntaxError on line ${L.lineNo}: expected ':' after else.`};const b=blockBounds9(i,indent,lines);if(!b)return {error:`IndentationError on line ${L.lineNo}: expected an indented block.`};let run=false;if(!executed){if(type==='else')run=true;else{try{run=!!evalExpr9(cond,vars,inputFn,L.lineNo);}catch(e){return {error:String(e.message||e)};}}}if(run){const r=execBlock9(b.start,b.indent,lines,vars,output,inputFn,state,inLoop);if(r.error)return r;if(r.signal)return {next:b.end,signal:r.signal};executed=true;}i=b.end;}return {next:i};}
+function execLine9(L,vars,output,inputFn,inLoop){const line=L.text;if(!line)return {};if(line==='break'){if(!inLoop)return {error:`SyntaxError on line ${L.lineNo}: 'break' outside loop.`};return {signal:'break'};}const aug=line.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*([+\-*/])=\s*(.+)$/);if(aug){if(!(aug[1] in vars))return {error:`NameError on line ${L.lineNo}: name '${aug[1]}' is not defined.`};try{vars[aug[1]]=calc9(vars[aug[1]],evalExpr9(aug[3],vars,inputFn,L.lineNo),aug[2],L.lineNo);return {};}catch(e){return {error:String(e.message||e)};}}const assign=findAssign9(line);if(assign>=0){const name=line.slice(0,assign).trim(),expr=line.slice(assign+1).trim();if(!/^[A-Za-z_][A-Za-z0-9_]*$/.test(name))return {error:`SyntaxError on line ${L.lineNo}: nama variabel tidak valid.`};try{vars[name]=evalExpr9(expr,vars,inputFn,L.lineNo);return {};}catch(e){return {error:String(e.message||e)};}}if(line.startsWith('print(')&&line.endsWith(')')){try{const expr=line.slice(6,-1).trim();output.push(String(evalExpr9(expr||'""',vars,inputFn,L.lineNo)));return {};}catch(e){return {error:String(e.message||e)};}}return {error:`SyntaxError on line ${L.lineNo}: simulator mendukung assignment, input(), print(), if/else, while, break, dan operasi dasar.`};}
+function findAssign9(line){let quote=null,depth=0;for(let i=0;i<line.length;i++){const c=line[i],p=line[i-1],n=line[i+1];if(quote){if(c===quote&&p!==BS)quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='(')depth++;else if(c===')')depth--;else if(c==='='&&depth===0&&p!=='='&&n!=='='&&p!=='>'&&p!=='<'&&p!=='!')return i;}return -1;}
+function replaceWords9(s){return s.split(' and ').join(' && ').split(' or ').join(' || ').replace(/\bTrue\b/g,'true').replace(/\bFalse\b/g,'false');}
+function evalExpr9(expr,vars,inputFn,lineNo){expr=expr.trim();if((expr.startsWith('f"')&&expr.endsWith('"'))||(expr.startsWith("f'")&&expr.endsWith("'")))return renderF9(expr.slice(2,-1),vars,inputFn,lineNo);if((expr.startsWith('"')&&expr.endsWith('"'))||(expr.startsWith("'")&&expr.endsWith("'")))return decodeLiteral9(expr.slice(1,-1));const keys=Object.keys(vars),vals=keys.map(k=>vars[k]);function input(prompt){return inputFn(prompt===undefined?'':String(prompt));}function int(v){const n=Number(String(v).trim());if(!Number.isFinite(n))throw new Error(`ValueError on line ${lineNo}: invalid literal for int(): '${v}'`);return Math.trunc(n);}function float(v){const n=Number(String(v).trim());if(!Number.isFinite(n))throw new Error(`ValueError on line ${lineNo}: could not convert string to float: '${v}'`);return n;}try{return Function(...keys,'input','int','float','return ('+replaceWords9(expr)+');')(...vals,input,int,float);}catch(e){const msg=String(e.message||e);if(msg.startsWith('ValueError')||msg.startsWith('ZeroDivisionError')||msg.startsWith('TypeError'))throw e;throw new Error(`NameError/SyntaxError on line ${lineNo}: periksa ekspresi '${expr}'.`);}}
+function renderF9(inner,vars,inputFn,lineNo){inner=decodeLiteral9(inner);let out='',i=0;while(i<inner.length){if(inner[i]==='{'){const j=inner.indexOf('}',i+1);if(j<0)throw new Error(`SyntaxError on line ${lineNo}: f-string missing closing brace.`);const content=inner.slice(i+1,j);out+=String(evalExpr9(content,vars,inputFn,lineNo));i=j+1;}else{out+=inner[i];i++;}}return out;}
+function decodeLiteral9(s){return s.replace(/\\n/g,'\n').replace(/\\t/g,'\t').replace(/\\"/g,'"').replace(/\\'/g,"'");}
+function calc9(a,b,op,lineNo){if(op==='+'&&typeof a==='string'&&typeof b==='string')return a+b;const x=Number(a),y=Number(b);if(!Number.isFinite(x)||!Number.isFinite(y))throw new Error(`TypeError on line ${lineNo}: operator ${op} membutuhkan data angka.`);if(op==='/'&&y===0)throw new Error(`ZeroDivisionError on line ${lineNo}: division by zero.`);if(op==='+')return x+y;if(op==='-')return x-y;if(op==='*')return x*y;return x/y;}
+</script>
+</body></html>
