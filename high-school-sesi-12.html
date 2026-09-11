@@ -1,0 +1,1536 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>UOB My Digital Space — High School Sesi 12</title><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗂️</text></svg>"><style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --blue: #0056b3;
+      --light-blue: #4a9eff;
+      --uob-red: #e60012;
+      --uob-red-soft: #ff5a6b;
+      --uob-blue-deep: #0056b3;
+      --uob-blue-soft: #5aa7ff;
+      --teal: #11a9b7;
+      --bg: #f5f6f8;
+      --panel: #fff;
+      --text: #2c3e50;
+      --muted: #6c757d;
+      --line: #e3e8ef;
+      --green: #2e9d57;
+      --orange: #f39c12;
+      --red: #e74c3c;
+      --purple: #8e44ad;
+      --blue-soft: #eef7ff;
+      --green-soft: #effaf2
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      height: 100vh;
+      overflow: hidden;
+      color: var(--text)
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #f5d7da, #d9e9ff);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, .08)
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--uob-red) 0%, var(--uob-red-soft) 28%, var(--uob-blue-deep) 72%, var(--uob-blue-soft) 100%);
+      transition: width .3s ease;
+      box-shadow: 0 0 8px rgba(0, 86, 179, .18)
+    }
+
+    .main-container {
+      display: flex;
+      height: 100vh
+    }
+
+    .slides-panel {
+      width: 50%;
+      background: #f8f9fa;
+      border-right: 2px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      position: relative
+    }
+
+    .explanation-panel {
+      width: 50%;
+      background: #fff;
+      overflow-y: auto;
+      padding: 32px
+    }
+
+    .slide-header {
+      background: #fff;
+      padding: 17px 20px 15px;
+      border-bottom: 2px solid var(--line);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+      position: relative
+    }
+
+    .slide-header::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(var(--uob-red), var(--light-blue))
+    }
+
+    .slide-header h1 {
+      font-size: 1.28rem;
+      color: var(--text);
+      margin-bottom: 3px
+    }
+
+    .slide-header p {
+      font-size: .9rem;
+      color: var(--muted)
+    }
+
+    .header-badge {
+      position: absolute;
+      right: 18px;
+      top: 17px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      border: 1px solid #cce7ff;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-weight: 700;
+      font-size: .76rem
+    }
+
+    .slide-content {
+      flex: 1;
+      padding: 24px 28px 94px;
+      overflow-y: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 0
+    }
+
+    .slide,
+    .explanation {
+      display: none;
+      opacity: 0;
+      transition: opacity .25s ease
+    }
+
+    .slide.active,
+    .explanation.active {
+      display: block;
+      opacity: 1
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 820px
+    }
+
+    .explanation {
+      max-width: 760px;
+      margin: 0 auto
+    }
+
+    .slide h2 {
+      font-size: 2.25rem;
+      color: var(--blue);
+      margin-bottom: 10px;
+      line-height: 1.15
+    }
+
+    .slide h3 {
+      font-size: 1.78rem;
+      color: var(--blue);
+      margin-bottom: 16px;
+      line-height: 1.2
+    }
+
+    .slide h4,
+    .explanation h4 {
+      font-size: 1.05rem;
+      margin-bottom: 9px;
+      color: var(--text)
+    }
+
+    .slide p,
+    .explanation p {
+      font-size: 1rem;
+      line-height: 1.58;
+      color: #495057;
+      margin-bottom: 14px
+    }
+
+    .explanation h3 {
+      font-size: 1.65rem;
+      margin-bottom: 16px;
+      color: var(--text);
+      line-height: 1.25
+    }
+
+    .slide ul,
+    .slide ol,
+    .explanation ul,
+    .explanation ol {
+      margin-left: 22px;
+      margin-bottom: 10px
+    }
+
+    .slide li,
+    .explanation li {
+      margin-bottom: 7px;
+      line-height: 1.5
+    }
+
+    code {
+      background: #eef3f8;
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #334155
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--uob-red);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 8px
+    }
+
+    .lead {
+      font-size: 1.08rem !important
+    }
+
+    .mini-note {
+      font-size: .9rem !important;
+      color: var(--muted) !important;
+      margin-top: 10px
+    }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      gap: 13px;
+      margin: 16px 0
+    }
+
+    .visual-card,
+    .metric-box,
+    .info-box,
+    .example-box,
+    .warning-box,
+    .interactive-box,
+    .code-card,
+    .quiz-card {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05)
+    }
+
+    .visual-card {
+      padding: 15px
+    }
+
+    .visual-card p {
+      margin-bottom: 0;
+      font-size: .92rem;
+      line-height: 1.42
+    }
+
+    .visual-icon {
+      font-size: 1.9rem;
+      margin-bottom: 8px
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 16px
+    }
+
+    .metric-box {
+      padding: 16px 12px;
+      text-align: center
+    }
+
+    .metric-box strong {
+      display: block;
+      font-size: 1.55rem;
+      color: var(--blue);
+      margin-bottom: 7px
+    }
+
+    .metric-box span {
+      font-size: .9rem;
+      line-height: 1.35;
+      color: #495057;
+      display: block
+    }
+
+    .info-box,
+    .example-box,
+    .warning-box,
+    .interactive-box {
+      padding: 17px;
+      margin: 16px 0
+    }
+
+    .info-box {
+      border-left: 5px solid var(--light-blue)
+    }
+
+    .example-box {
+      border-left: 5px solid var(--green);
+      background: #f8fff8
+    }
+
+    .warning-box {
+      border-left: 5px solid var(--orange);
+      background: #fffaf0
+    }
+
+    .interactive-box {
+      border-left: 5px solid var(--purple);
+      background: #fcf8ff
+    }
+
+    .navigation {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 2px solid var(--line);
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, .04)
+    }
+
+    .nav-btn {
+      background: var(--light-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: .94rem;
+      font-weight: 700;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      transition: .2s ease
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      background: #357abd
+    }
+
+    .nav-btn:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none
+    }
+
+    .slide-indicator {
+      font-size: .9rem;
+      color: var(--muted);
+      font-weight: 700
+    }
+
+    .floating-element {
+      position: absolute;
+      opacity: .07;
+      pointer-events: none;
+      font-size: 2rem;
+      animation: float 6s ease-in-out infinite
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0)
+      }
+
+      33% {
+        transform: translateY(-12px) rotate(4deg)
+      }
+
+      66% {
+        transform: translateY(7px) rotate(-3deg)
+      }
+    }
+
+    .access-popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .8);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center
+    }
+
+    .access-popup {
+      background: white;
+      border: 3px solid var(--light-blue);
+      border-radius: 15px;
+      padding: 38px;
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .3);
+      transform: scale(.8);
+      opacity: 0;
+      transition: all .3s ease
+    }
+
+    .access-popup.show {
+      transform: scale(1);
+      opacity: 1
+    }
+
+    .access-popup h2 {
+      color: var(--text);
+      margin-bottom: 13px;
+      font-size: 1.8rem
+    }
+
+    .access-popup p {
+      color: #666;
+      margin-bottom: 22px;
+      line-height: 1.55
+    }
+
+    .access-input {
+      width: 100%;
+      padding: 14px;
+      font-size: 1.15rem;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      text-align: center;
+      letter-spacing: 2px;
+      font-weight: bold;
+      text-transform: uppercase
+    }
+
+    .access-input:focus {
+      outline: none;
+      border-color: var(--light-blue);
+      box-shadow: 0 0 0 3px rgba(74, 158, 255, .12)
+    }
+
+    .access-submit,
+    .primary-btn,
+    .secondary-btn {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .access-submit,
+    .primary-btn {
+      background: var(--blue);
+      color: white
+    }
+
+    .secondary-btn {
+      background: #e9ecef;
+      color: var(--text)
+    }
+
+    .access-submit {
+      padding: 13px 28px;
+      font-size: 1.05rem
+    }
+
+    .access-error {
+      color: var(--red);
+      margin-top: 13px;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity .2s
+    }
+
+    .access-error.show {
+      opacity: 1
+    }
+
+    .access-hint {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 5px;
+      padding: 9px;
+      margin-top: 18px;
+      font-size: .88rem;
+      color: #856404
+    }
+
+    .scratch-map-wrap {
+      position: relative;
+      width: 100%;
+      margin: 12px auto;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .08)
+    }
+
+    .scratch-map-wrap img {
+      width: 100%;
+      display: block
+    }
+
+    .hotspot {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      background: var(--uob-red);
+      color: white;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35);
+      display: grid;
+      place-items: center;
+      transform: translate(-50%, -50%);
+      transition: transform .16s, background .16s;
+      z-index: 3
+    }
+
+    .hotspot:hover,
+    .hotspot.active {
+      transform: translate(-50%, -50%) scale(1.16);
+      background: var(--blue)
+    }
+
+    .scratch-caption {
+      text-align: center;
+      font-size: .85rem;
+      color: var(--muted);
+      margin-top: 8px
+    }
+
+    .area-live-card {
+      min-height: 110px;
+      border: 2px solid #cfe7fb;
+      background: var(--blue-soft);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 14px
+    }
+
+    .area-number {
+      display: inline-grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: white;
+      font-weight: 900;
+      margin-right: 7px
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .choice-btn {
+      border: 2px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 11px 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: .18s;
+      text-align: left
+    }
+
+    .choice-btn:hover {
+      border-color: var(--light-blue);
+      transform: translateY(-1px)
+    }
+
+    .choice-btn.correct,
+    .choice-btn.selected {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: #176b35
+    }
+
+    .choice-btn.wrong {
+      border-color: var(--red);
+      background: #fff1f0;
+      color: #a42820
+    }
+
+    .feedback-line {
+      min-height: 28px;
+      font-weight: 700;
+      margin-top: 8px
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .form-grid label {
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--text)
+    }
+
+    .form-grid input,
+    .form-grid textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      margin-top: 5px
+    }
+
+    .form-grid input:focus,
+    .form-grid textarea:focus {
+      outline: none;
+      border-color: var(--light-blue)
+    }
+
+    .lms-map-wrap,
+    .test-map-wrap {
+      position: relative
+    }
+
+    .session-card-hotspot {
+      position: absolute;
+      left: 19.1%;
+      top: 43%;
+      width: 25.5%;
+      height: 51%;
+      padding: 0;
+      border: 3px dashed transparent;
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+      transition: .2s ease
+    }
+
+    .session-card-hotspot span {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: #fff;
+      font-size: .9rem;
+      font-weight: 900;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35)
+    }
+
+    .session-card-hotspot:hover,
+    .session-card-hotspot.active {
+      border-color: var(--uob-red);
+      background: rgba(230, 0, 18, .08)
+    }
+
+    .session-card-hotspot:hover span,
+    .session-card-hotspot.active span {
+      background: var(--blue);
+      transform: scale(1.1)
+    }
+
+    .test-card-hotspot {
+      position: absolute;
+      left: 18%;
+      right: 3%;
+      bottom: 5%;
+      height: 20%;
+      padding: 0;
+      border: 3px dashed transparent;
+      border-radius: 14px;
+      background: transparent;
+      cursor: pointer;
+      transition: .2s ease
+    }
+
+    .test-number {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--uob-red);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, .35)
+    }
+
+    .test-instruction {
+      position: absolute;
+      left: 50%;
+      bottom: 12px;
+      transform: translateX(-50%);
+      width: 88%;
+      padding: 7px 9px;
+      border-radius: 8px;
+      background: rgba(0, 86, 179, .94);
+      color: #fff;
+      font-size: .76rem;
+      line-height: 1.3;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, .25)
+    }
+
+    .test-card-hotspot:hover,
+    .test-card-hotspot.active {
+      border-color: var(--uob-red);
+      background: rgba(230, 0, 18, .08)
+    }
+
+    .test-card-hotspot:hover .test-instruction,
+    .test-card-hotspot.active .test-instruction {
+      background: var(--uob-red)
+    }
+
+    .flow-line {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 20px 0
+    }
+
+    .flow-box {
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--blue);
+      color: #fff;
+      text-align: center;
+      font-weight: 900;
+      cursor: pointer
+    }
+
+    .flow-arrow {
+      color: var(--uob-red);
+      font-size: 1.6rem;
+      font-weight: 900
+    }
+
+    .comparison-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    .compare-card {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      background: #fff
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 2px
+    }
+
+    .pill.blue {
+      background: var(--blue)
+    }
+
+    .pill.green {
+      background: var(--green)
+    }
+
+    .pill.purple {
+      background: var(--purple)
+    }
+
+    .colab-mock,
+    .colab-hotmap {
+      border: 2px solid #dce6ef;
+      border-radius: 14px;
+      background: #1e1e1e;
+      color: #e5e7eb;
+      overflow: hidden;
+      margin: 16px 0;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .12);
+      position: relative
+    }
+
+    .colab-title {
+      background: #111827;
+      padding: 10px 14px;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      font-size: .9rem
+    }
+
+    .colab-title span {
+      font-size: .8rem;
+      color: #9ca3af
+    }
+
+    .colab-cell {
+      margin: 12px;
+      border: 1px solid #374151;
+      border-radius: 10px;
+      background: #0f172a;
+      min-height: 72px;
+      position: relative;
+      padding: 14px 14px 14px 48px
+    }
+
+    .run-dot {
+      position: absolute;
+      left: 12px;
+      top: 15px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 0;
+      background: #16a34a;
+      color: white;
+      display: grid;
+      place-items: center
+    }
+
+    .colab-cell pre,
+    .code-card pre,
+    .receipt-preview pre {
+      white-space: pre-wrap;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .9rem;
+      line-height: 1.45
+    }
+
+    .colab-output {
+      margin: 0 12px 12px;
+      padding: 12px;
+      background: #fff;
+      color: #111827;
+      border-radius: 10px;
+      min-height: 48px;
+      position: relative
+    }
+
+    .python-editor {
+      border-radius: 18px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #152744 0%, #132742 100%);
+      box-shadow: 0 10px 24px rgba(8, 22, 46, .18);
+      margin: 16px 0;
+      border: 1px solid #274468
+    }
+
+    .editor-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #182c49;
+      color: #fff;
+      padding: 13px 18px 11px;
+      font-weight: 900
+    }
+
+    .editor-label {
+      font-size: 1.05rem;
+      letter-spacing: .05em;
+      color: #dbeafe
+    }
+
+    .editor-live {
+      font-size: .95rem;
+      letter-spacing: .04em;
+      color: #69e3a7
+    }
+
+    .python-editor textarea {
+      width: 100%;
+      min-height: 250px;
+      resize: vertical;
+      background: #0f2240;
+      color: #fff;
+      border: 0;
+      padding: 18px 18px 16px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 1rem;
+      line-height: 1.65;
+      outline: none
+    }
+
+    .python-editor textarea:focus {
+      box-shadow: inset 0 0 0 2px rgba(147, 197, 253, .22)
+    }
+
+    .editor-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      background: #182c49;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      border-bottom: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .run-code-btn {
+      background: #22b573;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-weight: 900;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, .12);
+      transition: .18s ease
+    }
+
+    .run-code-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03)
+    }
+
+    .editor-toolbar-note {
+      color: #dbeafe;
+      font-size: .98rem;
+      line-height: 1.4
+    }
+
+    .editor-output-panel {
+      padding: 0 16px 16px;
+      background: #182c49
+    }
+
+    .editor-output-label {
+      color: #93c5fd;
+      font-size: 1rem;
+      letter-spacing: .08em;
+      font-weight: 900;
+      padding: 14px 12px 8px
+    }
+
+    .output-box {
+      background: #041126;
+      color: #fff;
+      min-height: 110px;
+      white-space: pre-wrap;
+      font-family: Consolas, Monaco, monospace;
+      padding: 16px;
+      border: 1px solid #2b4f7b;
+      border-radius: 12px;
+      line-height: 1.6
+    }
+
+    .code-card {
+      padding: 14px;
+      background: #111827;
+      color: #e5e7eb;
+      overflow: auto
+    }
+
+    .receipt-preview {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 14px 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05)
+    }
+
+    .receipt-preview pre {
+      color: #111827
+    }
+
+    .component-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0
+    }
+
+    .component-pill {
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      padding: 8px 11px;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .component-pill.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    .checklist {
+      list-style: none;
+      margin-left: 0 !important;
+      display: grid;
+      gap: 8px
+    }
+
+    .check-item {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      cursor: pointer
+    }
+
+    .check-item input {
+      margin-top: 3px;
+      transform: scale(1.2)
+    }
+
+    .check-item.done {
+      background: var(--green-soft);
+      border-color: #9cd9af;
+      text-decoration: line-through;
+      color: #3e6b4c
+    }
+
+    .debug-scenario {
+      display: none
+    }
+
+    .debug-scenario.active {
+      display: block
+    }
+
+    .debug-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px
+    }
+
+    .debug-tab {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 7px 11px;
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    .debug-tab.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    @media(max-width:960px) {
+      body {
+        overflow: auto;
+        height: auto
+      }
+
+      .main-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh
+      }
+
+      .slides-panel,
+      .explanation-panel {
+        width: 100%;
+        height: auto;
+        min-height: 50vh
+      }
+
+      .slides-panel {
+        min-height: 100vh
+      }
+
+      .slide-content {
+        padding: 20px 20px 92px
+      }
+
+      .explanation-panel {
+        padding: 24px
+      }
+
+      .header-badge {
+        display: none
+      }
+
+      .flow-line,
+      .comparison-table {
+        grid-template-columns: 1fr
+      }
+
+      .flow-arrow {
+        display: none
+      }
+    }
+
+    .stdin-panel {
+      padding: 0 16px 14px;
+      background: #182c49;
+      border-top: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .stdin-label {
+      color: #93c5fd;
+      font-size: .86rem;
+      letter-spacing: .08em;
+      font-weight: 900;
+      padding: 10px 2px 6px;
+      text-transform: uppercase
+    }
+
+    .stdin-area {
+      width: 100%;
+      min-height: 74px;
+      resize: vertical;
+      border: 1px solid #2b4f7b;
+      border-radius: 10px;
+      background: #0b1a33;
+      color: #e5f0ff;
+      padding: 10px 12px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .92rem;
+      line-height: 1.45;
+      outline: none
+    }
+
+    .stdin-area:focus {
+      box-shadow: inset 0 0 0 2px rgba(147, 197, 253, .22)
+    }
+
+    .stdin-area.preset-loaded {
+      border-color: #69e3a7;
+      box-shadow: 0 0 0 3px rgba(105, 227, 167, .22), inset 0 0 0 1px rgba(105, 227, 167, .35)
+    }
+
+    .type-bank {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin: 12px 0
+    }
+
+    .type-card {
+      border: 2px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: 800
+    }
+
+    .type-card.active {
+      background: var(--blue-soft);
+      border-color: var(--blue)
+    }
+
+    .mini-terminal {
+      background: #041126;
+      color: #fff;
+      border-radius: 12px;
+      border: 1px solid #2b4f7b;
+      padding: 16px;
+      margin: 14px 0;
+      font-family: Consolas, Monaco, monospace;
+      white-space: pre-wrap;
+      line-height: 1.55;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .08)
+    }
+
+    .safe-card {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 13px;
+      cursor: pointer;
+      font-weight: 800
+    }
+
+    .safe-card.safe {
+      border-color: var(--green);
+      background: var(--green-soft);
+      color: #176b35
+    }
+
+    .safe-card.risky {
+      border-color: var(--red);
+      background: #fff1f0;
+      color: #a42820
+    }
+
+    .memory-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin: 14px 0
+    }
+
+    .memory-slot {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      cursor: pointer
+    }
+
+    .memory-slot.active {
+      border-color: var(--blue);
+      background: var(--blue-soft)
+    }
+
+    .memory-slot code {
+      display: block;
+      margin-top: 6px;
+      color: var(--blue);
+      font-weight: 900
+    }
+
+    .thin-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 14px 0
+    }
+
+    .thin-table th {
+      background: var(--blue);
+      color: #fff;
+      text-align: left;
+      padding: 10px
+    }
+
+    .thin-table td {
+      border-top: 1px solid var(--line);
+      padding: 10px;
+      vertical-align: top
+    }
+
+    .thin-table code {
+      background: #eef3f8;
+      padding: 2px 6px;
+      border-radius: 5px
+    }
+  
+    details.learn-accordion {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      margin: 10px 0;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+    details.learn-accordion summary {
+      cursor: pointer;
+      padding: 12px 14px;
+      font-weight: 900;
+      color: var(--blue);
+      background: var(--blue-soft);
+      list-style: none;
+    }
+    details.learn-accordion summary::-webkit-details-marker {display:none;}
+    details.learn-accordion .accordion-body {padding: 14px 16px;}
+    .decision-gate {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 16px 0;
+    }
+    .gate-node {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      font-weight: 900;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
+    .gate-diamond {
+      width: 112px;
+      height: 112px;
+      transform: rotate(45deg);
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--blue), var(--light-blue));
+      color: white;
+      border-radius: 16px;
+      font-weight: 900;
+      text-align: center;
+      box-shadow: 0 7px 16px rgba(0,86,179,.18);
+    }
+    .gate-diamond span {transform: rotate(-45deg); display:block; font-size:.85rem; line-height:1.25;}
+    .branch-label {font-size:.82rem; color:var(--muted); font-weight:800; margin-top:6px;}
+    .trace-card {display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin:12px 0;}
+    .trace-step {background:#fff; border:2px solid var(--line); border-radius:12px; padding:12px; text-align:center;}
+    .trace-step strong {display:block; color:var(--blue); margin-bottom:5px;}
+    .operator-board {display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin:14px 0;}
+    .operator-btn {background:#fff; border:2px solid var(--line); border-radius:12px; padding:12px; cursor:pointer; font-weight:900; text-align:center;}
+    .operator-btn:hover,.operator-btn.active {border-color:var(--blue); background:var(--blue-soft); color:var(--blue); transform:translateY(-1px);}
+    .true-false {display:flex; gap:8px; flex-wrap:wrap; margin:10px 0;}
+    .true-pill,.false-pill {padding:7px 11px; border-radius:999px; color:white; font-weight:900;}
+    .true-pill {background:var(--green);} .false-pill{background:var(--red);}
+    .compact-code {max-height: 260px; overflow:auto;}
+    @media(max-width:960px){.decision-gate{grid-template-columns:1fr}.gate-diamond{margin:0 auto}.flow-arrow{display:none}}
+
+  
+/* Session 6 components */
+.risk-scale{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}.risk-zone{border:2px solid var(--line);background:#fff;border-radius:14px;padding:15px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:.18s ease}.risk-zone:hover,.risk-zone.active{transform:translateY(-2px);border-color:var(--blue);background:var(--blue-soft)}.risk-zone strong{display:block;font-size:1.05rem;margin-bottom:6px}.risk-zone small{color:var(--muted);font-weight:800}.risk-zone.aman{border-left:6px solid var(--green)}.risk-zone.hati{border-left:6px solid var(--orange)}.risk-zone.risk{border-left:6px solid var(--red)}.score-meter{height:26px;border-radius:999px;background:linear-gradient(90deg,#f87171 0%,#f59e0b 50%,#22c55e 100%);position:relative;margin:18px 0 10px;box-shadow:inset 0 2px 4px rgba(0,0,0,.12)}.score-marker{position:absolute;top:-9px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#fff;border:3px solid var(--blue);font-weight:900;color:var(--blue);box-shadow:0 4px 12px rgba(0,0,0,.18);transform:translateX(-50%);left:65%}.score-labels{display:flex;justify-content:space-between;font-size:.82rem;font-weight:900;color:var(--muted)}.branch-chain{display:grid;gap:10px;margin:14px 0}.branch-row{display:grid;grid-template-columns:110px 1fr;gap:10px}.branch-key{background:var(--blue);color:#fff;border-radius:12px;display:grid;place-items:center;font-weight:900}.branch-condition{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px}.branch-condition strong{color:var(--blue)}.mini-terminal.dark{background:#041126;color:#e5f0ff;border:1px solid #2b4f7b;border-radius:12px;padding:16px;margin:14px 0;font-family:Consolas,Monaco,monospace;white-space:pre-wrap;line-height:1.55}.boundary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(95px,1fr));gap:10px;margin:12px 0}.boundary-btn{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;font-weight:900;text-align:center}.boundary-btn:hover,.boundary-btn.active{border-color:var(--blue);background:var(--blue-soft);color:var(--blue)}.note-pill{display:inline-block;padding:5px 9px;border-radius:999px;background:var(--blue-soft);color:var(--blue);font-size:.82rem;font-weight:900;margin:2px}@media(max-width:960px){.risk-scale{grid-template-columns:1fr}.branch-row{grid-template-columns:1fr}}
+
+/* Session 7 components */
+.login-gate{display:grid;grid-template-columns:1fr 90px 1fr;gap:12px;align-items:center;margin:18px 0}.key-card{background:#fff;border:2px solid var(--line);border-radius:14px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,.05);cursor:pointer;transition:.18s ease}.key-card:hover,.key-card.active{border-color:var(--blue);background:var(--blue-soft);transform:translateY(-2px)}.lock-core{display:grid;place-items:center;width:82px;height:82px;border-radius:50%;background:linear-gradient(135deg,var(--uob-red),var(--blue));color:#fff;font-size:2.2rem;font-weight:900;box-shadow:0 8px 18px rgba(0,0,0,.16)}.logic-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:14px 0}.logic-card{background:#fff;border:2px solid var(--line);border-radius:14px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,.05);cursor:pointer}.logic-card.active{border-color:var(--blue);background:var(--blue-soft)}.truth-table{width:100%;border-collapse:collapse;background:#fff;border:2px solid var(--line);border-radius:12px;overflow:hidden;margin:14px 0}.truth-table th{background:var(--blue);color:#fff;text-align:left;padding:10px}.truth-table td{border-top:1px solid var(--line);padding:10px}.truth-table tr.good td{background:#effaf2}.truth-table tr.bad td{background:#fff7f7}.terminal-login{background:#041126;color:#e5f0ff;border:1px solid #2b4f7b;border-radius:12px;padding:16px;margin:14px 0;font-family:Consolas,Monaco,monospace;white-space:pre-wrap;line-height:1.55}.trace-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin:12px 0}.trace-step{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px}.trace-step strong{display:block;color:var(--blue);margin-bottom:5px}.operator-btn{border:2px solid var(--line);background:#fff;border-radius:12px;padding:12px 14px;font-weight:900;cursor:pointer}.operator-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}.accordion{border:2px solid var(--line);border-radius:12px;background:#fff;margin:10px 0;overflow:hidden}.accordion button{width:100%;border:0;background:#f8fbfe;padding:12px 14px;text-align:left;font-weight:900;cursor:pointer;color:var(--text)}.accordion-content{display:none;padding:14px;border-top:1px solid var(--line)}.accordion.open .accordion-content{display:block}.password-meter{height:18px;border-radius:999px;background:#e5e7eb;overflow:hidden;margin:10px 0}.password-meter span{display:block;height:100%;width:35%;background:var(--red);transition:.2s ease}.password-meter.medium span{width:65%;background:var(--orange)}.password-meter.strong span{width:100%;background:var(--green)}.mono-tag{font-family:Consolas,Monaco,monospace;background:#eef3f8;border-radius:6px;padding:2px 6px}.mini-code{max-height:360px;overflow:auto}.safe-card{border:2px solid var(--line);border-radius:12px;background:#fff;padding:13px;cursor:pointer;font-weight:800}.safe-card.safe{border-color:var(--green);background:var(--green-soft);color:#176b35}.safe-card.risky{border-color:var(--red);background:#fff1f0;color:#a42820}@media(max-width:960px){.login-gate{grid-template-columns:1fr}.lock-core{margin:0 auto}}
+
+.growth-bars{display:grid;gap:10px;margin-top:12px}.growth-bars div{display:grid;grid-template-columns:72px 1fr;align-items:center;gap:8px}.growth-bars span{font-weight:900;color:var(--muted);font-size:.85rem}.growth-bars b{display:block;height:18px;border-radius:999px;background:linear-gradient(90deg,var(--uob-red),var(--blue));box-shadow:inset 0 1px 2px rgba(0,0,0,.12)}.growth-bars.compound b{background:linear-gradient(90deg,var(--green),var(--blue))}.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:14px 0}.timeline button{border:2px solid var(--line);background:#fff;border-radius:12px;padding:12px;cursor:pointer;font-weight:900}.timeline button.active,.timeline button:hover{background:var(--blue-soft);border-color:var(--blue);color:var(--blue)}.range-track{display:flex;gap:12px;align-items:center;justify-content:center;margin:22px 0;flex-wrap:wrap}.range-track span{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;border:3px solid var(--line);background:#fff;font-weight:900;font-size:1.2rem}.range-track span.active{background:var(--blue);border-color:var(--blue);color:#fff}.range-track span.stop{background:#fff1f0;border-color:var(--uob-red);color:var(--uob-red);position:relative}.range-track span.stop::after{content:'stop';position:absolute;bottom:-22px;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}.compound-mini{background:#fff;border:2px solid var(--line);border-radius:12px;padding:13px;margin:10px 0}.compound-mini strong{color:var(--blue)}
+
+    /* Session 9 components */
+    .vault-panel{background:linear-gradient(135deg,#0f2240,#182c49);color:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 10px 24px rgba(8,22,46,.18);border:1px solid #274468}
+    .vault-door{width:170px;height:170px;border-radius:50%;margin:10px auto 16px;background:radial-gradient(circle at 35% 35%,#5aa7ff,#0056b3 55%,#041126 100%);border:10px solid #dbeafe;display:grid;place-items:center;font-size:3rem;box-shadow:inset 0 0 18px rgba(0,0,0,.5),0 8px 20px rgba(0,0,0,.22);transition:.25s ease}
+    .vault-door.open{background:radial-gradient(circle at 35% 35%,#69e3a7,#22b573 55%,#06391f 100%);transform:rotate(-6deg) scale(1.02)}
+    .pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:260px;margin:14px auto}.pin-key{border:0;border-radius:12px;background:#fff;color:var(--blue);font-weight:900;padding:12px;cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.15)}.pin-key:hover{transform:translateY(-1px)}
+    .pin-display{max-width:260px;margin:0 auto;background:#041126;border:1px solid #2b4f7b;border-radius:12px;padding:12px;text-align:center;font-family:Consolas,monospace;font-size:1.4rem;letter-spacing:.25rem;color:#69e3a7;min-height:52px}
+    .attempt-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px auto;max-width:260px}.attempt-dot{border-radius:999px;background:#dbeafe;color:#0f2240;text-align:center;padding:7px;font-weight:900}.attempt-dot.used{background:#fff1f0;color:#a42820;border:1px solid #f2aaa3}
+    .loop-cycle{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:center;margin:18px 0}.cycle-card{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px;text-align:center;font-weight:900;box-shadow:0 2px 8px rgba(0,0,0,.05);cursor:pointer}.cycle-card:hover,.cycle-card.active{border-color:var(--blue);background:var(--blue-soft);color:var(--blue)}.cycle-arrow{font-size:1.6rem;color:var(--uob-red);font-weight:900}
+    .decision-split{display:grid;grid-template-columns:1fr 120px 1fr;gap:12px;align-items:center;margin:18px 0}.diamond-decision{width:116px;height:116px;margin:auto;background:linear-gradient(135deg,var(--blue),var(--light-blue));color:#fff;display:grid;place-items:center;transform:rotate(45deg);border-radius:16px;box-shadow:0 7px 16px rgba(0,86,179,.18)}.diamond-decision span{transform:rotate(-45deg);font-weight:900;text-align:center;font-size:.82rem;line-height:1.25}.branch-card{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.05)}.branch-card.true{border-left:6px solid var(--green)}.branch-card.false{border-left:6px solid var(--red)}
+    .brute-visual{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}.brute-card{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px;text-align:center;cursor:pointer}.brute-card:hover,.brute-card.active{border-color:var(--red);background:#fff1f0}.brute-card strong{display:block;font-size:1.3rem;color:var(--uob-red);margin-bottom:6px}
+    .trace-table{width:100%;border-collapse:collapse;background:#fff;border:2px solid var(--line);border-radius:12px;overflow:hidden;margin:14px 0}.trace-table th{background:var(--blue);color:#fff;text-align:left;padding:10px}.trace-table td{border-top:1px solid var(--line);padding:10px;vertical-align:top}.trace-table tr:nth-child(even) td{background:#f8fbfe}
+    .accordion{border:2px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;margin:12px 0}.accordion button{width:100%;border:0;background:#f8fbfe;text-align:left;padding:12px 14px;font-weight:900;color:var(--blue);cursor:pointer}.accordion-content{display:none;padding:14px;border-top:1px solid var(--line)}.accordion.open .accordion-content{display:block}
+    @media(max-width:960px){.loop-cycle,.decision-split{grid-template-columns:1fr}.cycle-arrow{display:none}.diamond-decision{transform:rotate(0);width:auto;height:auto;border-radius:14px;padding:18px}.diamond-decision span{transform:none}.pin-pad,.pin-display,.attempt-bar{max-width:100%}}
+
+
+    /* Session 10 — Anti-Crash components */
+    .crash-split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}.crash-card{background:#fff;border:2px solid var(--line);border-radius:14px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,.05)}.crash-card.bad{border-left:6px solid var(--red);background:#fff7f7}.crash-card.good{border-left:6px solid var(--green);background:#f8fff8}.crash-card h4{margin-bottom:8px}.shield-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:center;margin:18px 0}.shield-node{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px;text-align:center;font-weight:900;box-shadow:0 2px 8px rgba(0,0,0,.05);cursor:pointer}.shield-node:hover,.shield-node.active{border-color:var(--blue);background:var(--blue-soft);color:var(--blue);transform:translateY(-1px)}.shield-node.danger{border-left:6px solid var(--red)}.shield-node.safe{border-left:6px solid var(--green)}.shield-arrow{font-size:1.7rem;color:var(--uob-red);font-weight:900}.exception-card{background:#041126;color:#e5f0ff;border:1px solid #2b4f7b;border-radius:14px;padding:16px;margin:14px 0;font-family:Consolas,Monaco,monospace;white-space:pre-wrap;line-height:1.55;box-shadow:0 8px 16px rgba(0,0,0,.08)}.error-tag{display:inline-block;background:#fff1f0;color:#a42820;border:1px solid #fecaca;border-radius:999px;padding:5px 10px;font-weight:900;font-size:.84rem;margin:3px}.safe-tag{display:inline-block;background:#effaf2;color:#176b35;border:1px solid #bbf7d0;border-radius:999px;padding:5px 10px;font-weight:900;font-size:.84rem;margin:3px}.case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:14px 0}.case-btn{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;font-weight:900;text-align:left}.case-btn:hover,.case-btn.active{border-color:var(--blue);background:var(--blue-soft);color:var(--blue)}.trace-path{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:14px 0}.trace-box{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center}.trace-box strong{display:block;color:var(--blue);margin-bottom:5px}.trace-box.stop{border-color:var(--red);background:#fff1f0}.trace-box.go{border-color:var(--green);background:#effaf2}.accordion{border:2px solid var(--line);border-radius:12px;background:#fff;margin:10px 0;overflow:hidden}.accordion button{width:100%;border:0;background:#f8fbfe;padding:12px 14px;text-align:left;font-weight:900;cursor:pointer;color:var(--text)}.accordion-content{display:none;padding:14px;border-top:1px solid var(--line)}.accordion.open .accordion-content{display:block}.thin-table{width:100%;border-collapse:collapse;background:#fff;border:2px solid var(--line);border-radius:12px;overflow:hidden;margin:14px 0}.thin-table th{background:var(--blue);color:#fff;text-align:left;padding:10px}.thin-table td{border-top:1px solid var(--line);padding:10px;vertical-align:top}.test-badge{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;font-weight:900;margin-right:6px}.mini-code{max-height:360px;overflow:auto}.terminal-red{background:#2a0710;color:#ffd7dc;border:1px solid #7f1d1d;border-radius:12px;padding:16px;margin:14px 0;font-family:Consolas,Monaco,monospace;white-space:pre-wrap;line-height:1.55}.terminal-green{background:#041126;color:#e5f0ff;border:1px solid #2b4f7b;border-radius:12px;padding:16px;margin:14px 0;font-family:Consolas,Monaco,monospace;white-space:pre-wrap;line-height:1.55}.memory-box.s10{grid-template-columns:repeat(auto-fit,minmax(135px,1fr))}.stdin-area.preset-loaded{border-color:#69e3a7;box-shadow:0 0 0 3px rgba(105,227,167,.22), inset 0 0 0 1px rgba(105,227,167,.35)}@media(max-width:960px){.crash-split,.shield-flow{grid-template-columns:1fr}.shield-arrow{display:none}}
+</style></head><body><div class="access-popup-overlay" id="accessPopup"><div class="access-popup"><h2>🔐 Kode Akses</h2><p>Masukkan kode akses High School untuk membuka materi Sesi 12.</p><input type="text" class="access-input" id="accessInput" placeholder="MASUKKAN KODE" maxlength="20" autocomplete="off" /><button class="access-submit" onclick="checkAccessCode()">Masuk</button><div class="access-error" id="accessError">Kode akses belum tepat. Coba lagi.</div><div class="access-hint">Kode akses diberikan oleh guru.</div></div></div><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div><div class="main-container" id="mainContent" style="display:none;"><div class="slides-panel"><div class="slide-header"><h1>UOB My Digital Space — High School</h1><p>Sesi 12 · Database Rekening</p><span class="header-badge">Python · High School</span></div><div class="slide-content"><div class="floating-element" style="top:12%;left:7%;">🗂️</div><div class="floating-element" style="top:18%;right:10%;">🔑</div><div class="floating-element" style="bottom:25%;left:14%;">🐍</div><div class="floating-element" style="bottom:15%;right:16%;">🔍</div><section class="slide active" id="slide-1"><span class="eyebrow">Sesi 12</span><h2>Database Rekening</h2><p class="lead">Hari ini kamu akan membuat database mini berbasis <strong>dictionary</strong> untuk menyimpan pasangan nama nasabah dummy dan nomor rekening dummy.</p><div class="metrics"><div class="metric-box"><strong>{ }</strong><span>Dictionary</span></div><div class="metric-box"><strong>🔑</strong><span>Key sebagai label</span></div><div class="metric-box"><strong>📦</strong><span>Value sebagai isi</span></div><div class="metric-box"><strong>🔍</strong><span>Akses data cepat</span></div></div><div class="example-box"><h4>Target akhir</h4><p>Program menyimpan data dummy seperti <code>{"Alya Nabila": "021-9901"}</code>, lalu mengambil nomor rekening berdasarkan nama yang diketik user.</p></div></section><section class="slide" id="slide-2"><span class="eyebrow">Rencana Belajar</span><h3>Misi Belajar Hari Ini</h3><div class="visual-grid"><div class="visual-card"><div class="visual-icon">🧠</div><h4>Pahami Konsep</h4><p>Kenalan dengan dictionary, key, value, dan tanda <code>{}</code>.</p></div><div class="visual-card"><div class="visual-icon">🔎</div><h4>Akses Data</h4><p>Mengambil value memakai key yang tepat.</p></div><div class="visual-card"><div class="visual-icon">🧪</div><h4>Testing</h4><p>Mencoba nama yang cocok dan nama yang tidak cocok.</p></div><div class="visual-card"><div class="visual-icon">➕</div><h4>Challenge</h4><p>Menambahkan data baru ke dictionary.</p></div></div><div class="interactive-box"><h4>Quick poll</h4><p>Kalau kamu punya 100 data nasabah, cara mana yang lebih enak untuk mencari nomor rekening?</p><div class="choice-grid"><button class="choice-btn" onclick="selectKVQuiz(this,false,'poll1')">Menghafal nomor urut index</button><button class="choice-btn" onclick="selectKVQuiz(this,true,'poll1')">Mencari lewat nama sebagai key</button><button class="choice-btn" onclick="selectKVQuiz(this,false,'poll1')">Membaca semua data satu-satu</button></div><div class="feedback-line" id="poll1"></div></div></section><section class="slide" id="slide-3"><h3>Siapkan Workspace</h3><p class="lead">Pastikan notebook siap sebelum masuk ke kode dictionary.</p><div class="choice-grid"><button class="choice-btn" onclick="deviceCheck(this,true)">Google Colab/editor sudah terbuka</button><button class="choice-btn" onclick="deviceCheck(this,true)">Notebook bernama Sesi12_Database_Rekening</button><button class="choice-btn" onclick="deviceCheck(this,true)">Siap memakai data dummy</button><button class="choice-btn" onclick="deviceCheck(this,true)">Tidak memakai nomor rekening asli</button><button class="choice-btn" onclick="deviceCheck(this,true)">Siap mengetes huruf besar-kecil</button><button class="choice-btn" onclick="deviceCheck(this,true)">Siap membaca error message</button></div><div class="info-box"><strong>Alamat LMS:</strong><br><a href="https://app.uobmydigitalspace.com/" target="_blank" rel="noopener noreferrer">https://app.uobmydigitalspace.com/</a></div></section><section class="slide" id="slide-4"><h3>Masalah List: Harus Ingat Index</h3><p class="lead">List menyimpan data berdasarkan urutan. Itu berguna, tapi kadang tidak nyaman untuk data berpasangan.</p><div class="code-card"><pre><code># Contoh memakai list
+nama_nasabah = ["Alya", "Budi", "Citra"]
+rekening = ["021-9901", "021-9902", "021-9903"]
+
+# Kita harus ingat: Alya ada di index 0
+print(rekening[0])</code></pre></div><div class="interactive-box"><h4>Masalahnya?</h4><p>Kalau datanya makin banyak, mengingat index bisa bikin rawan salah.</p></div></section><section class="slide" id="slide-5"><h3>Dictionary Itu Apa?</h3><p class="lead"><strong>Dictionary</strong> adalah struktur data untuk menyimpan pasangan <strong>key</strong> dan <strong>value</strong>.</p><div class="login-gate"><div class="key-card" onclick="showDictConcept('key',this)"><h4>🔑 Key</h4><p>Label pencarian</p></div><div class="lock-core">:</div><div class="key-card" onclick="showDictConcept('value',this)"><h4>📦 Value</h4><p>Isi datanya</p></div></div><div class="area-live-card" id="dictConceptInfo"><h4>Dictionary</h4><p>Struktur data untuk menyimpan pasangan data. Contoh: nama nasabah dummy dipasangkan dengan nomor rekening dummy.</p></div></section><section class="slide" id="slide-6"><h3>Sintaks Dasar Dictionary</h3><p class="lead">Dictionary ditulis memakai kurung kurawal <code>{}</code>. Key dan value dipisahkan dengan titik dua <code>:</code>.</p><div class="code-card"><pre><code># Format dictionary
+rekening_bank = {
+    "Alya": "021-9901",
+    "Budi": "021-9902"
+}
+
+# Polanya adalah:
+# "Key": "Value"</code></pre></div><div class="component-bank"><button class="component-pill" onclick="showDictConcept('braces',this)">{ }</button><button class="component-pill" onclick="showDictConcept('colon',this)">:</button><button class="component-pill" onclick="showDictConcept('key',this)">Key</button><button class="component-pill" onclick="showDictConcept('value',this)">Value</button></div></section><section class="slide" id="slide-7"><h3>Aktivitas Mini: Key atau Value?</h3><p>Perhatikan data ini:</p><div class="code-card"><pre><code>akun_nasabah = {"Citra": "021-9903"}</code></pre></div><div class="choice-grid"><button class="safe-card" onclick="showKeyValue('key',this)">"Citra"</button><button class="safe-card" onclick="showKeyValue('value',this)">"021-9903"</button><button class="safe-card" onclick="showKeyValue('wrong',this)">Keduanya cuma teks biasa</button></div><div class="area-live-card" id="keyValueInfo"><h4>Pilih salah satu bagian</h4><p>Klik bagian data untuk melihat perannya.</p></div></section><section class="slide" id="slide-8"><h3>Visual: Kartu Kontak Dummy</h3><div class="memory-box"><div class="memory-slot active"><strong>Key</strong><code>Alya Nabila</code><p class="mini-note">Label pencarian</p></div><div class="memory-slot active"><strong>Value</strong><code>021-9901</code><p class="mini-note">Nomor rekening dummy</p></div><div class="memory-slot"><strong>Pair</strong><code>"Alya Nabila": "021-9901"</code><p class="mini-note">Satu pasangan data</p></div></div><div class="example-box"><h4>Analogi</h4><p>Seperti kontak HP: kamu pilih nama, lalu aplikasi menampilkan nomor.</p></div></section><section class="slide" id="slide-9"><h3>Buat Dictionary Pertama</h3><p class="lead">Coba jalankan contoh ini. Dictionary dibuat dalam satu baris supaya simulator slide bisa membacanya.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py_dict1" spellcheck="false" style="min-height:230px"># Membuat dictionary berisi data rekening dummy
+rekening_bank = {"Alya": "021-9901", "Budi": "021-9902"}
+
+# Menampilkan seluruh dictionary
+print(rekening_bank)
+print(type(rekening_bank))</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py_dict1_input" spellcheck="false"></textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py_dict1')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu jalankan untuk melihat outputnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py_dict1_out">Output akan muncul di sini.</div></div></div><p class="mini-note">Di Colab, kamu boleh menulis dictionary beberapa baris agar lebih rapi.</p></section><section class="slide" id="slide-10"><h3>Akses Value dengan Key</h3><p class="lead">Untuk mengambil data, tulis nama dictionary, lalu key di dalam kurung siku.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py_access" spellcheck="false" style="min-height:230px"># Dictionary data dummy
+rekening_bank = {"Alya": "021-9901", "Budi": "021-9902"}
+
+# Mengambil value berdasarkan key
+print(rekening_bank["Alya"])
+print(rekening_bank["Budi"])</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py_access_input" spellcheck="false"></textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py_access')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu jalankan untuk melihat outputnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py_access_out">Output akan muncul di sini.</div></div></div><div class="info-box"><h4>Pola akses</h4><p><code>nama_dictionary["key"]</code></p></div></section><section class="slide" id="slide-11"><h3>Key Harus Cocok Persis</h3><p class="lead">Dictionary sangat literal. Huruf besar, huruf kecil, dan spasi ikut dihitung.</p><div class="case-grid"><button class="case-btn" onclick="showExactMatch('ok',this)">Alya Nabila</button><button class="case-btn" onclick="showExactMatch('case',this)">alya nabila</button><button class="case-btn" onclick="showExactMatch('space',this)">Alya Nabila&nbsp;</button><button class="case-btn" onclick="showExactMatch('unknown',this)">Dodi Dermawan</button></div><div class="area-live-card" id="exactMatchInfo"><h4>Pilih contoh key</h4><p>Klik pilihan untuk melihat apakah key akan ditemukan.</p></div></section><section class="slide" id="slide-12"><h3>Apa Itu KeyError?</h3><p class="lead">KeyError muncul saat kita memanggil key yang belum ada di dictionary.</p><div class="code-card"><pre><code>rekening_bank = {"Alya": "021-9901", "Budi": "021-9902"}
+
+# Key "Citra" belum ada
+print(rekening_bank["Citra"])  # KeyError</code></pre></div><div class="warning-box"><h4>Kenapa ini terjadi?</h4><p>Python tidak menemukan label <code>"Citra"</code>, jadi value-nya tidak bisa diambil.</p></div></section><section class="slide" id="slide-13"><h3>Data Dummy dan Privasi</h3><p class="lead">Karena konteksnya rekening, aturan keamanan datanya harus tegas: jangan pakai data asli.</p><div class="choice-grid"><button class="safe-card" onclick="markSafety(this,true)">Alya Nabila — 021-9901</button><button class="safe-card" onclick="markSafety(this,false)">Nomor rekening asli keluarga</button><button class="safe-card" onclick="markSafety(this,false)">NIK asli</button><button class="safe-card" onclick="markSafety(this,true)">Budi Santoso — 021-9902</button><button class="safe-card" onclick="markSafety(this,false)">PIN atau password</button><button class="safe-card" onclick="markSafety(this,true)">Citra Lestari — 021-9903</button></div><p class="mini-note">Hijau = aman untuk latihan. Merah = jangan dipakai.</p></section><section class="slide" id="slide-14"><h3>Alur Project Database Rekening</h3><p class="lead">Klik tiap langkah untuk melihat cara program bekerja.</p><div class="shield-flow"><div class="shield-node" onclick="showDictFlow('create')">Buat Dictionary</div><div class="shield-arrow">→</div><div class="shield-node" onclick="showDictFlow('search')">Input Nama</div><div class="shield-arrow">→</div><div class="shield-node" onclick="showDictFlow('access')">Ambil Value</div></div><div class="area-live-card" id="dictFlowInfo"><h4>1. Buat dictionary</h4><p>Program menyiapkan data dummy dalam bentuk pasangan nama dan nomor rekening.</p></div></section><section class="slide" id="slide-15"><h3>Project Brief</h3><div class="accordion"><button onclick="toggleAccordion(this)">🎯 Tujuan aplikasi</button><div class="accordion-content"><p>Membuat program CLI yang menyimpan data nasabah dummy dan menampilkan nomor rekening dummy berdasarkan nama yang dicari.</p></div></div><div class="accordion"><button onclick="toggleAccordion(this)">📥 Input</button><div class="accordion-content"><p>User mengetik nama lengkap dummy, misalnya <strong>Alya Nabila</strong>.</p></div></div><div class="accordion"><button onclick="toggleAccordion(this)">⚙️ Proses</button><div class="accordion-content"><p>Program memakai <code>db_rekening[cari_nama]</code> untuk mengambil nomor rekening dummy dari dictionary.</p></div></div><div class="accordion"><button onclick="toggleAccordion(this)">📤 Output</button><div class="accordion-content"><p>Terminal menampilkan nama dan nomor rekening dummy yang cocok.</p></div></div></section><section class="slide" id="slide-16"><h3>Starter Code: Struktur Utama</h3><p class="lead">Baca dulu bagian-bagiannya sebelum menjalankan program lengkap.</p><div class="code-card"><pre><code>print("=== DATABASE KONTAK REKENING: BANK MUDA ===")
+
+# Membuat dictionary berisi data dummy
+# Format: {"Nama": "No_Rekening"}
+db_rekening = {
+    "Alya Nabila": "021-9901",
+    "Budi Santoso": "021-9902",
+    "Citra Lestari": "021-9903"
+}
+
+# User mengetik nama yang ingin dicari
+cari_nama = input("Masukkan nama lengkap nasabah: ")
+
+# Mengambil nomor rekening berdasarkan key
+no_rekening = db_rekening[cari_nama]</code></pre></div><div class="mini-note">Kode ini akan dibuat versi runnable di slide berikutnya.</div></section><section class="slide" id="slide-17"><h3>Program Utama: Database Rekening</h3><p class="lead">Jalankan program ini. Input simulator sudah diisi dengan salah satu key yang valid.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py_project" spellcheck="false" style="min-height:430px">print("=== DATABASE KONTAK REKENING: BANK MUDA ===")
+
+# 1. Membuat dictionary berisi data dummy
+# Format: {"Nama": "No_Rekening"}
+db_rekening = {"Alya Nabila": "021-9901", "Budi Santoso": "021-9902", "Citra Lestari": "021-9903"}
+
+print("Pilihan Nama Nasabah: Alya Nabila, Budi Santoso, Citra Lestari")
+print("------------------------------------------------------------")
+
+# 2. Meminta user memasukkan nama key yang ingin dicari
+cari_nama = input("Masukkan nama lengkap nasabah untuk cek rekening: ")
+
+print("\n🔍 MEMPROSES PENCARIAN DATABASE...")
+print("------------------------------------------------------------")
+
+# 3. Mengambil value berdasarkan key
+no_rekening = db_rekening[cari_nama]
+
+print(f"Nama Nasabah : {cari_nama}")
+print(f"No. Rekening : {no_rekening} (DATA DUMMY)")
+print("------------------------------------------------------------")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py_project_input" spellcheck="false">Alya Nabila</textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py_project')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu jalankan untuk melihat outputnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py_project_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-18"><h3>Output yang Diharapkan</h3><p class="lead">Jika inputnya <code>Alya Nabila</code>, output kurang lebih seperti ini:</p><div class="terminal-green">=== DATABASE KONTAK REKENING: BANK MUDA ===
+Pilihan Nama Nasabah: Alya Nabila, Budi Santoso, Citra Lestari
+------------------------------------------------------------
+Masukkan nama lengkap nasabah untuk cek rekening: Alya Nabila
+
+🔍 MEMPROSES PENCARIAN DATABASE...
+------------------------------------------------------------
+Nama Nasabah : Alya Nabila
+No. Rekening : 021-9901 (DATA DUMMY)
+------------------------------------------------------------</div><div class="info-box"><h4>Catatan</h4><p>Nomor rekening di atas adalah contoh palsu untuk latihan.</p></div></section><section class="slide" id="slide-19"><h3>Test Case: Coba Beberapa Nama</h3><p class="lead">Klik salah satu case, lalu kembali ke slide program utama untuk menjalankan ulang.</p><div class="case-grid"><button class="case-btn" onclick="loadDbCase(this,'alya')">Case 1<br>Alya Nabila</button><button class="case-btn" onclick="loadDbCase(this,'budi')">Case 2<br>Budi Santoso</button><button class="case-btn" onclick="loadDbCase(this,'citra')">Case 3<br>Citra Lestari</button><button class="case-btn" onclick="loadDbCase(this,'error')">Edge Case<br>alya nabila</button></div><div class="feedback-line" id="dbCaseFeedback"></div><div class="warning-box"><h4>Edge case</h4><p><code>alya nabila</code> sengaja memakai huruf kecil. Program dasar kemungkinan gagal karena key tidak cocok persis.</p></div></section><section class="slide" id="slide-20"><h3>Reading Code: Prediksi Output</h3><p>Tanpa menjalankan kode, apa output dari program ini?</p><div class="code-card"><pre><code>db_rekening = {"Alya": "021-9901", "Budi": "021-9902"}
+print(db_rekening["Budi"])</code></pre></div><div class="choice-grid"><button class="choice-btn" onclick="selectKVQuiz(this,false,'read1')">Alya</button><button class="choice-btn" onclick="selectKVQuiz(this,true,'read1')">021-9902</button><button class="choice-btn" onclick="selectKVQuiz(this,false,'read1')">db_rekening</button><button class="choice-btn" onclick="selectKVQuiz(this,false,'read1')">KeyError</button></div><div class="feedback-line" id="read1"></div></section><section class="slide" id="slide-21"><h3>Update Value dalam Dictionary</h3><p class="lead">Kalau key sudah ada, kita bisa mengganti value-nya dengan assignment baru.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py_update" spellcheck="false" style="min-height:270px"># Data awal
+rekening_bank = {"Alya": "021-9901", "Budi": "021-9902"}
+
+# Mengganti value milik key "Budi"
+rekening_bank["Budi"] = "021-9002"
+
+print(rekening_bank)
+print(rekening_bank["Budi"])</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py_update_input" spellcheck="false"></textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py_update')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu jalankan untuk melihat outputnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py_update_out">Output akan muncul di sini.</div></div></div><p class="mini-note">Ini contoh update data dummy, bukan mengubah rekening asli.</p></section><section class="slide" id="slide-22"><h3>Tambah Data Baru</h3><p class="lead">Kalau key belum ada, assignment akan menambahkan pasangan key-value baru.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py_add" spellcheck="false" style="min-height:320px"># Database awal
+rek = {"Alya Nabila": "021-9901", "Budi Santoso": "021-9902"}
+
+# Menambahkan data dummy baru
+rek["Dodi Dermawan"] = "021-9904"
+rek["Eka Putri"] = "021-9905"
+
+print("Daftar akun setelah ditambah:")
+print(rek)
+print(f"Total data: {len(rek)}")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py_add_input" spellcheck="false"></textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py_add')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu jalankan untuk melihat outputnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py_add_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-23"><h3>Dictionary sebagai Tabel Dua Kolom</h3><p class="lead">Cara lain membaca dictionary adalah membayangkannya sebagai tabel.</p><table class="thin-table"><tr><th>Key</th><th>Value</th><th>Catatan</th></tr><tr><td>Alya Nabila</td><td>021-9901</td><td>Data dummy</td></tr><tr><td>Budi Santoso</td><td>021-9902</td><td>Data dummy</td></tr><tr><td>Citra Lestari</td><td>021-9903</td><td>Data dummy</td></tr></table><div class="example-box"><h4>Bedanya dengan tabel biasa</h4><p>Di dictionary, key harus unik. Jika key yang sama ditulis lagi, value lama bisa tertimpa.</p></div></section><section class="slide" id="slide-24"><h3>Key Harus Unik</h3><p class="lead">Apa yang terjadi jika key yang sama ditulis dua kali?</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py_duplicate" spellcheck="false" style="min-height:230px">data = {"Alya": "021-9901", "Alya": "021-9999"}
+
+print(data)
+print(data["Alya"])</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py_duplicate_input" spellcheck="false"></textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py_duplicate')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu jalankan untuk melihat outputnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py_duplicate_out">Output akan muncul di sini.</div></div></div><div class="warning-box"><h4>Kesimpulan</h4><p>Key yang sama akan membuat value lama tertimpa oleh value baru.</p></div></section><section class="slide" id="slide-25"><h3>Detektif Kode: Bug Dictionary</h3><div class="debug-tabs"><button class="debug-tab active" onclick="showDictBug('s12bug1',this)">KeyError</button><button class="debug-tab" onclick="showDictBug('s12bug2',this)">Lupa kutip</button><button class="debug-tab" onclick="showDictBug('s12bug3',this)">Lupa titik dua</button><button class="debug-tab" onclick="showDictBug('s12bug4',this)">Data asli</button></div><div class="debug-scenario s12 active" id="s12bug1"><div class="warning-box"><h4>Gejala</h4><p><code>KeyError: 'alya nabila'</code></p></div><div class="info-box"><h4>Cek</h4><p>Input harus sama persis dengan key. Perhatikan kapital dan spasi.</p></div></div><div class="debug-scenario s12" id="s12bug2"><div class="warning-box"><h4>Gejala</h4><p><code>NameError</code> saat memanggil key.</p></div><div class="info-box"><h4>Cek</h4><p>Key berbentuk teks perlu tanda kutip: <code>db_rekening["Alya"]</code>.</p></div></div><div class="debug-scenario s12" id="s12bug3"><div class="warning-box"><h4>Gejala</h4><p><code>SyntaxError</code> saat membuat dictionary.</p></div><div class="info-box"><h4>Cek</h4><p>Pasangan dictionary harus memakai titik dua: <code>"Alya": "021-9901"</code>.</p></div></div><div class="debug-scenario s12" id="s12bug4"><div class="warning-box"><h4>Gejala</h4><p>Program jalan, tapi datanya sensitif.</p></div><div class="info-box"><h4>Cek</h4><p>Ganti dengan data dummy. Jangan pakai rekening, NIK, PIN, atau password asli.</p></div></div></section><section class="slide" id="slide-26"><h3>Bug Challenge: Perbaiki Satu Baris</h3><p>Baris mana yang perlu diperbaiki?</p><div class="code-card"><pre><code>db_rekening = {"Alya": "021-9901", "Budi": "021-9902"}
+print(db_rekening[Alya])</code></pre></div><div class="choice-grid"><button class="choice-btn" onclick="selectKVQuiz(this,true,'fixBug1')">Ubah menjadi <code>db_rekening["Alya"]</code></button><button class="choice-btn" onclick="selectKVQuiz(this,false,'fixBug1')">Ubah menjadi <code>db_rekening( "Alya" )</code></button><button class="choice-btn" onclick="selectKVQuiz(this,false,'fixBug1')">Hapus dictionary-nya</button></div><div class="feedback-line" id="fixBug1"></div></section><section class="slide" id="slide-27"><h3>Challenge: Tambah Nasabah Baru</h3><p class="lead">Tambahkan dua data dummy baru, lalu panggil salah satunya.</p><div class="python-editor"><div class="editor-head"><div class="editor-label">PYTHON EDITOR</div><div class="editor-live">LIVE OUTPUT</div></div><textarea id="py_challenge" spellcheck="false" style="min-height:320px">db_rekening = {"Alya Nabila": "021-9901", "Budi Santoso": "021-9902"}
+
+# Challenge: tambah dua data dummy baru
+db_rekening["Dodi Dermawan"] = "021-9904"
+db_rekening["Eka Putri"] = "021-9905"
+
+# Panggil salah satu data baru
+print(db_rekening["Dodi Dermawan"])
+print(f"Jumlah data sekarang: {len(db_rekening)}")</textarea><div class="stdin-panel"><div class="stdin-label">Input simulator</div><textarea class="stdin-area" id="py_challenge_input" spellcheck="false"></textarea></div><div class="editor-toolbar"><button class="run-code-btn" onclick="runPyEditor('py_challenge')">Run code</button><span class="editor-toolbar-note">Edit kode, lalu jalankan untuk melihat outputnya.</span></div><div class="editor-output-panel"><div class="editor-output-label">OUTPUT</div><div class="output-box" id="py_challenge_out">Output akan muncul di sini.</div></div></div></section><section class="slide" id="slide-28"><h3>Challenge Plus: Validasi Pencarian</h3><p class="lead">Program dasar akan error jika key tidak ada. Versi lebih aman bisa memakai <code>if</code>.</p><div class="code-card"><pre><code># Preview konsep lanjutan
+# Di Colab, kamu bisa mencoba pola ini:
+
+if cari_nama in db_rekening:
+    no_rekening = db_rekening[cari_nama]
+    print(f"No. Rekening: {no_rekening}")
+else:
+    print("Nama belum ada di database dummy.")</code></pre></div><div class="warning-box"><h4>Catatan</h4><p>Ini preview pengamanan pencarian. Fokus utama sesi ini tetap dictionary key-value.</p></div></section><section class="slide" id="slide-29"><h3>Output Minimum</h3><ul class="checklist"><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox" /> Dictionary <code>db_rekening</code> berhasil dibuat.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox" /> Data memakai key dan value yang jelas.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox" /> Program bisa mengambil nomor rekening dummy berdasarkan nama.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox" /> Minimal satu test case valid berhasil.</li><li class="check-item" onclick="toggleCheck(this)"><input type="checkbox" /> Tidak ada data pribadi asli di kode.</li></ul><div class="example-box"><h4>Misi berhasil jika</h4><p>Dictionary bisa menyimpan dan memanggil data berdasarkan key dengan benar.</p></div></section><section class="slide" id="slide-30"><h3>Clean Code untuk Dictionary</h3><div class="visual-grid"><div class="visual-card"><div class="visual-icon">🏷️</div><h4>Nama variabel jelas</h4><p><code>db_rekening</code> lebih jelas daripada <code>x</code>.</p></div><div class="visual-card"><div class="visual-icon">🔐</div><h4>Data dummy</h4><p>Jangan masukkan data asli.</p></div><div class="visual-card"><div class="visual-icon">🧱</div><h4>Struktur konsisten</h4><p>Key dan value punya pola yang sama.</p></div><div class="visual-card"><div class="visual-icon">🧪</div><h4>Test case</h4><p>Coba input valid dan input salah.</p></div></div><div class="interactive-box"><h4>Quick check</h4><p>Nama variabel mana yang lebih readable?</p><div class="choice-grid"><button class="choice-btn" onclick="selectKVQuiz(this,false,'cleanQ')">x</button><button class="choice-btn" onclick="selectKVQuiz(this,true,'cleanQ')">db_rekening</button><button class="choice-btn" onclick="selectKVQuiz(this,false,'cleanQ')">a1</button></div><div class="feedback-line" id="cleanQ"></div></div></section><section class="slide" id="slide-31"><h3>Refleksi Developer</h3><div class="interactive-box"><h4>Exit ticket</h4><p>Pilih kalimat yang paling tepat tentang dictionary.</p><div class="choice-grid"><button class="choice-btn" onclick="selectKVQuiz(this,false,'exitQ')">Dictionary selalu memakai index 0, 1, 2</button><button class="choice-btn" onclick="selectKVQuiz(this,true,'exitQ')">Dictionary menyimpan pasangan key dan value</button><button class="choice-btn" onclick="selectKVQuiz(this,false,'exitQ')">Dictionary hanya bisa menyimpan angka</button></div><div class="feedback-line" id="exitQ"></div></div><div class="example-box"><h4>Tulis di catatanmu</h4><p>Bug apa yang kamu temukan hari ini? Bagaimana cara kamu memperbaikinya?</p></div></section><section class="slide" id="slide-32"><span class="eyebrow">Penutup</span><h2>Kamu Sudah Membuat Database Mini</h2><p class="lead">Hari ini kamu belajar dictionary, key-value, akses data, update value, tambah data baru, dan pentingnya data dummy.</p><div class="metrics"><div class="metric-box"><strong>{ }</strong><span>Dictionary</span></div><div class="metric-box"><strong>🔑</strong><span>Key untuk mencari</span></div><div class="metric-box"><strong>📦</strong><span>Value sebagai isi</span></div><div class="metric-box"><strong>🧪</strong><span>Testing input</span></div></div><div class="example-box"><h4>Preview Sesi 13</h4><p>Berikutnya, dictionary akan dipakai bersama list dan loop untuk membuat sistem kasir mini.</p></div></section></div><div class="navigation"><button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)"><span>←</span> Previous</button><div class="slide-indicator"><span id="currentSlide">1</span> / <span id="totalSlides">32</span></div><button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next <span>→</span></button></div></div><div class="explanation-panel"><section class="explanation active" id="explanation-1"><h3>Project yang Akan Dibuat</h3><p>Di sesi sebelumnya, kamu sudah memakai <code>list</code> untuk menyimpan beberapa aset simulasi. Sekarang kita naik satu level: bukan hanya menyimpan daftar, tapi menyimpan data yang berpasangan.</p><p>Project hari ini adalah <strong>Database Rekening Nasabah</strong>. Bentuknya masih sederhana dan berbasis terminal, tetapi pola datanya sudah mirip database kecil: ada nama sebagai label, lalu ada nomor rekening dummy sebagai isi.</p><div class="warning-box"><h4>Catatan penting</h4><p>Semua data di sesi ini wajib data dummy. Jangan memakai nomor rekening asli, nomor HP asli, NIK, PIN, password, atau data keluarga.</p></div></section><section class="explanation" id="explanation-2"><h3>Alur Belajar Sesi Ini</h3><p>Fokus sesi ini adalah membuat data lebih mudah dicari. Kalau <code>list</code> cocok untuk daftar berurutan, <code>dictionary</code> cocok untuk data yang punya label jelas.</p><p>Di project ini, labelnya adalah nama nasabah dummy. Isinya adalah nomor rekening dummy. Dengan pola ini, program bisa mengambil data berdasarkan nama, bukan berdasarkan nomor urut.</p><div class="info-box"><h4>Skill inti</h4><ul><li>Membuat dictionary dengan <code>{}</code>.</li><li>Membedakan <strong>key</strong> dan <strong>value</strong>.</li><li>Mengakses data dengan <code>nama_dictionary[key]</code>.</li><li>Menambah pasangan data baru.</li></ul></div></section><section class="explanation" id="explanation-3"><h3>Persiapan Coding</h3><p>Sesi ini akan sering meminta kamu menjalankan kode dan mengubah input. Pastikan kamu bisa menjalankan cell dengan lancar, lalu pakai input simulator atau terminal Colab untuk mencoba beberapa nama dummy.</p><p>Gunakan format penulisan yang konsisten. Nama yang diketik user harus sama persis dengan key yang ada di dictionary. Ini akan terasa agak ketat, tetapi memang begitu cara kerja pencarian key dasar di Python.</p><div class="warning-box"><h4>Data dummy dulu</h4><p>Nomor rekening dalam latihan ini dibuat palsu. Tujuannya hanya untuk memahami struktur data, bukan menyimpan data finansial nyata.</p></div></section><section class="explanation" id="explanation-4"><h3>Kenapa Butuh Dictionary?</h3><p>List cocok untuk data yang urutannya penting. Namun untuk data berpasangan seperti nama → nomor rekening dummy, kita butuh cara yang lebih langsung.</p><p>Dengan dictionary, kamu tidak perlu mengingat posisi Alya ada di index berapa. Kamu cukup memanggil key <code>"Alya"</code>, lalu Python mengambil value yang terkait.</p><div class="example-box"><h4>Pola pikirnya</h4><p><strong>Daripada mencari berdasarkan nomor urut, cari berdasarkan label.</strong></p></div></section><section class="explanation" id="explanation-5"><h3>Key dan Value</h3><p>Bayangkan daftar kontak. Nama kontak berfungsi sebagai <strong>key</strong>, sedangkan nomor teleponnya adalah <strong>value</strong>. Kamu mencari nama, lalu aplikasi menampilkan nomor.</p><p>Di project ini, nama nasabah dummy menjadi key. Nomor rekening dummy menjadi value. Pola ini membuat data lebih mudah dicari dan lebih mudah dibaca.</p><div class="info-box"><h4>Kalimat penting</h4><p>Dictionary menyimpan data sebagai pasangan: <code>key: value</code>.</p></div></section><section class="explanation" id="explanation-6"><h3>Membaca Sintaks Dictionary</h3><p>Di Python, tanda <code>{}</code> memberi tahu bahwa data tersebut adalah dictionary. Di dalamnya, tiap pasangan punya key di kiri dan value di kanan.</p><p>Kalau ada lebih dari satu pasangan, pisahkan dengan koma. Tanda kutip dipakai karena key dan value pada contoh ini berupa teks.</p><div class="warning-box"><h4>Hati-hati</h4><p>Lupa koma, lupa titik dua, atau lupa tanda kutip bisa membuat program error. Untuk awal, ketik pelan-pelan dan cek pasangan tanda kurung.</p></div></section><section class="explanation" id="explanation-7"><h3>Latihan Membaca Data</h3><p>Dalam <code>{"Citra": "021-9903"}</code>, <code>"Citra"</code> adalah key karena dipakai sebagai label pencarian. <code>"021-9903"</code> adalah value karena itulah data yang diambil saat key dipanggil.</p><p>Latihan seperti ini kelihatan sederhana, tapi penting. Saat dictionary makin panjang, kamu perlu cepat melihat mana label dan mana isi.</p></section><section class="explanation" id="explanation-8"><h3>Dictionary sebagai Kartu Data</h3><p>Satu pasangan key-value bisa dibayangkan seperti satu kartu kontak. Bagian depan berisi nama sebagai label, bagian belakang berisi nomor yang dicari.</p><p>Dalam konteks program, Python tidak “menebak” data. Python hanya mengambil value jika key yang diberikan cocok dengan key yang tersimpan.</p></section><section class="explanation" id="explanation-9"><h3>Dictionary Pertama</h3><p>Kode ini membuat variabel <code>rekening_bank</code> yang berisi dua pasangan data. Setelah dijalankan, Python menampilkan isi dictionary dan tipe datanya.</p><div class="info-box"><h4>Yang perlu diperhatikan</h4><p>Nomor rekening dummy disimpan sebagai string, bukan angka. Ini wajar karena nomor rekening tidak kita hitung seperti matematika. Nomor itu lebih tepat dianggap identitas teks.</p></div></section><section class="explanation" id="explanation-10"><h3>Pola Akses Dictionary</h3><p>Kalau kamu menulis <code>rekening_bank["Alya"]</code>, Python mencari key <code>"Alya"</code> di dalam dictionary. Jika ketemu, Python mengembalikan value yang terkait.</p><p>Ini berbeda dengan list. Pada list, kamu mengambil data dengan index seperti <code>data[0]</code>. Pada dictionary, kamu mengambil data dengan key seperti <code>data["Alya"]</code>.</p></section><section class="explanation" id="explanation-11"><h3>Exact Match Itu Penting</h3><p>Python membandingkan key secara persis. <code>"Alya Nabila"</code> dan <code>"alya nabila"</code> tidak dianggap sama karena huruf kapitalnya berbeda.</p><p>Ini penting saat membuat program pencarian. Program dasar kita belum punya fitur validasi atau pencarian fleksibel. Jadi user harus mengetik nama sesuai daftar yang tersedia.</p><div class="warning-box"><h4>Bug yang sering muncul</h4><p><strong>KeyError</strong> muncul ketika key yang diminta tidak ada di dictionary.</p></div></section><section class="explanation" id="explanation-12"><h3>Membaca KeyError</h3><p><code>KeyError</code> bukan berarti Python rusak. Itu hanya tanda bahwa key yang kamu minta belum tersedia di dictionary.</p><p>Untuk sesi ini, cara paling simpel adalah memastikan input user sama persis dengan pilihan nama yang disediakan. Di sesi lanjutan, kamu bisa menambahkan validasi dengan <code>if</code> agar program memberi pesan yang lebih ramah.</p></section><section class="explanation" id="explanation-13"><h3>Data Finansial Itu Sensitif</h3><p>Walaupun project ini kecil, konteksnya tetap data rekening. Biasakan memakai data dummy sejak latihan. Kebiasaan ini penting untuk developer, karena notebook atau source code kadang dibagikan ke orang lain.</p><div class="info-box"><h4>Data dummy yang aman</h4><p>Gunakan nama dan nomor contoh yang tidak terhubung ke orang sungguhan. Tujuan kita adalah menguji logika program, bukan menyimpan informasi nyata.</p></div></section><section class="explanation" id="explanation-14"><h3>Input → Cari → Output</h3><p>Project ini punya alur sederhana. Pertama, program membuat dictionary. Kedua, user mengetik nama yang ingin dicari. Ketiga, program mengambil value dari dictionary berdasarkan key yang dimasukkan.</p><p>Alur ini mirip fitur pencarian kecil. Bedanya, data kita belum disimpan permanen. Data hanya ada selama program berjalan.</p></section><section class="explanation" id="explanation-15"><h3>Scope Project Sesi 12</h3><p>Project ini fokus pada struktur data dictionary. Kita belum membuat database permanen, login, atau validasi pencarian yang lengkap. Semua masih latihan CLI dasar.</p><p>Walaupun sederhana, konsepnya penting. Banyak aplikasi nyata memakai pola key-value untuk mencari data cepat, menyimpan konfigurasi, atau membaca detail record.</p></section><section class="explanation" id="explanation-16"><h3>Membaca Starter Code</h3><p>Bagian atas membuat dictionary bernama <code>db_rekening</code>. Dictionary ini berisi tiga pasangan data dummy. Setelah itu, program meminta user mengetik nama.</p><p>Baris paling penting adalah <code>no_rekening = db_rekening[cari_nama]</code>. Di sini, isi variabel <code>cari_nama</code> dipakai sebagai key untuk mencari value.</p></section><section class="explanation" id="explanation-17"><h3>Program Utama</h3><p>Program ini menyatukan semua konsep sesi 12: dictionary, input user, akses value dengan key, dan output terformat.</p><p>Coba ganti input simulator menjadi <code>Budi Santoso</code> atau <code>Citra Lestari</code>. Jika ejaannya sama persis dengan key, program akan menampilkan nomor rekening dummy yang sesuai.</p><div class="warning-box"><h4>Jika error</h4><p>Cek apakah nama yang diketik sama persis dengan pilihan nama. Kapital dan spasi berpengaruh.</p></div></section><section class="explanation" id="explanation-18"><h3>Mengecek Output</h3><p>Output yang baik harus mudah dibaca. Header membantu user tahu aplikasi apa yang sedang berjalan. Garis pemisah membuat bagian hasil lebih rapi.</p><p>Perhatikan bahwa program tidak menampilkan semua database saat pencarian. Program hanya menampilkan data yang diminta user. Ini lebih mirip cara aplikasi bekerja: user mencari satu data, lalu sistem mengembalikan hasil yang relevan.</p></section><section class="explanation" id="explanation-19"><h3>Testing dengan Case Berbeda</h3><p>Testing bukan hanya menjalankan program satu kali. Kamu perlu mencoba beberapa input untuk memastikan program bekerja sesuai rencana.</p><p>Case yang valid membantu memastikan dictionary bisa mengambil value yang benar. Edge case membantu menemukan batas program, misalnya ketika key tidak cocok karena huruf kapital berbeda.</p><div class="info-box"><h4>Kebiasaan developer</h4><p>Jangan hanya mengetes input yang benar. Tes juga input yang berpotensi salah supaya kamu tahu kelemahan program.</p></div></section><section class="explanation" id="explanation-20"><h3>Latihan Reading Code</h3><p>Program memanggil <code>db_rekening["Budi"]</code>. Artinya Python mencari key <code>"Budi"</code>, lalu mengambil value yang dipasangkan dengannya.</p><p>Karena value untuk Budi adalah <code>"021-9902"</code>, itulah output yang muncul.</p></section><section class="explanation" id="explanation-21"><h3>Mengubah Isi Value</h3><p>Dictionary bisa diperbarui. Jika key yang ditulis sudah ada, Python akan mengganti value lama dengan value baru.</p><p>Pola ini berguna untuk memperbaiki data contoh atau mengubah status. Namun, untuk data sensitif di aplikasi nyata, perubahan data harus punya validasi dan izin yang jelas.</p></section><section class="explanation" id="explanation-22"><h3>Menambahkan Data</h3><p>Pola <code>nama_dict["Key Baru"] = "Value Baru"</code> dipakai untuk menambahkan pasangan baru. Jika key belum ada, dictionary akan bertambah.</p><p>Perhatikan bahwa <code>len(rek)</code> menghitung jumlah pasangan key-value di dictionary. Setelah dua data baru ditambahkan, jumlah data ikut berubah.</p></section><section class="explanation" id="explanation-23"><h3>Membaca Dictionary sebagai Tabel</h3><p>Visual tabel membantu memahami key-value. Key seperti kolom pencarian, sedangkan value adalah data yang dikembalikan.</p><p>Karena key dipakai sebagai label, key sebaiknya unik. Kalau key sama dipakai dua kali, Python akan menyimpan value terakhir untuk key tersebut.</p></section><section class="explanation" id="explanation-24"><h3>Duplicate Key</h3><p>Dictionary tidak menyimpan dua value untuk key yang sama. Jika kamu menulis key yang sama lagi, value terbaru akan menggantikan value lama.</p><p>Dalam aplikasi nyata, duplicate key perlu dicegah atau ditangani dengan aturan yang jelas. Untuk latihan ini, cukup ingat: <strong>key sebaiknya unik</strong>.</p></section><section class="explanation" id="explanation-25"><h3>Debugging Dictionary</h3><p>Bug sesi ini biasanya berasal dari key yang tidak cocok, tanda kutip yang hilang, atau struktur dictionary yang tidak lengkap.</p><p>Kalau error muncul, baca pesan error-nya. Cari baris yang ditunjuk Python, lalu cek tanda kutip, titik dua, koma, kurung kurawal, dan key yang dipanggil.</p></section><section class="explanation" id="explanation-26"><h3>Kenapa Perlu Tanda Kutip?</h3><p>Tanpa tanda kutip, Python mengira <code>Alya</code> adalah nama variabel. Karena variabel <code>Alya</code> belum dibuat, program bisa memunculkan <code>NameError</code>.</p><p>Kalau key-nya berupa teks, panggil dengan tanda kutip: <code>db_rekening["Alya"]</code>.</p></section><section class="explanation" id="explanation-27"><h3>Challenge Data Baru</h3><p>Challenge ini melatih kamu menambah pasangan key-value tanpa membongkar dictionary awal. Caranya cukup menulis assignment baru dengan key dan value baru.</p><p>Setelah menambah data, panggil salah satu key baru untuk memastikan datanya benar-benar masuk.</p></section><section class="explanation" id="explanation-28"><h3>Menuju Program yang Lebih Aman</h3><p>Program yang baik tidak hanya berjalan saat input benar. Program juga perlu memberi respons saat input tidak ditemukan.</p><p>Pola <code>if cari_nama in db_rekening</code> mengecek apakah key ada sebelum diakses. Ini mencegah program langsung berhenti karena <code>KeyError</code>. Konsep ini akan makin sering dipakai saat aplikasi CLI bertambah besar.</p></section><section class="explanation" id="explanation-29"><h3>Checklist Kualitas Project</h3><p>Gunakan checklist ini sebelum mengumpulkan atau menyimpan project. Jangan hanya mengecek apakah program bisa jalan; cek juga apakah datanya aman dan strukturnya rapi.</p><p>Kalau program masih error, mulai dari hal kecil: cek tanda kutip, nama key, kurung kurawal, titik dua, dan input yang diketik.</p></section><section class="explanation" id="explanation-30"><h3>Readable Code</h3><p>Kode yang baik bukan hanya benar, tapi juga mudah dibaca. Saat project CLI makin besar, nama variabel yang jelas akan sangat membantu.</p><p>Untuk dictionary, pakai nama yang menggambarkan isinya. Contoh: <code>db_rekening</code>, <code>kontak_dummy</code>, atau <code>data_nasabah</code>.</p></section><section class="explanation" id="explanation-31"><h3>Refleksi Sesi 12</h3><p>Kalau kamu bisa menjelaskan key, value, dan cara memanggil data dari dictionary, berarti inti sesi ini sudah kamu pegang.</p><p>Catat juga bug yang muncul. Untuk dictionary, bug paling sering biasanya <code>KeyError</code>, salah tanda kutip, atau key yang tidak cocok persis.</p></section><section class="explanation" id="explanation-32"><h3>Rangkuman Sesi 12</h3><p>Dictionary membantu program menyimpan data yang berpasangan. Key dipakai untuk mencari data, value adalah isi yang dikembalikan.</p><p>Konsep ini akan sangat berguna saat kamu membangun aplikasi CLI yang punya banyak data, seperti kasir mini, database kontak, atau tracker keuangan sederhana.</p></section></div></div><script>
+const ACCESS_CODE='RGMDSHS26';let currentSlide=1;const totalSlides=27;const NL='\n';const CR='\r';const BS='\\';
+window.addEventListener('load',()=>{setTimeout(()=>document.querySelector('.access-popup').classList.add('show'),50);const input=document.getElementById('accessInput');input.focus();input.addEventListener('input',e=>{e.target.value=e.target.value.toUpperCase()});input.addEventListener('keydown',e=>{if(e.key==='Enter')checkAccessCode()});document.getElementById('totalSlides').textContent=totalSlides;initPyEditors();updateSlide();});
+function checkAccessCode(){const val=document.getElementById('accessInput').value.trim().toUpperCase();if(val===ACCESS_CODE){document.getElementById('accessPopup').style.display='none';document.getElementById('mainContent').style.display='flex';}else{document.getElementById('accessError').classList.add('show');setTimeout(()=>document.getElementById('accessError').classList.remove('show'),1800);}}
+function changeSlide(d){const n=currentSlide+d;if(n<1||n>totalSlides)return;currentSlide=n;updateSlide();}
+function updateSlide(){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.explanation').forEach(e=>e.classList.remove('active'));let s=document.getElementById('slide-'+currentSlide),e=document.getElementById('explanation-'+currentSlide);if(s)s.classList.add('active');if(e)e.classList.add('active');document.getElementById('currentSlide').textContent=currentSlide;document.getElementById('prevBtn').disabled=currentSlide===1;document.getElementById('nextBtn').disabled=currentSlide===totalSlides;document.getElementById('progressFill').style.width=((currentSlide-1)/(totalSlides-1))*100+'%';}
+function selectAny(btn){btn.classList.toggle('selected');}
+function deviceCheck(btn){btn.classList.toggle('correct');}
+function quiz(btn,correct,id){const group=btn.parentElement.querySelectorAll('.choice-btn');group.forEach(b=>b.classList.remove('correct','wrong'));btn.classList.add(correct?'correct':'wrong');const el=document.getElementById(id);if(el)el.textContent=correct?'Benar. Lanjutkan logikanya.':'Belum tepat. Coba baca petunjuknya lagi.';}
+function revealAnswer(id){const el=document.getElementById(id);if(el)el.style.display=el.style.display==='none'||!el.style.display?'block':'none';}
+function toggleAccordion(btn){btn.parentElement.classList.toggle('open');}
+function toggleCheck(item){const cb=item.querySelector('input');if(cb){cb.checked=!cb.checked;}item.classList.toggle('done');}
+function showDebug(id,btn){document.querySelectorAll('.debug-scenario').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');btn.parentElement.querySelectorAll('.debug-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function showCrashFlow(k){const data={raw:['Input salah tanpa pelindung','Program mencoba memproses input seperti biasa. Kalau formatnya tidak cocok, error tidak tertangani.'],value:['ValueError','ValueError muncul saat nilai tidak bisa dikonversi, misalnya int("banyak").'],stop:['Program berhenti','Tanpa except, program berhenti dan user melihat traceback teknis.'],try:['try','Bagian rawan error dimasukkan ke blok try agar Python tahu ini perlu dicoba dengan pengaman.'],catch:['except ValueError','Jika ValueError terjadi, Python lompat ke blok except dan menjalankan pesan penyelamat.'],safe:['Pesan ramah','Program tetap selesai dan user mendapat petunjuk yang jelas.']};document.getElementById('crashFlowInfo').innerHTML='<h4>'+data[k][0]+'</h4><p>'+data[k][1]+'</p>';}
+function predictInput(btn,k){btn.parentElement.querySelectorAll('.case-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const data={150000:['Aman','Input ini berisi digit angka murni, jadi int() bisa memprosesnya.'],seratus:['ValueError','Input berisi huruf. int() tidak bisa menebak bahwa seratus berarti 100.'], '150000.5':['ValueError','int() tidak menerima teks berdesimal. Untuk desimal, gunakan float().'], blank:['ValueError','Input kosong tidak punya angka untuk dikonversi.'], dot:['ValueError','Titik ribuan membuat string tidak valid untuk int().']};document.getElementById('predictInfo').innerHTML='<h4>'+data[k][0]+'</h4><p>'+data[k][1]+'</p>';}
+function showProjectFlow(k){const data={input:['Input','User mengetik target tabungan sebagai teks dari terminal.'],casting:['Casting int()','Program mengubah teks angka menjadi integer agar bisa dihitung.'],calc:['Hitung','Program membagi target dengan 12 untuk estimasi bulanan.'],success:['Output sukses','Jika semua aman, program mencetak target dan tabungan per bulan.'],invalid:['Input tidak valid','Contoh: huruf, kosong, desimal, atau titik ribuan.'],except:['except ValueError','Jalur ini memberi pesan ramah tanpa menghentikan program.']};document.getElementById('projectFlowInfo').innerHTML='<h4>'+data[k][0]+'</h4><p>'+data[k][1]+'</p>';}
+function loadAntiCase(btn,n){document.querySelectorAll('#slide-20 .case-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const cases={1:['1200000','Case valid dimuat. Harus menghasilkan Rp 100,000/bulan.'],2:['banyak','Case huruf dimuat. Harus masuk except ValueError.'],3:['','Case kosong dimuat. Harus masuk except ValueError.'],4:['1.200.000','Case titik ribuan dimuat. Harus masuk except ValueError.'],5:['150000.5','Case desimal dimuat. Pada int(), ini masuk ValueError.']};['py5','py6','py7'].forEach(id=>{let inp=document.getElementById(id+'_input');if(inp){inp.value=cases[n][0];inp.classList.add('preset-loaded');setTimeout(()=>inp.classList.remove('preset-loaded'),900);}});document.getElementById('antiCaseFeedback').textContent=cases[n][1];}
+
+function showDataConcept(k,btn){if(btn){btn.parentElement.querySelectorAll('.component-pill').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}const d={list:['List','Wadah untuk banyak data. Contoh: ["Emas", "Laptop", "Sepeda"].'],dict:['Dictionary','Data berlabel key-value. Contoh: {"id": 1, "nama": "Emas"}.'],record:['Record','Satu baris data lengkap. Di sesi ini, satu record = satu dictionary aset.'],database:['List of Dictionary','List besar berisi beberapa dictionary. Bentuk ini mirip database mini.']};document.getElementById('dataConceptInfo').innerHTML='<h4>'+d[k][0]+'</h4><p>'+d[k][1]+'</p>';}
+function showKeyAccess(k,btn){if(btn){btn.parentElement.querySelectorAll('.operator-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}const d={id:['aset["id"]','Mengambil ID dari record aset.'],nama:['aset["nama"]','Mengambil nama aset dari record.'],wrong:['aset[id]','Rawan error, karena Python akan mencari variabel bernama id. Key string perlu tanda kutip.'],missing:['aset["harga"]','Akan error jika key harga belum ada di dictionary.']};document.getElementById('keyAccessInfo').innerHTML='<h4>'+d[k][0]+'</h4><p>'+d[k][1]+'</p>';}
+function showDatabaseFlow(k){const d={data:['Data awal','List menyimpan beberapa dictionary aset.'],loop:['Loop','for aset in database_portofolio membaca record satu per satu.'],key:['Akses key','Di setiap putaran, aset["id"] dan aset["nama"] mengambil isi record.'],output:['Output','Terminal mencetak satu baris tabel untuk setiap record.']};document.getElementById('databaseFlowInfo').innerHTML='<h4>'+d[k][0]+'</h4><p>'+d[k][1]+'</p>';}
+function loadPortfolioCase(btn,n){document.querySelectorAll('#slide-18 .case-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const d={1:'Database awal harus menampilkan 3 aset.',2:'Setelah append(), Reksa Dana harus muncul sebagai aset keempat.',3:'Jika menambah aset baru, gunakan ID yang belum dipakai.'};document.getElementById('portfolioCaseFeedback').textContent=d[n];}
+function markSafety(btn,isSafe){btn.classList.remove('safe','risky');btn.classList.add(isSafe?'safe':'risky');}
+
+function initPyEditors(){document.querySelectorAll('.python-editor textarea[id^="py"]').forEach(area=>{runPyEditor(area.id);});}
+function runPyEditor(id){try{const code=document.getElementById(id).value;const inp=document.getElementById(id+'_input');document.getElementById(id+'_out').textContent=runMiniPython(code,inp?inp.value:'');}catch(e){document.getElementById(id+'_out').textContent=String(e.message||e);}}
+function PyError(type,msg,line){const e=new Error(type+(line?' on line '+line:'')+': '+msg);e.pyType=type;return e;}
+function stripComment(line){let quote=null,out='';for(let i=0;i<line.length;i++){let c=line[i],p=line[i-1];if(quote){out+=c;if(c===quote&&p!==BS)quote=null;continue;}if(c==='"'||c==="'"){quote=c;out+=c;continue;}if(c==='#')break;out+=c;}return out;}
+function normalizeLines(code){return code.replaceAll(CR,'').split(NL).map((raw,idx)=>{let no=stripComment(raw),indent=0;while(indent<no.length&&no[indent]===' ')indent++;return {raw,text:no.trim(),indent,lineNo:idx+1,blank:no.trim()===''};});}
+function blockBounds(i,indent,lines){let j=i+1;while(j<lines.length&&lines[j].blank)j++;if(j>=lines.length||lines[j].indent<=indent)return null;let bi=lines[j].indent,end=j;while(end<lines.length){if(!lines[end].blank&&lines[end].indent<=indent)break;end++;}return {start:j,indent:bi,end};}
+function runMiniPython(code,stdinText){let vars={},output=[],inputs=(stdinText||'').replaceAll(CR,'').split(NL),inputIndex=0,guard={steps:0};function inputFn(prompt){let val=inputIndex<inputs.length?inputs[inputIndex++]:'';output.push(String(prompt)+val);return val;}let lines=normalizeLines(code);try{execBlock(0,0,lines,vars,output,inputFn,guard);return output.length?output.join(NL):'(Tidak ada output. Coba gunakan print().)';}catch(e){return (e.pyType?e.message:'RuntimeError: '+(e.message||String(e)));}}
+function execBlock(start,indent,lines,vars,output,inputFn,guard){let i=start;while(i<lines.length){if(++guard.steps>10000)throw PyError('RuntimeError','loop terlalu panjang untuk simulator slide');let L=lines[i];if(L.blank){i++;continue;}if(L.indent<indent)break;if(L.indent>indent)throw PyError('IndentationError','unexpected indent',L.lineNo);if(L.text.startsWith('except'))break;if(L.text.startsWith('elif')||L.text.startsWith('else'))break;if(L.text==='break')return {next:i+1,break:true};if(L.text.startsWith('try')){let r=execTry(i,indent,lines,vars,output,inputFn,guard);i=r.next;continue;}if(L.text.startsWith('for ')){let r=execFor(i,indent,lines,vars,output,inputFn,guard);if(r.break)return {next:r.next,break:true};i=r.next;continue;}if(L.text.startsWith('if ')){let r=execIf(i,indent,lines,vars,output,inputFn,guard);if(r.break)return {next:r.next,break:true};i=r.next;continue;}if(L.text.startsWith('while ')){let r=execWhile(i,indent,lines,vars,output,inputFn,guard);if(r.break)return {next:r.next,break:true};i=r.next;continue;}execLine(L,vars,output,inputFn);i++;}return {next:i};}
+function execFor(i,indent,lines,vars,output,inputFn,guard){let L=lines[i];if(!L.text.endsWith(':'))throw PyError('SyntaxError','expected colon after for loop',L.lineNo);let m=L.text.slice(0,-1).match(/^for\s+([A-Za-z_][A-Za-z0-9_]*)\s+in\s+(.+)$/);if(!m)throw PyError('SyntaxError','format for loop tidak valid',L.lineNo);let name=m[1],iterable=evalExpr(m[2],vars,inputFn,L.lineNo);if(!Array.isArray(iterable))throw PyError('TypeError','for loop membutuhkan list',L.lineNo);let b=blockBounds(i,indent,lines);if(!b)throw PyError('IndentationError','expected an indented block after for',L.lineNo);for(let item of iterable){vars[name]=item;let r=execBlock(b.start,b.indent,lines,vars,output,inputFn,guard);if(r.break)break;}return {next:b.end};}
+function execTry(i,indent,lines,vars,output,inputFn,guard){let L=lines[i];if(L.text!=='try:')throw PyError('SyntaxError','expected try:',L.lineNo);let tb=blockBounds(i,indent,lines);if(!tb)throw PyError('IndentationError','expected an indented block after try',L.lineNo);let next=tb.end;if(next>=lines.length||lines[next].indent!==indent||!lines[next].text.startsWith('except'))throw PyError('SyntaxError','expected except after try block',L.lineNo);let E=lines[next];if(!E.text.endsWith(':'))throw PyError('SyntaxError','expected colon after except',E.lineNo);let match=E.text.match(/^except(?:\s+([A-Za-z_][A-Za-z0-9_]*))?:$/);if(!match)throw PyError('SyntaxError','format except tidak valid',E.lineNo);let eb=blockBounds(next,indent,lines);if(!eb)throw PyError('IndentationError','expected an indented block after except',E.lineNo);let err=null;try{execBlock(tb.start,tb.indent,lines,vars,output,inputFn,guard);}catch(e){err=e;}if(err){let target=match[1]||'';if(!target||target===err.pyType){execBlock(eb.start,eb.indent,lines,vars,output,inputFn,guard);}else{throw err;}}return {next:eb.end};}
+function execWhile(i,indent,lines,vars,output,inputFn,guard){let L=lines[i];if(!L.text.endsWith(':'))throw PyError('SyntaxError','expected colon after while condition',L.lineNo);let cond=L.text.slice(6,-1).trim();let b=blockBounds(i,indent,lines);if(!b)throw PyError('IndentationError','expected an indented block',L.lineNo);while(Boolean(evalExpr(cond,vars,inputFn,L.lineNo))){if(++guard.steps>10000)throw PyError('RuntimeError','loop terlalu panjang untuk simulator slide');let r=execBlock(b.start,b.indent,lines,vars,output,inputFn,guard);if(r.break)return {next:b.end};}return {next:b.end};}
+function execIf(i,indent,lines,vars,output,inputFn,guard){let L=lines[i];if(!L.text.endsWith(':'))throw PyError('SyntaxError','expected colon after if condition',L.lineNo);let b=blockBounds(i,indent,lines);if(!b)throw PyError('IndentationError','expected an indented block',L.lineNo);let ran=false,breakFlag=false;if(Boolean(evalExpr(L.text.slice(3,-1).trim(),vars,inputFn,L.lineNo))){let r=execBlock(b.start,b.indent,lines,vars,output,inputFn,guard);breakFlag=!!r.break;ran=true;}let next=b.end;if(next<lines.length&&lines[next].indent===indent&&lines[next].text.startsWith('else')){let E=lines[next];if(E.text!=='else:')throw PyError('SyntaxError','expected colon after else',E.lineNo);let eb=blockBounds(next,indent,lines);if(!eb)throw PyError('IndentationError','expected an indented block after else',E.lineNo);if(!ran){let r=execBlock(eb.start,eb.indent,lines,vars,output,inputFn,guard);breakFlag=!!r.break;}next=eb.end;}return {next:next,break:breakFlag};}
+function execLine(L,vars,output,inputFn){let line=L.text;if(!line)return;let subAssign=line.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*\[\s*(.+?)\s*\]\s*=\s*(.+)$/);if(subAssign){let dictName=subAssign[1];if(!(dictName in vars)||!vars[dictName]||typeof vars[dictName]!=="object"||Array.isArray(vars[dictName]))throw PyError('TypeError',dictName+' bukan dictionary',L.lineNo);let key=evalExpr(subAssign[2],vars,inputFn,L.lineNo);vars[dictName][key]=evalExpr(subAssign[3],vars,inputFn,L.lineNo);return;}let aug=findAug(line);if(aug){if(!(aug.name in vars))throw PyError('NameError','name '+aug.name+' is not defined',L.lineNo);vars[aug.name]=calc(vars[aug.name],evalExpr(aug.expr,vars,inputFn,L.lineNo),aug.op,L.lineNo);return;}let eq=findAssign(line);if(eq>=0){let name=line.slice(0,eq).trim();let expr=line.slice(eq+1).trim();if(!isName(name))throw PyError('SyntaxError','nama variabel tidak valid',L.lineNo);vars[name]=evalExpr(expr,vars,inputFn,L.lineNo);return;}let app=line.match(/^([A-Za-z_][A-Za-z0-9_]*)\.append\((.*)\)$/);if(app){if(!Array.isArray(vars[app[1]]))throw PyError('TypeError',app[1]+' bukan list',L.lineNo);vars[app[1]].push(evalExpr(app[2],vars,inputFn,L.lineNo));return;}if(line.startsWith('print(')&&line.endsWith(')')){let expr=line.slice(6,-1).trim();output.push(pyRepr(evalExpr(expr||'""',vars,inputFn,L.lineNo)));return;}throw PyError('SyntaxError','simulator mendukung assignment, input(), int(), float(), if/else, while, try/except, dan print()',L.lineNo);}
+function isName(s){return /^[A-Za-z_][A-Za-z0-9_]*$/.test(s);}function findAssign(line){let quote=null,depth=0;for(let i=0;i<line.length;i++){let c=line[i],p=line[i-1],n=line[i+1];if(quote){if(c===quote&&p!==BS)quote=null;continue;}if(c==='"'||c==="'"){quote=c;continue;}if(c==='(')depth++;else if(c===')')depth--;else if(c==='='&&depth===0&&p!=='='&&n!=='='&&p!=='>'&&p!=='<'&&p!=='!')return i;}return -1;}function findAug(line){let m=line.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*([+\-*\/])=\s*(.+)$/);return m?{name:m[1],op:m[2],expr:m[3]}:null;}function calc(a,b,op,lineNo){a=Number(a);b=Number(b);if(!isFinite(a)||!isFinite(b))throw PyError('TypeError','operator membutuhkan data angka',lineNo);if(op==='/'&&b===0)throw PyError('ZeroDivisionError','division by zero',lineNo);return op==='+'?a+b:op==='-'?a-b:op==='*'?a*b:a/b;}
+function decodeLiteral(s){return s.replace(/\\n/g,NL).replace(/\\t/g,'\t').replace(/\\"/g,'"').replace(/\\'/g,"'");}function fmtNum(v,fmt){let n=Number(v);if(!isFinite(n))return String(v);if(fmt===',.0f')return Math.round(n).toLocaleString('en-US');if(fmt===',')return Math.trunc(n).toLocaleString('en-US');return String(v);}function replaceWords(s){return s.split(' and ').join(' && ').split(' or ').join(' || ').replace(/\bTrue\b/g,'true').replace(/\bFalse\b/g,'false');}
+function pyRepr(v){if(Array.isArray(v))return '['+v.map(pyRepr).join(', ')+']';if(v&&typeof v==='object'){return '{'+Object.keys(v).map(k=>"'"+k+"': "+pyRepr(v[k])).join(', ')+'}';}return String(v);}
+function evalExpr(expr,vars,inputFn,lineNo){expr=expr.trim();if((expr.startsWith('f"')&&expr.endsWith('"'))||(expr.startsWith("f'")&&expr.endsWith("'")))return renderF(expr.slice(2,-1),vars,inputFn,lineNo);if((expr.startsWith('"')&&expr.endsWith('"'))||(expr.startsWith("'")&&expr.endsWith("'")))return decodeLiteral(expr.slice(1,-1));let keys=Object.keys(vars),vals=keys.map(k=>vars[k]);function input(prompt){return inputFn(prompt===undefined?'':String(prompt));}function int(v){let s=String(v).trim();if(!/^[+-]?\d+$/.test(s))throw PyError('ValueError','invalid literal for int(): '+String(v),lineNo);return parseInt(s,10);}function float(v){let s=String(v).trim();if(!/^[+-]?(\d+(\.\d*)?|\.\d+)$/.test(s))throw PyError('ValueError','could not convert string to float: '+String(v),lineNo);return parseFloat(s);}function type(v){if(typeof v==='number')return Number.isInteger(v)?"<class 'int'>":"<class 'float'>";if(typeof v==='boolean')return "<class 'bool'>";if(Array.isArray(v))return "<class 'list'>";if(v&&typeof v==='object')return "<class 'dict'>";return "<class 'str'>";}function len(v){if(Array.isArray(v)||typeof v==='string')return v.length;if(v&&typeof v==='object')return Object.keys(v).length;throw PyError('TypeError','object tidak punya len()',lineNo);}try{return Function(...keys,'input','int','float','type','len','return ('+replaceWords(expr)+');')(...vals,input,int,float,type,len);}catch(e){if(e.pyType)throw e;throw PyError('NameError','periksa nama variabel atau sintaks ekspresi '+expr,lineNo);}}
+function renderF(inner,vars,inputFn,lineNo){inner=decodeLiteral(inner);let out='',i=0;while(i<inner.length){if(inner[i]==='{'){let j=inner.indexOf('}',i+1);if(j<0)throw PyError('SyntaxError','f-string missing closing brace',lineNo);let content=inner.slice(i+1,j);let expr=content,fmt='';let colon=content.indexOf(':');if(colon>=0){expr=content.slice(0,colon);fmt=content.slice(colon+1).trim();}let val=evalExpr(expr,vars,inputFn,lineNo);out+=fmt?fmtNum(val,fmt):String(val);i=j+1;}else{out+=inner[i];i++;}}return out;}
+
+
+function showDictConcept(k,btn){if(btn){btn.parentElement.querySelectorAll('.component-pill,.operator-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}const d={dict:['Dictionary','Struktur data untuk menyimpan pasangan data. Bentuknya seperti database kecil: ada label, ada isi.'],key:['Key','Label untuk mencari data. Contoh: nama nasabah dummy seperti "Alya Nabila".'],value:['Value','Isi yang disimpan di balik key. Contoh: nomor rekening dummy seperti "021-9901".'],braces:['{ }','Kurung kurawal adalah tanda awal dan akhir dictionary. Pasangan key-value ditulis di dalamnya.'],colon:[':', 'Titik dua memisahkan key dan value. Polanya: "Key": "Value".']};document.getElementById('dictConceptInfo').innerHTML='<h4>'+d[k][0]+'</h4><p>'+d[k][1]+'</p>';}
+function showKeyValue(k,btn){if(btn){btn.parentElement.querySelectorAll('.safe-card,.logic-card,.key-card').forEach(b=>b.classList.remove('safe','risky','active'));btn.classList.add(k==='key'||k==='value'?'safe':'risky');}const d={key:['Key','Bagian kiri sebelum titik dua. Dipakai untuk memanggil data. Dalam contoh {"Citra": "021-9903"}, key-nya adalah "Citra".'],value:['Value','Bagian kanan setelah titik dua. Ini data yang akan keluar saat key dipanggil. Dalam contoh tersebut, value-nya adalah "021-9903".'],wrong:['Bukan key-value','Dictionary perlu pasangan. Kalau hanya ada nama tanpa value, datanya belum lengkap.']};document.getElementById('keyValueInfo').innerHTML='<h4>'+d[k][0]+'</h4><p>'+d[k][1]+'</p>';}
+function showDictFlow(k){const d={create:['1. Buat dictionary','Program menyiapkan data dummy dalam bentuk {"Nama": "Nomor"}.'],search:['2. Ambil input','User mengetik nama yang ingin dicari. Input ini disimpan ke variabel cari_nama.'],access:['3. Akses value','Program menjalankan db_rekening[cari_nama] untuk mengambil nomor rekening dummy.'],output:['4. Tampilkan hasil','Nama dan nomor rekening dummy dicetak ke terminal.']};document.getElementById('dictFlowInfo').innerHTML='<h4>'+d[k][0]+'</h4><p>'+d[k][1]+'</p>';}
+function showExactMatch(k,btn){if(btn){btn.parentElement.querySelectorAll('.case-btn,.choice-btn').forEach(b=>b.classList.remove('active','correct','wrong'));btn.classList.add(k==='ok'?'correct':'wrong');}const d={ok:['Ketemu','Key cocok persis dengan yang ada di dictionary, jadi value bisa diambil.'],case:['KeyError','Huruf besar-kecil beda. Python menganggap "alya nabila" berbeda dari "Alya Nabila".'],space:['KeyError','Spasi tambahan membuat key tidak sama persis. Data bisa gagal ditemukan.'],unknown:['KeyError','Nama tersebut belum ada di dictionary. Program dasar belum punya validasi pencarian.']};document.getElementById('exactMatchInfo').innerHTML='<h4>'+d[k][0]+'</h4><p>'+d[k][1]+'</p>';}
+function loadDbCase(btn,k){if(btn){btn.parentElement.querySelectorAll('.case-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}const data={alya:'Alya Nabila',budi:'Budi Santoso',citra:'Citra Lestari',error:'alya nabila'};let input=document.getElementById('py_project_input');if(input){input.value=data[k];input.classList.add('preset-loaded');setTimeout(()=>input.classList.remove('preset-loaded'),700);}document.getElementById('dbCaseFeedback').textContent=k==='error'?'Case ini sengaja salah kapital. Jalankan untuk melihat kenapa pencarian bisa gagal.':'Input simulator sudah diisi. Klik Run code di slide project untuk mengecek hasil.';}
+function showDictBug(k,btn){if(btn){btn.parentElement.querySelectorAll('.debug-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.debug-scenario.s12').forEach(s=>s.classList.remove('active'));document.getElementById(k).classList.add('active');}}
+function markKV(btn,isSafe){btn.classList.remove('safe','risky');btn.classList.add(isSafe?'safe':'risky');}
+function selectKVQuiz(btn,good,id){btn.parentElement.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('correct','wrong'));btn.classList.add(good?'correct':'wrong');document.getElementById(id).textContent=good?'Yep. Ini jawaban paling tepat.':'Belum pas. Cek lagi posisi key dan value-nya.';}
+</script></body></html>
